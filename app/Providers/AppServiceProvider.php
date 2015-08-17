@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Providers;
+namespace FairHub\Providers;
 
 use Illuminate\Support\ServiceProvider;
 

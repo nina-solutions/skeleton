@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Jobs;
+namespace FairHub\Jobs;
 
 use Illuminate\Bus\Queueable;
 

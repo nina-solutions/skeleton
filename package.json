@@ -2,8 +2,7 @@
   "name":"veronafiere_hub",
   "author":{
     "name": "Karoly Albert Szabo",
-    "email": "karoly.szabo@intesys.it",
-
+    "email": "karoly.szabo@intesys.it"
   },
   "private": true,
   "devDependencies": {

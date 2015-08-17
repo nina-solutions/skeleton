@@ -1,5 +1,5 @@
 suites:
     main:
-        namespace: App
-        psr4_prefix: App
+        namespace: FairHub
+        psr4_prefix: FairHub
         src_path: app

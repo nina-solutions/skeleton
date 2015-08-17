@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Events;
+namespace FairHub\Events;
 
 abstract class Event
 {
