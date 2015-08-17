@@ -2,7 +2,7 @@
 <html>
   <head>
     <title>Titolo</title>
-    <link href="{{ URL::asset("assets/sass/app.scss") }}" rel="stylesheet">
+    <link href="{{ URL::asset("css/app.css") }}" rel="stylesheet">
   </head>
   <body>
     <div class="container">
