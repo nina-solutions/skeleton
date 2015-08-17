@@ -1,4 +1,6 @@
 var elixir = require('laravel-elixir');
+require('laravel-elixir-jade');
+require('gulp-cortex-jade-mixins');
 
 /*
  |--------------------------------------------------------------------------
@@ -13,4 +15,13 @@ var elixir = require('laravel-elixir');
 
 elixir(function(mix) {
     mix.sass('app.scss');
+    mix.coffee('app.coffee');
+    mix.jade({
+        baseDir: './resources',
+        blade: true,
+        dest: '/views/',
+        pretty: true,
+        search: '**/*.jade',
+        src: '/jade/'
+    });
 });
