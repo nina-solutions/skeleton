@@ -14,3 +14,33 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::match(
+    ['get','post'],
+    '{locale}/press-accreditation/{action}/{code}',
+    function($locale, $action, $code){
+        App::setLocale($locale);
+        $controllerClass = 'FairHub\\'.'PressAccreditation'.'Controller';
+        $methodName = studly_case($action);
+        //Just a translation example before the route works
+        return trans('messages.hello');
+
+        if(method_exists($controllerClass, $methodName)){
+            $pressController = App::make($controllerClass);
+            return $pressController->callAction($methodName, array('code' => $code));
+        }
+    }
+);
+/*
+Route::group('{locale}/{service}/{action}/{code}', function ($locale='it', $service='subscriptions',$action='index', $code='') {
+    App::setLocale($locale);
+    $controllerClass = 'FairHub\\'.$service.'Controller';
+    $action = studly_case($action); // optional, converts foo-bar into FooBar for example
+    $methodName = $action;
+
+    if(method_exists($controllerClass, $methodName)){
+        $controller = App::make($controllerClass);
+        return $controller->callAction($methodName, array());
+    }
+});
+*/
