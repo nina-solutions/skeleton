@@ -4,5 +4,20 @@ namespace FairHub;
 
 class DW_SOTTOCATEGORIE extends HubModel
 {
-    //
+    protected $table = 'DW_SOTTOCATEGORIE';
+    public $timestamps = false;
+
+    protected $primaryKey = 'SOC_ID';
+
+    //SOC_ID INT PRIMARY KEY NOT NULL,
+    //SOC_MAC_ID INT NOT NULL,
+    //SOC_VISIBILE VARCHAR(2) NOT NULL,
+    //SOC_DESCRIZIONE VARCHAR(100) NOT NULL,
+    //SOC_DESCRIZIONE_EN VARCHAR(100) NOT NULL,
+    //SOC_NOTE VARCHAR(200),
+    //SOC_TIMESC DATETIME NOT NULL,
+    //SOC_UTEC VARCHAR(50),
+    //SOC_DESCRIZIONE_DE VARCHAR(100),
+    //SOC_DESCRIZIONE_FR VARCHAR(100),
+    //SOC_DESCRIZIONE_ES VARCHAR(100)
 }
