@@ -20,7 +20,8 @@ class DatabaseSeeder extends Seeder
         //$this->call(PROVSeeder::class);
         //$this->call(REGIONISeeder::class);
         //$this->call(PERIODICITASeeder::class);
-        $this->call(DW_UTILITASeeder::class);
+        //$this->call(DW_UTILITASeeder::class);
+        $this->call(DW_MACROCATEGORIESeeder::class);
         Model::reguard();
     }
 }

@@ -4,5 +4,19 @@ namespace FairHub;
 
 class DW_MACROCATEGORIE extends HubModel
 {
-    //
+    protected $table = 'DW_MACROCATEGORIE';
+    public $timestamps = false;
+
+    protected $primaryKey = 'MAC_ID';
+
+    //MAC_ID INT PRIMARY KEY NOT NULL,
+    //MAC_ANALISI_IN VARCHAR(5) NOT NULL,
+    //MAC_ANNO INT NOT NULL,
+    //MAC_MANIF VARCHAR(3) NOT NULL,
+    //MAC_VISIBILE VARCHAR(2) NOT NULL,
+    //MAC_DESCRIZIONE VARCHAR(100) NOT NULL,
+    //MAC_DESCRIZIONE_EN VARCHAR(100) NOT NULL,
+    //MAC_NOTE VARCHAR(200),
+    //MAC_TIMESC DATETIME NOT NULL,
+    //MAC_UTEC VARCHAR(50)
 }
