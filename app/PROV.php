@@ -4,7 +4,6 @@ namespace FairHub;
 
 class PROV extends HubModel
 {
-    //
     protected $table = 'PROV';
     public $timestamps = false;
     //Working with this kind of keys implies NO incrementing and some custom save functions

@@ -18,7 +18,7 @@ class DatabaseSeeder extends Seeder
         //$this->call(DW_CANALESeeder::class);
         //$this->call(NAZIONISeeder::class);
         //$this->call(PROVSeeder::class);
-        //$this->call(Seeder::class);
+        $this->call(REGIONISeeder::class);
         Model::reguard();
     }
 }
