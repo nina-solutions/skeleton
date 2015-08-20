@@ -16,7 +16,9 @@ class DatabaseSeeder extends Seeder
 
         // $this->call(UserTableSeeder::class);
         //$this->call(DW_CANALESeeder::class);
-        $this->call(NAZIONISeeder::class);
+        //$this->call(NAZIONISeeder::class);
+        //$this->call(PROVSeeder::class);
+        //$this->call(Seeder::class);
         Model::reguard();
     }
 }
