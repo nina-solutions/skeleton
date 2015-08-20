@@ -2,9 +2,7 @@
 
 namespace FairHub;
 
-use Illuminate\Database\Eloquent\Model;
-
-class DW_CANALE extends Model
+class DW_CANALE extends HubModel
 {
     protected $table = 'DW_CANALE';
     public $timestamps = false;

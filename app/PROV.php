@@ -2,9 +2,7 @@
 
 namespace FairHub;
 
-use Illuminate\Database\Eloquent\Model;
-
-class PROV extends Model
+class PROV extends HubModel
 {
     //
 }
