@@ -18,4 +18,5 @@ return [
     'permissiondenied' => 'Non si dispone dei permessi necessari per visitare quest\'area.',
     'pleaseback' => 'per favore torna alla nostra home.',
     'funny404' => 'Siamo spiacenti, a quento pare abbiamo perso questa pagina, ma non vogliamo perdere te!',
+
 ];

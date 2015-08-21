@@ -18,19 +18,10 @@ elixir(function(mix) {
         blade: true,
         dest: '/views/',
         pretty: true,
-        //search: '**/*.jade', //in depth compiling..we just need the views we use
-        search: '*.jade',
+        search: '**/*.jade', //in depth compiling..we just need the views we use
+        //search: '*.jade', // partial search, if I want to exclude partials from here
         src: '/jade/'
     });
     mix.sass('app.scss');
     mix.coffee('app.coffee');
-    mix.jade({
-        baseDir: './resources',
-        blade: true,
-        dest: '/views/errors/',
-        pretty: true,
-        //search: '**/*.jade', //in depth compiling..we just need the views we use
-        search: 'errors/*.jade',
-        src: '/jade/'
-    });
 });
