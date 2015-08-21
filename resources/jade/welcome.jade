@@ -1,9 +1,8 @@
-doctype html
-html
-  head
-    title= "Titolo"
-    link(href!='{{ URL::asset("css/app.css") }}', rel='stylesheet')
-  body
-    div.container
-      div.content
-        div.title= "Laravel"
+extends partials/template
+
+block title
+  title @lang('messages.hello')
+
+block content
+  h1.title Laravel Rulez
+  a(href="!{}")

@@ -12,5 +12,9 @@ return [
     */
 
     'hello' => 'Hello',
+    'thanks' => 'Thanks for choosing our service.',
+    'brb' => 'Be Right Back!',
+    'notfound' => 'I\'m so sorry, but apparently you do not exist',
+    'permissiondenied' => 'Permission denied for this area.',
 
 ];

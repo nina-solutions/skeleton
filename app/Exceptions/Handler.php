@@ -3,8 +3,12 @@
 namespace FairHub\Exceptions;
 
 use Exception;
+use Symfony\Component\Finder\Exception\OperationNotPermitedException;
+use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\HttpKernel\Exception\ServiceUnavailableHttpException;
 
 class Handler extends ExceptionHandler
 {
@@ -39,6 +43,15 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $e)
     {
+        if ($e instanceof AccessDeniedHttpException) {
+            return response()->view('errors.403',[],403);
+        }
+        if ($e instanceof NotFoundHttpException) {
+            return response()->view('errors.404',[],404);
+        }
+        if ($e instanceof ServiceUnavailableHttpException) {
+            return response()->view('errors.503',[],503);
+        }
         return parent::render($request, $e);
     }
 }

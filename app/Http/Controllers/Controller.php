@@ -9,4 +9,6 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 abstract class Controller extends BaseController
 {
     use DispatchesJobs, ValidatesRequests;
+    //here we put all the validations needed for our app
+    //out controllers extends this class
 }

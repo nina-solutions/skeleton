@@ -1,6 +1,5 @@
 var elixir = require('laravel-elixir');
 require('laravel-elixir-jade');
-require('gulp-cortex-jade-mixins');
 
 /*
  |--------------------------------------------------------------------------
@@ -21,7 +20,17 @@ elixir(function(mix) {
         blade: true,
         dest: '/views/',
         pretty: true,
-        search: '**/*.jade',
+        //search: '**/*.jade', //in depth compiling..we just need the views we use
+        search: '*.jade',
+        src: '/jade/'
+    });
+    mix.jade({
+        baseDir: './resources',
+        blade: true,
+        dest: '/views/errors/',
+        pretty: true,
+        //search: '**/*.jade', //in depth compiling..we just need the views we use
+        search: 'errors/*.jade',
         src: '/jade/'
     });
 });

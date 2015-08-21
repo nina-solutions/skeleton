@@ -1,0 +1,11 @@
+//- templade.jade
+include mixins
+doctype html
+html
+  include header
+  body
+    include errors
+    div.container
+      div.content
+        block content
+    include footer

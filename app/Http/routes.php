@@ -31,6 +31,15 @@ Route::match(
         }
     }
 );
+
+Route::get(
+    'press-accreditation/register/{code}',
+    ['as' => 'press-register', 'uses' => 'PressAccreditationController@create']
+);
+Route::post(
+    'press-accreditation/save/{code}',
+    ['as' => 'press-store', 'uses' => 'PressAccreditationController@store']
+);
 /*
 Route::group('{locale}/{service}/{action}/{code}', function ($locale='it', $service='subscriptions',$action='index', $code='') {
     App::setLocale($locale);

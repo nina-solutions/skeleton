@@ -3,6 +3,7 @@
 namespace FairHub\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 use FairHub\Http\Requests;
 use FairHub\Http\Controllers\Controller;
@@ -26,7 +27,8 @@ class PressAccreditationController extends Controller
      */
     public function create()
     {
-        //
+        $request = Request::capture();
+        $inputs = $request->all();
     }
 
     /**
@@ -37,7 +39,13 @@ class PressAccreditationController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $params = $request->all();
+        $validates = false;
+
+        if (!$validates) {
+            return redirect('press-register')->withInput($request->except('password'));
+        }
+
     }
 
     /**
