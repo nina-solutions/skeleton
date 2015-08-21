@@ -5,7 +5,7 @@ namespace FairHub\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
-use FairHub\Http\Requests;
+use FairHub\Http\Requests\PressAccreditationRequest;
 use FairHub\Http\Controllers\Controller;
 
 class PressAccreditationController extends Controller
@@ -38,7 +38,7 @@ class PressAccreditationController extends Controller
      * @param  Request  $request
      * @return Response
      */
-    public function store(Request $request)
+    public function store(PressAccreditationRequest $request)
     {
         $params = $request->all();
         $validates = false;
@@ -46,7 +46,8 @@ class PressAccreditationController extends Controller
         if (!$validates) {
             return redirect('press-register')->withInput($request->except('password'));
         }
-
+        return \Redirect::route('thanks')
+            ->with('message', 'Thanks for contacting us!');
     }
 
     /**

@@ -27,6 +27,13 @@ Route::match(
 );
 
 Route::get(
+    'thanks',
+    ['as' => 'thanks', function(){
+        return view('thanks');
+    }]
+);
+
+Route::get(
     'press-accreditation/create/{code}',
     ['as' => 'press-register', 'uses' => 'PressAccreditationController@create']
 );
