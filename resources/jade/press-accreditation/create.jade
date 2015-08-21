@@ -5,4 +5,13 @@ block title
 
 block content
   h1 @lang('press.register')
+  + php ( "Form::open(array('route' => 'press-store', 'class' => 'form'))", "Form::close()" )
+    .form-group
+      + php("Form::label(trans('Name'))")
+      + php("Form::text('ANA_NOME', null, array('required', 'class'=>'form-control', 'placeholder'=>trans('Name')))")
+    .form-group
+      + php("Form::label(trans('Email'))")
+      + php("Form::text('ANA_EMAILE', null, array('required', 'class'=>'form-control', 'placeholder'=>trans('Email')))")
+    .form-group
+      + php("Form::submit(trans('ContactUs'), array('class' => 'btn btn-primary'))")
 

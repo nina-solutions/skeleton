@@ -3,7 +3,15 @@
   The syntax mimic Blade statements, however identation differs in some cases.
 
   ENJOY
-
+mixin php(start, end)
+  =newline
+  | {!! !{start} !!}
+  =newline
+  if(end)
+    block
+    =newline
+    | {!! !{end} !!}
+    =newline
 
 //- var newline = "\r\n" //WINDOWS SERVER
 - var newline = "\n" //LINUX SERVER
