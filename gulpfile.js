@@ -13,8 +13,6 @@ require('laravel-elixir-jade');
  */
 
 elixir(function(mix) {
-    mix.sass('app.scss');
-    mix.coffee('app.coffee');
     mix.jade({
         baseDir: './resources',
         blade: true,
@@ -24,6 +22,8 @@ elixir(function(mix) {
         search: '*.jade',
         src: '/jade/'
     });
+    mix.sass('app.scss');
+    mix.coffee('app.coffee');
     mix.jade({
         baseDir: './resources',
         blade: true,

@@ -11,9 +11,7 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', ['as' => 'welcome', 'uses' => 'CustomController@welcome']);
 
 Route::match(
     ['get','post'],
@@ -23,8 +21,6 @@ Route::match(
         $controllerClass = 'FairHub\\'.'PressAccreditation'.'Controller';
         $methodName = studly_case($action);
         //Just a translation example before the route works
-        return trans('messages.hello');
-
         if(method_exists($controllerClass, $methodName)){
             $pressController = App::make($controllerClass);
             return $pressController->callAction($methodName, array('code' => $code));

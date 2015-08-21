@@ -46,9 +46,11 @@ class Handler extends ExceptionHandler
         if ($e instanceof AccessDeniedHttpException) {
             return response()->view('errors.403',[],403);
         }
+
         if ($e instanceof NotFoundHttpException) {
             return response()->view('errors.404',[],404);
         }
+
         if ($e instanceof ServiceUnavailableHttpException) {
             return response()->view('errors.503',[],503);
         }
