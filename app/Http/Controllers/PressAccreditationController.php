@@ -29,6 +29,7 @@ class PressAccreditationController extends Controller
     {
         $request = Request::capture();
         $inputs = $request->all();
+        return view('press-accreditation.create');
     }
 
     /**

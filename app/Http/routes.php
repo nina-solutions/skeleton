@@ -15,21 +15,19 @@ Route::get('/', ['as' => 'welcome', 'uses' => 'CustomController@welcome']);
 
 Route::match(
     ['get','post'],
-    '{locale}/press-accreditation/{action}/{code}',
-    function($locale, $action, $code){
+    '{locale}/press-accreditation/create/{code}',
+    ['as' => 'press-register-locale', function($locale, $code){
         App::setLocale($locale);
-        $controllerClass = 'FairHub\\'.'PressAccreditation'.'Controller';
-        $methodName = studly_case($action);
-        //Just a translation example before the route works
-        if(method_exists($controllerClass, $methodName)){
-            $pressController = App::make($controllerClass);
-            return $pressController->callAction($methodName, array('code' => $code));
-        }
-    }
+        $controller = App::make('PressAccreditationController');
+        return $controller->callAction('create', ['code' => $code]);
+        //$pressAccreditationController = new \FairHub\Http\Controllers\PressAccreditationController();
+        //return $pressAccreditationController->create();
+
+    }]
 );
 
 Route::get(
-    'press-accreditation/register/{code}',
+    'press-accreditation/create/{code}',
     ['as' => 'press-register', 'uses' => 'PressAccreditationController@create']
 );
 Route::post(
