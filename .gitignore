@@ -6,5 +6,5 @@ Homestead.yaml
 .env.*.php
 .env.php
 .idea*
-#resources/views/*
-#!resources/views/vendor*
+resources/views/*
+!resources/views/vendor*
