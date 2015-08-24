@@ -2,9 +2,9 @@
 
 namespace FairHub;
 
-class DW_RELANACATEG extends HubModel
+class DW_RELANAGCATEG extends HubModel
 {
-    protected $table = 'DW_RELANACATEG';
+    protected $table = 'DW_RELANAGCATEG';
     public $timestamps = false;
     //Working with this kind of keys implies NO incrementing and some custom save functions
     public $incrementing = false;
