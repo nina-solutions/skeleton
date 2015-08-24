@@ -8,6 +8,38 @@ class DW_ANAGRAFICHE extends HubModel
     public $timestamps = false;
 
     protected $primaryKey = 'ANA_ID';
+
+
+    /** Mutator: Force well formatted names.
+     * We can improve this filter via implode and explode,
+     * for name composed of many words.
+     * @param $value string
+     */
+    public function setANA_NOMEAttribute($value){
+        //mutator in Laravel is automatically called when a value is set in this case
+        $this->attributes['ANA_NOME'] = ucfirst(strtolower($value));
+    }
+
+    /**Sorry for that, this field should be in DW_ANAGRAFICHE
+     * is a fake many to many,
+     * should be a belongs to utilita + has many anagrafiche
+     * @return \Illuminate\Database\Eloquent\Relations\HasManyThrough
+     */
+    public function utilita(){
+        return $this->hasManyThrough('FairHub\DW_UTILITA','FairHub\DW_RELANAUTY','UTY_ID','UT_ID','ANA_ID');
+    }
+
+
+    /**Sorry for that, this field should be in DW_ANAGRAFICHE
+     * is a fake many to many,
+     * should be a belongs to utilita + has many anagrafiche
+     * @return \Illuminate\Database\Eloquent\Relations\HasManyThrough
+     */
+    public function categories(){
+        return $this->hasManyThrough('FairHub\DW_SOTTOCATEGORIE','FairHub\DW_RELANAUTY','UTY_ID','UT_ID','ANA_ID');
+    }
+
+
     /*
 ANA_ID INT NOT NULL IDENTITY,
 ANA_ANALISI_IN VARCHAR(5) NOT NULL,
