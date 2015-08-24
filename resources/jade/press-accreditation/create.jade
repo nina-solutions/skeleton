@@ -10,14 +10,34 @@ block content
       legend @lang('press.contact.head')
       .form-group
         + php("Form::label(trans('press.contact.name'))")
-        + php("Form::text('ANA_NOME', null, array('required', 'class'=>'form-control', 'placeholder'=>trans('Name')))")
+        + php("Form::text('ANA_NOME', Input::old('ANA_NOME'), array('required', 'class'=>'form-control', 'placeholder'=>trans('press.contact.name')))")
       .form-group
         + php("Form::label(trans('press.contact.surname'))")
-        + php("Form::text('ANA_COGNOME', null, array('required', 'class'=>'form-control', 'placeholder'=>trans('Surname')))")
+        + php("Form::text('ANA_COGNOME', Input::old('ANA_COGNOME'), array('required', 'class'=>'form-control', 'placeholder'=>trans('press.contact.surname')))")
       .form-group
         + php("Form::label(trans('press.contact.email'))")
-        + php("Form::text('ANA_EMAIL', null, array('required', 'class'=>'form-control', 'placeholder'=>trans('Email')))")
+        + php("Form::email('ANA_EMAIL', Input::old('ANA_EMAIL'), array('required', 'class'=>'form-control', 'placeholder'=>trans('press.contact.email')))")
       .form-group
-        + php("Form::submit(trans('press.submit', ['fair_name' => 'FAIR NAME']), array('class' => 'btn btn-primary'))")
-        + php("Form::reset(trans('press.reset'), array('class' => 'btn'))")
+        + php("Form::label(trans('press.contact.mobile'))")
+        + php("Form::text('ANA_CELLULARE', Input::old('ANA_CELLULARE'), array('required', 'class'=>'form-control', 'placeholder'=>trans('press.contact.mobile')))")
+      .form-group
+        + php("Form::label(trans('press.contact.qualification'))")
+        + php("Form::select('ANA_QUALIFICATESTO', $qualifications, Input::old('ANA_QUALIFICATESTO'), array('required', 'class'=>'form-control', 'placeholder'=>trans('press.contact.qualification')))")
+      .form-group
+        + php("Form::label(trans('press.contact.workfor'))")
+        + php("Form::select('DW_UTILITY', $workfor, Input::old('DW_UTILITY'), array('required', 'class'=>'form-control', 'placeholder'=>trans('press.contact.workfor')))")
+      .form-group
+        + php("Form::label(trans('press.contact.twitter'))")
+        + php("Form::text('ANA_TWITTER_ACCOUNT', null, array('required', 'class'=>'form-control', 'placeholder'=>trans('press.contact.twitter')))")
+
+
+    fieldset
+      legend @lang('press.actions.head')
+      p
+        strong @lang('press.actions.description')
+      .box.jumbotron
+        strong @lang('press.actions.notice')
+      .form-group
+        + php("Form::submit(trans('press.actions.submit', ['fair_name' => 'FAIR NAME']), array('class' => 'btn btn-primary'))")
+        + php("Form::reset(trans('press.actions.reset'), array('class' => 'btn'))")
 
