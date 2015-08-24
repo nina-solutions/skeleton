@@ -20,9 +20,6 @@ Route::match(
         App::setLocale($locale);
         $controller = App::make('PressAccreditationController');
         return $controller->callAction('create', ['code' => $code, 'role' => $role]);
-        //$pressAccreditationController = new \FairHub\Http\Controllers\PressAccreditationController();
-        //return $pressAccreditationController->create();
-
     }]
 );
 
