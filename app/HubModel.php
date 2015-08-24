@@ -1,7 +1,7 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: web
+ * User: Karoly Szabo
  * Date: 8/20/15
  * Time: 12:31 PM
  */

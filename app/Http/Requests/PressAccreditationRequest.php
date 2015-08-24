@@ -24,8 +24,9 @@ class PressAccreditationRequest extends Request
     public function rules()
     {
         return [
-            'name' => 'required',
-            'email' => 'required|email',
+            'ANA_NOME' => 'required',
+            'ANA_COGNOME' => 'required',
+            'ANA_EMAIL' => 'required|email',
         ];
     }
 }

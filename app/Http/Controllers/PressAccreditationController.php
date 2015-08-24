@@ -25,7 +25,7 @@ class PressAccreditationController extends Controller
      *
      * @return Response
      */
-    public function create()
+    public function create($role, $code)
     {
         $request = Request::capture();
         $inputs = $request->all();
@@ -38,7 +38,7 @@ class PressAccreditationController extends Controller
      * @param  Request  $request
      * @return Response
      */
-    public function store(PressAccreditationRequest $request)
+    public function store(PressAccreditationRequest $request, $role, $code)
     {
         $params = $request->all();
         $validates = false;
