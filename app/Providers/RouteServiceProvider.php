@@ -24,8 +24,10 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function boot(Router $router)
     {
-        //
-
+        //Fair code structure for code parameter
+        $router->pattern('code', '[A-Z]{3}[0-9]{2}');
+        //Fair code structure for code parameter
+        $router->pattern('role', 'journalist|giornalista|photographer|fotografo|collaborator|collaboratore');
         parent::boot($router);
     }
 
