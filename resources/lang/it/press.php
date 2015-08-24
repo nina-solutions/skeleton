@@ -44,11 +44,16 @@ return [
     'infocommunications' => 'Vostre comunicazioni',
     'infoprivacy' => 'Informativa sulla privacy',
     'privacycheckbox' => 'Letta l\'<a href="{0}">informativa sulla privacy</a> ai sensi del Dlg 196/03, acconsento al trattamento dei dati personali per le finalit&agrave; e con le modalit&agrave; specificatamente indicate nell\'informativa stessa',
-    'sendrequest' => 'Invia richiesta accredito',
-    'sendrequestdescription' => 'Una schermata di conferma testimonia il buon esito dell\'invio della richiesta di accredito. Eventuali errori nella procedura di compilazione del form sono evidenziati in rosso.',
-    'sendrequestnotice' => 'Prima di inviare la richiesta assicurati di aver compilato tutti i campi obbligatori (contrassegnati da asterisco)',
+    'actions' => [
+        'head' => 'Invia richiesta accredito',
+        'description' => 'Una schermata di conferma testimonia il buon esito dell\'invio della richiesta di accredito. Eventuali errori nella procedura di compilazione del form sono evidenziati in rosso.',
+        'notice' => 'Prima di inviare la richiesta assicurati di aver compilato tutti i campi obbligatori (contrassegnati da asterisco)',
+        'submit' => 'Invia richiesta per :fair_name',
+        'reset' => 'Cancella'
+    ],
 
-    'submit' => 'Invia richiesta per :fair_name',
-    'reset' => 'Cancella'
-
-    ];
+    'select' => [
+        'qualifications' => 'Seleziona la qualifica',
+        'workfor' => 'Seleziona un\'opzione',
+    ]
+];

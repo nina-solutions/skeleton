@@ -45,10 +45,16 @@ return [
     'infocommunications' => 'Your Communications',
     'infoprivacy' => 'Privacy Notification',
     'privacycheckbox' => 'I agree to processing of my personal data in conformity with the standards of <a href="{0}">privacy laws</a>.',
-    'sendrequest' => 'Send accreditation request',
-    'sendrequestdescription' => 'A confirmation screen will notify the successful outcome of sending the accreditation request. Any errors in the form compilation procedure are highlighted in red.',
-    'sendrequestnotice' => 'Before sending the request make sure you have filled in all the required fields (marked with asterisks)',
+    'actions' => [
+        'head' => 'Send accreditation request',
+        'description' => 'A confirmation screen will notify the successful outcome of sending the accreditation request. Any errors in the form compilation procedure are highlighted in red.',
+        'notice' => 'Before sending the request make sure you have filled in all the required fields (marked with asterisks)',
+        'submit' => 'Send accreditation request for :fair_name',
+        'reset' => 'Reset',
+    ],
 
-    'submit' => 'Send accreditation request for :fair_name',
-    'reset' => 'Reset'
+    'select' => [
+        'qualifications' => 'Select a qualification',
+        'workfor' => 'Please select an option',
+    ]
 ];
