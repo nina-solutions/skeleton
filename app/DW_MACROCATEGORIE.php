@@ -1,6 +1,8 @@
 <?php
 
 namespace FairHub;
+use Illuminate\Database\Query\Builder;
+use Illuminate\Support\Facades\App;
 
 class DW_MACROCATEGORIE extends HubModel
 {
@@ -8,6 +10,41 @@ class DW_MACROCATEGORIE extends HubModel
     public $timestamps = false;
 
     protected $primaryKey = 'MAC_ID';
+
+    public function scopeQualifications($query){
+        return $query->where('MAC_DESCRIZIONE', 'LIKE', 'Qualifica%');
+    }
+
+    public function scopeFairCode($query, $code){
+        return $query->where('MAC_ANALISI_IN', 'LIKE', $code);
+    }
+
+    public function subCategories(){
+        return $this->hasMany('DW_SOTTOCATEGORIE', 'MAC_ID', 'MAC_ID');
+    }
+
+    //If you hate the way this Database is designed,
+    //uniformity: if I want ID of any class, i just use id() method
+    /**
+     * @return int
+     */
+    public function getIdAttribute(){
+        return $this->attributes['MAC_ID'];
+    }
+
+    //If you hate the way this Database is designed,
+    //please use this method to automagically the right translated description
+    //instead of dirty stuff like CAMPO1 and CAMPO2
+    /**
+     * @return string
+     */
+    public function getDescriptionAttribute(){
+        //If english return english description
+        if (App::getLocale() == 'en')
+            return $this->attributes['MAC_DESCRIZIONE_EN'];
+        //fallback on Italian for everything else
+        return $this->attributes['MAC_DESCRIZIONE'];
+    }
 
     //MAC_ID INT PRIMARY KEY NOT NULL,
     //MAC_ANALISI_IN VARCHAR(5) NOT NULL,
