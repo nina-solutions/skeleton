@@ -2,6 +2,8 @@
 
 namespace FairHub\Http\Controllers;
 
+use FairHub\DW_SOTTOCATEGORIE;
+use FairHub\DW_UTILITA;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
@@ -29,7 +31,24 @@ class PressAccreditationController extends Controller
     {
         $request = Request::capture();
         $inputs = $request->all();
-        return view('press-accreditation.create');
+        $jobs = DW_UTILITA::type('LAVORO')->get();
+        $workfor = [0=>trans('press.select.workfor')];
+        foreach($jobs as $job){
+            //we should use only query and not this trick,
+            //it is necessary to build a clean structure before give it
+            //to the view
+            $workfor[$job->id] =$job->description;
+        }
+
+        $categories = DW_SOTTOCATEGORIE::visible(true)->qualifiche('VIR09')->get();
+        $qualifications = [0=>trans('press.select.qualifications')];
+        foreach($categories as $category){
+            //we should use only query and not this trick,
+            //it is necessary to build a clean structure before give it
+            //to the view
+            $qualifications[$category->id] =$category->description;
+        }
+        return view('press-accreditation.create', ['workfor' => $workfor, 'qualifications'=>$qualifications]);
     }
 
     /**
