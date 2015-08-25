@@ -16,7 +16,7 @@ Route::get('/', ['as' => 'welcome', 'uses' => 'CustomController@welcome']);
 Route::match(
     ['get','post'],
     '{locale}/press-accreditation/register/{role}/{code}',
-    ['as' => 'press-register-locale', function($locale, $role,$code){
+    ['middleware' => 'role', 'as' => 'press-register-locale', function($locale, $role,$code){
         App::setLocale($locale);
         $controller = App::make('PressAccreditationController');
         return $controller->callAction('create', ['role' => $role, 'code' => $code]);
@@ -32,11 +32,11 @@ Route::get(
 
 Route::get(
     'press-accreditation/register/{role}/{code}',
-    ['as' => 'press-register', 'uses' => 'PressAccreditationController@create']
+    ['middleware' => 'role', 'as' => 'press-register', 'uses' => 'PressAccreditationController@create']
 );
 Route::post(
     'press-accreditation/save/{role}/{code}',
-    ['as' => 'press-store', 'uses' => 'PressAccreditationController@store']
+    ['middleware' => 'role', 'as' => 'press-store', 'uses' => 'PressAccreditationController@store']
 );
 /*
 Route::group('{locale}/{service}/{action}/{code}', function ($locale='it', $service='subscriptions',$action='index', $code='') {

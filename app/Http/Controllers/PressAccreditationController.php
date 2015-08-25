@@ -16,6 +16,20 @@ use FairHub\Http\Controllers\Controller;
 class PressAccreditationController extends Controller
 {
 
+    static $roles =
+    [
+        'journalist' =>20,
+        'giornalista' => 20,
+        'photographer' => 23,
+        'fotografo' => 23,
+        'collaborator' => 24,
+        'collaboratore' => 24,
+        'journalist_en' => 33,
+        'giornalista_en' => 33,
+
+    ];
+
+
     /**
      * Display a listing of the resource.
      *
@@ -33,6 +47,8 @@ class PressAccreditationController extends Controller
      */
     public function create($role, $code)
     {
+
+
         $jobs = DW_UTILITA::type('LAVORO')->get();
         $workfor = [];
         foreach($jobs as $job){

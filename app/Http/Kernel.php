@@ -30,5 +30,6 @@ class Kernel extends HttpKernel
         'auth' => \FairHub\Http\Middleware\Authenticate::class,
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
         'guest' => \FairHub\Http\Middleware\RedirectIfAuthenticated::class,
+        'role' => \FairHub\Http\Middleware\RoleMiddleware::class,
     ];
 }
