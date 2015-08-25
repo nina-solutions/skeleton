@@ -7,7 +7,6 @@
   "private": true,
   "devDependencies": {
     "gulp": "^3.8.8",
-    "larasset-js": "^1.1.1"
   },
   "dependencies": {
     "bootstrap-sass": "^3.0.0",

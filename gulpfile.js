@@ -1,5 +1,6 @@
 var elixir = require('laravel-elixir');
 require('laravel-elixir-jade');
+require("laravel-elixir-requirejs");
 
 /*
  |--------------------------------------------------------------------------
@@ -22,6 +23,7 @@ elixir(function(mix) {
         //search: '*.jade', // partial search, if I want to exclude partials from here
         src: '/jade/'
     });
-    mix.sass('app.scss');
+    mix.sass('app.sass');
     mix.coffee('app.coffee');
+    //mix.requirejs("bootstrap.js", rjsOptions);
 });
