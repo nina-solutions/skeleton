@@ -1,3 +1,5 @@
 include mixins
 +if("Session::has('message')")
-  .alert.alert-info {{Session::get('message')}}
+  .alert.alert-info
+    a.close(href='#', data-dismiss='alert', aria-label='close') &times;
+    strong {{Session::get('message')}}
