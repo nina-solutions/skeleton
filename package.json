@@ -7,12 +7,14 @@
   "private": true,
   "devDependencies": {
     "gulp": "^3.8.8",
-    "gulp-debug": "^2.1.0"
+    "gulp-debug": "^2.1.0",
+    "larasset-js": "> 0.9.x"
   },
   "dependencies": {
     "bootstrap-sass": "^3.0.0",
     "gulp-cortex-jade-mixins": "^0.1.4",
     "laravel-elixir": "^2.0.0",
-    "laravel-elixir-jade": "~0.1.x"
+    "laravel-elixir-jade": "~0.1.x",
+    "jquery-latest": "1.9.0"
   }
 }

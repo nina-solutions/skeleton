@@ -136,7 +136,10 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
-        Illuminate\Html\HtmlServiceProvider::class,
+        Collective\Html\HtmlServiceProvider::class,
+
+        Efficiently\Larasset\LarassetServiceProvider::class,
+        Efficiently\JqueryLaravel\JqueryLaravelServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -170,12 +173,13 @@ return [
         'Cookie'    => Illuminate\Support\Facades\Cookie::class,
         'Crypt'     => Illuminate\Support\Facades\Crypt::class,
         'DB'        => Illuminate\Support\Facades\DB::class,
+        'Asset'     => Efficiently\Larasset\Facades\Asset::class,
         'Eloquent'  => Illuminate\Database\Eloquent\Model::class,
         'Event'     => Illuminate\Support\Facades\Event::class,
         'File'      => Illuminate\Support\Facades\File::class,
-        'Form'      => Illuminate\Html\FormFacade::class,
+        'Form'      => Collective\Html\FormFacade::class,
         'Hash'      => Illuminate\Support\Facades\Hash::class,
-        'HTML'      => Illuminate\Html\HtmlFacade::class,
+        'HTML'      => Collective\Html\HtmlFacade::class,
         'Input'     => Illuminate\Support\Facades\Input::class,
         'Inspiring' => Illuminate\Foundation\Inspiring::class,
         'Lang'      => Illuminate\Support\Facades\Lang::class,
