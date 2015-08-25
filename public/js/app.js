@@ -12,7 +12,7 @@
     return head.appendChild(script);
   };
 
-  scripts = ["jquery", "boostrap"];
+  scripts = ["boostrap", ""];
 
   requireJs = function(scripts) {
     var item;

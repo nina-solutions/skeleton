@@ -18,7 +18,7 @@ class Kernel extends HttpKernel
         \Illuminate\Session\Middleware\StartSession::class,
         \Illuminate\View\Middleware\ShareErrorsFromSession::class,
         \FairHub\Http\Middleware\VerifyCsrfToken::class,
-        \Efficiently\JqueryLaravel\VerifyJavascriptResponse::class,
+        //\Efficiently\JqueryLaravel\VerifyJavascriptResponse::class,
     ];
 
     /**
