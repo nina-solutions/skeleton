@@ -6,6 +6,7 @@ use FairHub\DW_SOTTOCATEGORIE;
 use FairHub\DW_UTILITA;
 use FairHub\NAZIONI;
 use FairHub\DW_PERIODICITA;
+use FairHub\PROV;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
@@ -61,6 +62,14 @@ class PressAccreditationController extends Controller
             $nations[$nation->id] =$nation->description;
         }
 
+        $prov_q = PROV::all();
+        $provences = [];
+        foreach($prov_q as $province){
+            //we should use only query and not this trick,
+            //it is necessary to build a clean structure before give it
+            //to the view
+            $provences[$province->id] =$province->description;
+        }
 
         $periods = DW_PERIODICITA::all();
         $schedule = [];
@@ -71,7 +80,15 @@ class PressAccreditationController extends Controller
             $schedule[$option->id] =$option->description;
         }
 
-        return view('press-accreditation.create', ['workfor' => $workfor, 'qualifications'=>$qualifications, 'nations' => $nations, 'schedule' => $schedule]);
+        return view('press-accreditation.create', [
+            'workfor' => $workfor,
+            'qualifications'=>$qualifications,
+            'nations' => $nations,
+            'schedule' => $schedule,
+            'role' => $role,
+            'code' => $code,
+            'provences' => $provences
+        ]);
     }
 
     /**
@@ -86,7 +103,7 @@ class PressAccreditationController extends Controller
         $validates = false;
 
         if (!$validates) {
-            return redirect('press-register')->withInput($request->except('password'));
+            return redirect('press-register')->withInput($request->except('password'))->with('message', 'Something wrong');;
         }
         return \Redirect::route('thanks')
             ->with('message', 'Thanks for contacting us!');

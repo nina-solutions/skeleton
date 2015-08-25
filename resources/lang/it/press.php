@@ -31,10 +31,12 @@ return [
         'city' => 'Citt&agrave;',
         'zip' => 'CAP',
         'nationality' => 'Nazionalit&agrave;',
+        'province' => 'Provincia',
         'schedule' => 'Periodicit&agrave;',
         'email' => 'E-mail redazione',
         'phone' => 'Telefono fisso',
         'website' => 'sito web',
+        'first' => 'Se collabori per più testate inserisci l\'indirizzo della prima citata',
     ],
     'firsttime' => [
         'yes' => 'S&igrave;',
@@ -45,6 +47,8 @@ return [
         'head' => 'Esegui qui l\'upload dei documenti richiesti, in formato PDF, JPG o DOC.<br>Il totale delle dimensioni degli allegati non può superare i 3 megabyte (3Mb).',
         'letter' => 'Copia della lettera d\'incarico della testata/radio/tv/sito web registrato per cui si collabora, firmata dal direttore o caporedattore',
         'colophon' => 'Copia del colophon o delle indicazioni sulla gerenza della testata/radio/tv/sito web registrato',
+        'document' => 'Copia di un proprio documento di intentit&agrave;',
+        'photo' => 'Foto del richiedente, stile fototessera',
         'article' => 'Copia di un articolo recente pubblicato a propria firma su testate cartacee, oppure link ad un servizio audio/video o ad un articolo pubblicato su testate online registrate, che testimoni l\'effettiva attività giornalistica svolta nel settore inerente alla manifestazione per cui si richiede l\'accredito. Per chi ha gi&agrave; partecipato alla precedente edizione della manifestazione, il materiale allegato deve testimoniarne l\'avvenuta copertura',
     ],
     'infocommunications' => 'Vostre comunicazioni',
@@ -65,5 +69,6 @@ return [
         'workfor' => 'Seleziona un\'opzione',
         'nationality' => 'Seleziona una nazione',
         'schedule' => 'Seleziona la periodicit&agrave;',
+        'province' => 'Seleziona una provincia',
     ]
 ];

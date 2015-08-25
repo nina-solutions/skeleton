@@ -31,11 +31,12 @@ return [
         'city' => 'City',
         'zip' => 'ZIP code',
         'nationality' => 'Nationality',
+        'province' => 'Province',
         'schedule' => 'Publication schedule',
         'email' => 'Publisher\'s email',
         'phone' => 'Landline',
         'website' => 'Web Site',
-        'first' => ''
+        'first' => 'If you work for several publications, enter the address of the first one mentioned',
     ],
     'firsttime' => [
         'yes' => 'Yes',
@@ -45,6 +46,8 @@ return [
     'upload' => [
         'head' => 'Upload the documents requested here in PDF, JPG or DOC format.<br>Total size of attachment must not exceed 3 megabytes (3Mb).',
         'letter' => 'Copy of your engagement letter from your publisher',
+        'document' => 'Copy of a valid personal identity document',
+        'photo' => 'Passport-style photo of the applicant for the press pass',
         'colophon' => 'copy of articles published with your signature in printed magazines dealing with the event',
         'article' => 'Copy of a document testifying to journalistic activity',
     ],
@@ -66,5 +69,6 @@ return [
         'workfor' => 'Please select an option',
         'nationality' => 'Select a country',
         'schedule' => 'Select a scheduling',
+        'province' => 'Select a province',
     ]
 ];

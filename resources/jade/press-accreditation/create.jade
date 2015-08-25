@@ -5,63 +5,124 @@ block title
 
 block content
   h1 @lang('press.register')
-  + php ( "Form::open(array('route' => 'press-store', 'class' => 'form'))", "Form::close()" )
+  + php("Form::open(array('route' => array('press-store', $role, $code), 'class' => 'form-horizontal hub-press', 'files' => true))", "Form::close()")
     fieldset
       legend @lang('press.contact.head')
       .form-group
-        + php("Form::label(trans('press.contact.name'))")
-        + php("Form::text('ANA_NOME', Input::old('ANA_NOME'), array('required', 'class'=>'form-control', 'placeholder'=>trans('press.contact.name')))")
+        + php("Form::label('ANA_NOME', trans('press.contact.name'), ['class' => 'control-label col-md-3'])")
+        .col-md-9
+          + php("Form::text('ANA_NOME', Input::old('ANA_NOME'), array('required', 'class'=>'form-control', 'placeholder'=>trans('press.contact.name')))")
       .form-group
-        + php("Form::label(trans('press.contact.surname'))")
-        + php("Form::text('ANA_COGNOME', Input::old('ANA_COGNOME'), array('required', 'class'=>'form-control', 'placeholder'=>trans('press.contact.surname')))")
+        + php("Form::label('ANA_COGNOME', trans('press.contact.surname'), ['class' => 'control-label col-md-3'])")
+        .col-md-9
+          + php("Form::text('ANA_COGNOME', Input::old('ANA_COGNOME'), array('required', 'class'=>'form-control', 'placeholder'=>trans('press.contact.surname')))")
       .form-group
-        + php("Form::label(trans('press.contact.email'))")
-        + php("Form::email('ANA_EMAIL', Input::old('ANA_EMAIL'), array('required', 'class'=>'form-control', 'placeholder'=>trans('press.contact.email')))")
+        + php("Form::label('ANA_EMAIL', trans('press.contact.email'), ['class' => 'control-label col-md-3'])")
+        .col-md-9
+          + php("Form::email('ANA_EMAIL', Input::old('ANA_EMAIL'), array('required', 'class'=>'form-control', 'placeholder'=>trans('press.contact.email')))")
       .form-group
-        + php("Form::label(trans('press.contact.mobile'))")
-        + php("Form::text('ANA_CELLULARE', Input::old('ANA_CELLULARE'), array('required', 'class'=>'form-control', 'placeholder'=>trans('press.contact.mobile')))")
+        + php("Form::label('ANA_CELLULARE', trans('press.contact.mobile'), ['class' => 'control-label col-md-3'])")
+        .col-md-9
+          + php("Form::text('ANA_CELLULARE', Input::old('ANA_CELLULARE'), array('required', 'class'=>'form-control', 'placeholder'=>trans('press.contact.mobile')))")
       .form-group
-        + php("Form::label(trans('press.contact.qualification'))")
-        + php("Form::select('ANA_QUALIFICATESTO', $qualifications, Input::old('ANA_QUALIFICATESTO'), array('required', 'class'=>'form-control', 'placeholder'=>trans('press.select.qualification')))")
+        + php("Form::label('ANA_QUALIFICATESTO', trans('press.contact.qualification'), ['class' => 'control-label col-md-3'])")
+        .col-md-9
+          + php("Form::select('ANA_QUALIFICATESTO', $qualifications, Input::old('ANA_QUALIFICATESTO'), array('required', 'class'=>'form-control', 'placeholder'=>trans('press.select.qualification')))")
       .form-group
-        + php("Form::label(trans('press.contact.workfor'))")
-        + php("Form::select('DW_UTILITY', $workfor, Input::old('DW_UTILITY'), array('required', 'class'=>'form-control', 'placeholder'=>trans('press.select.workfor')))")
+        + php("Form::label('DW_UTILITY',trans('press.contact.workfor'), ['class' => 'control-label col-md-3'])")
+        .col-md-9
+          + php("Form::select('DW_UTILITY', $workfor, Input::old('DW_UTILITY'), array('required', 'class'=>'form-control', 'placeholder'=>trans('press.select.workfor')))")
       .form-group
-        + php("Form::label(trans('press.contact.twitter'))")
-        + php("Form::text('ANA_TWITTER_ACCOUNT', null, array('required', 'class'=>'form-control', 'placeholder'=>trans('press.contact.twitter')))")
+        + php("Form::label('ANA_TWITTER_ACCOUNT',trans('press.contact.twitter'), ['class' => 'control-label col-md-3'])")
+        .col-md-9
+          + php("Form::text('ANA_TWITTER_ACCOUNT', Input::old('ANA_TWITTER_ACCOUNT'), array('required', 'class'=>'form-control', 'placeholder'=>trans('press.contact.twitter')))")
 
     fieldset
       legend @lang('press.newspaper.head')
       .form-group
-        + php("Form::label(trans('press.newspaper.name'))")
-        + php("Form::text('AS_NOME_TESTATA', Input::old('AS_NOME_TESTATA'), array('required', 'class'=>'form-control', 'placeholder'=>trans('press.newspaper.name')))")
+        + php("Form::label('AS_NOME_TESTATA', trans('press.newspaper.name'), ['class' => 'control-label col-md-3'])")
+        .col-md-9
+          + php("Form::text('AS_NOME_TESTATA', Input::old('AS_NOME_TESTATA'), array('required', 'class'=>'form-control', 'placeholder'=>trans('press.newspaper.name')))")
       .form-group
-        + php("Form::label(trans('press.newspaper.address'))")
-        + php("Form::text('AS_ADDRESS', Input::old('AS_ADDRESS'), array('required', 'class'=>'form-control', 'placeholder'=>trans('press.newspaper.address')))")
-      strong @lang('press.newspaper.first')
+        .col-md-offset-3.col-md-9
+          .well.well-sm @lang('press.newspaper.first')
       .form-group
-        + php("Form::label(trans('press.newspaper.nationality'))")
-        + php("Form::select('AS_COUNTRY', $nations, Input::old('ANA_QUALIFICATESTO'), array('required', 'class'=>'form-control', 'placeholder'=>trans('press.select.nationality')))")
+        + php("Form::label('AS_ADDRESS', trans('press.newspaper.address'), ['class' => 'control-label col-md-3'])")
+        .col-md-9
+          + php("Form::text('AS_ADDRESS', Input::old('AS_ADDRESS'), array('required', 'class'=>'form-control', 'placeholder'=>trans('press.newspaper.address')))")
       .form-group
-        + php("Form::label(trans('press.newspaper.schedule'))")
-        + php("Form::select('AS_PERIODICITA', $schedule, Input::old('DW_UTILITY'), array('required', 'class'=>'form-control', 'placeholder'=>trans('press.select.schedule')))")
+        + php("Form::label('AS_CITY', trans('press.newspaper.city'), ['class' => 'control-label col-md-3'])")
+        .col-md-9
+          + php("Form::text('AS_CITY', Input::old('AS_CITY'), array('required', 'class'=>'form-control', 'placeholder'=>trans('press.newspaper.city')))")
+      .form-group
+        + php("Form::label('AS_CAP', trans('press.newspaper.zip'), ['class' => 'control-label col-md-3'])")
+        .col-md-9
+          + php("Form::text('AS_CAP', Input::old('AS_CAP'), array('required', 'class'=>'form-control', 'placeholder'=>trans('press.newspaper.zip')))")
+
+      //Tricky..apparently who made the DB doesn't know that VR is not a country but is a
+      .form-group
+        + php("Form::label('AS_COUNTRY', trans('press.newspaper.province'), ['class' => 'control-label col-md-3'])")
+        .col-md-9
+          + php("Form::select('AS_COUNTRY', $provences, Input::old('AS_COUNTRY'), array('required', 'class'=>'form-control', 'placeholder'=>trans('press.select.province')))")
+
+      //Tricky..apparently who made the DB doesn't know that States indicates internal separation
+        I.E USA is divided into regions, or states
+      .form-group
+        + php("Form::label('AS_STATES', trans('press.newspaper.nationality'), ['class' => 'control-label col-md-3'])")
+        .col-md-9
+          + php("Form::select('AS_STATES', $nations, Input::old('AS_STATES'), array('required', 'class'=>'form-control', 'placeholder'=>trans('press.select.nationality')))")
 
       .form-group
-        + php("Form::label(trans('press.newspaper.email'))")
-        + php("Form::email('AS_EMAIL', Input::old('AS_EMAIL'), array('required', 'class'=>'form-control', 'placeholder'=>trans('press.newspaper.email')))")
+        + php("Form::label('AS_PERIODICITA', trans('press.newspaper.schedule'), ['class' => 'control-label col-md-3'])")
+        .col-md-9
+          + php("Form::select('AS_PERIODICITA', $schedule, Input::old('AS_PERIODICITA'), array('required', 'class'=>'form-control', 'placeholder'=>trans('press.select.schedule')))")
       .form-group
-        + php("Form::label(trans('press.newspaper.phone'))")
-        + php("Form::text('AS_PHONE', Input::old('AS_PHONE'), array('required', 'class'=>'form-control', 'placeholder'=>trans('press.newspaper.phone')))")
+        + php("Form::label('AS_EMAIL', trans('press.newspaper.email'), ['class' => 'control-label col-md-3'])")
+        .col-md-9
+          + php("Form::email('AS_EMAIL', Input::old('AS_EMAIL'), array('required', 'class'=>'form-control', 'placeholder'=>trans('press.newspaper.email')))")
       .form-group
-        + php("Form::label(trans('press.newspaper.website'))")
-        + php("Form::text('AS_WWW', Input::old('AS_WWW'), array('required', 'class'=>'form-control', 'placeholder'=>trans('press.newspaper.website')))")
-
+        + php("Form::label('AS_PHONE', trans('press.newspaper.phone'), ['class' => 'control-label col-md-3'])")
+        .col-md-9
+          + php("Form::text('AS_PHONE', Input::old('AS_PHONE'), array('required', 'class'=>'form-control', 'placeholder'=>trans('press.newspaper.phone')))")
+      .form-group
+        + php("Form::label('AS_WWW', trans('press.newspaper.website'), ['class' => 'control-label col-md-3'])")
+        .col-md-9
+          + php("Form::text('AS_WWW', Input::old('AS_WWW'), array('required', 'class'=>'form-control', 'placeholder'=>trans('press.newspaper.website')))")
+    fieldset
+      legend @lang('press.firsttime.head')
+      .form-group
+        .col-md-offset-3.col-md-9
+          + php("Form::label('ANA_PRIMA_VISITA', trans('press.firsttime.no'), array('class'=>'radio-inline'))")
+          + php("Form::radio('ANA_PRIMA_VISITA', 'NO', (Input::old('ANA_PRIMA_VISITA') == 'NO' ? true : false), array('required', 'class'=>'radio-inline'))")
+          + php("Form::label('ANA_PRIMA_VISITA', trans('press.firsttime.yes'), array('class'=>'radio-inline'))")
+          + php("Form::radio('ANA_PRIMA_VISITA', 'SI', (Input::old('ANA_PRIMA_VISITA') == 'SI' ? true : false), array('required', 'class'=>'radio-inline'))")
+    fieldset
+      legend @lang('press.upload.head')
+      .form-group
+        + php("Form::label('AS_FILENAME1', trans('press.upload.letter'), ['class' => 'control-label col-md-6'])")
+        .col-md-6
+          + php("Form::file('AS_FILENAME1', Input::old('AS_FILENAME1'), array('required', 'class'=>'form-control'))")
+      .form-group
+        + php("Form::label('AS_FILENAME2', trans('press.upload.document'), ['class' => 'control-label col-md-6'])")
+        .col-md-6
+          + php("Form::file('AS_FILENAME2', Input::old('AS_FILENAME2'), array('required', 'class'=>'form-control'))")
+      .form-group
+        + php("Form::label('AS_FILENAME3', trans('press.upload.photo'), ['class' => 'control-label col-md-6'])")
+        .col-md-6
+          + php("Form::file('AS_FILENAME3', Input::old('AS_FILENAME3'), array('required', 'class'=>'form-control'))")
+      .form-group
+        + php("Form::label('AS_FILENAME4', trans('press.upload.letter'), ['class' => 'control-label col-md-6'])")
+        .col-md-6
+          + php("Form::file('AS_FILENAME4', Input::old('AS_FILENAME4'), array('required', 'class'=>'form-control'))")
+      .form-group
+        + php("Form::label('AS_FILENAME5', trans('press.upload.colophon'), ['class' => 'control-label col-md-6'])")
+        .col-md-6
+          + php("Form::file('AS_FILENAME5', Input::old('AS_FILENAME5'), array('required', 'class'=>'form-control'))")
     fieldset
       legend @lang('press.actions.head')
       p
         strong @lang('press.actions.description')
-      .box.jumbotron
-        strong @lang('press.actions.notice')
+      .well.well-sm @lang('press.actions.notice')
       .form-group
         + php("Form::submit(trans('press.actions.submit', ['fair_name' => 'FAIR NAME']), array('class' => 'btn btn-primary'))")
         + php("Form::reset(trans('press.actions.reset'), array('class' => 'btn'))")

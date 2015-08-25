@@ -19,7 +19,7 @@ Route::match(
     ['as' => 'press-register-locale', function($locale, $role,$code){
         App::setLocale($locale);
         $controller = App::make('PressAccreditationController');
-        return $controller->callAction('create', ['code' => $code, 'role' => $role]);
+        return $controller->callAction('create', ['role' => $role, 'code' => $code]);
     }]
 );
 
