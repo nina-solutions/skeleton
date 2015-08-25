@@ -5991,4 +5991,7 @@ button.close {
   .hidden-print {
     display: none !important; } }
 
+.hub-press .well {
+  margin-bottom: 0; }
+
 /*# sourceMappingURL=app.css.map */
