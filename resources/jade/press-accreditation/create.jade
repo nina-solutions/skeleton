@@ -22,14 +22,39 @@ block content
         + php("Form::text('ANA_CELLULARE', Input::old('ANA_CELLULARE'), array('required', 'class'=>'form-control', 'placeholder'=>trans('press.contact.mobile')))")
       .form-group
         + php("Form::label(trans('press.contact.qualification'))")
-        + php("Form::select('ANA_QUALIFICATESTO', $qualifications, Input::old('ANA_QUALIFICATESTO'), array('required', 'class'=>'form-control', 'placeholder'=>trans('press.contact.qualification')))")
+        + php("Form::select('ANA_QUALIFICATESTO', $qualifications, Input::old('ANA_QUALIFICATESTO'), array('required', 'class'=>'form-control', 'placeholder'=>trans('press.select.qualification')))")
       .form-group
         + php("Form::label(trans('press.contact.workfor'))")
-        + php("Form::select('DW_UTILITY', $workfor, Input::old('DW_UTILITY'), array('required', 'class'=>'form-control', 'placeholder'=>trans('press.contact.workfor')))")
+        + php("Form::select('DW_UTILITY', $workfor, Input::old('DW_UTILITY'), array('required', 'class'=>'form-control', 'placeholder'=>trans('press.select.workfor')))")
       .form-group
         + php("Form::label(trans('press.contact.twitter'))")
         + php("Form::text('ANA_TWITTER_ACCOUNT', null, array('required', 'class'=>'form-control', 'placeholder'=>trans('press.contact.twitter')))")
 
+    fieldset
+      legend @lang('press.newspaper.head')
+      .form-group
+        + php("Form::label(trans('press.newspaper.name'))")
+        + php("Form::text('AS_NOME_TESTATA', Input::old('AS_NOME_TESTATA'), array('required', 'class'=>'form-control', 'placeholder'=>trans('press.newspaper.name')))")
+      .form-group
+        + php("Form::label(trans('press.newspaper.address'))")
+        + php("Form::text('AS_ADDRESS', Input::old('AS_ADDRESS'), array('required', 'class'=>'form-control', 'placeholder'=>trans('press.newspaper.address')))")
+      strong @lang('press.newspaper.first')
+      .form-group
+        + php("Form::label(trans('press.newspaper.nationality'))")
+        + php("Form::select('AS_COUNTRY', $nations, Input::old('ANA_QUALIFICATESTO'), array('required', 'class'=>'form-control', 'placeholder'=>trans('press.select.nationality')))")
+      .form-group
+        + php("Form::label(trans('press.newspaper.schedule'))")
+        + php("Form::select('AS_PERIODICITA', $schedule, Input::old('DW_UTILITY'), array('required', 'class'=>'form-control', 'placeholder'=>trans('press.select.schedule')))")
+
+      .form-group
+        + php("Form::label(trans('press.newspaper.email'))")
+        + php("Form::email('AS_EMAIL', Input::old('AS_EMAIL'), array('required', 'class'=>'form-control', 'placeholder'=>trans('press.newspaper.email')))")
+      .form-group
+        + php("Form::label(trans('press.newspaper.phone'))")
+        + php("Form::text('AS_PHONE', Input::old('AS_PHONE'), array('required', 'class'=>'form-control', 'placeholder'=>trans('press.newspaper.phone')))")
+      .form-group
+        + php("Form::label(trans('press.newspaper.website'))")
+        + php("Form::text('AS_WWW', Input::old('AS_WWW'), array('required', 'class'=>'form-control', 'placeholder'=>trans('press.newspaper.website')))")
 
     fieldset
       legend @lang('press.actions.head')

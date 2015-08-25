@@ -4,6 +4,8 @@ namespace FairHub\Http\Controllers;
 
 use FairHub\DW_SOTTOCATEGORIE;
 use FairHub\DW_UTILITA;
+use FairHub\NAZIONI;
+use FairHub\DW_PERIODICITA;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
@@ -32,7 +34,7 @@ class PressAccreditationController extends Controller
         $request = Request::capture();
         $inputs = $request->all();
         $jobs = DW_UTILITA::type('LAVORO')->get();
-        $workfor = [0=>trans('press.select.workfor')];
+        $workfor = [];
         foreach($jobs as $job){
             //we should use only query and not this trick,
             //it is necessary to build a clean structure before give it
@@ -41,14 +43,35 @@ class PressAccreditationController extends Controller
         }
 
         $categories = DW_SOTTOCATEGORIE::visible(true)->qualifiche('VIR09')->get();
-        $qualifications = [0=>trans('press.select.qualifications')];
+        $qualifications = [];
         foreach($categories as $category){
             //we should use only query and not this trick,
             //it is necessary to build a clean structure before give it
             //to the view
             $qualifications[$category->id] =$category->description;
         }
-        return view('press-accreditation.create', ['workfor' => $workfor, 'qualifications'=>$qualifications]);
+
+
+        $nations_q = NAZIONI::all();
+        $nations = [];
+        foreach($nations_q as $nation){
+            //we should use only query and not this trick,
+            //it is necessary to build a clean structure before give it
+            //to the view
+            $nations[$nation->id] =$nation->description;
+        }
+
+
+        $periods = DW_PERIODICITA::all();
+        $schedule = [];
+        foreach($periods as $option){
+            //we should use only query and not this trick,
+            //it is necessary to build a clean structure before give it
+            //to the view
+            $schedule[$option->id] =$option->description;
+        }
+
+        return view('press-accreditation.create', ['workfor' => $workfor, 'qualifications'=>$qualifications, 'nations' => $nations, 'schedule' => $schedule]);
     }
 
     /**

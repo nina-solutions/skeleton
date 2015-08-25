@@ -1,6 +1,7 @@
 <?php
 
 namespace FairHub;
+use Illuminate\Support\Facades\App;
 
 class NAZIONI extends HubModel
 {
@@ -13,6 +14,29 @@ class NAZIONI extends HubModel
         'naz_ute',
         'naz_nazione'
     ];
+
+    //If you hate the way this Database is designed,
+    //uniformity: if I want ID of any class, i just use id() method
+    /**
+     * @return int
+     */
+    public function getIdAttribute(){
+        return $this->attributes['naz_nazione'];
+    }
+
+    //If you hate the way this Database is designed,
+    //please use this method to automagically the right translated description
+    //instead of dirty stuff like CAMPO1 and CAMPO2
+    /**
+     * @return string
+     */
+    public function getDescriptionAttribute(){
+        //If english return english description
+        if (App::getLocale() == 'en')
+            return $this->attributes['naz_descr_naz'];
+        //fallback on Italian for everything else
+        return $this->attributes['naz_descr_ita'];
+    }
 
     //naz_ute VARCHAR(2) NOT NULL,
     //naz_nazione VARCHAR(2) NOT NULL,
