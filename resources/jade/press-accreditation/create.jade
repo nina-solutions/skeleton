@@ -25,13 +25,13 @@ block content
         .col-md-9
           + php("Form::text('ANA_CELLULARE', Input::old('ANA_CELLULARE'), array('required', 'class'=>'form-control', 'placeholder'=>trans('press.contact.mobile')))")
       .form-group
-        + php("Form::label('ANA_QUALIFICATESTO', trans('press.contact.qualification'), ['class' => 'control-label col-md-3'])")
+        + php("Form::label('SOC_ID', trans('press.contact.qualification'), ['class' => 'control-label col-md-3'])")
         .col-md-9
-          + php("Form::select('ANA_QUALIFICATESTO', $qualifications, Input::old('ANA_QUALIFICATESTO'), array('required', 'class'=>'form-control', 'placeholder'=>trans('press.select.qualification')))")
+          + php("Form::select('SOC_ID', $qualifications, Input::old('SOC_ID'), array('required', 'class'=>'form-control', 'placeholder'=>trans('press.select.qualification')))")
       .form-group
-        + php("Form::label('DW_UTILITY',trans('press.contact.workfor'), ['class' => 'control-label col-md-3'])")
+        + php("Form::label('UTY_ID',trans('press.contact.workfor'), ['class' => 'control-label col-md-3'])")
         .col-md-9
-          + php("Form::select('DW_UTILITY', $workfor, Input::old('DW_UTILITY'), array('required', 'class'=>'form-control', 'placeholder'=>trans('press.select.workfor')))")
+          + php("Form::select('UTY_ID', $workfor, Input::old('UTY_ID'), array('required', 'class'=>'form-control', 'placeholder'=>trans('press.select.workfor')))")
       .form-group
         + php("Form::label('ANA_TWITTER_ACCOUNT',trans('press.contact.twitter'), ['class' => 'control-label col-md-3'])")
         .col-md-9

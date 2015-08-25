@@ -23,10 +23,29 @@ class PressAccreditationRequest extends Request
      */
     public function rules()
     {
-        return [
+        $common =  [
             'ANA_NOME' => 'required',
             'ANA_COGNOME' => 'required',
             'ANA_EMAIL' => 'required|email',
+            'ANA_CELLULARE' => 'required',
+            'SOC_ID' => 'required',
+            'UTY_ID' => 'required',
+            'AS_NOME_TESTATA' => 'required',
+            'AS_ADDRESS' => 'required',
+            'AS_CITY' => 'required',
+            'AS_CAP' => 'required',
+            'AS_STATES' => 'required',
+
         ];
+        $roleFields = $this->roleMandatoryFields();
+
+        $needs = array_merge($common, $roleFields);
+
+        return $needs;
+    }
+
+    public function roleMandatoryFields(){
+
+        return [];
     }
 }

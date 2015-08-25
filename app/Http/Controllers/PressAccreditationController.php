@@ -15,6 +15,7 @@ use FairHub\Http\Controllers\Controller;
 
 class PressAccreditationController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      *
@@ -32,8 +33,6 @@ class PressAccreditationController extends Controller
      */
     public function create($role, $code)
     {
-        $request = Request::capture();
-        $inputs = $request->all();
         $jobs = DW_UTILITA::type('LAVORO')->get();
         $workfor = [];
         foreach($jobs as $job){
@@ -46,37 +45,24 @@ class PressAccreditationController extends Controller
         $categories = DW_SOTTOCATEGORIE::visible(true)->qualifiche('VIR09')->get();
         $qualifications = [];
         foreach($categories as $category){
-            //we should use only query and not this trick,
-            //it is necessary to build a clean structure before give it
-            //to the view
             $qualifications[$category->id] =$category->description;
         }
-
 
         $nations_q = NAZIONI::all();
         $nations = [];
         foreach($nations_q as $nation){
-            //we should use only query and not this trick,
-            //it is necessary to build a clean structure before give it
-            //to the view
             $nations[$nation->id] =$nation->description;
         }
 
         $prov_q = PROV::all();
         $provences = [];
-        foreach($prov_q as $province){
-            //we should use only query and not this trick,
-            //it is necessary to build a clean structure before give it
-            //to the view
-            $provences[$province->id] =$province->description;
+        foreach($prov_q as $provence){
+            $provences[$provence->id] =$provence->description;
         }
 
         $periods = DW_PERIODICITA::all();
         $schedule = [];
         foreach($periods as $option){
-            //we should use only query and not this trick,
-            //it is necessary to build a clean structure before give it
-            //to the view
             $schedule[$option->id] =$option->description;
         }
 
@@ -105,6 +91,35 @@ class PressAccreditationController extends Controller
         if (!$validates) {
             return redirect('press-register')->withInput($request->except('password'))->with('message', 'Something wrong');;
         }
+
+        //SAVE DW_ANAGRAFICHE, QUALIFICHE is text, COUNTRY is mandatory if STATE = ITALIA, ANA_FILENAME= nome rinominato, ANA_IMAGEX= byte
+        //I file caricati vanno opportunamente rinominati
+        //NOME=FILE1_date('YmdHis-').md5(str_replace('.'.ESTENSIONE, '', $file['name'])).'.'.ESTENSIONE )
+        //spostati nella cartella "uploaded_files/<codiceFiera>";
+        //estensioni ammesse 'jpg', 'pdf','doc','docx','tiff','odt','tif'
+
+        /**
+         *  Method for storing images
+         *
+         *     $out = 'null';
+         *    $handle = @fopen($filepath, 'rb');
+         *    if ($handle)
+         *    {
+         *        $content = @fread($handle, filesize($filepath));
+         *        $content = bin2hex($content);
+         *        @fclose($handle);
+         *        $out = "0x".$content;
+         *    }
+         *    return $out;
+         */
+
+
+        //SAVE RELANAGCATEG with QUALIFICHE ID MAC SOC and eventually OTHER as text
+
+        //SAVE RELANAUTY ANA_ID and UTY_ID
+
+        //SAVE DW_ANAGRAFICA_TESTATA WITH ANA_ID from DW_ANAGRAFICHE
+
         return \Redirect::route('thanks')
             ->with('message', 'Thanks for contacting us!');
     }
