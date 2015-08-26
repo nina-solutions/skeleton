@@ -37,6 +37,7 @@ class PressAccreditationRequest extends Request
             function($contstraints){
                 return implode('|', $contstraints);
             }, $needs);
+        //special requirements
         $needs['human'] .= '|in:' . \Session::get('captcha_answer');
         return $needs;
     }

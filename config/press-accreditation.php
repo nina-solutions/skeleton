@@ -47,7 +47,44 @@ return [
             'UTY_ID' => [
                 'required'
             ],
-            //Required by everyone
+            'ANA_TWITTER_ACCOUNT' => [],
+
+            'AS_NOME_TESTATA' => [
+                'required'
+            ],
+            'AS_ADDRESS' => [
+                'required'
+            ],
+            'AS_CITY' => [
+                'required'
+            ],
+            'AS_CAP' => [
+                'required'
+            ],
+            'AS_STATES' => [
+                'required'
+            ],
+            'AS_COUNTRY' => [
+                'required_if:AS_STATES,IT'
+            ],
+            'AS_PERIODICITA' => [
+                'required'
+            ],
+            'AS_EMAIL' => [
+                'required',
+                'email'
+            ],
+            'AS_PHONE' => [],
+            'AS_WWW' => [],
+            'ANA_PRIMA_VISITA' => [
+                'required',
+                'in:SI,NO'
+            ],
+
+            'ANA_FILENAME1' => [
+                'photo' => 'mimes:jpeg,bmp,png'
+            ],
+
             'ANA_CARD' => [
                 'required'
             ],
