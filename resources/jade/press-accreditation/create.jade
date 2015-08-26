@@ -5,7 +5,7 @@ block title
 
 block content
   h1 @lang('press.register')
-  + php("Form::open(array('route' => array('press-store-locale', App::getLocale(), $role, $code), 'class' => 'form-horizontal hub-press', 'files' => true))", "Form::close()")
+  + php("Form::open(array('route' => array('press-save-locale', 'it', $role, $code), 'class' => 'form-horizontal hub-press', 'files' => true))", "Form::close()")
     fieldset
       legend @lang('press.contact.head')
       .form-group
@@ -120,10 +120,11 @@ block content
           + php("Form::file('AS_FILENAME5', Input::old('AS_FILENAME5'), array('required', 'class'=>'form-control'))")
     fieldset
       legend @lang('press.actions.head')
-      p
-        strong @lang('press.actions.description')
-      .well.well-sm @lang('press.actions.notice')
-      .form-group
+      .form-group.col-md-12
+        p
+          strong @lang('press.actions.description')
+        .well.well-sm @lang('press.actions.notice')
+      .form-group.col-md-12
         + php("Form::submit(trans('press.actions.submit', ['fair_name' => 'FAIR NAME']), array('class' => 'btn btn-primary'))")
         + php("Form::reset(trans('press.actions.reset'), array('class' => 'btn'))")
 

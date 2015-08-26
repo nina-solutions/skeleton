@@ -23,6 +23,15 @@ Route::match(
     }]
 );
 
+Route::post(
+    '{locale}/press-accreditation/save/{role}/{code}',
+    ['middleware' => 'role', 'as' => 'press-save-locale', function($locale, $role,$code){
+        App::setLocale($locale);
+        $controller = App::make('PressAccreditationController');
+        return $controller->callAction('store', ['role' => $role, 'code' => $code]);
+    }]
+);
+
 Route::get(
     'thanks',
     ['as' => 'thanks', function(){
