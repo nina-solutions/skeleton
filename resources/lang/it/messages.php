@@ -19,4 +19,6 @@ return [
     'pleaseback' => 'per favore torna alla nostra home.',
     'funny404' => 'Siamo spiacenti, a quento pare abbiamo perso questa pagina, ma non vogliamo perdere te!',
 
+    'wrongform' => 'Per favore controlla la compilazione dei dati, qualcosa &egrave; andato storto.',
+
 ];

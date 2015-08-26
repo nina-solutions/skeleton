@@ -23,26 +23,14 @@ class PressAccreditationRequest extends Request
      */
     public function rules()
     {
-        $common =  [
-            'ANA_NOME' => 'required',
-            'ANA_COGNOME' => 'required',
-            'ANA_EMAIL' => 'required|email',
-            'ANA_CELLULARE' => 'required',
-            'SOC_ID' => 'required',
-            'UTY_ID' => 'required',
-            'AS_NOME_TESTATA' => 'required',
-            'AS_ADDRESS' => 'required',
-            'AS_CITY' => 'required',
-            'AS_CAP' => 'required',
-            'AS_STATES' => 'required',
 
-            'ANA_CONSENSO' => 'required',
-
-            'capcha' => 'required',
-        ];
-        $roleFields = $this->roleMandatoryFields();
-
+        $common = config('press-accreditation.fields.0');
+        $roleFields = config('press-accreditation.fields'.$this->channel);
         $needs = array_merge($common, $roleFields);
+
+        //array map for imploding each field values like
+        //FIELD => ['required', 'email']
+        //FIELD => 'required|email'
 
         return $needs;
     }

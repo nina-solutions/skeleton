@@ -18,4 +18,6 @@ return [
     'permissiondenied' => 'Permission denied for this area.',
     'pleaseback' => 'please go back to our home',
     'funny404' => 'We are sorry, it seems we have lost this page, but we don\'t want to loose you!',
+
+    'wrongform' => 'Something wrong with the form validation, please check again.',
 ];

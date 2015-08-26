@@ -26,13 +26,28 @@ return [
     //fields with 1 as value as mandatory
     'fields' => [
         0  => [
-            'ANA_NOME' => 1,
-            'ANA_COGNOME' => 1,
-            'ANA_EMAIL' => 1,
-            'ANA_CELLULARE' => 0,
-            'SOC_ID' => 0,
-            'UTY_ID' => 0,
-            'ANA_CARD' => 1,
+            'ANA_NOME' => [
+                'required'
+            ],
+            'ANA_COGNOME' => [
+                'required'
+            ],
+            'ANA_EMAIL' => [
+                'required',
+                'email',
+            ],
+            'ANA_CELLULARE' => [
+                'required'
+            ],
+            'SOC_ID' => [
+                'required'
+            ],
+            'UTY_ID' => [
+                'required'
+            ],
+            'ANA_CARD' => [
+                'required'
+            ],
         ],
         20 => [
 

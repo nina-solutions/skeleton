@@ -12,11 +12,10 @@ use Illuminate\Http\Response;
 
 use FairHub\Http\Requests\PressAccreditationRequest;
 use FairHub\Http\Controllers\Controller;
+use Illuminate\Support\Facades\App;
 
 class PressAccreditationController extends Controller
 {
-
-
     /**
      * Display a listing of the resource.
      *
@@ -32,10 +31,8 @@ class PressAccreditationController extends Controller
      *
      * @return Response
      */
-    public function create($role, $code)
+    public function create(Request $request, $role, $code)
     {
-
-
         $jobs = DW_UTILITA::type('LAVORO')->get();
         $workfor = [];
         foreach($jobs as $job){
@@ -76,6 +73,7 @@ class PressAccreditationController extends Controller
             'schedule' => $schedule,
             'role' => $role,
             'code' => $code,
+            'fields' => $request->fields,
             'provences' => $provences
         ]);
     }
@@ -92,7 +90,7 @@ class PressAccreditationController extends Controller
         $validates = false;
 
         if (!$validates) {
-            return redirect('press-register')->withInput($request->except('password'))->with('message', 'Something wrong');;
+            return redirect()->back()->withInput($request->except('password'))->with('message', trans('messages.wrongform'));
         }
 
         //SAVE DW_ANAGRAFICHE, QUALIFICHE is text, COUNTRY is mandatory if STATE = ITALIA, ANA_FILENAME= nome rinominato, ANA_IMAGEX= byte
@@ -101,20 +99,14 @@ class PressAccreditationController extends Controller
         //spostati nella cartella "uploaded_files/<codiceFiera>";
         //estensioni ammesse 'jpg', 'pdf','doc','docx','tiff','odt','tif'
 
-        /**
-         *  Method for storing images
-         *
-         *     $out = 'null';
-         *    $handle = @fopen($filepath, 'rb');
-         *    if ($handle)
-         *    {
-         *        $content = @fread($handle, filesize($filepath));
-         *        $content = bin2hex($content);
-         *        @fclose($handle);
-         *        $out = "0x".$content;
-         *    }
-         *    return $out;
-         */
+
+        //FOR each uploaded files as file
+        $file = array('name' => 'NomeFile', 'extension' => '.pdf');
+        $filename = 'file1_' . date('YmdHis-').md5($file['name']).'.'.$file['extension'];
+        $filepath = storage_path(implode('/', [env('UPLOAD'), $code, $filename]));
+
+        //store the file in this location then save also to DB
+        $image = $this->prepareImage($filepath);
 
 
         //SAVE RELANAGCATEG with QUALIFICHE ID MAC SOC and eventually OTHER as text
@@ -170,5 +162,18 @@ class PressAccreditationController extends Controller
     public function destroy($id)
     {
         //need authentication
+    }
+
+    private function prepareImage($filepath){
+        $out = 'null';
+        $handle = @fopen($filepath, 'rb');
+        if ($handle)
+        {
+            $content = @fread($handle, filesize($filepath));
+            $content = bin2hex($content);
+            @fclose($handle);
+            $out = "0x".$content;
+        }
+        return $out;
     }
 }
