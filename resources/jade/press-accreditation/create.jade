@@ -12,37 +12,37 @@ block content
         .form-group
           + php("Form::label('ANA_NOME', trans('press.contact.name'), ['class' => 'control-label col-md-3'])")
           .col-md-9
-            + php("Form::text('ANA_NOME', Input::old('ANA_NOME'), array(in_array('required',$fields['ANA_NOME'])?'required':'', 'class'=>'form-control', 'placeholder'=>trans('press.contact.name')))")
+            + php("Form::text('ANA_NOME', Input::old('ANA_NOME'), array((in_array('required',$fields['ANA_NOME'])?'required':''), 'class'=>'form-control', 'placeholder'=>trans('press.contact.name')))")
       + if("isset($fields['ANA_COGNOME'])")
         .form-group
           + php("Form::label('ANA_COGNOME', trans('press.contact.surname'), ['class' => 'control-label col-md-3'])")
           .col-md-9
-            + php("Form::text('ANA_COGNOME', Input::old('ANA_COGNOME'), array(in_array('required',$fields['ANA_COGNOME'])?'required':'', 'class'=>'form-control', 'placeholder'=>trans('press.contact.surname')))")
+            + php("Form::text('ANA_COGNOME', Input::old('ANA_COGNOME'), array((in_array('required',$fields['ANA_COGNOME'])?'required':''), 'class'=>'form-control', 'placeholder'=>trans('press.contact.surname')))")
       + if("isset($fields['ANA_EMAIL'])")
         .form-group
           + php("Form::label('ANA_EMAIL', trans('press.contact.email'), ['class' => 'control-label col-md-3'])")
           .col-md-9
-            + php("Form::email('ANA_EMAIL', Input::old('ANA_EMAIL'), array(in_array('required',$fields['ANA_EMAIL'])?'required':'', 'class'=>'form-control', 'placeholder'=>trans('press.contact.email')))")
+            + php("Form::email('ANA_EMAIL', Input::old('ANA_EMAIL'), array((in_array('required',$fields['ANA_EMAIL'])?'required':''), 'class'=>'form-control', 'placeholder'=>trans('press.contact.email')))")
       + if("isset($fields['ANA_CELLULARE'])")
         .form-group
           + php("Form::label('ANA_CELLULARE', trans('press.contact.mobile'), ['class' => 'control-label col-md-3'])")
           .col-md-9
-            + php("Form::text('ANA_CELLULARE', Input::old('ANA_CELLULARE'), array(in_array('required',$fields['ANA_CELLULARE'])?'required':'', 'class'=>'form-control', 'placeholder'=>trans('press.contact.mobile')))")
+            + php("Form::text('ANA_CELLULARE', Input::old('ANA_CELLULARE'), array((in_array('required',$fields['ANA_CELLULARE'])?'required':''), 'class'=>'form-control', 'placeholder'=>trans('press.contact.mobile')))")
       + if("isset($fields['SOC_ID'])")
         .form-group
           + php("Form::label('SOC_ID', trans('press.contact.qualification'), ['class' => 'control-label col-md-3'])")
           .col-md-9
-            + php("Form::select('SOC_ID', $qualifications, Input::old('SOC_ID'), array(in_array('required',$fields['SOC_ID'])?'required':'', 'class'=>'form-control', 'placeholder'=>trans('press.select.qualification')))")
+            + php("Form::select('SOC_ID', $qualifications, Input::old('SOC_ID'), array((in_array('required',$fields['SOC_ID'])?'required':''), 'class'=>'form-control', 'placeholder'=>trans('press.select.qualification')))")
       + if("isset($fields['UTY_ID'])")
         .form-group
           + php("Form::label('UTY_ID',trans('press.contact.workfor'), ['class' => 'control-label col-md-3'])")
           .col-md-9
-            + php("Form::select('UTY_ID', $workfor, Input::old('UTY_ID'), array(in_array('required',$fields['UTY_ID'])?'required':'', 'class'=>'form-control', 'placeholder'=>trans('press.select.workfor')))")
+            + php("Form::select('UTY_ID', $workfor, Input::old('UTY_ID'), array((in_array('required',$fields['UTY_ID'])?'required':''), 'class'=>'form-control', 'placeholder'=>trans('press.select.workfor')))")
       + if("isset($fields['ANA_TWITTER_ACCOUNT'])")
         .form-group
           + php("Form::label('ANA_TWITTER_ACCOUNT',trans('press.contact.twitter'), ['class' => 'control-label col-md-3'])")
           .col-md-9
-            + php("Form::text('ANA_TWITTER_ACCOUNT', Input::old('ANA_TWITTER_ACCOUNT'), array(in_array('required',$fields['ANA_TWITTER_ACCOUNT'])?'required':'', 'class'=>'form-control', 'placeholder'=>trans('press.contact.twitter')))")
+            + php("Form::text('ANA_TWITTER_ACCOUNT', Input::old('ANA_TWITTER_ACCOUNT'), array((in_array('required',$fields['ANA_TWITTER_ACCOUNT'])?'required':''), 'class'=>'form-control', 'placeholder'=>trans('press.contact.twitter')))")
 
     fieldset
       legend @lang('press.newspaper.head')

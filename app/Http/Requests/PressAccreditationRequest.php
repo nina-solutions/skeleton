@@ -25,13 +25,16 @@ class PressAccreditationRequest extends Request
     {
 
         $common = config('press-accreditation.fields.0');
-        $roleFields = config('press-accreditation.fields'.$this->channel);
+        $roleFields = config('press-accreditation.fields.'.$this->channel);
         $needs = array_merge($common, $roleFields);
 
         //array map for imploding each field values like
         //FIELD => ['required', 'email']
         //FIELD => 'required|email'
-
+        $needs = array_map(
+            function($contstraints){
+                return implode('|', $contstraints);
+            }, $needs);
         return $needs;
     }
 

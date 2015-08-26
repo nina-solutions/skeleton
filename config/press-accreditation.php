@@ -45,6 +45,7 @@ return [
             'UTY_ID' => [
                 'required'
             ],
+            //Required by everyone
             'ANA_CARD' => [
                 'required'
             ],
@@ -59,7 +60,8 @@ return [
 
         ],
         33 => [
-            'ANA_CARD' => 0,
+            //NOT REQUIRED example
+            'ANA_CARD' => [],
         ],
     ]
 

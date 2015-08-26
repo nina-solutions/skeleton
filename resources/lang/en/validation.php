@@ -103,6 +103,9 @@ return [
     |
     */
 
-    'attributes' => [],
+    'attributes' => [
+        'ANA_NOME' => 'Name',
+
+    ],
 
 ];
