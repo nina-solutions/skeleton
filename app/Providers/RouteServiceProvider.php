@@ -27,7 +27,8 @@ class RouteServiceProvider extends ServiceProvider
         //Fair code structure for code parameter
         $router->pattern('code', '[A-Z]{3}[0-9]{2}');
         //accepted roles
-        $router->pattern('role', 'journalist|giornalista|photographer|fotografo|collaborator|collaboratore');
+        $roles = implode('|',array_keys(config('press-accreditation.channels')));
+        $router->pattern('role', $roles);
         parent::boot($router);
     }
 
