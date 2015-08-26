@@ -8,6 +8,25 @@ class DW_ANAGRAFICA_TESTATA extends HubModel
     public $timestamps = false;
 
     protected $primaryKey = 'AS_ID';
+
+    protected $fillable = [
+        'ANA_ID',
+        'AS_TESSERA',
+        'AS_NOME_TESTATA',
+        'AS_PERIODICITA',
+        'AS_ADDRESS',
+        'AS_CITY',
+        'AS_CAP',
+        'AS_COUNTRY',
+        'AS_STATES',
+        'AS_EMAIL',
+        'AS_PHONE',
+        'AS_FAX',
+        'AS_MOBILE',
+        'AS_COMUNICAZIONI',
+        'AS_INSRETTIME',
+        'AS_WWW',
+    ];
     //AS_ID INT PRIMARY KEY NOT NULL IDENTITY,
     //ANA_ID INT NOT NULL,
     //AS_TESSERA VARCHAR(15) NOT NULL,
