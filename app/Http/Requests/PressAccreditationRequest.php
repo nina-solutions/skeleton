@@ -26,6 +26,8 @@ class PressAccreditationRequest extends Request
 
         $common = config('press-accreditation.fields.0');
         $roleFields = config('press-accreditation.fields.'.$this->channel);
+        //order is important, the roleFields may override the common ones
+        //if you swap those two, common roles will override the specific configurations
         $needs = array_merge($common, $roleFields);
 
         //array map for imploding each field values like
