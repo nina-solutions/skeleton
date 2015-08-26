@@ -64,6 +64,15 @@ return [
         'reset' => 'Reset',
     ],
 
+    'human' => [
+        'head' => 'Human verification test',
+        'question' => 'Write the result of :a + :b',
+        'placeholder' => 'Results',
+        'wrong' => 'Sorry, your answer is wrong. Please try again',
+        'numeric' => 'Please enter only numbers in the human verification test answer',
+        'required' => 'Please verify you are human by answering this simple math question',
+    ],
+
     'select' => [
         'qualification' => 'Select a qualification',
         'workfor' => 'Please select an option',

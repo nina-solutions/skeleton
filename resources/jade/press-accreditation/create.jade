@@ -43,68 +43,68 @@ block content
           + php("Form::label('ANA_TWITTER_ACCOUNT',trans('press.contact.twitter'), ['class' => 'control-label col-md-3'])")
           .col-md-9
             + php("Form::text('ANA_TWITTER_ACCOUNT', Input::old('ANA_TWITTER_ACCOUNT'), array((in_array('required',$fields['ANA_TWITTER_ACCOUNT'])?'required':''), 'class'=>'form-control', 'placeholder'=>trans('press.contact.twitter')))")
+    + if("isset($fields['AS_NOME_TESTATA'])")
+      fieldset
+        legend @lang('press.newspaper.head')
+        + if("isset($fields['AS_NOME_TESTATA'])")
+          .form-group
+            + php("Form::label('AS_NOME_TESTATA', trans('press.newspaper.name'), ['class' => 'control-label col-md-3'])")
+            .col-md-9
+              + php("Form::text('AS_NOME_TESTATA', Input::old('AS_NOME_TESTATA'), array(in_array('required',$fields['AS_NOME_TESTATA'])?'required':'', 'class'=>'form-control', 'placeholder'=>trans('press.newspaper.name')))")
+        .form-group
+          .col-md-offset-3.col-md-9
+            .well.well-sm @lang('press.newspaper.first')
+        + if("isset($fields['AS_ADDRESS'])")
+          .form-group
+            + php("Form::label('AS_ADDRESS', trans('press.newspaper.address'), ['class' => 'control-label col-md-3'])")
+            .col-md-9
+              + php("Form::text('AS_ADDRESS', Input::old('AS_ADDRESS'), array(in_array('required',$fields['AS_ADDRESS'])?'required':'', 'class'=>'form-control', 'placeholder'=>trans('press.newspaper.address')))")
+        + if("isset($fields['AS_CITY'])")
+          .form-group
+            + php("Form::label('AS_CITY', trans('press.newspaper.city'), ['class' => 'control-label col-md-3'])")
+            .col-md-9
+              + php("Form::text('AS_CITY', Input::old('AS_CITY'), array(in_array('required',$fields['AS_CITY'])?'required':'', 'class'=>'form-control', 'placeholder'=>trans('press.newspaper.city')))")
+        + if("isset($fields['AS_CAP'])")
+          .form-group
+            + php("Form::label('AS_CAP', trans('press.newspaper.zip'), ['class' => 'control-label col-md-3'])")
+            .col-md-9
+              + php("Form::text('AS_CAP', Input::old('AS_CAP'), array(in_array('required',$fields['AS_CAP'])?'required':'', 'class'=>'form-control', 'placeholder'=>trans('press.newspaper.zip')))")
 
-    fieldset
-      legend @lang('press.newspaper.head')
-      + if("isset($fields['AS_NOME_TESTATA'])")
-        .form-group
-          + php("Form::label('AS_NOME_TESTATA', trans('press.newspaper.name'), ['class' => 'control-label col-md-3'])")
-          .col-md-9
-            + php("Form::text('AS_NOME_TESTATA', Input::old('AS_NOME_TESTATA'), array(in_array('required',$fields['AS_NOME_TESTATA'])?'required':'', 'class'=>'form-control', 'placeholder'=>trans('press.newspaper.name')))")
-      .form-group
-        .col-md-offset-3.col-md-9
-          .well.well-sm @lang('press.newspaper.first')
-      + if("isset($fields['AS_ADDRESS'])")
-        .form-group
-          + php("Form::label('AS_ADDRESS', trans('press.newspaper.address'), ['class' => 'control-label col-md-3'])")
-          .col-md-9
-            + php("Form::text('AS_ADDRESS', Input::old('AS_ADDRESS'), array(in_array('required',$fields['AS_ADDRESS'])?'required':'', 'class'=>'form-control', 'placeholder'=>trans('press.newspaper.address')))")
-      + if("isset($fields['AS_CITY'])")
-        .form-group
-          + php("Form::label('AS_CITY', trans('press.newspaper.city'), ['class' => 'control-label col-md-3'])")
-          .col-md-9
-            + php("Form::text('AS_CITY', Input::old('AS_CITY'), array(in_array('required',$fields['AS_CITY'])?'required':'', 'class'=>'form-control', 'placeholder'=>trans('press.newspaper.city')))")
-      + if("isset($fields['AS_CAP'])")
-        .form-group
-          + php("Form::label('AS_CAP', trans('press.newspaper.zip'), ['class' => 'control-label col-md-3'])")
-          .col-md-9
-            + php("Form::text('AS_CAP', Input::old('AS_CAP'), array(in_array('required',$fields['AS_CAP'])?'required':'', 'class'=>'form-control', 'placeholder'=>trans('press.newspaper.zip')))")
+        //Tricky..apparently who made the DB doesn't know that VR is not a country but is a
+        + if("isset($fields['AS_COUNTRY'])")
+          .form-group
+            + php("Form::label('AS_COUNTRY', trans('press.newspaper.province'), ['class' => 'control-label col-md-3'])")
+            .col-md-9
+              + php("Form::select('AS_COUNTRY', $provences, Input::old('AS_COUNTRY'), array(in_array('required',$fields['AS_COUNTRY'])?'required':'', 'class'=>'form-control', 'placeholder'=>trans('press.select.province')))")
 
-      //Tricky..apparently who made the DB doesn't know that VR is not a country but is a
-      + if("isset($fields['AS_COUNTRY'])")
-        .form-group
-          + php("Form::label('AS_COUNTRY', trans('press.newspaper.province'), ['class' => 'control-label col-md-3'])")
-          .col-md-9
-            + php("Form::select('AS_COUNTRY', $provences, Input::old('AS_COUNTRY'), array(in_array('required',$fields['AS_COUNTRY'])?'required':'', 'class'=>'form-control', 'placeholder'=>trans('press.select.province')))")
+        //Tricky..apparently who made the DB doesn't know that States indicates internal separation
+          I.E USA is divided into regions, or states
+        + if("isset($fields['AS_STATES'])")
+          .form-group
+            + php("Form::label('AS_STATES', trans('press.newspaper.nationality'), ['class' => 'control-label col-md-3'])")
+            .col-md-9
+              + php("Form::select('AS_STATES', $nations, Input::old('AS_STATES'), array(in_array('required',$fields['AS_STATES'])?'required':'', 'class'=>'form-control', 'placeholder'=>trans('press.select.nationality')))")
 
-      //Tricky..apparently who made the DB doesn't know that States indicates internal separation
-        I.E USA is divided into regions, or states
-      + if("isset($fields['AS_STATES'])")
-        .form-group
-          + php("Form::label('AS_STATES', trans('press.newspaper.nationality'), ['class' => 'control-label col-md-3'])")
-          .col-md-9
-            + php("Form::select('AS_STATES', $nations, Input::old('AS_STATES'), array(in_array('required',$fields['AS_STATES'])?'required':'', 'class'=>'form-control', 'placeholder'=>trans('press.select.nationality')))")
-
-      + if("isset($fields['AS_PERIODICITA'])")
-        .form-group
-          + php("Form::label('AS_PERIODICITA', trans('press.newspaper.schedule'), ['class' => 'control-label col-md-3'])")
-          .col-md-9
-            + php("Form::select('AS_PERIODICITA', $schedule, Input::old('AS_PERIODICITA'), array(in_array('required',$fields['AS_PERIODICITA'])?'required':'', 'class'=>'form-control', 'placeholder'=>trans('press.select.schedule')))")
-      + if("isset($fields['AS_EMAIL'])")
-        .form-group
-          + php("Form::label('AS_EMAIL', trans('press.newspaper.email'), ['class' => 'control-label col-md-3'])")
-          .col-md-9
-            + php("Form::email('AS_EMAIL', Input::old('AS_EMAIL'), array(in_array('required',$fields['AS_EMAIL'])?'required':'', 'class'=>'form-control', 'placeholder'=>trans('press.newspaper.email')))")
-      + if("isset($fields['AS_PHONE'])")
-        .form-group
-          + php("Form::label('AS_PHONE', trans('press.newspaper.phone'), ['class' => 'control-label col-md-3'])")
-          .col-md-9
-            + php("Form::text('AS_PHONE', Input::old('AS_PHONE'), array(in_array('required',$fields['AS_PHONE'])?'required':'', 'class'=>'form-control', 'placeholder'=>trans('press.newspaper.phone')))")
-      + if("isset($fields['AS_WWW'])")
-        .form-group
-          + php("Form::label('AS_WWW', trans('press.newspaper.website'), ['class' => 'control-label col-md-3'])")
-          .col-md-9
-            + php("Form::text('AS_WWW', Input::old('AS_WWW'), array(in_array('required',$fields['AS_WWW'])?'required':'', 'class'=>'form-control', 'placeholder'=>trans('press.newspaper.website')))")
+        + if("isset($fields['AS_PERIODICITA'])")
+          .form-group
+            + php("Form::label('AS_PERIODICITA', trans('press.newspaper.schedule'), ['class' => 'control-label col-md-3'])")
+            .col-md-9
+              + php("Form::select('AS_PERIODICITA', $schedule, Input::old('AS_PERIODICITA'), array(in_array('required',$fields['AS_PERIODICITA'])?'required':'', 'class'=>'form-control', 'placeholder'=>trans('press.select.schedule')))")
+        + if("isset($fields['AS_EMAIL'])")
+          .form-group
+            + php("Form::label('AS_EMAIL', trans('press.newspaper.email'), ['class' => 'control-label col-md-3'])")
+            .col-md-9
+              + php("Form::email('AS_EMAIL', Input::old('AS_EMAIL'), array(in_array('required',$fields['AS_EMAIL'])?'required':'', 'class'=>'form-control', 'placeholder'=>trans('press.newspaper.email')))")
+        + if("isset($fields['AS_PHONE'])")
+          .form-group
+            + php("Form::label('AS_PHONE', trans('press.newspaper.phone'), ['class' => 'control-label col-md-3'])")
+            .col-md-9
+              + php("Form::text('AS_PHONE', Input::old('AS_PHONE'), array(in_array('required',$fields['AS_PHONE'])?'required':'', 'class'=>'form-control', 'placeholder'=>trans('press.newspaper.phone')))")
+        + if("isset($fields['AS_WWW'])")
+          .form-group
+            + php("Form::label('AS_WWW', trans('press.newspaper.website'), ['class' => 'control-label col-md-3'])")
+            .col-md-9
+              + php("Form::text('AS_WWW', Input::old('AS_WWW'), array(in_array('required',$fields['AS_WWW'])?'required':'', 'class'=>'form-control', 'placeholder'=>trans('press.newspaper.website')))")
     + if("isset($fields['ANA_PRIMA_VISITA'])")
       fieldset
         legend @lang('press.firsttime.head')
@@ -141,6 +141,17 @@ block content
           + php("Form::label('AS_FILENAME5', trans('press.upload.colophon'), ['class' => 'control-label col-md-6'])")
           .col-md-6
             + php("Form::file('AS_FILENAME5', Input::old('AS_FILENAME5'), array(in_array('required',$fields['AS_FILENAME5'])?'required':'', 'class'=>'form-control'))")
+
+    + if("isset($fields['human'])")
+      fieldset
+        legend @lang('press.human.head')
+        .form-group
+          + php("Form::label('human', trans('press.human.question', ['a'=>array_pop($captcha), 'b'=>array_pop($captcha)]), ['class' => 'control-label col-md-3'])")
+          .col-md-6
+            + php("Form::text('human', null, array(in_array('required',$fields['human'])?'required':'', 'class'=>'form-control', 'placeholder'=>trans('press.human.placeholder')))")
+
+
+
     fieldset
       legend @lang('press.actions.head')
       .form-group.col-md-12

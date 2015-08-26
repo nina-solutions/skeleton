@@ -13,6 +13,7 @@ use Illuminate\Http\Response;
 use FairHub\Http\Requests\PressAccreditationRequest;
 use FairHub\Http\Controllers\Controller;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Session;
 
 class PressAccreditationController extends Controller
 {
@@ -33,6 +34,11 @@ class PressAccreditationController extends Controller
      */
     public function create(Request $request, $role, $code)
     {
+
+        $numbers = [(int) substr(mt_rand(),0,2),(int) substr(mt_rand(),0,1)];
+        $sum = array_sum($numbers);
+        Session::put('captcha_answer', $sum);
+
         $jobs = DW_UTILITA::type('LAVORO')->get();
         $workfor = [];
         foreach($jobs as $job){
@@ -74,6 +80,7 @@ class PressAccreditationController extends Controller
             'role' => $role,
             'code' => $code,
             'fields' => $request->fields,
+            'captcha' => $numbers,
             'provences' => $provences
         ]);
     }

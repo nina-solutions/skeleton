@@ -37,11 +37,21 @@ class PressAccreditationRequest extends Request
             function($contstraints){
                 return implode('|', $contstraints);
             }, $needs);
+        $needs['human'] .= '|in:' . \Session::get('captcha_answer');
         return $needs;
     }
 
-    public function roleMandatoryFields(){
-
-        return [];
+    /**
+     * Set custom messages for validator errors.
+     *
+     * @return array
+     */
+    public function messages()
+    {
+        return [
+            'human.required' => trans('press.human.required'),
+            'human.numeric' => trans('press.human.numeric'),
+            'human.in' => trans('press.human.wrong'),
+        ];
     }
 }

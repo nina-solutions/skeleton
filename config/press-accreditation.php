@@ -6,6 +6,8 @@
  * Time: 12:32 PM
  */
 
+use Illuminate\Support\Facades\Session;
+
 return [
     'channels' => [
         'journalist' =>20,
@@ -48,6 +50,11 @@ return [
             //Required by everyone
             'ANA_CARD' => [
                 'required'
+            ],
+
+            'human' => [
+                'required',
+                'numeric',
             ],
         ],
         20 => [

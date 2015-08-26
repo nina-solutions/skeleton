@@ -64,6 +64,15 @@ return [
         'reset' => 'Cancella'
     ],
 
+    'human' => [
+        'head' => 'Domanda di controllo',
+        'question' => 'Scrivi il risultato di :a + :b',
+        'placeholder' => 'Risultato',
+        'wrong' => 'La riposta alla domanda di controllo non risulta corretta',
+        'numeric' => 'Nella domanda di controllo vanno inseriti solo numeri',
+        'required' => 'Per favore ripondi alla domanda di controllo',
+    ],
+
     'select' => [
         'qualification' => 'Seleziona la qualifica',
         'workfor' => 'Seleziona un\'opzione',
