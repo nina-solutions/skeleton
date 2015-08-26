@@ -5,7 +5,7 @@ block title
 
 block content
   h1 @lang('press.register')
-  + php("Form::open(array('route' => array('press-save', $role, $code), 'class' => 'form-horizontal hub-press', 'files' => true))", "Form::close()")
+  + php("Form::open(array('route' => array('press-save', $role, $code), 'data-toggle' => 'validator', 'class' => 'form-horizontal hub-press', 'files' => true))", "Form::close()")
     fieldset
       legend @lang('press.contact.head')
       + if("isset($fields['ANA_NOME'])")
