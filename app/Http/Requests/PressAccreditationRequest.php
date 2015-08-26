@@ -36,6 +36,9 @@ class PressAccreditationRequest extends Request
             'AS_CAP' => 'required',
             'AS_STATES' => 'required',
 
+            'ANA_CONSENSO' => 'required',
+
+            'capcha' => 'required',
         ];
         $roleFields = $this->roleMandatoryFields();
 
