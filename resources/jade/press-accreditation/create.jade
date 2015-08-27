@@ -192,7 +192,7 @@ block content
         + php("Form::hidden('IS_FOTOGRAFO', Input::old('IS_FOTOGRAFO'))")
       + if("isset($fields['IS_OTHER'])")
         + php("Form::hidden('IS_OTHER', Input::old('IS_OTHER'))")
-
+      + php("Form::hidden('channel', $channel)")
 
     fieldset
       legend @lang('press.actions.head')

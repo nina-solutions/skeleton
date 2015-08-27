@@ -83,6 +83,7 @@ class PressAccreditationController extends Controller
             'qualifications'=>$qualifications,
             'nations' => $nations,
             'schedule' => $schedule,
+            'channel' => $request->channel,
             'role' => $role,
             'code' => $code,
             'fields' => $request->fields,
