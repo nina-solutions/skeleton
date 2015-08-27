@@ -39,6 +39,25 @@ class DW_ANAGRAFICHE extends HubModel
         return $this->hasManyThrough('FairHub\DW_SOTTOCATEGORIE','FairHub\DW_RELANAUTY','UTY_ID','UT_ID','ANA_ID');
     }
 
+    //If you hate the way this Database is designed,
+    //uniformity: if I want ID of any class, i just use id() method
+    /**
+     * @return int
+     */
+    public function getIdAttribute(){
+        return $this->attributes['ANA_ID'];
+    }
+
+    //If you hate the way this Database is designed,
+    //please use this method to automagically the right translated description
+    //instead of dirty stuff like CAMPO1 and CAMPO2
+    /**
+     * @return string
+     */
+    public function getDescriptionAttribute(){
+        return $this->attributes['ANA_NOME'] . ' ' . $this->attributes['ANA_COGNOME'];
+    }
+
     protected $fillable = [
         'ANA_ANALISI_IN',
         'ANA_COGNOME',

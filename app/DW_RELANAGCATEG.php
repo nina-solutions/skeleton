@@ -13,6 +13,13 @@ class DW_RELANAGCATEG extends HubModel
         'RMC_MAC_ID',
         'RMC_SOC_ID'
     ];
+
+    protected $fillable = [
+        'RMC_ANA_ID',
+        'RMC_MAC_ID',
+        'RMC_SOC_ID',
+        'RMC_ALTRO',
+    ];
     /*
     RMC_ANA_ID INT NOT NULL,
     RMC_MAC_ID INT NOT NULL,
