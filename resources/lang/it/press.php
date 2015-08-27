@@ -83,5 +83,9 @@ return [
         'nationality' => 'Seleziona una nazione',
         'schedule' => 'Seleziona la periodicit&agrave;',
         'province' => 'Seleziona una provincia',
-    ]
+    ],
+
+    'errors' => [
+        'isblogger' => 'Il campo :attribute &egrave; obbligatorio.',
+    ],
 ];

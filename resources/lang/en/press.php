@@ -83,5 +83,10 @@ return [
         'nationality' => 'Select a country',
         'schedule' => 'Select a scheduling',
         'province' => 'Select a province',
-    ]
+    ],
+
+    'errors' => [
+        'isblogger' => 'For the qualifications and employer selected you have to upload :attribute',
+    ],
+
 ];

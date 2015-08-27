@@ -53,6 +53,13 @@ class PressAccreditationRequest extends Request
             'human.required' => trans('press.human.required'),
             'human.numeric' => trans('press.human.numeric'),
             'human.in' => trans('press.human.wrong'),
+
+            'ANA_FILENAME1.required_if' => trans('press.errors.isblogger'),
+            'ANA_FILENAME2.required_if' => trans('press.errors.isblogger'),
+            'ANA_FILENAME3.required_if' => trans('press.errors.isblogger'),
+            'ANA_FILENAME4.required_if' => trans('press.errors.isblogger'),
+            'ANA_FILENAME5.required_if' => trans('press.errors.isblogger'),
+
         ];
     }
 }
