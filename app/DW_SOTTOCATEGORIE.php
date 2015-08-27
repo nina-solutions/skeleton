@@ -14,11 +14,12 @@ class DW_SOTTOCATEGORIE extends HubModel
 
     /**
      * @param $query Builder
-     * @param $code string
+     * @param $code string faircode
+     * @param $channel int role related channel
      * @return mixed Builder
      */
-    public function scopeQualifiche($query, $code){
-        return $query->where('SOC_MAC_ID', '=',DW_MACROCATEGORIE::qualifications()->fairCode($code)->select('MAC_ID')->first()->id);
+    public function scopeQualifiche($query, $code = null, $channel = 0){
+        return $query->where('SOC_MAC_ID', '=',DW_MACROCATEGORIE::qualifications($channel)->fairCode($code)->select('MAC_ID')->first()->id);
     }
 
     /**

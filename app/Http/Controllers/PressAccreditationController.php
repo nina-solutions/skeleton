@@ -54,7 +54,7 @@ class PressAccreditationController extends Controller
             $workfor[$job->id] =$job->description;
         }
 
-        $categories = DW_SOTTOCATEGORIE::visible(true)->qualifiche('VIR09')->get();
+        $categories = DW_SOTTOCATEGORIE::visible(true)->qualifiche('VIR09', $request->channel)->get();
         $qualifications = [];
         foreach($categories as $category){
             $qualifications[$category->id] =$category->description;
@@ -100,11 +100,13 @@ class PressAccreditationController extends Controller
     public function store(PressAccreditationRequest $request, $role, $code)
     {
         //Setup custon needs for each request
+        $qualification = DW_SOTTOCATEGORIE::findOrNew($request->SOC_ID);
         $request->merge([
             'ANA_CANALE' => $request->channel,
             'ANA_ANALISI_IN' => $code,
             'ANA_TIMESC' => time(),
             'AS_INSRETTIME' => time(),
+            'ANA_QUALIFICATESTO' => $qualification->description,
         ]);
         $fileKeys = [];
         for($i = 1; $i <= 5; $i++){
@@ -135,12 +137,21 @@ class PressAccreditationController extends Controller
             $cat = new DW_RELANAGCATEG();
             $util = new DW_RELANAUTY();
 
+            print_r($input);
 
+            echo PHP_EOL;
+
+            print_r($ana->getAttributes());
+
+
+            echo PHP_EOL;
+
+            print_r($ana_te->getAttributes());
             //SAVE DW_ANAGRAFICHE, QUALIFICHE is text, COUNTRY is mandatory if STATE = ITALIA, ANA_FILENAME= nome rinominato, ANA_IMAGEX= byte
             //SAVE RELANAGCATEG with QUALIFICHE ID MAC SOC and eventually OTHER as text
             //SAVE RELANAUTY ANA_ID and UTY_ID
             //SAVE DW_ANAGRAFICA_TESTATA WITH ANA_ID from DW_ANAGRAFICHE
-
+            die();
 
             //
         });

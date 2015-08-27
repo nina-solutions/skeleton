@@ -20,6 +20,14 @@ return [
         'giornalista_en' => 33,
     ],
 
+    'query' => [
+        0 => 'Qualifica',
+        20 => 'Qualifica',
+        23 => 'Qualifica giornalisti generici',
+        24 => 'Qualifica fotografo/operatore radiotv',
+        33 => 'Qualifica giornalisti stranieri',
+    ],
+
     //channel related fields
     //channel 0 is ALL THE CHANNELS
     //a channel can override his common configuration
