@@ -20,4 +20,5 @@ return [
     'funny404' => 'We are sorry, it seems we have lost this page, but we don\'t want to loose you!',
 
     'wrongform' => 'Something wrong with the form validation, please check again.',
+    'wrongextension' => 'Available extensions for uploaded files are: jpg, pdf,doc,docx,tiff,odt,tif',
 ];

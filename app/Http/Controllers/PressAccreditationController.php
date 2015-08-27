@@ -116,11 +116,17 @@ class PressAccreditationController extends Controller
             $imageKey = 'ANA_IMAGE'.$i;
             //check if I have this image and id is valid
             //TODO validator override: estensioni ammesse 'jpg', 'pdf','doc','docx','tiff','odt','tif'
+            //symfony2 mime handler seems working not properly at all
+            $valid_extensions = ['jpg', 'pdf','doc','docx','tiff','odt','tif'];
+
             if($request->hasFile($fileKey) && $request->file($fileKey)->isValid()){
                 $file = [
                     'name' => $request->file($fileKey)->getClientOriginalName(),
                     'extension' => $request->file($fileKey)->getClientOriginalExtension()
                 ];
+                if (!in_array($file['extension'], $valid_extensions)){
+                    return redirect()->back()->withInput($request->except(['password','human']))->with('message', trans('messages.wrongextension'));
+                }
                 $filename = 'file'.$i.'_' . date('YmdHis-').md5($file['name']).'.'.$file['extension'];
                 $filepath = storage_path(implode('/', [env('UPLOAD'), $code]));
                 $request->file($fileKey)->move($filepath, $filename);
