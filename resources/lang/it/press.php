@@ -51,7 +51,9 @@ return [
         'photo' => 'Foto del richiedente, stile fototessera',
         'article' => 'Copia di un articolo recente pubblicato a propria firma su testate cartacee, oppure link ad un servizio audio/video o ad un articolo pubblicato su testate online registrate, che testimoni l\'effettiva attività giornalistica svolta nel settore inerente alla manifestazione per cui si richiede l\'accredito. Per chi ha gi&agrave; partecipato alla precedente edizione della manifestazione, il materiale allegato deve testimoniarne l\'avvenuta copertura',
     ],
-    'infocommunications' => 'Vostre comunicazioni',
+    'communications' => [
+        'head' => 'Vostre comunicazioni',
+    ],
     'privacy' => [
         'head' => 'Informativa sulla privacy',
         'checkbox' => 'Letta l\'<a href=":url">informativa sulla privacy</a> ai sensi del Dlg 196/03, acconsento al trattamento dei dati personali per le finalit&agrave; e con le modalit&agrave; specificatamente indicate nell\'informativa stessa',

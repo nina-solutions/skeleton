@@ -51,7 +51,9 @@ return [
         'colophon' => 'copy of articles published with your signature in printed magazines dealing with the event',
         'article' => 'Copy of a document testifying to journalistic activity',
     ],
-    'infocommunications' => 'Your Communications',
+    'communications' => [
+        'head' => 'Your Communications',
+    ],
     'privacy' => [
         'head' => 'Privacy Notification',
         'checkbox' => 'I agree to processing of my personal data in conformity with the standards of <a href=":url">privacy laws</a>.',

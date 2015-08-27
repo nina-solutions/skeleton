@@ -38,6 +38,7 @@ block content
           + php("Form::label('SOC_ID', trans('press.contact.qualification'), ['class' => 'control-label col-md-3'])")
           .col-md-9
             + php("Form::select('SOC_ID', $qualifications, Input::old('SOC_ID'), array((in_array('required',$fields['SOC_ID'])?'required':''), 'class'=>'form-control', 'placeholder'=>trans('press.select.qualification')))")
+
       + if("isset($fields['UTY_ID'])")
         .form-group
           + php("Form::label('UTY_ID',trans('press.contact.workfor'), ['class' => 'control-label col-md-3'])")
@@ -146,6 +147,12 @@ block content
           + php("Form::label('ANA_FILENAME5', trans('press.upload.colophon'), ['class' => 'control-label col-md-6'])")
           .col-md-6
             + php("Form::file('ANA_FILENAME5', Input::old('ANA_FILENAME5'), array(in_array('required',$fields['ANA_FILENAME5'])?'required':'', 'class'=>'form-control'))")
+      + if("isset($fields['ANA_LINK_ARTICOLI'])")
+        .form-group
+          + php("Form::label('ANA_LINK_ARTICOLI', trans('press.upload.link'), ['class' => 'control-label col-md-3'])")
+          .col-md-9
+            + php("Form::textarea('ANA_LINK_ARTICOLI', Input::old('ANA_LINK_ARTICOLI'), array((in_array('required',$fields['ANA_LINK_ARTICOLI'])?'required':''), 'class'=>'form-control', 'placeholder'=>trans('press.upload.link')))")
+
 
     + if("isset($fields['ANA_CONSENSO'])")
       fieldset
@@ -157,6 +164,14 @@ block content
                 + php("Form::checkbox('ANA_CONSENSO', 'SI', (Input::old('ANA_CONSENSO') ? true : false), array(in_array('required',$fields['ANA_CONSENSO'])?'required':'', 'class'=>''))")
                 + lang('press.privacy.checkbox')
 
+    + if("isset($fields['AS_COMUNICAZIONI'])")
+      fieldset
+        legend @lang('press.communications.head')
+        .form-group
+          .col-md-12
+            + php("Form::textarea('AS_COMUNICAZIONI', Input::old('AS_COMUNICAZIONI'), array((in_array('required',$fields['AS_COMUNICAZIONI'])?'required':''), 'class'=>'form-control', 'placeholder'=>trans('press.communications.head')))")
+
+
     + if("isset($fields['human'])")
       fieldset
         legend @lang('press.human.head')
@@ -165,7 +180,10 @@ block content
           .col-md-6
             + php("Form::text('human', null, array(in_array('required',$fields['human'])?'required':'', 'class'=>'form-control', 'placeholder'=>trans('press.human.placeholder')))")
 
-
+    + if("isset($fields['IS_BLOGGER'])")
+      + php("Form::hidden('IS_BLOGGER', 0, Input::old('IS_BLOGGER'), array((in_array('required',$fields['IS_BLOGGER'])?'required':'')))")
+    + if("isset($fields['IS_FOTOGRAFO'])")
+      + php("Form::hidden('IS_FOTOGRAFO', 0, Input::old('IS_FOTOGRAFO'), array((in_array('required',$fields['IS_FOTOGRAFO'])?'required':'')))")
 
     fieldset
       legend @lang('press.actions.head')

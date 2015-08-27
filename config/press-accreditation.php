@@ -85,33 +85,32 @@ return [
             'AS_PHONE' => [],
             'AS_WWW' => [],
             'ANA_PRIMA_VISITA' => [
-                'required',
-                'integer'
+                'integer',
             ],
             'ANA_CONSENSO' => [
                 'required',
                 'in:SI,NO'
             ],
 
-            'ANA_FILENAME1' => [
-                'photo' => 'mimes:jpeg,bmp,png'
-            ],
+
             'ANA_FILENAME2' => [
-                'photo' => 'mimes:jpeg,bmp,png'
+                'mimes:png,pdf,odt,tiff,tif,jpg,doc,docx'
             ],
             'ANA_FILENAME3' => [
-                'photo' => 'mimes:jpeg,bmp,png'
+                'mimes:png,pdf,odt,tiff,tif,jpg,doc,docx'
             ],
             'ANA_FILENAME4' => [
-                'photo' => 'mimes:jpeg,bmp,png'
+                'mimes:png,pdf,odt,tiff,tif,jpg,doc,docx'
             ],
             'ANA_FILENAME5' => [
-                'photo' => 'mimes:jpeg,bmp,png'
+                'mimes:png,pdf,odt,tiff,tif,jpg,doc,docx'
             ],
 
             'AS_TESSERA' => [
                 'required'
             ],
+
+            'AS_COMUNICAZIONI' => [],
 
             'human' => [
                 'required',
@@ -119,17 +118,83 @@ return [
             ],
         ],
         20 => [
-
+            'ANA_FILENAME1' => [
+                'required',
+                'mimes:png,pdf,odt,tiff,tif,jpg,doc,docx'
+            ],
         ],
         23 => [
+            'IS_BLOGGER' => [
+                'required',
+                'boolean'
+            ],
 
+            'ANA_FILENAME3' => [
+                'required_if:IS_BLOGGER,TRUE',
+                'mimes:png,pdf,odt,tiff,tif,jpg,doc,docx'
+            ],
+            'ANA_LINK_ARTICOLI' =>[
+                'required_if:IS_BLOGGER,TRUE',
+            ],
+
+            'ANA_FILENAME1' => [
+                'required_if:IS_BLOGGER,FALSE',
+                'mimes:png,pdf,odt,tiff,tif,jpg,doc,docx'
+            ],
+            'ANA_FILENAME2' => [
+                'required_if:IS_BLOGGER,FALSE',
+                'mimes:png,pdf,odt,tiff,tif,jpg,doc,docx'
+            ],
+            'ANA_FILENAME5' => [
+                'required_if:IS_BLOGGER,FALSE',
+                'mimes:png,pdf,odt,tiff,tif,jpg,doc,docx'
+            ],
         ],
         24 => [
+            'IS_FOTOGRAFO' => [
+                'required',
+                'boolean'
+            ],
+            'ANA_FILENAME1' => [
+                'required:',
+                'mimes:png,pdf,odt,tiff,tif,jpg,doc,docx'
+            ],
+            'ANA_FILENAME2' => [
+                'required',
+                'mimes:png,pdf,odt,tiff,tif,jpg,doc,docx'
+            ],
+
+            'ANA_FILENAME4' => [
+                'mimes:png,pdf,odt,tiff,tif,jpg,doc,docx'
+            ],
+            'ANA_FILENAME5' => [
+                'mimes:png,pdf,odt,tiff,tif,jpg,doc,docx'
+            ],
 
         ],
         33 => [
             //NOT REQUIRED example
             'AS_TESSERA' => [],
+            'ANA_LINK_ARTICOLI' =>[],
+
+            'IS_BLOGGER' => [
+                'required',
+                'boolean'
+            ],
+
+            'ANA_FILENAME2' => [
+                'required_if:IS_BLOGGER,TRUE',
+                'mimes:png,pdf,odt,tiff,tif,jpg,doc,docx'
+            ],
+
+            'ANA_FILENAME1' => [
+                'required_if:IS_BLOGGER,FALSE',
+                'mimes:png,pdf,odt,tiff,tif,jpg,doc,docx'
+            ],
+
+            'ANA_FILENAME5' => [
+                'mimes:png,pdf,odt,tiff,tif,jpg,doc,docx'
+            ],
         ],
     ]
 
