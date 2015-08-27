@@ -2,6 +2,10 @@
 
 namespace FairHub\Http\Controllers;
 
+use FairHub\DW_ANAGRAFICA_TESTATA;
+use FairHub\DW_ANAGRAFICHE;
+use FairHub\DW_RELANAGCATEG;
+use FairHub\DW_RELANAUTY;
 use FairHub\DW_SOTTOCATEGORIE;
 use FairHub\DW_UTILITA;
 use FairHub\NAZIONI;
@@ -13,6 +17,8 @@ use Illuminate\Http\Response;
 use FairHub\Http\Requests\PressAccreditationRequest;
 use FairHub\Http\Controllers\Controller;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Session;
 
 class PressAccreditationController extends Controller
@@ -93,34 +99,57 @@ class PressAccreditationController extends Controller
      */
     public function store(PressAccreditationRequest $request, $role, $code)
     {
-        $params = $request->all();
-        $validates = false;
-
-        if (!$validates) {
-            return redirect()->back()->withInput($request->except('password'))->with('message', trans('messages.wrongform'));
+        //Setup custon needs for each request
+        $request->merge([
+            'ANA_CANALE' => $request->channel,
+            'ANA_ANALISI_IN' => $code,
+            'ANA_TIMESC' => time(),
+            'AS_INSRETTIME' => time(),
+        ]);
+        $fileKeys = [];
+        for($i = 1; $i <= 5; $i++){
+            $fileKey = 'ANA_FILENAME'.$i;
+            $imageKey = 'ANA_IMAGE'.$i;
+            //check if I have this image and id is valid
+            //TODO validator override: estensioni ammesse 'jpg', 'pdf','doc','docx','tiff','odt','tif'
+            if($request->hasFile($fileKey) && $request->file($fileKey)->isValid()){
+                $file = [
+                    'name' => $request->file($fileKey)->getClientOriginalName(),
+                    'extension' => $request->file($fileKey)->getClientOriginalExtension()
+                ];
+                $filename = 'file'.$i.'_' . date('YmdHis-').md5($file['name']).'.'.$file['extension'];
+                $filepath = storage_path(implode('/', [env('UPLOAD'), $code]));
+                $request->file($fileKey)->move($filepath, $filename);
+                //this trick is due to some Symfony2 security stuff
+                //I cannot override file with text apparently
+                $fileKeys[$fileKey] = $filename;
+                $request->merge([$imageKey => $this->prepareImage($filepath, $filename)]);
+            }
         }
-
-        //SAVE DW_ANAGRAFICHE, QUALIFICHE is text, COUNTRY is mandatory if STATE = ITALIA, ANA_FILENAME= nome rinominato, ANA_IMAGEX= byte
-        //I file caricati vanno opportunamente rinominati
-        //NOME=FILE1_date('YmdHis-').md5(str_replace('.'.ESTENSIONE, '', $file['name'])).'.'.ESTENSIONE )
-        //spostati nella cartella "uploaded_files/<codiceFiera>";
-        //estensioni ammesse 'jpg', 'pdf','doc','docx','tiff','odt','tif'
-
-
-        //FOR each uploaded files as file
-        $file = array('name' => 'NomeFile', 'extension' => '.pdf');
-        $filename = 'file1_' . date('YmdHis-').md5($file['name']).'.'.$file['extension'];
-        $filepath = storage_path(implode('/', [env('UPLOAD'), $code, $filename]));
-
-        //store the file in this location then save also to DB
-        $image = $this->prepareImage($filepath);
+        $input = array_merge($request->except(array_merge(array_keys($fileKeys),['human', 'fields'])), $fileKeys);
+        DB::transaction(function() use ($input, $role, $code, $request)
+        {
+            //just take what you can
+            $ana = new DW_ANAGRAFICHE($input);
+            $ana_te = new DW_ANAGRAFICA_TESTATA($input);
+            $cat = new DW_RELANAGCATEG();
+            $util = new DW_RELANAUTY();
 
 
-        //SAVE RELANAGCATEG with QUALIFICHE ID MAC SOC and eventually OTHER as text
+            //SAVE DW_ANAGRAFICHE, QUALIFICHE is text, COUNTRY is mandatory if STATE = ITALIA, ANA_FILENAME= nome rinominato, ANA_IMAGEX= byte
+            //SAVE RELANAGCATEG with QUALIFICHE ID MAC SOC and eventually OTHER as text
+            //SAVE RELANAUTY ANA_ID and UTY_ID
+            //SAVE DW_ANAGRAFICA_TESTATA WITH ANA_ID from DW_ANAGRAFICHE
 
-        //SAVE RELANAUTY ANA_ID and UTY_ID
 
-        //SAVE DW_ANAGRAFICA_TESTATA WITH ANA_ID from DW_ANAGRAFICHE
+            //
+        });
+
+
+        $save = false;
+        if (!$save) {
+            return redirect()->back()->withInput($request->except(['password','human']))->with('message', trans('messages.wrongform'));
+        }
 
         return \Redirect::route('thanks')
             ->with('message', 'Thanks for contacting us!');
@@ -171,12 +200,18 @@ class PressAccreditationController extends Controller
         //need authentication
     }
 
-    private function prepareImage($filepath){
+    /**
+     * @param $filepath string
+     * @param $filename string
+     * @return string
+     */
+    private function prepareImage($filepath, $filename){
         $out = 'null';
-        $handle = @fopen($filepath, 'rb');
+        $file = $filepath .'/'. $filename;
+        $handle = @fopen($file, 'rb');
         if ($handle)
         {
-            $content = @fread($handle, filesize($filepath));
+            $content = @fread($handle, filesize($file));
             $content = bin2hex($content);
             @fclose($handle);
             $out = "0x".$content;
