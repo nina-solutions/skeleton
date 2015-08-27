@@ -52,6 +52,7 @@ return [
             'SOC_ID' => [
                 'required'
             ],
+            'RMC_ALTRO' => [],
             'UTY_ID' => [
                 'required'
             ],
@@ -92,18 +93,9 @@ return [
                 'in:SI,NO'
             ],
 
-
-            'ANA_FILENAME2' => [
-                'mimes:png,pdf,odt,tiff,tif,jpg,doc,docx'
-            ],
-            'ANA_FILENAME3' => [
-                'mimes:png,pdf,odt,tiff,tif,jpg,doc,docx'
-            ],
-            'ANA_FILENAME4' => [
-                'mimes:png,pdf,odt,tiff,tif,jpg,doc,docx'
-            ],
-            'ANA_FILENAME5' => [
-                'mimes:png,pdf,odt,tiff,tif,jpg,doc,docx'
+            'IS_OTHER' => [
+                'required',
+                'integer'
             ],
 
             'AS_TESSERA' => [
@@ -120,55 +112,55 @@ return [
         20 => [
             'ANA_FILENAME1' => [
                 'required',
-                'mimes:png,pdf,odt,tiff,tif,jpg,doc,docx'
+                //'mimes:png,pdf,odt,tiff,tif,jpg,doc,docx,jpeg'
             ],
         ],
         23 => [
             'IS_BLOGGER' => [
                 'required',
-                'boolean'
+                'integer'
             ],
 
             'ANA_FILENAME3' => [
-                'required_if:IS_BLOGGER,TRUE',
-                'mimes:png,pdf,odt,tiff,tif,jpg,doc,docx'
+                'required_if:IS_BLOGGER,1',
+                //'mimes:png,pdf,odt,tiff,tif,jpg,doc,docx,jpeg'
             ],
             'ANA_LINK_ARTICOLI' =>[
-                'required_if:IS_BLOGGER,TRUE',
+                'required_if:IS_BLOGGER,1',
             ],
 
             'ANA_FILENAME1' => [
-                'required_if:IS_BLOGGER,FALSE',
-                'mimes:png,pdf,odt,tiff,tif,jpg,doc,docx'
+                'required_if:IS_BLOGGER,0',
+                //'mimes:png,pdf,odt,tiff,tif,jpg,doc,docx,jpeg'
             ],
             'ANA_FILENAME2' => [
-                'required_if:IS_BLOGGER,FALSE',
-                'mimes:png,pdf,odt,tiff,tif,jpg,doc,docx'
+                'required_if:IS_BLOGGER,0',
+                //'mimes:png,pdf,odt,tiff,tif,jpg,doc,docx,jpeg'
             ],
             'ANA_FILENAME5' => [
-                'required_if:IS_BLOGGER,FALSE',
-                'mimes:png,pdf,odt,tiff,tif,jpg,doc,docx'
+                'required_if:IS_BLOGGER,0',
+                //'mimes:png,pdf,odt,tiff,tif,jpg,doc,docx,jpeg'
             ],
         ],
         24 => [
             'IS_FOTOGRAFO' => [
                 'required',
-                'boolean'
+                'integer'
             ],
             'ANA_FILENAME1' => [
-                'required:',
-                'mimes:png,pdf,odt,tiff,tif,jpg,doc,docx'
+                'required',
+                //'mimes:png,pdf,odt,tiff,tif,jpg,doc,docx,jpeg'
             ],
             'ANA_FILENAME2' => [
                 'required',
-                'mimes:png,pdf,odt,tiff,tif,jpg,doc,docx'
+                //'mimes:png,pdf,odt,tiff,tif,jpg,doc,docx,jpeg'
             ],
 
             'ANA_FILENAME4' => [
-                'mimes:png,pdf,odt,tiff,tif,jpg,doc,docx'
+                //'mimes:png,pdf,odt,tiff,tif,jpg,doc,docx,jpeg'
             ],
             'ANA_FILENAME5' => [
-                'mimes:png,pdf,odt,tiff,tif,jpg,doc,docx'
+                //'mimes:png,pdf,odt,tiff,tif,jpg,doc,docx,jpeg'
             ],
 
         ],
@@ -179,21 +171,21 @@ return [
 
             'IS_BLOGGER' => [
                 'required',
-                'boolean'
+                'integer'
             ],
 
             'ANA_FILENAME2' => [
-                'required_if:IS_BLOGGER,TRUE',
-                'mimes:png,pdf,odt,tiff,tif,jpg,doc,docx'
+                'required_if:IS_BLOGGER,1',
+                //'mimes:png,pdf,odt,tiff,tif,jpg,doc,docx,jpeg'
             ],
 
             'ANA_FILENAME1' => [
-                'required_if:IS_BLOGGER,FALSE',
-                'mimes:png,pdf,odt,tiff,tif,jpg,doc,docx'
+                'required_if:IS_BLOGGER,0',
+                //'mimes:png,pdf,odt,tiff,tif,jpg,doc,docx,jpeg'
             ],
 
             'ANA_FILENAME5' => [
-                'mimes:png,pdf,odt,tiff,tif,jpg,doc,docx'
+                //'mimes:png,pdf,odt,tiff,tif,jpg,doc,docx,jpeg'
             ],
         ],
     ]

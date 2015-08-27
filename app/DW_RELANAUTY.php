@@ -12,4 +12,9 @@ class DW_RELANAUTY extends HubModel
         'UTY_ID',
         'ANA_ID'
     ];
+
+    protected $fillable = [
+        'UTY_ID',
+        'ANA_ID'
+    ];
 }

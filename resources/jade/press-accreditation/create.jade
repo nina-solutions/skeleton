@@ -39,6 +39,12 @@ block content
           .col-md-9
             + php("Form::select('SOC_ID', $qualifications, Input::old('SOC_ID'), array((in_array('required',$fields['SOC_ID'])?'required':''), 'class'=>'form-control', 'placeholder'=>trans('press.select.qualification')))")
 
+      + if("isset($fields['RMC_ALTRO'])")
+        .form-group.hidden
+          + php("Form::label('RMC_ALTRO', trans('press.contact.other'), ['class' => 'control-label col-md-3'])")
+          .col-md-9
+            + php("Form::text('RMC_ALTRO', Input::old('RMC_ALTRO'), array('class'=>'form-control', 'placeholder'=>trans('press.contact.other')))")
+
       + if("isset($fields['UTY_ID'])")
         .form-group
           + php("Form::label('UTY_ID',trans('press.contact.workfor'), ['class' => 'control-label col-md-3'])")
@@ -120,7 +126,7 @@ block content
             + php("Form::radio('ANA_PRIMA_VISITA', 0, (Input::old('ANA_PRIMA_VISITA') === 0 ? true : false), array(in_array('required',$fields['ANA_PRIMA_VISITA'])?'required':'', 'class'=>'radio-inline'))")
             + php("Form::label('ANA_PRIMA_VISITA', trans('press.firsttime.yes'), array('class'=>'radio-inline'))")
             + php("Form::radio('ANA_PRIMA_VISITA', 1, (Input::old('ANA_PRIMA_VISITA') === 1 ? true : false), array(in_array('required',$fields['ANA_PRIMA_VISITA'])?'required':'', 'class'=>'radio-inline'))")
-    fieldset
+    fieldset.hidden
       legend @lang('press.upload.head')
       + if("isset($fields['ANA_FILENAME1'])")
         .form-group
@@ -180,10 +186,13 @@ block content
           .col-md-6
             + php("Form::text('human', null, array(in_array('required',$fields['human'])?'required':'', 'class'=>'form-control', 'placeholder'=>trans('press.human.placeholder')))")
 
-    + if("isset($fields['IS_BLOGGER'])")
-      + php("Form::hidden('IS_BLOGGER', 0, Input::old('IS_BLOGGER'), array((in_array('required',$fields['IS_BLOGGER'])?'required':'')))")
-    + if("isset($fields['IS_FOTOGRAFO'])")
-      + php("Form::hidden('IS_FOTOGRAFO', 0, Input::old('IS_FOTOGRAFO'), array((in_array('required',$fields['IS_FOTOGRAFO'])?'required':'')))")
+      + if("isset($fields['IS_BLOGGER'])")
+        + php("Form::hidden('IS_BLOGGER', Input::old('IS_BLOGGER'))")
+      + if("isset($fields['IS_FOTOGRAFO'])")
+        + php("Form::hidden('IS_FOTOGRAFO', Input::old('IS_FOTOGRAFO'))")
+      + if("isset($fields['IS_OTHER'])")
+        + php("Form::hidden('IS_OTHER', Input::old('IS_OTHER'))")
+
 
     fieldset
       legend @lang('press.actions.head')

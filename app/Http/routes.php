@@ -32,7 +32,8 @@ Route::get(
     }]
 );
 
-Route::get(
+Route::match(
+    ['get','post'],
     'press-accreditation/register/{role}/{code}',
     ['middleware' => 'role', 'as' => 'press-register', 'uses' => 'PressAccreditationController@create']
 );

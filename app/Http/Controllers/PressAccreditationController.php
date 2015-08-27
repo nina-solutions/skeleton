@@ -104,9 +104,11 @@ class PressAccreditationController extends Controller
         $request->merge([
             'ANA_CANALE' => $request->channel,
             'ANA_ANALISI_IN' => $code,
-            'ANA_TIMESC' => time(),
-            'AS_INSRETTIME' => time(),
+            'ANA_TIMESC' => date('Y-m-d H:i:s'),
+            'AS_INSRETTIME' => date('Y-m-d H:i:s'),
             'ANA_QUALIFICATESTO' => $qualification->description,
+            'RMC_MAC_ID' => $qualification->SOC_MAC_ID,
+            'RMC_SOC_ID' => $request->SOC_ID,
         ]);
         $fileKeys = [];
         for($i = 1; $i <= 5; $i++){
@@ -128,42 +130,31 @@ class PressAccreditationController extends Controller
                 $request->merge([$imageKey => $this->prepareImage($filepath, $filename)]);
             }
         }
-        $input = array_merge($request->except(array_merge(array_keys($fileKeys),['human', 'fields'])), $fileKeys);
-        DB::transaction(function() use ($input, $role, $code, $request)
-        {
-            //just take what you can
-            $ana = new DW_ANAGRAFICHE($input);
-            $ana_te = new DW_ANAGRAFICA_TESTATA($input);
-            $cat = new DW_RELANAGCATEG();
-            $util = new DW_RELANAUTY();
+        $input = array_merge(
+            $request->except(array_merge(
+                array_keys($fileKeys),
+                ['human', 'fields', '_token'])),
+            $fileKeys);
+        try {
+            DB::transaction(function () use ($input) {
+                $ana = new DW_ANAGRAFICHE($input);
+                $ana->save();
+                $input = array_merge($input, [
+                    'ANA_ID' => $ana->id,
+                    'RMC_ANA_ID' => $ana->id,
+                ]);
+                $ana_te = new DW_ANAGRAFICA_TESTATA($input);
+                $cat = new DW_RELANAGCATEG($input);
+                $util = new DW_RELANAUTY($input);
 
-            print_r($input);
-
-            echo PHP_EOL;
-
-            print_r($ana->getAttributes());
-
-
-            echo PHP_EOL;
-
-            print_r($ana_te->getAttributes());
-            //SAVE DW_ANAGRAFICHE, QUALIFICHE is text, COUNTRY is mandatory if STATE = ITALIA, ANA_FILENAME= nome rinominato, ANA_IMAGEX= byte
-            //SAVE RELANAGCATEG with QUALIFICHE ID MAC SOC and eventually OTHER as text
-            //SAVE RELANAUTY ANA_ID and UTY_ID
-            //SAVE DW_ANAGRAFICA_TESTATA WITH ANA_ID from DW_ANAGRAFICHE
-            die();
-
-            //
-        });
-
-
-        $save = false;
-        if (!$save) {
+                $ana_te->save();
+                $cat->save();
+                $util->save();
+            });
+        }catch (\Exception $e){
             return redirect()->back()->withInput($request->except(['password','human']))->with('message', trans('messages.wrongform'));
         }
-
-        return \Redirect::route('thanks')
-            ->with('message', 'Thanks for contacting us!');
+        return redirect()->route('thanks')->with('message', 'Thanks for contacting us!');
     }
 
     /**
