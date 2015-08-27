@@ -23,6 +23,7 @@ return [
         'qualification' => 'Qualifica',
         'workfor' => 'Lavori per',
         'twitter' => 'Account Twitter',
+        'other' => 'Altro',
     ],
     'newspaper' => [
         'head' => 'Informazioni relative alla testata e/o testate rappresentate',
@@ -50,6 +51,7 @@ return [
         'document' => 'Copia di un proprio documento di intentit&agrave;',
         'photo' => 'Foto del richiedente, stile fototessera',
         'article' => 'Copia di un articolo recente pubblicato a propria firma su testate cartacee, oppure link ad un servizio audio/video o ad un articolo pubblicato su testate online registrate, che testimoni l\'effettiva attività giornalistica svolta nel settore inerente alla manifestazione per cui si richiede l\'accredito. Per chi ha gi&agrave; partecipato alla precedente edizione della manifestazione, il materiale allegato deve testimoniarne l\'avvenuta copertura',
+        'link' => 'Per chi presente alla precedente edizione della manifestazione, link ad un post/articolo pubblicato sul proprio blog e relativo all\'evento in questione',
     ],
     'communications' => [
         'head' => 'Vostre comunicazioni',

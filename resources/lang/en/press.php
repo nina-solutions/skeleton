@@ -23,6 +23,7 @@ return [
         'qualification' => 'Qualification ',
         'workfor' => 'Work for',
         'twitter' => 'Twitter Account',
+        'other' => 'Other',
     ],
     'newspaper' => [
         'head' => 'Information about publication(s) represented',
@@ -50,6 +51,7 @@ return [
         'photo' => 'Passport-style photo of the applicant for the press pass',
         'colophon' => 'copy of articles published with your signature in printed magazines dealing with the event',
         'article' => 'Copy of a document testifying to journalistic activity',
+        'link' => 'For bloggers who already attended the previous edition of the event, links to at least one post/article published on the blog about the event in question',
     ],
     'communications' => [
         'head' => 'Your Communications',
