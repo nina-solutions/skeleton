@@ -54,7 +54,7 @@ return [
     'infocommunications' => 'Vostre comunicazioni',
     'privacy' => [
         'head' => 'Informativa sulla privacy',
-        'checkbox' => 'Letta l\'<a href="{0}">informativa sulla privacy</a> ai sensi del Dlg 196/03, acconsento al trattamento dei dati personali per le finalit&agrave; e con le modalit&agrave; specificatamente indicate nell\'informativa stessa',
+        'checkbox' => 'Letta l\'<a href=":url">informativa sulla privacy</a> ai sensi del Dlg 196/03, acconsento al trattamento dei dati personali per le finalit&agrave; e con le modalit&agrave; specificatamente indicate nell\'informativa stessa',
     ],
     'actions' => [
         'head' => 'Invia richiesta accredito',

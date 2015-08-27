@@ -18,6 +18,11 @@ block content
           + php("Form::label('ANA_COGNOME', trans('press.contact.surname'), ['class' => 'control-label col-md-3'])")
           .col-md-9
             + php("Form::text('ANA_COGNOME', Input::old('ANA_COGNOME'), array((in_array('required',$fields['ANA_COGNOME'])?'required':''), 'class'=>'form-control', 'placeholder'=>trans('press.contact.surname')))")
+      + if("isset($fields['AS_TESSERA'])")
+        .form-group
+          + php("Form::label('AS_TESSERA', trans('press.contact.cardnr'), ['class' => 'control-label col-md-3'])")
+          .col-md-9
+            + php("Form::text('AS_TESSERA', Input::old('AS_TESSERA'), array((in_array('required',$fields['AS_TESSERA'])?'required':''), 'class'=>'form-control', 'placeholder'=>trans('press.contact.cardnr')))")
       + if("isset($fields['ANA_EMAIL'])")
         .form-group
           + php("Form::label('ANA_EMAIL', trans('press.contact.email'), ['class' => 'control-label col-md-3'])")
@@ -111,36 +116,46 @@ block content
         .form-group
           .col-md-offset-3.col-md-9
             + php("Form::label('ANA_PRIMA_VISITA', trans('press.firsttime.no'), array('class'=>'radio-inline'))")
-            + php("Form::radio('ANA_PRIMA_VISITA', 'NO', (Input::old('ANA_PRIMA_VISITA') == 'NO' ? true : false), array(in_array('required',$fields['ANA_PRIMA_VISITA'])?'required':'', 'class'=>'radio-inline'))")
+            + php("Form::radio('ANA_PRIMA_VISITA', 0, (Input::old('ANA_PRIMA_VISITA') === 0 ? true : false), array(in_array('required',$fields['ANA_PRIMA_VISITA'])?'required':'', 'class'=>'radio-inline'))")
             + php("Form::label('ANA_PRIMA_VISITA', trans('press.firsttime.yes'), array('class'=>'radio-inline'))")
-            + php("Form::radio('ANA_PRIMA_VISITA', 'SI', (Input::old('ANA_PRIMA_VISITA') == 'SI' ? true : false), array(in_array('required',$fields['ANA_PRIMA_VISITA'])?'required':'', 'class'=>'radio-inline'))")
+            + php("Form::radio('ANA_PRIMA_VISITA', 1, (Input::old('ANA_PRIMA_VISITA') === 1 ? true : false), array(in_array('required',$fields['ANA_PRIMA_VISITA'])?'required':'', 'class'=>'radio-inline'))")
     fieldset
       legend @lang('press.upload.head')
-      + if("isset($fields['AS_FILENAME1'])")
+      + if("isset($fields['ANA_FILENAME1'])")
         .form-group
-          + php("Form::label('AS_FILENAME1', trans('press.upload.letter'), ['class' => 'control-label col-md-6'])")
+          + php("Form::label('ANA_FILENAME1', trans('press.upload.letter'), ['class' => 'control-label col-md-6'])")
           .col-md-6
-            + php("Form::file('AS_FILENAME1', Input::old('AS_FILENAME1'), array(in_array('required',$fields['AS_FILENAME1'])?'required':'', 'class'=>'form-control'))")
-      + if("isset($fields['AS_FILENAME2'])")
+            + php("Form::file('ANA_FILENAME1', Input::old('ANA_FILENAME1'), array(in_array('required',$fields['ANA_FILENAME1'])?'required':'', 'class'=>'form-control'))")
+      + if("isset($fields['ANA_FILENAME2'])")
         .form-group
-          + php("Form::label('AS_FILENAME2', trans('press.upload.document'), ['class' => 'control-label col-md-6'])")
+          + php("Form::label('ANA_FILENAME2', trans('press.upload.document'), ['class' => 'control-label col-md-6'])")
           .col-md-6
-            + php("Form::file('AS_FILENAME2', Input::old('AS_FILENAME2'), array(in_array('required',$fields['AS_FILENAME2'])?'required':'', 'class'=>'form-control'))")
-      + if("isset($fields['AS_FILENAME3'])")
+            + php("Form::file('ANA_FILENAME2', Input::old('ANA_FILENAME2'), array(in_array('required',$fields['ANA_FILENAME2'])?'required':'', 'class'=>'form-control'))")
+      + if("isset($fields['ANA_FILENAME3'])")
         .form-group
-          + php("Form::label('AS_FILENAME3', trans('press.upload.photo'), ['class' => 'control-label col-md-6'])")
+          + php("Form::label('ANA_FILENAME3', trans('press.upload.photo'), ['class' => 'control-label col-md-6'])")
           .col-md-6
-            + php("Form::file('AS_FILENAME3', Input::old('AS_FILENAME3'), array(in_array('required',$fields['AS_FILENAME3'])?'required':'', 'class'=>'form-control'))")
-      + if("isset($fields['AS_FILENAME4'])")
+            + php("Form::file('ANA_FILENAME3', Input::old('ANA_FILENAME3'), array(in_array('required',$fields['ANA_FILENAME3'])?'required':'', 'class'=>'form-control'))")
+      + if("isset($fields['ANA_FILENAME4'])")
         .form-group
-          + php("Form::label('AS_FILENAME4', trans('press.upload.letter'), ['class' => 'control-label col-md-6'])")
+          + php("Form::label('ANA_FILENAME4', trans('press.upload.letter'), ['class' => 'control-label col-md-6'])")
           .col-md-6
-            + php("Form::file('AS_FILENAME4', Input::old('AS_FILENAME4'), array(in_array('required',$fields['AS_FILENAME4'])?'required':'', 'class'=>'form-control'))")
-      + if("isset($fields['AS_FILENAME5'])")
+            + php("Form::file('ANA_FILENAME4', Input::old('ANA_FILENAME4'), array(in_array('required',$fields['ANA_FILENAME4'])?'required':'', 'class'=>'form-control'))")
+      + if("isset($fields['ANA_FILENAME5'])")
         .form-group
-          + php("Form::label('AS_FILENAME5', trans('press.upload.colophon'), ['class' => 'control-label col-md-6'])")
+          + php("Form::label('ANA_FILENAME5', trans('press.upload.colophon'), ['class' => 'control-label col-md-6'])")
           .col-md-6
-            + php("Form::file('AS_FILENAME5', Input::old('AS_FILENAME5'), array(in_array('required',$fields['AS_FILENAME5'])?'required':'', 'class'=>'form-control'))")
+            + php("Form::file('ANA_FILENAME5', Input::old('ANA_FILENAME5'), array(in_array('required',$fields['ANA_FILENAME5'])?'required':'', 'class'=>'form-control'))")
+
+    + if("isset($fields['ANA_CONSENSO'])")
+      fieldset
+        legend @lang('press.privacy.head')
+        .form-group
+          .col-md-offset-3.col-md-9
+            .checkbox
+              label.checkbox(for='ANA_CONSENSO')
+                + php("Form::checkbox('ANA_CONSENSO', 'SI', (Input::old('ANA_CONSENSO') ? true : false), array(in_array('required',$fields['ANA_CONSENSO'])?'required':'', 'class'=>''))")
+                + lang('press.privacy.checkbox')
 
     + if("isset($fields['human'])")
       fieldset

@@ -54,7 +54,7 @@ return [
     'infocommunications' => 'Your Communications',
     'privacy' => [
         'head' => 'Privacy Notification',
-        'checkbox' => 'I agree to processing of my personal data in conformity with the standards of <a href="{0}">privacy laws</a>.',
+        'checkbox' => 'I agree to processing of my personal data in conformity with the standards of <a href=":url">privacy laws</a>.',
     ],
     'actions' => [
         'head' => 'Send accreditation request',

@@ -78,14 +78,30 @@ return [
             'AS_WWW' => [],
             'ANA_PRIMA_VISITA' => [
                 'required',
+                'integer'
+            ],
+            'ANA_CONSENSO' => [
+                'required',
                 'in:SI,NO'
             ],
 
             'ANA_FILENAME1' => [
                 'photo' => 'mimes:jpeg,bmp,png'
             ],
+            'ANA_FILENAME2' => [
+                'photo' => 'mimes:jpeg,bmp,png'
+            ],
+            'ANA_FILENAME3' => [
+                'photo' => 'mimes:jpeg,bmp,png'
+            ],
+            'ANA_FILENAME4' => [
+                'photo' => 'mimes:jpeg,bmp,png'
+            ],
+            'ANA_FILENAME5' => [
+                'photo' => 'mimes:jpeg,bmp,png'
+            ],
 
-            'ANA_CARD' => [
+            'AS_TESSERA' => [
                 'required'
             ],
 
@@ -105,7 +121,7 @@ return [
         ],
         33 => [
             //NOT REQUIRED example
-            'ANA_CARD' => [],
+            'AS_TESSERA' => [],
         ],
     ]
 
