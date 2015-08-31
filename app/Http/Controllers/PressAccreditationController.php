@@ -41,7 +41,7 @@ class PressAccreditationController extends Controller
     public function create(Request $request, $role, $code)
     {
 
-        $numbers = [(int) substr(mt_rand(),0,2),(int) substr(mt_rand(),0,1)];
+        $numbers = [(int) substr(mt_rand(),0,1),(int) substr(mt_rand(),0,1)];
         $sum = array_sum($numbers);
         Session::put('captcha_answer', $sum);
 
@@ -54,7 +54,7 @@ class PressAccreditationController extends Controller
             $workfor[$job->id] =$job->description;
         }
 
-        $categories = DW_SOTTOCATEGORIE::visible(true)->qualifiche('VIR09', $request->channel)->get();
+        $categories = DW_SOTTOCATEGORIE::visible(true)->qualifiche($code, $request->channel)->get();
         $qualifications = [];
         foreach($categories as $category){
             $qualifications[$category->id] =$category->description;

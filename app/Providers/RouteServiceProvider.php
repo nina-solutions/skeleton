@@ -2,6 +2,7 @@
 
 namespace FairHub\Providers;
 
+use FairHub\DW_MACROCATEGORIE;
 use Illuminate\Routing\Router;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 
@@ -24,8 +25,15 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function boot(Router $router)
     {
+
+        $faircodes = DW_MACROCATEGORIE::fairCodes()->get();
+        $codes = [];
+        foreach($faircodes as $faircode){
+            $codes[] = $faircode->fairCode;
+        }
         //Fair code structure for code parameter
-        $router->pattern('code', '[A-Z]{3}[0-9]{2}');
+        $router->pattern('code', implode('|', $codes));
+        //$router->pattern('code', '[A-Z]{3}[0-9]{2}');
         //accepted roles
         $roles = implode('|',array_keys(config('press-accreditation.channels')));
         $router->pattern('role', $roles);

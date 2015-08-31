@@ -22,6 +22,10 @@ class DW_MACROCATEGORIE extends HubModel
         return $query;
     }
 
+    public function scopeFairCodes($query){
+        return $query->select('MAC_ANALISI_IN')->groupBy('MAC_ANALISI_IN');
+    }
+
     public function subCategories(){
         return $this->hasMany('DW_SOTTOCATEGORIE', 'MAC_ID', 'MAC_ID');
     }
@@ -47,6 +51,13 @@ class DW_MACROCATEGORIE extends HubModel
             return $this->attributes['MAC_DESCRIZIONE_EN'];
         //fallback on Italian for everything else
         return $this->attributes['MAC_DESCRIZIONE'];
+    }
+
+    /**
+     * @return int
+     */
+    public function getFairCodeAttribute(){
+        return $this->attributes['MAC_ANALISI_IN'];
     }
 
     //MAC_ID INT PRIMARY KEY NOT NULL,
