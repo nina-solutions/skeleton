@@ -12,7 +12,7 @@ class DW_MACROCATEGORIE extends HubModel
     protected $primaryKey = 'MAC_ID';
 
     public function scopeQualifications($query, $channel = 0){
-        $string = config('press-accreditation.macrocategoriesquery.'.$channel);
+        $string = config('press-accreditation.query.'.$channel);
         return $query->where('MAC_DESCRIZIONE', 'LIKE', $string.'%');
     }
 
