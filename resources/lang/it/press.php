@@ -88,6 +88,7 @@ return [
     'emails' =>[
         'signature' => "Cordiali saluti<br>\nServizio Stampa Veronafiere - :fair<br>\nTel.: +39 045 8298 242 - 285<br>\ne-mail:pressoffice@veronafiere.it",
         'thanks' => "Gentile Collega,<br />\nAbbiamo ricevuto la sua cortese richiesta di accredito stampa per :fair, in programma a Verona dal :from al :until.<br />\nIn seguito alla verifica dei dati inseriti riceverà una risposta dal Servizio Stampa.",
+        'subject' => "Richiesta accredito stampa - :fair",
     ],
 
     'errors' => [

@@ -88,6 +88,7 @@ return [
     'emails' =>[
         'signature' => 'Kind regards<br>\nVeronafiere Press Office- :fair<br>\nTel.: +39 045 8298 242 - 285<br>\ne-mail:pressoffice@veronafiere.it',
         'thanks' => "Dear collegue,<br />\nWe received your kind press accreditation requestdito for :fair, scheduled in Verona from :from until :until.<br />\nAfter verification of the data entered, you will receive a response from the Press Service.",
+        'subject' => "Press Accreditation - :fair",
     ],
 
     'errors' => [

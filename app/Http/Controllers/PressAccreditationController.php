@@ -163,12 +163,12 @@ class PressAccreditationController extends Controller
                 //I don't want to save anything if i can't send our internal emails
                 Mail::send('press-accreditation.emails.thankyou', ['fields' => array_keys($request->fields), 'input' => $input], function ($m) use ($ana, $code){
                     $m->to($ana->email, 'Press Accreditation')
-                        ->subject('Press Accreditation '.$code)
+                        ->subject(trans('press.emails.subject', ['fair' => $code]))
                         ->from(env('FROM_EMAIL_PRESS'), env('FROM_NAME'));;
                 });
                 Mail::send('press-accreditation.emails.internal', ['fields' => array_keys($request->fields), 'input' => $input], function ($m) use ($code) {
                     $m->to(env('EMAIL_INTERNAL'), 'Richiesta accredito stampa - '.$code)
-                        ->subject('Press Accreditation')
+                        ->subject(trans('press.emails.subject', ['fair' => $code]))
                         ->from(env('FROM_EMAIL_INFO'), env('FROM_NAME'));
                 });
             });
