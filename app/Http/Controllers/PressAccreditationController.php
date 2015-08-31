@@ -19,6 +19,7 @@ use FairHub\Http\Controllers\Controller;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
 
 class PressAccreditationController extends Controller
@@ -158,7 +159,14 @@ class PressAccreditationController extends Controller
                 $cat->save();
                 $util->save();
             });
+            Mail::send('press-accreditation.emails.internal', ['fields' => array_keys($request->fields), 'input' => $input], function ($m) {
+                $m->to(env('EMAIL_INTERNAL'), 'Press Accreditation')->subject('Press Accreditation');
+            });
+            Mail::send('press-accreditation.emails.thankyou', ['fields' => array_keys($request->fields), 'input' => $input], function ($m) {
+                $m->to($ana->email, 'Press Accreditation')->subject('Press Accreditation');
+            });
         }catch (\Exception $e){
+            print_r($e);
             return redirect()->back()->withInput($request->except(['password','human']))->with('message', trans('messages.wrongform'));
         }
         return redirect()->route('thanks')->with('message', 'Thanks for contacting us!');

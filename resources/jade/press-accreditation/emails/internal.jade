@@ -1,0 +1,20 @@
+//
+   Created by Karoly Szabo on 8/31/15.
+
+extends ../../partials/template
+
+block title
+  title @lang('press.register')
+block content
+  h1 @lang('press.register')
+  table.table.table-striped
+    thead
+      tr
+        th= 'Campo'
+        th= 'Valore'
+    tbody
+      + foreach('$fields','$field')
+        + if('isset($input[$field])')
+          tr
+            td {{$field}}
+            td {{$input[$field]}}
