@@ -13,8 +13,8 @@ class EventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $listen = [
-        'FairHub\Events\SomeEvent' => [
-            'FairHub\Listeners\EventListener',
+        'FairHub\Events\AnagraficaSaved' => [
+            'FairHub\Listeners\EmailSubscriptionConfirmation',
         ],
     ];
 

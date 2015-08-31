@@ -66,6 +66,14 @@ class DW_ANAGRAFICHE extends HubModel
         return $this->attributes['ANA_EMAIL'];
     }
 
+    //If you hate the way this Database is designed,
+    /**
+     * @return string
+     */
+    public function getCodeAttribute(){
+        return $this->attributes['ANA_ANALISI_IN'];
+    }
+
     protected $fillable = [
         'ANA_ANALISI_IN',
         'ANA_COGNOME',

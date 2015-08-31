@@ -10,6 +10,6 @@ block content
   table.table.table-striped
     tbody
       tr
-        td @lang('press.emails.thanks', ['fair' => 'Vinitaly', 'from' => date('d-m-Y'), 'until' => date('d-m-Y')])
+        td @lang('press.emails.thanks', ['fair' => $fair, 'from' => $fairStart, 'until' => $fairEnd])
       tr
         td @lang('press.emails.signature', ['fair' => 'Vinitaly'])
