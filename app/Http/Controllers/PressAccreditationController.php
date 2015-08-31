@@ -20,6 +20,7 @@ use FairHub\Http\Controllers\Controller;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
 
@@ -159,13 +160,13 @@ class PressAccreditationController extends Controller
                 $ana_te->save();
                 $cat->save();
                 $util->save();
-                //Email can be sent asynchronously, after the page is shown
-                //if you want to do so, please use middleware with
-                //I don't want to save anything if i can't send our internal emails
                 event(new AnagraficaSaved($ana, $input));
             });
         }catch (\Exception $e){
-            print_r($e);
+
+            //this should be an event
+            Log::error('Exception: '.$e->getMessage());
+            Log::error('Exception: '.$e->getTraceAsString());
             return redirect()->back()->withInput($request->except(['password','human']))->with('message', trans('messages.wrongform'));
         }
         return redirect()->route('thanks')->with('message', trans('press.messages.success'));
