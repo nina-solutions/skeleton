@@ -1,0 +1,15 @@
+//
+   Created by Karoly Szabo on 8/31/15.
+
+extends ../../partials/template
+
+block title
+  title @lang('press.register')
+block content
+  h1 @lang('press.register')
+  table.table.table-striped
+    tbody
+      tr
+        td @lang('press.emails.thanks', ['fair' => 'Vinitaly', 'from' => date('d-m-Y'), 'until' => date('d-m-Y')])
+      tr
+        td @lang('press.emails.signature', ['fair' => 'Vinitaly'])

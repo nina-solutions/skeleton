@@ -144,7 +144,7 @@ class PressAccreditationController extends Controller
                 ['human', 'fields', '_token'])),
             $fileKeys);
         try {
-            DB::transaction(function () use ($input) {
+            DB::transaction(function () use ($input, $request, $code) {
                 $ana = new DW_ANAGRAFICHE($input);
                 $ana->save();
                 $input = array_merge($input, [
@@ -158,18 +158,25 @@ class PressAccreditationController extends Controller
                 $ana_te->save();
                 $cat->save();
                 $util->save();
-            });
-            Mail::send('press-accreditation.emails.internal', ['fields' => array_keys($request->fields), 'input' => $input], function ($m) {
-                $m->to(env('EMAIL_INTERNAL'), 'Press Accreditation')->subject('Press Accreditation');
-            });
-            Mail::send('press-accreditation.emails.thankyou', ['fields' => array_keys($request->fields), 'input' => $input], function ($m) {
-                $m->to($ana->email, 'Press Accreditation')->subject('Press Accreditation');
+                //Email can be sent asynchronously, after the page is shown
+                //if you want to do so, please use middleware with
+                //I don't want to save anything if i can't send our internal emails
+                Mail::send('press-accreditation.emails.thankyou', ['fields' => array_keys($request->fields), 'input' => $input], function ($m) use ($ana, $code){
+                    $m->to($ana->email, 'Press Accreditation')
+                        ->subject('Press Accreditation '.$code)
+                        ->from(env('FROM_EMAIL_PRESS'), env('FROM_NAME'));;
+                });
+                Mail::send('press-accreditation.emails.internal', ['fields' => array_keys($request->fields), 'input' => $input], function ($m) use ($code) {
+                    $m->to(env('EMAIL_INTERNAL'), 'Richiesta accredito stampa - '.$code)
+                        ->subject('Press Accreditation')
+                        ->from(env('FROM_EMAIL_INFO'), env('FROM_NAME'));
+                });
             });
         }catch (\Exception $e){
-            print_r($e);
+            //print_r($e);
             return redirect()->back()->withInput($request->except(['password','human']))->with('message', trans('messages.wrongform'));
         }
-        return redirect()->route('thanks')->with('message', 'Thanks for contacting us!');
+        return redirect()->route('thanks')->with('message', trans('press.messages.success'));
     }
 
     /**
