@@ -16,7 +16,9 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         DB::listen(function($sql, $bindings, $time) {
-            if('local' == env('APP_ENV')) {
+            if('local' === env('APP_ENV')
+            && true === env('APP_DEBUG')
+            && true === env('APP_ORM_DEBUG')) {
                 echo $sql . PHP_EOL;
                 print_r($bindings);
                 echo $time . PHP_EOL;
