@@ -17,22 +17,22 @@
 
 
   category.change ->
-    if blogger.length > 0
-      $('fieldset.hidden').removeClass('hidden')
-      switch channel
-        when '22'
-          file1.parent().parent().show()
-          if file2.length > 0
-            file2.parent().parent().hide()
-          if file3.length > 0
-            file3.parent().parent().hide()
-          if file4.length > 0
-            file4.parent().parent().hide()
-          if file5.length > 0
-            file5.parent().parent().hide()
-          if analink.length > 0
-            analink.parent().parent().hide()
-        when '24'
+    $('fieldset.hidden').removeClass('hidden')
+    switch channel
+      when '22'
+        file1.parent().parent().show()
+        if file2.length > 0
+          file2.parent().parent().hide()
+        if file3.length > 0
+          file3.parent().parent().hide()
+        if file4.length > 0
+          file4.parent().parent().hide()
+        if file5.length > 0
+          file5.parent().parent().hide()
+        if analink.length > 0
+          analink.parent().parent().hide()
+      when '24'
+        if photographer.length > 0
           if category.find(':selected').text() == 'Fotografo' or category.find(':selected').text() == 'Photographer'
             photographer.val(1)
             file1.parent().parent().show()
@@ -57,7 +57,8 @@
               file4.parent().parent().hide()
             if file5.length > 0
               file5.parent().parent().hide()
-        when '23'
+      when '23'
+        if blogger.length > 0
           if category.find(':selected').text() == 'Blogger' or workfor.find(':selected').text() == 'Blog'
             blogger.val(1)
             file3.parent().parent().show()
@@ -83,7 +84,8 @@
               file3.parent().parent().hide()
             if file4.length > 0
               file4.parent().parent().hide()
-        when '33'
+      when '33'
+        if blogger.length > 0
           if (category.find(':selected').text() == 'Blogger')
             file2.parent().parent().show()
             analink.parent().parent().show()
