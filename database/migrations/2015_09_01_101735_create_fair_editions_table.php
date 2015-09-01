@@ -23,6 +23,7 @@ class CreateFairEditionsTable extends Migration
             $table->dateTime('end');
             $table->string('description')->nullable();
             $table->string('location')->nullable();
+            $table->integer('nr')->nullable();
 
             $table->foreign('fair_id')->references('id')->on('fairs');
         });

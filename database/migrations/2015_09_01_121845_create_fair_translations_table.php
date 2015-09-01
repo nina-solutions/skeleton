@@ -18,7 +18,7 @@ class CreateFairTranslationsTable extends Migration
             $table->integer('language_id');
             $table->timestamps();
 
-            $table->string('name');
+            $table->string('description');
 
             $table->foreign('fair_id')->references('id')->on('fairs');
             $table->foreign('language_id')->references('id')->on('languages');
