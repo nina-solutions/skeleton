@@ -25,5 +25,6 @@ elixir(function(mix) {
     });
     mix.sass('app.sass');
     mix.coffee('app.coffee');
+    mix.version(["css/app.css", "js/app.js"]);
     //mix.requirejs("bootstrap.js", rjsOptions);
 });
