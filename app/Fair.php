@@ -13,4 +13,12 @@ class Fair extends Model
     {
         return $this->hasMany('FairHub\FairEdition');
     }
+
+    /**
+     * Get the translatinos that belongs to this fair.
+     */
+    public function translation()
+    {
+        return $this->hasMany('FairHub\FairTranslation');
+    }
 }

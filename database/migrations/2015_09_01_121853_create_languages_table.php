@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateFairsTable extends Migration
+class CreateLanguagesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,10 +12,11 @@ class CreateFairsTable extends Migration
      */
     public function up()
     {
-        Schema::create('fairs', function (Blueprint $table) {
+        Schema::create('languages', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('code', 2)->unique();
+            $table->string('description');
             $table->timestamps();
-            $table->string('code', 3)->unique();
         });
     }
 
@@ -26,6 +27,6 @@ class CreateFairsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('fairs');
+        Schema::drop('languages');
     }
 }

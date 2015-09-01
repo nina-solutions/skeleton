@@ -17,7 +17,8 @@ class CreateFairEditionsTable extends Migration
             $table->integer('fair_id')->unsigned();
             $table->timestamps();
             $table->boolean('active');
-            $table->string('year', 2);
+            $table->string('year', 4);
+            $table->string('longcode')->nullable();
             $table->dateTime('start');
             $table->dateTime('end');
             $table->string('description')->nullable();
