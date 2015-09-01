@@ -15,6 +15,14 @@ class Fair extends Model
     }
 
     /**
+     * Get the code-related fair.
+     */
+    public function scopeCode($query, $code)
+    {
+        return $query->where('code', '=', $code);
+    }
+
+    /**
      * Get the translatinos that belongs to this fair.
      */
     public function translation()

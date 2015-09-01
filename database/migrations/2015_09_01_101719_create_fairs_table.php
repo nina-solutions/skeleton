@@ -16,6 +16,7 @@ class CreateFairsTable extends Migration
             $table->increments('id');
             $table->timestamps();
             $table->string('code', 3)->unique();
+            $table->string('name');
         });
     }
 
