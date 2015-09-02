@@ -29,4 +29,14 @@ class Fair extends Model
     {
         return $this->hasMany('FairHub\FairTranslation');
     }
+
+    /**
+     * Get the translatinos that belongs to this fair.
+     */
+    public function getDescriptionAttribute()
+    {
+        //If english return english description
+        $lang = App::getLocale();
+        return $this->translation()->language($lang)->description;
+    }
 }

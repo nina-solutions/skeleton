@@ -25,6 +25,7 @@ class CreateFairEditionsTable extends Migration
             $table->string('location')->nullable();
             $table->integer('nr')->nullable();
 
+            $table->unique(['fair_id', 'year']);
             $table->foreign('fair_id')->references('id')->on('fairs');
         });
     }

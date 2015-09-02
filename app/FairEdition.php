@@ -26,9 +26,9 @@ class FairEdition extends Model
         return $this->hasMany('FairHub\FairEditionTranslation');
     }
 
-    public function fairCode()
+    public function getFairCodeAttribute()
     {
-        return $this->fair()->code . $this->year;
+        return $this->fair()->code . substr($this->year,2,2);
     }
 
     /**
