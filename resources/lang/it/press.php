@@ -46,6 +46,43 @@ return [
     ],
     'upload' => [
         'head' => 'Esegui qui l\'upload dei documenti richiesti, in formato PDF, JPG o DOC.<br>Il totale delle dimensioni degli allegati non può superare i 3 megabyte (3Mb).',
+        'file1' => [
+            '20' => 'Copia della tessera dell\'Ordine dei giornalisti',
+            '23' => [
+                '0' =>'Copia della lettera d\'incarico della testata/radio/tv/sito web registrato per cui si collabora, firmata dal direttore o caporedattore',
+            ],
+            '24' => [
+                '1' => 'Lettera d\'incarico della testata per cui ci collabora, firmata dal direttore o caporedattore',
+                '0' => 'Lettera d\'incarico dell\'emittente per cui ci collabora, firmata dal direttore o caporedattore, specificando la trasmissione/programma su cui andrà in onda il servizio',
+            ],
+            '33' => 'Copia di un documento che attesti la vostra attivit &agrave; giornalistica',
+        ],
+        'file2' => [
+            '23' => 'Copia del colophon o delle indicazioni sulla gerenza della testata/radio/tv/sito web registrato',
+            '24' => 'Copia di un proprio documento d\'identità valido',
+            '33' => 'Copia di un proprio documento d\'identità valido',
+        ],
+        'file3' => [
+            '23' => 'Copia di un proprio documento d\'identità valido',
+        ],
+        'file4' => [
+            '24' => 'Servizio fotografico recentemente pubblicato che testimoni l\'effettiva attività di fotoreporter svolta dal richiedente. Per chi ha già partecipato alla precedente edizione della manifestazione, il materiale allegato deve testimoniarne l\'avvenuta copertura',
+        ],
+        'file5' => [
+            '23' => 'Copia di un articolo recente pubblicato a propria firma su testate cartacee, oppure link ad un servizio audio/video o ad un articolo pubblicato su testate online registrate, che testimoni l\'effettiva attività giornalistica svolta nel settore inerente alla manifestazione per cui si richiede l\'accredito. Per chi ha già partecipato alla precedente edizione della manifestazione, il materiale allegato deve testimoniarne l\'avvenuta copertura',
+            '24' => 'Eventuale tessera di appartenenza all\'AIRF e/o dell\'Ordine dei giornalisti',
+            '33' => 'Copia di un articolo recente pubblicato a propria firma su testate cartacee, riguardante l\'evento',
+        ],
+        'analink' => [
+            '23' => 'Per chi presente alla precedente edizione della manifestazione, link ad un post/articolo pubblicato sul proprio blog e relativo all\'evento in questione',
+            '33' => [
+                '1' => 'Per Bloggers presenti alla precedente edizione della manifestazione, link ad un post/articolo pubblicato sul proprio blog e relativo all\'evento in questione',
+                '0' => 'Link verso meteriale audio/video o articoli online che riguardino l\'evento',
+            ],
+        ],
+
+
+
         'letter' => 'Copia della lettera d\'incarico della testata/radio/tv/sito web registrato per cui si collabora, firmata dal direttore o caporedattore',
         'colophon' => 'Copia del colophon o delle indicazioni sulla gerenza della testata/radio/tv/sito web registrato',
         'document' => 'Copia di un proprio documento di intentit&agrave;',

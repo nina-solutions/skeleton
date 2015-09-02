@@ -46,12 +46,40 @@ return [
     ],
     'upload' => [
         'head' => 'Upload the documents requested here in PDF, JPG or DOC format.<br>Total size of attachment must not exceed 3 megabytes (3Mb).',
-        'letter' => 'Copy of your engagement letter from your publisher',
-        'document' => 'Copy of a valid personal identity document',
-        'photo' => 'Passport-style photo of the applicant for the press pass',
-        'colophon' => 'copy of articles published with your signature in printed magazines dealing with the event',
-        'article' => 'Copy of a document testifying to journalistic activity',
-        'link' => 'For bloggers who already attended the previous edition of the event, links to at least one post/article published on the blog about the event in question',
+        'file1' => [
+            '20' => 'Order of the Journalist card',
+            '23' => [
+                '0' => 'Copy of the engagement letter from newspaper/radio/tv/website that you work with, signed by the director or chief publisher',
+            ],
+            '24' => [
+                '1' => 'Copy of the engagement letter from newspaper you work for, signed by your director or your chief publisher',
+                '0' => 'Copy of the engagement letter from broadcaster you work for, signed by your director or your chief publisher, specifyng transmission/program that where the service will be used',
+            ],
+            '33' => 'Copy of a document testifying to journalistic activity',
+        ],
+        'file2' => [
+            '23' => 'Copy of registred newspaper/radio/tv imprint or indications about its administration',
+            '24' => 'Copy of a valid personal identity document',
+            '33' => 'Copy of a valid personal identity document',
+        ],
+        'file3' => [
+            '23' => 'Copy of registred newspaper/radio/tv imprint or indications about its administration',
+        ],
+        'file4' => [
+            '24' => 'Photoservice recently published testifiyng your photoreporter activity. To whom already partecipated to a past edition of the manifestation, the attached material must testify the occurred coverage',
+        ],
+        'file5' => [
+            '23' => 'Copy of a recent article published in your signature on paper publications, or links to a service audio/video or an article published overn an online newspapers recorded that witnesses the actual journalistic activities conducted in the field relating to the event for which you are requiring accreditation. For those who have already participated in the previous edition of the event, the enclosed materials must witness the occurred coverage',
+            '24' => 'AIRF membership card and/or Order of the journalist membership card',
+            '33' => 'Copy of articles published with your signature in printed magazines dealing with the event',
+        ],
+        'analink' => [
+            '23' => 'For bloggers who already attended the previous edition of the event, links to at least one post/article published on the blog about the event in question',
+            '33' => [
+                '1' => 'For bloggers who already attended the previous edition of the event, links to at least one post/article published on the blog about the event in question',
+                '0' => 'Link to audio/video coverage or online articles dealing with the event',
+            ],
+        ],
     ],
     'communications' => [
         'head' => 'Your Communications',

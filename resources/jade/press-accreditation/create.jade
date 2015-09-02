@@ -130,34 +130,42 @@ block content
       legend @lang('press.upload.head')
       + if("isset($fields['ANA_FILENAME1'])")
         .form-group
-          + php("Form::label('ANA_FILENAME1', trans('press.upload.letter'), ['class' => 'control-label col-md-6'])")
+          + if("is_array(trans('press.upload.file1.'.$channel))")
+            + foreach("trans('press.upload.file1.'.$channel)", "$label", "$key", "$num")
+              + php("Form::label('ANA_FILENAME1', $label, ['class' => $key. ' control-label col-md-6'])")
+            + else
+              + php("Form::label('ANA_FILENAME1', trans('press.upload.file1.'.$channel), ['class' => 'control-label col-md-6'])")
           .col-md-6
             + php("Form::file('ANA_FILENAME1', Input::old('ANA_FILENAME1'), array(in_array('required',$fields['ANA_FILENAME1'])?'required':'', 'class'=>'form-control'))")
       + if("isset($fields['ANA_FILENAME2'])")
         .form-group
-          + php("Form::label('ANA_FILENAME2', trans('press.upload.document'), ['class' => 'control-label col-md-6'])")
+          + php("Form::label('ANA_FILENAME2', trans('press.upload.file2.'.$channel), ['class' => 'control-label col-md-6'])")
           .col-md-6
             + php("Form::file('ANA_FILENAME2', Input::old('ANA_FILENAME2'), array(in_array('required',$fields['ANA_FILENAME2'])?'required':'', 'class'=>'form-control'))")
       + if("isset($fields['ANA_FILENAME3'])")
         .form-group
-          + php("Form::label('ANA_FILENAME3', trans('press.upload.photo'), ['class' => 'control-label col-md-6'])")
+          + php("Form::label('ANA_FILENAME3', trans('press.upload.file3.'.$channel), ['class' => 'control-label col-md-6'])")
           .col-md-6
             + php("Form::file('ANA_FILENAME3', Input::old('ANA_FILENAME3'), array(in_array('required',$fields['ANA_FILENAME3'])?'required':'', 'class'=>'form-control'))")
       + if("isset($fields['ANA_FILENAME4'])")
         .form-group
-          + php("Form::label('ANA_FILENAME4', trans('press.upload.letter'), ['class' => 'control-label col-md-6'])")
+          + php("Form::label('ANA_FILENAME4', trans('press.upload.file4.'.$channel), ['class' => 'control-label col-md-6'])")
           .col-md-6
             + php("Form::file('ANA_FILENAME4', Input::old('ANA_FILENAME4'), array(in_array('required',$fields['ANA_FILENAME4'])?'required':'', 'class'=>'form-control'))")
       + if("isset($fields['ANA_FILENAME5'])")
         .form-group
-          + php("Form::label('ANA_FILENAME5', trans('press.upload.colophon'), ['class' => 'control-label col-md-6'])")
+          + php("Form::label('ANA_FILENAME5', trans('press.upload.file5.'.$channel), ['class' => 'control-label col-md-6'])")
           .col-md-6
             + php("Form::file('ANA_FILENAME5', Input::old('ANA_FILENAME5'), array(in_array('required',$fields['ANA_FILENAME5'])?'required':'', 'class'=>'form-control'))")
       + if("isset($fields['ANA_LINK_ARTICOLI'])")
         .form-group
-          + php("Form::label('ANA_LINK_ARTICOLI', trans('press.upload.link'), ['class' => 'control-label col-md-3'])")
+          + if("is_array(trans('press.upload.analink.'.$channel))")
+            + foreach("trans('press.upload.analink.'.$channel)", "$label", "$key", "$num")
+              + php("Form::label('ANA_LINK_ARTICOLI', $label, ['class' => $key. ' control-label col-md-3'])")
+            + else
+              + php("Form::label('ANA_LINK_ARTICOLI', trans('press.upload.analink.'.$channel), ['class' => 'control-label col-md-3'])")
           .col-md-9
-            + php("Form::textarea('ANA_LINK_ARTICOLI', Input::old('ANA_LINK_ARTICOLI'), array((in_array('required',$fields['ANA_LINK_ARTICOLI'])?'required':''), 'class'=>'form-control', 'placeholder'=>trans('press.upload.link')))")
+            + php("Form::textarea('ANA_LINK_ARTICOLI', Input::old('ANA_LINK_ARTICOLI'), array((in_array('required',$fields['ANA_LINK_ARTICOLI'])?'required':''), 'class'=>'form-control', 'placeholder'=>'Link'))")
 
 
     + if("isset($fields['ANA_CONSENSO'])")
