@@ -75,12 +75,8 @@ class FairEdition extends Model
             if ($collect) {
                 $name = $collect->name;
             }else{
-                //fallback on entity description, the less accurate
-                $name = $this->name;
-                if (empty($name)){
-                    //fallback on fair description..no data sorry!
-                    $name = $this->fair()->first()->name;
-                }
+                //fallback on fair name..no data sorry!
+                $name = $this->fair()->first()->name;
             }
         }
         return $name;
