@@ -47,7 +47,7 @@ Route::post(
 Route::get(
     'check/{code}',
     function($code){
-        $fair = \FairHub\Fair::code('VIR07')->first();
+        $fair = \FairHub\Fair::code($code)->first();
         $edition = \FairHub\FairEdition::code($code)->first();
         $faircodes = \FairHub\FairEdition::active()->get();
         $codes = [];
