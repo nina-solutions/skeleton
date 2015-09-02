@@ -3,6 +3,7 @@
 namespace FairHub\Providers;
 
 use FairHub\DW_MACROCATEGORIE;
+use FairHub\FairEdition;
 use Illuminate\Routing\Router;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 
@@ -26,7 +27,8 @@ class RouteServiceProvider extends ServiceProvider
     public function boot(Router $router)
     {
 
-        $faircodes = DW_MACROCATEGORIE::fairCodes()->get();
+        $faircodes = FairEdition::active()->get();
+        //$faircodes = DW_MACROCATEGORIE::fairCodes()->get();
         $codes = [];
         foreach($faircodes as $faircode){
             $codes[] = $faircode->fairCode;

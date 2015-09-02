@@ -3,6 +3,8 @@
 namespace FairHub;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\App;
+use FairHub\FairTranslation;
 
 class Fair extends Model
 {
@@ -19,7 +21,7 @@ class Fair extends Model
      */
     public function scopeCode($query, $code)
     {
-        return $query->where('code', '=', $code);
+        return $query->where('code', '=', substr($code,0,3));
     }
 
     /**
@@ -35,8 +37,8 @@ class Fair extends Model
      */
     public function getDescriptionAttribute()
     {
-        //If english return english description
         $lang = App::getLocale();
-        return $this->translation()->language($lang)->description;
+        return $this->translation()->lang($lang)->first()->description;
     }
+
 }

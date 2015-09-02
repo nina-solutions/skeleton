@@ -11,6 +11,8 @@
 |
 */
 
+use Illuminate\Support\Facades\App;
+
 Route::get('/', ['as' => 'welcome', 'uses' => 'CustomController@welcome']);
 
 Route::match(
@@ -40,6 +42,20 @@ Route::match(
 Route::post(
     'press-accreditation/save/{role}/{code}',
     ['middleware' => 'role', 'as' => 'press-save', 'uses' => 'PressAccreditationController@store']
+);
+
+Route::get(
+    'check/{code}',
+    function($code){
+        $fair = \FairHub\Fair::code('VIR07')->first();
+        $edition = \FairHub\FairEdition::code($code)->first();
+        $faircodes = \FairHub\FairEdition::active()->get();
+        $codes = [];
+        foreach($faircodes as $faircode){
+            $codes[] = $faircode->fairCode;
+        }
+        return response()->json([$codes, $fair->toArray(), $fair->description, $edition->toArray(), $edition->translatedDescription]);
+    }
 );
 /*
 Route::group('{locale}/{service}/{action}/{code}', function ($locale='it', $service='subscriptions',$action='index', $code='') {

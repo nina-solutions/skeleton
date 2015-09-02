@@ -26,9 +26,86 @@ class FairEdition extends Model
         return $this->hasMany('FairHub\FairEditionTranslation');
     }
 
+    /**
+     * Build up the fair code
+     */
     public function getFairCodeAttribute()
     {
-        return $this->fair()->code . substr($this->year,2,2);
+        return $this->fair()->first()->code . substr($this->year,2,2);
+    }
+
+    /**
+     * Build up the description
+     */
+    public function getTranslatedDescriptionAttribute()
+    {
+        $lang = App::getLocale();
+        $collect = $this->translation()->lang($lang)->first();
+        if ($collect) {
+            $desc = $collect->description;
+        }else{
+            //fallback to language with id = 1, should be there
+            $collect = $this->translation()->lang(1)->first();
+            if ($collect) {
+                $desc = $collect->description;
+            }else{
+                //fallback on entity description, the less accurate
+                $desc = $this->description;
+                if (empty($desc)){
+                    //fallback on fair description..no data sorry!
+                    $desc = $this->fair()->first()->description;
+                }
+            }
+        }
+        return $desc;
+    }
+
+    /**
+     * Build up the description
+     */
+    public function getTranslatedNameAttribute()
+    {
+        $lang = App::getLocale();
+        $collect = $this->translation()->lang($lang)->first();
+        if ($collect) {
+            $name = $collect->name;
+        }else{
+            //fallback to language with id = 1, should be there
+            $collect = $this->translation()->lang(1)->first();
+            if ($collect) {
+                $name = $collect->name;
+            }else{
+                //fallback on entity description, the less accurate
+                $name = $this->name;
+                if (empty($name)){
+                    //fallback on fair description..no data sorry!
+                    $name = $this->fair()->first()->name;
+                }
+            }
+        }
+        return $name;
+    }
+
+    /**
+     * Build up the description
+     */
+    public function getTranslatedLocationAttribute()
+    {
+        $lang = App::getLocale();
+        $collect = $this->translation()->lang($lang)->first();
+        if ($collect) {
+            $location = $collect->location;
+        }else{
+            //fallback to language with id = 1, should be there
+            $collect = $this->translation()->lang(1)->first();
+            if ($collect) {
+                $location = $collect->location;
+            }else{
+                //fallback on entity description, the less accurate
+                $location = $this->location;
+            }
+        }
+        return $location;
     }
 
     /**
@@ -36,8 +113,25 @@ class FairEdition extends Model
      *
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function scopeActive($query)
+    public function scopeActive($query, $active = true)
     {
-        return $query->where('active', true);
+        return $query->where('active', '=', $active);
+    }
+
+    /**
+     * Scope a query to only include the fair edition that correspond to the given code
+     *
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeCode($query, $code)
+    {
+        $fair_id = Fair::code($code)->first()->id;
+        return $query
+                ->where('fair_id', '=', $fair_id)
+                ->where(function ($query) use ($code) {
+                    $query
+                        ->where('year', '=', '19'.substr($code, 3, 2))
+                        ->orWhere('year', '=', '20'.substr($code, 3, 2));
+                });
     }
 }
