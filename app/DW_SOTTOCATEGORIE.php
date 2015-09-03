@@ -19,7 +19,12 @@ class DW_SOTTOCATEGORIE extends HubModel
      * @return mixed Builder
      */
     public function scopeQualifiche($query, $code = null, $channel = 0){
-        return $query->where('SOC_MAC_ID', '=',DW_MACROCATEGORIE::qualifications($channel)->fairCode($code)->select('MAC_ID')->first()->id);
+        $mac = DW_MACROCATEGORIE::qualifications($channel)->fairCode($code)->select('MAC_ID')->first();
+        if ($mac)
+            $id = $mac->id;
+        else
+            $id = -1;
+        return $query->where('SOC_MAC_ID', '=',$id);
     }
 
     /**
