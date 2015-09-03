@@ -28,14 +28,12 @@ class RouteServiceProvider extends ServiceProvider
     {
 
         $faircodes = FairEdition::active()->get();
-        //$faircodes = DW_MACROCATEGORIE::fairCodes()->get();
         $codes = [];
         foreach($faircodes as $faircode){
             $codes[] = $faircode->fairCode;
         }
         //Fair code structure for code parameter
         $router->pattern('code', implode('|', $codes));
-        //$router->pattern('code', '[A-Z]{3}[0-9]{2}');
         //accepted roles
         $roles = implode('|',array_keys(config('press-accreditation.channels')));
         $router->pattern('role', $roles);

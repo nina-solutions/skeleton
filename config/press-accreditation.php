@@ -6,8 +6,6 @@
  * Time: 12:32 PM
  */
 
-use Illuminate\Support\Facades\Session;
-
 return [
     'channels' => [
         'journalist' =>20,
