@@ -137,7 +137,7 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
-
+        Frozennode\Administrator\AdministratorServiceProvider::class,
         //Efficiently\Larasset\LarassetServiceProvider::class,
         //Efficiently\JqueryLaravel\JqueryLaravelServiceProvider::class,
 
@@ -147,6 +147,7 @@ return [
         FairHub\Providers\AppServiceProvider::class,
         FairHub\Providers\EventServiceProvider::class,
         FairHub\Providers\RouteServiceProvider::class,
+
 
     ],
 
