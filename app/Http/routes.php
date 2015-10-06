@@ -70,3 +70,36 @@ Route::group('{locale}/{service}/{action}/{code}', function ($locale='it', $serv
     }
 });
 */
+
+// Admin area
+Route::get(
+    'admin',
+    function () {
+        return redirect('/admin/dashboard');
+    });
+Route::group(
+    [
+        'as' => 'admin::',
+        'namespace' => 'Admin',
+        'middleware' => 'auth'
+    ],
+    function () {
+        Route::get('dashboard', ['as' => 'dashboard', function () {
+            // Route named "admin::dashboard"
+
+        }]);
+    });
+
+// Logging in and out
+Route::get('/auth/login', 'Auth\AuthController@getLogin');
+Route::post('/auth/login', 'Auth\AuthController@postLogin');
+Route::get('/auth/logout', 'Auth\AuthController@getLogout');
+
+// Registration routes...
+Route::get('auth/register', 'Auth\AuthController@getRegister');
+Route::post('auth/register', 'Auth\AuthController@postRegister');
+
+
+Route::controllers([
+    'password' => 'Auth\PasswordController',
+]);
