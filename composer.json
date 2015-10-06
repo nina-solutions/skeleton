@@ -9,8 +9,7 @@
         "laravel/framework": "5.1.*",
         "laravelcollective/html": "5.1.*",
         "guzzlehttp/guzzle": "~5.3",
-        "predis/predis": "~1.0",
-        "frozennode/administrator": " 5.*"
+        "predis/predis": "~1.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

@@ -78,7 +78,7 @@ return [
     |
     */
 
-    'key' => env('APP_KEY', 'SomeRandomString'),
+    'key' => env('APP_KEY', 'lalalalala'),
 
     'cipher' => 'AES-256-CBC',
 
@@ -137,7 +137,6 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
-        Frozennode\Administrator\AdministratorServiceProvider::class,
         //Efficiently\Larasset\LarassetServiceProvider::class,
         //Efficiently\JqueryLaravel\JqueryLaravelServiceProvider::class,
 
