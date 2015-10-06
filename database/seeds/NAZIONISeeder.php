@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use FairHub\NAZIONI as N;
+use FairHub\Models\NAZIONI as N;
 
 class NAZIONISeeder extends Seeder
 {

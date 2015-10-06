@@ -28,7 +28,7 @@ return [
     |
     */
 
-    'model' => FairHub\User::class,
+    'model' => FairHub\Models\User::class,
 
     /*
     |--------------------------------------------------------------------------

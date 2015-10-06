@@ -1,6 +1,6 @@
 <?php
 
-namespace FairHub;
+namespace FairHub\Models;
 
 use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Facades\App;

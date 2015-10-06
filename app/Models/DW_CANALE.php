@@ -1,6 +1,6 @@
 <?php
 
-namespace FairHub;
+namespace FairHub\Models;
 
 class DW_CANALE extends HubModel
 {

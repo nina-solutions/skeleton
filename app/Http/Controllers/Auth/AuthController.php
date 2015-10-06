@@ -2,7 +2,7 @@
 
 namespace FairHub\Http\Controllers\Auth;
 
-use FairHub\User;
+use FairHub\Models\User;
 use Validator;
 use FairHub\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;

@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use FairHub\DW_UTILITA as DU;
+use FairHub\Models\DW_UTILITA as DU;
 
 class DW_UTILITASeeder extends Seeder
 {

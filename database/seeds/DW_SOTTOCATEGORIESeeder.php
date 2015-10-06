@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use FairHub\DW_SOTTOCATEGORIE as SM;
+use FairHub\Models\DW_SOTTOCATEGORIE as SM;
 
 class DW_SOTTOCATEGORIESeeder extends Seeder
 {

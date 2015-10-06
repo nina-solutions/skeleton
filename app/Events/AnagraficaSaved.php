@@ -2,7 +2,7 @@
 
 namespace FairHub\Events;
 
-use FairHub\DW_ANAGRAFICHE;
+use FairHub\Models\DW_ANAGRAFICHE;
 use FairHub\Events\Event;
 use FairHub\Http\Requests\Request;
 use Illuminate\Queue\SerializesModels;

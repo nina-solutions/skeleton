@@ -6,7 +6,7 @@
  * Time: 12:31 PM
  */
 
-namespace FairHub;
+namespace FairHub\Models;
 use Illuminate\Database\Eloquent\Model;
 
 abstract class HubModel extends Model

@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use FairHub\Language as L;
+use FairHub\Models\Language as L;
 
 class LanguageSeeder extends Seeder
 {

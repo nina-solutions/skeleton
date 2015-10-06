@@ -2,16 +2,16 @@
 
 namespace FairHub\Http\Controllers;
 
-use FairHub\DW_ANAGRAFICA_TESTATA;
-use FairHub\DW_ANAGRAFICHE;
-use FairHub\DW_RELANAGCATEG;
-use FairHub\DW_RELANAUTY;
-use FairHub\DW_SOTTOCATEGORIE;
-use FairHub\DW_UTILITA;
+use FairHub\Models\DW_ANAGRAFICA_TESTATA;
+use FairHub\Models\DW_ANAGRAFICHE;
+use FairHub\Models\DW_RELANAGCATEG;
+use FairHub\Models\DW_RELANAUTY;
+use FairHub\Models\DW_SOTTOCATEGORIE;
+use FairHub\Models\DW_UTILITA;
 use FairHub\Events\AnagraficaSaved;
-use FairHub\NAZIONI;
-use FairHub\DW_PERIODICITA;
-use FairHub\PROV;
+use FairHub\Models\NAZIONI;
+use FairHub\Models\DW_PERIODICITA;
+use FairHub\Models\PROV;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 

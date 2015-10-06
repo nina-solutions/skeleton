@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use FairHub\PROV as P;
+use FairHub\Models\PROV as P;
 
 class PROVSeeder extends Seeder
 {

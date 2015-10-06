@@ -1,18 +1,18 @@
 <?php
 
-namespace FairHub;
+namespace FairHub\Models;
 use Illuminate\Support\Facades\App;
 
-class REGIONI extends HubModel
+class NAZIONI extends HubModel
 {
-    protected $table = 'REGIONI';
+    //
+    protected $table = 'NAZIONI';
     public $timestamps = false;
     //Working with this kind of keys implies NO incrementing and some custom save functions
     public $incrementing = false;
     protected $primaryKey = [
-        'CDT_UTE',
-        'CDT_NOME_TAB',
-        'CDT_CODICE'
+        'naz_ute',
+        'naz_nazione'
     ];
 
     //If you hate the way this Database is designed,
@@ -21,7 +21,7 @@ class REGIONI extends HubModel
      * @return int
      */
     public function getIdAttribute(){
-        return $this->attributes['CDT_CODICE'];
+        return $this->attributes['naz_nazione'];
     }
 
     //If you hate the way this Database is designed,
@@ -33,15 +33,17 @@ class REGIONI extends HubModel
     public function getDescriptionAttribute(){
         //If english return english description
         if (App::getLocale() == 'en')
-            return $this->attributes['CDT_DESCR'];
+            return $this->attributes['naz_descr_naz'];
         //fallback on Italian for everything else
-        return $this->attributes['CDT_DESCR'];
+        return $this->attributes['naz_descr_ita'];
     }
 
-    //CDT_UTE VARCHAR(2) NOT NULL,
-    //CDT_NOME_TAB VARCHAR(4) NOT NULL,
-    //CDT_CODICE VARCHAR(10) NOT NULL,
-    //CDT_DESCR VARCHAR(40) NOT NULL,
-    //CDT_CODICE_RICLA VARCHAR(10) NOT NULL,
-    //PRIMARY KEY (CDT_UTE, CDT_NOME_TAB, CDT_CODICE)
+    //naz_ute VARCHAR(2) NOT NULL,
+    //naz_nazione VARCHAR(2) NOT NULL,
+    //naz_descr_ita VARCHAR(50),
+    //naz_descr_naz VARCHAR(50),
+    //naz_valuta VARCHAR(3),
+    //naz_lingua VARCHAR(3),
+    //naz_nazione_03 VARCHAR(3),
+    //PRIMARY KEY (naz_ute, naz_nazione)
 }

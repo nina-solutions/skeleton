@@ -2,8 +2,8 @@
 
 namespace FairHub\Providers;
 
-use FairHub\DW_MACROCATEGORIE;
-use FairHub\FairEdition;
+use FairHub\Models\DW_MACROCATEGORIE;
+use FairHub\Models\FairEdition;
 use Illuminate\Routing\Router;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 

@@ -1,18 +1,18 @@
 <?php
 
-namespace FairHub;
+namespace FairHub\Models;
 use Illuminate\Support\Facades\App;
 
-class PROV extends HubModel
+class REGIONI extends HubModel
 {
-    protected $table = 'PROV';
+    protected $table = 'REGIONI';
     public $timestamps = false;
     //Working with this kind of keys implies NO incrementing and some custom save functions
     public $incrementing = false;
     protected $primaryKey = [
-        'cdt_ute',
-        'cdt_nome_tab',
-        'cdt_codice'
+        'CDT_UTE',
+        'CDT_NOME_TAB',
+        'CDT_CODICE'
     ];
 
     //If you hate the way this Database is designed,
@@ -21,7 +21,7 @@ class PROV extends HubModel
      * @return int
      */
     public function getIdAttribute(){
-        return $this->attributes['cdt_codice'];
+        return $this->attributes['CDT_CODICE'];
     }
 
     //If you hate the way this Database is designed,
@@ -33,14 +33,15 @@ class PROV extends HubModel
     public function getDescriptionAttribute(){
         //If english return english description
         if (App::getLocale() == 'en')
-            return $this->attributes['cdt_descr'];
+            return $this->attributes['CDT_DESCR'];
         //fallback on Italian for everything else
-        return $this->attributes['cdt_descr'];
+        return $this->attributes['CDT_DESCR'];
     }
-    //cdt_ute VARCHAR(2) NOT NULL,
-    //cdt_nome_tab VARCHAR(4) NOT NULL,
-    //cdt_codice VARCHAR(10) NOT NULL,
-    //cdt_descr VARCHAR(40) NOT NULL,
-    //cdt_codice_ricla VARCHAR(10) NOT NULL,
-    //PRIMARY KEY (cdt_ute, cdt_nome_tab, cdt_codice)
+
+    //CDT_UTE VARCHAR(2) NOT NULL,
+    //CDT_NOME_TAB VARCHAR(4) NOT NULL,
+    //CDT_CODICE VARCHAR(10) NOT NULL,
+    //CDT_DESCR VARCHAR(40) NOT NULL,
+    //CDT_CODICE_RICLA VARCHAR(10) NOT NULL,
+    //PRIMARY KEY (CDT_UTE, CDT_NOME_TAB, CDT_CODICE)
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace FairHub;
+namespace FairHub\Models;
 use Illuminate\Support\Facades\App;
 
 class DW_PERIODICITA extends HubModel
