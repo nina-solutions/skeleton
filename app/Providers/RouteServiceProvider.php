@@ -26,7 +26,7 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function boot(Router $router)
     {
-
+/*
         $faircodes = FairEdition::active()->get();
         $codes = [];
         foreach($faircodes as $faircode){
@@ -34,6 +34,7 @@ class RouteServiceProvider extends ServiceProvider
         }
         //Fair code structure for code parameter
         $router->pattern('code', implode('|', $codes));
+        */
         //accepted roles
         $roles = implode('|',array_keys(config('press-accreditation.channels')));
         $router->pattern('role', $roles);

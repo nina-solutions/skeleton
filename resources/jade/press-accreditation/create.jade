@@ -209,6 +209,8 @@ block content
           strong @lang('press.actions.description')
         .well.well-sm @lang('press.actions.notice')
       .form-group.col-md-12
-        + php("Form::submit(trans('press.actions.submit', ['fair_name' => 'FAIR NAME']), array('class' => 'btn btn-primary'))")
+        + if("env('APP_ENV') == 'testing'")
+          + php("Form::submit('submit', array('class' => 'btn btn-primary', 'name' => 'submit'))")
+        + php("Form::submit(trans('press.actions.submit', ['fair_name' => 'FAIR NAME']), array('class' => 'btn btn-primary', 'name' => 'submit'))")
         + php("Form::reset(trans('press.actions.reset'), array('class' => 'btn'))")
 
