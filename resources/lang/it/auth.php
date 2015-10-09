@@ -27,9 +27,19 @@ return [
         'title' => 'Login',
         'head' => 'Inserisci le tue credenziali'
     ],
+    'password' => [
+        'title' => 'Recupero password',
+        'head' => 'Inserisci l\'indirizzo e-mail di registrazione'
+    ],
     'actions' => [
         'register' => 'Registrati',
         'login' => 'Login',
+        'password' => 'Reset Password',
         'reset' => 'Annulla'
+    ],
+    'emails' => [
+        'password' => [
+            'reset' => 'Clicca sul seguente link per re-impostare la password: '
+        ]
     ]
 ];

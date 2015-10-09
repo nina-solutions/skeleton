@@ -27,9 +27,19 @@ return [
         'title' => 'Login',
         'head' => 'Insert your credentials'
     ],
+    'password' => [
+        'title' => 'Password recovery',
+        'head' => 'Insert the email you registered'
+    ],
     'actions' => [
         'register' => 'Register',
         'login' => 'Login',
+        'password' => 'Password Reset',
         'reset' => 'Cancel'
+    ],
+    'emails' => [
+        'password' => [
+            'reset' => 'Click here to reset your password: '
+        ]
     ]
 ];
