@@ -4,7 +4,7 @@ namespace FairHub\Http\Middleware;
 use \Illuminate\Http\Request;
 use Closure;
 
-class RoleMiddleware
+class ChannelRoleMiddleware
 {
     /**
      * Handle an incoming request.

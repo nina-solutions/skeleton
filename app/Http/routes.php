@@ -14,11 +14,12 @@
 use Illuminate\Support\Facades\App;
 
 Route::get('/', ['as' => 'welcome', 'uses' => 'CustomController@welcome']);
+Route::get('home', ['as' => 'home', 'uses' => 'CustomController@home']);
 
 Route::match(
     ['get','post'],
     '{lang}/press-accreditation/register/{role}/{code}',
-    ['middleware' => 'role', 'as' => 'press-register-locale', function($lang, $role,$code){
+    ['middleware' => 'channelrole', 'as' => 'press-register-locale', function($lang, $role,$code){
         App::setLocale($lang);
         session(['lang' => App::getLocale()]);
         $request = Route::getCurrentRequest();
@@ -37,11 +38,11 @@ Route::get(
 Route::match(
     ['get','post'],
     'press-accreditation/register/{role}/{code}',
-    ['middleware' => 'role', 'as' => 'press-register', 'uses' => 'PressAccreditationController@create']
+    ['middleware' => 'channelrole', 'as' => 'press-register', 'uses' => 'PressAccreditationController@create']
 );
 Route::post(
     'press-accreditation/save/{role}/{code}',
-    ['middleware' => 'role', 'as' => 'press-save', 'uses' => 'PressAccreditationController@store']
+    ['middleware' => 'channelrole', 'as' => 'press-save', 'uses' => 'PressAccreditationController@store']
 );
 
 Route::get(
@@ -71,14 +72,9 @@ Route::group('{locale}/{service}/{action}/{code}', function ($locale='it', $serv
 });
 */
 
-// Admin area
-Route::get(
-    'admin',
-    function () {
-        return redirect('/admin/dashboard');
-    });
 Route::group(
     [
+        'prefix' => 'admin',
         'as' => 'admin::',
         'namespace' => 'Admin',
         'middleware' => 'auth'
@@ -87,19 +83,22 @@ Route::group(
         Route::get('dashboard', ['as' => 'dashboard', function () {
             // Route named "admin::dashboard"
 
-        }]);
-    });
+    }]);
+});
 
-// Logging in and out
-Route::get('/auth/login', 'Auth\AuthController@getLogin');
-Route::post('/auth/login', 'Auth\AuthController@postLogin');
-Route::get('/auth/logout', 'Auth\AuthController@getLogout');
+// Authentication routes...
+Route::get('auth/login', 'Auth\AuthController@getLogin');
+Route::post('auth/login', 'Auth\AuthController@postLogin');
+Route::get('auth/logout', 'Auth\AuthController@getLogout');
 
 // Registration routes...
 Route::get('auth/register', 'Auth\AuthController@getRegister');
 Route::post('auth/register', 'Auth\AuthController@postRegister');
 
-
+/*
 Route::controllers([
+    'auth' => 'Auth\AuthController',
     'password' => 'Auth\PasswordController',
 ]);
+
+*/
