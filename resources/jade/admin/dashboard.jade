@@ -1,5 +1,18 @@
-extends ../partials/template
+extends partials/template
 block title
   title @lang('admin.dashboard.head')
-block content
+
+block breadcrumbs
+  ol.breadcrumb
+    li
+      a(href='#')
+        i.fa.fa-dashboard
+        | Level
+    li.active
+      | Dashboard
+
+block inner-title
   h1 @lang('admin.dashboard.head')
+    small @lang('admin.dashboard.head')
+
+block content

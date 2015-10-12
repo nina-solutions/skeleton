@@ -1,0 +1,81 @@
+header.main-header
+  a.logo(href='/') Admin
+  nav.navbar.navbar-static-top(role='navigation')
+    // Sidebar toggle button
+    a(href='#', data-toggle='offcanvas', role='button').sidebar-toggle
+      span.sr-only Toggle navigation
+    // Navbar Right Menu
+    div.navbar-custom-menu
+      ul.nav.navbar-nav
+        li.dropdown.messages-menu
+          a(href='#', data-toggle='dropdown').dropdown-toggle
+            i.fa.fa-envelope-o
+            span.label.label-success 4
+          ul.dropdown-menu
+            li.header Hai 4 messaggi
+            li
+              ul.menu
+                // messages
+                li
+                  a(href='#')
+                    div.pull-left
+                      img(src="https://placehold.it/160x160", alt='User img').img-circle
+                    h4
+                      messaggio
+                      small
+                        i.fa.fa-clock-o
+                          x minuti
+                    p Testo messaggio
+            li.footer
+              a(href='#') Vedi tutti i messaggi
+        li.dropdown.notifications-menu
+          a(href='#', data-toggle='dropdown').dropdown-toggle
+            i.fa.fa-bell-o
+            span.lavel.label-warning 10
+          ul.dropdown-menu
+            li.header Hai 4 notifiche
+            li
+              ul.menu
+                // notifications
+                li
+                  a(href='#')
+                    i.fa.fa-users.text-aqua
+                      some members popped up now
+            li.footer
+              a(href='#') Vedi tutte le notifiche
+        li.dropdown.tasks-menu
+          a(href='#', data-toggle='dropdown').dropdown-toggle
+            i.fa.fa-flag-o
+            span.lavel.label-danger 2
+          ul.dropdown-menu
+            li.header Hai 2 issue aperte
+            li
+              ul.menu
+                // issues
+                li
+                  a(href='#')
+                    h3
+                      Fai qualcosa
+                      small.pull-right 20%
+            li.footer
+              a(href='#') Vedi tutte le issues
+        li.dropdown.user.user-menu
+          a(href='#', data-toggle='dropdown').dropdown-toggle
+            img(src="https://placehold.it/160x160", alt='User img').user-image
+            span.hidden-xs Nome utente
+          ul.dropdown-menu
+            li.user-header
+              img(src="https://placehold.it/160x160", alt='User img').user-image
+              p
+                Nome utente - web developer
+                small
+                  membro da qua qua qua
+            li.user-body
+              div.col-xs4.text-center
+                a(href='#')
+                  TEST
+            li.user-footer
+              div.pull-left
+                a(href='#').btn.btn-default.btn-flat Profilo
+              div.pull-right
+                a(href='#').btn.btn-default.btn-flat Logout

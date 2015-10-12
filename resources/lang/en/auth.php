@@ -35,7 +35,9 @@ return [
         'register' => 'Register',
         'login' => 'Login',
         'password' => 'Password Reset',
-        'reset' => 'Cancel'
+        'reset' => 'Cancel',
+        'forgot' =>'Forgot your password?',
+        'new' =>'Register'
     ],
     'emails' => [
         'password' => [

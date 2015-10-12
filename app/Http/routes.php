@@ -81,7 +81,7 @@ Route::group(
     ],
     function () {
         Route::get('dashboard', ['as' => 'dashboard', function () {
-            // Route named "admin::dashboard"
+            return view('admin/dashboard');
 
     }]);
 });
