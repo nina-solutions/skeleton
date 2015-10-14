@@ -17,7 +17,7 @@ class TabEventiTranslations extends Migration
             $table->timestamps();
             $table->integer('language_id');
             $table->integer('eventi_id');
-            $table->string('descr', 30);
+            $table->string('description', 30);
 
             $table->unique(array('eventi_id', 'language_id'));
 

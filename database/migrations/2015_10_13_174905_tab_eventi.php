@@ -14,7 +14,7 @@ class TabEventi extends Migration
     {
         Schema::create('tab_eventi', function (Blueprint $table) {
             $table->increments('eve_id');
-            $table->string('eve_descr', 30);
+            $table->string('eve_desc', 30);
             $table->string('eve_href', 100)->nullable();
             $table->char('eve_codmanif', 3)->nullable();
         });

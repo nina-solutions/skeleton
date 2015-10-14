@@ -24,9 +24,12 @@ class DatabaseSeeder extends Seeder
         //$this->call(DW_MACROCATEGORIESeeder::class);
         //$this->call(DW_SOTTOCATEGORIESeeder::class);
         //$this->call(LanguageSeeder::class);
-//        $this->call(FairSeeder::class);
-//        $this->call(FairTranslationsSeeder::class);
-//        $this->call(FairEditionsSeeder::class);
+        //$this->call(FairSeeder::class);
+        //$this->call(FairTranslationsSeeder::class);
+        //$this->call(FairEditionsSeeder::class);
+        //$this->call(tab_lingue_Seeder::class);
+        //$this->call(tab_eventi_Seeder::class);
+        $this->call(tab_categorie_Seeder::class);
 
         Model::reguard();
     }

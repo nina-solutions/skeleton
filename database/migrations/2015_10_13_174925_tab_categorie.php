@@ -14,9 +14,9 @@ class TabCategorie extends Migration
     {
         Schema::create('tab_categorie', function (Blueprint $table) {
             $table->increments('cat_id');
-            $table->string('cat_descr', 100);
+            $table->string('cat_desc', 100);
             $table->integer('cat_eve_id');
-            $table->integer('cat_orderpres')->nullable();
+            $table->integer('cat_ordpres')->nullable();
             $table->string('cat_desc_eng', 100)->nullable();
         });
     }

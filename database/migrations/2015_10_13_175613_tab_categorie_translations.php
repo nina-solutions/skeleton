@@ -17,7 +17,7 @@ class TabCategorieTranslations extends Migration
             $table->timestamps();
             $table->integer('language_id');
             $table->integer('categorie_id');
-            $table->string('descr', 100);
+            $table->string('description', 100);
 
             $table->unique(array('categorie_id', 'language_id'));
 
