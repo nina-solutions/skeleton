@@ -1,3 +1,4 @@
+include ../../partials/mixins
 header.main-header
   a.logo(href='/') Admin
   nav.navbar.navbar-static-top(role='navigation')
@@ -7,58 +8,62 @@ header.main-header
     // Navbar Right Menu
     div.navbar-custom-menu
       ul.nav.navbar-nav
-        li.dropdown.messages-menu
-          a(href='#', data-toggle='dropdown').dropdown-toggle
-            i.fa.fa-envelope-o
-            span.label.label-success 4
-          ul.dropdown-menu
-            li.header Hai 4 messaggi
-            li
-              ul.menu
-                // messages
-                li
-                  a(href='#')
-                    div.pull-left
-                      img(src="https://placehold.it/160x160", alt='User img').img-circle
-                    h4
-                      messaggio
-                      small
-                        i.fa.fa-clock-o
-                          x minuti
-                    p Testo messaggio
-            li.footer
-              a(href='#') Vedi tutti i messaggi
+        +if("Session::has('message')")
+          li.dropdown.messages-menu
+            a(href='#', data-toggle='dropdown').dropdown-toggle
+              i.fa.fa-envelope-o
+              span.label.label-success {{count($messages)}}
+            ul.dropdown-menu
+              li.header Hai count($messages) messaggi
+              li
+                ul.menu
+                  // messages
+                  li
+                    a(href='#')
+                      div.pull-left
+                        img(src="https://placehold.it/160x160", alt='User img').img-circle
+                      h4
+                        messaggio
+                        small
+                          i.fa.fa-clock-o
+                            x minuti
+                      p Testo messaggio
+              li.footer
+                a(href='#') Vedi tutti i messaggi
         li.dropdown.notifications-menu
           a(href='#', data-toggle='dropdown').dropdown-toggle
             i.fa.fa-bell-o
-            span.lavel.label-warning 10
+            span.lavel.label-warning {{$errors->count()}}
           ul.dropdown-menu
-            li.header Hai 4 notifiche
-            li
-              ul.menu
-                // notifications
-                li
-                  a(href='#')
-                    i.fa.fa-users.text-aqua
-                      some members popped up now
+            li.header Hai {{$errors->count()}} notifiche
+            + foreach('$errors->all()','$error')
+              li
+                ul.menu
+                  // notifications
+                  li
+                    a(href='#')
+                      i.fa.fa-users.text-aqua
+                        | {{$error}}
             li.footer
               a(href='#') Vedi tutte le notifiche
-        li.dropdown.tasks-menu
-          a(href='#', data-toggle='dropdown').dropdown-toggle
-            i.fa.fa-flag-o
-            span.lavel.label-danger 2
-          ul.dropdown-menu
-            li.header Hai 2 issue aperte
-            li
-              ul.menu
-                // issues
-                li
-                  a(href='#')
-                    h3
-                      Fai qualcosa
-                      small.pull-right 20%
-            li.footer
-              a(href='#') Vedi tutte le issues
+        +if("Session::has('issues')")
+          li.dropdown.tasks-menu
+            a(href='#', data-toggle='dropdown').dropdown-toggle
+              i.fa.fa-flag-o
+              span.lavel.label-danger {{$issues->count()}}
+            ul.dropdown-menu
+              li.header Hai {{$issues->count()}} issue aperte
+              + foreach('$issues->all()','$issue')
+              li
+                ul.menu
+                  // issues
+                  li
+                    a(href='#')
+                      h3
+                        | {{$issue->content}}
+                        small.pull-right {{$issue->percentage}}%
+              li.footer
+                a(href='#') Vedi tutte le issues
         li.dropdown.user.user-menu
           a(href='#', data-toggle='dropdown').dropdown-toggle
             img(src="https://placehold.it/160x160", alt='User img').user-image
@@ -76,6 +81,6 @@ header.main-header
                   TEST
             li.user-footer
               div.pull-left
-                a(href='#').btn.btn-default.btn-flat Profilo
+                a(href='/admin/profile').btn.btn-default.btn-flat Profilo
               div.pull-right
-                a(href='#').btn.btn-default.btn-flat Logout
+                a(href='/auth/logout').btn.btn-default.btn-flat Logout
