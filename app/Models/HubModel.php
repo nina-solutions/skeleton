@@ -73,4 +73,8 @@ abstract class HubModel extends Model
         return $saved;
     }
 
+    public  function scopeLike($query, $field, $value){
+        return $query->where($field, 'LIKE', "%$value%");
+    }
+
 }
