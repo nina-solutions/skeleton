@@ -27,9 +27,9 @@ class TabComunicati extends Migration
             $table->dateTime('com_timesc')->nullable();
             $table->dateTime('com_timesm')->nullable();
             $table->string('com_riferimento', 50)->nullable();
-            $table->integer('com_categoria');
-            $table->text('com_html_ita');
-            $table->text('com_html_eng');
+            $table->integer('com_categoria')->nullable();
+            $table->text('com_html_ita')->nullable();
+            $table->text('com_html_eng')->nullable();
 
             $table->foreign('com_eve')->references('eve_id')->on('tab_eventi');
             $table->foreign('com_categoria')->references('cat_id')->on('tab_categorie');
