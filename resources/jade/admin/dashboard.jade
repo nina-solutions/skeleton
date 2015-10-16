@@ -4,12 +4,10 @@ block title
 
 block breadcrumbs
   ol.breadcrumb
-    li
+    li.active
       a(href='#')
         i.fa.fa-dashboard
-        | Level
-    li.active
-      | Dashboard
+        | @lang('admin.dashboard.head')
 
 block inner-title
   h1 @lang('admin.dashboard.head')

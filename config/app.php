@@ -200,6 +200,7 @@ return [
         'View'      => Illuminate\Support\Facades\View::class,
 
         'PressAccreditationController'  => FairHub\Http\Controllers\PressAccreditationController::class,
+        'PressReleaseController'  => FairHub\Http\Controllers\PressReleaseController::class,
     ],
 
 ];

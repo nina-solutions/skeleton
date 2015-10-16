@@ -13,6 +13,15 @@ return [
     */
 
     'register' => 'Registration',
+    'search' => [
+        'text' => 'Search',
+        'dates' => [
+            'all' => 'All',
+            'current' => 'Current',
+            'new' => 'Future',
+            'old' => 'Expired'
+        ],
+    ],
     'contact' => [
         'name' => 'Name',
         'email' => 'Personal E-mail',
@@ -20,5 +29,11 @@ return [
     ],
     'dashboard' => [
         'head' => 'Dashboard'
-    ]
+    ],
+    'press-release' => [
+        'head' => 'Press Release',
+        'index' => [
+            'head' => 'Releases'
+        ],
+    ],
 ];

@@ -76,14 +76,14 @@ Route::group(
     [
         'prefix' => 'admin',
         'as' => 'admin::',
-        'namespace' => 'Admin',
         'middleware' => 'auth'
     ],
     function () {
         Route::get('dashboard', ['as' => 'dashboard', function () {
             return view('admin/dashboard');
+        }]);
+        Route::resource('press-release', 'PressReleaseController', ['as' => 'press-release']);
 
-    }]);
 });
 
 // Authentication routes...

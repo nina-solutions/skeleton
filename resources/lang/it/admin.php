@@ -13,6 +13,15 @@ return [
     */
 
     'register' => 'Registrazione',
+    'search' => [
+        'text' => 'Cerca',
+        'dates' => [
+            'all' => 'Tutti',
+            'current' => 'Correnti',
+            'new' => 'Futuri',
+            'old' => 'Scaduti'
+        ],
+    ],
     'contact' => [
         'name' => 'Nome',
         'email' => 'Indirizzo E-mail',
@@ -20,5 +29,11 @@ return [
     ],
     'dashboard' => [
         'head' => 'Pannello di controllo'
-    ]
+    ],
+    'press-release' => [
+        'head' => 'Comunicati Stampa',
+        'index' => [
+            'head' => 'Elenco comunicati'
+        ],
+    ],
 ];
