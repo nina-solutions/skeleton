@@ -35,6 +35,7 @@ block content
               th Data inizio
               th Data fine
               th Stato
+              th
             + foreach('$communications','$c')
               tr
                 td {{$c->title}}
@@ -45,5 +46,10 @@ block content
                     span.label.label-success {{$c->com_stato}}
                     +else
                       span.label.label-warning {{$c->com_stato}}
+                td
+                  +php ('"<a href=\'/admin/press-release/$c->id/edit\'>"', '"</a>"')
+                    span.glyphicon.glyphicon-edit
+                  +php ('"<a href=\'/admin/press-release/$c->id\'>"', '"</a>"')
+                    span.glyphicon.glyphicon-remove
       + php("$communications->render()")
 

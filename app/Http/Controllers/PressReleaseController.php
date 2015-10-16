@@ -2,7 +2,10 @@
 
 namespace FairHub\Http\Controllers;
 
+use FairHub\Models\Language;
+use FairHub\Models\tab_categorie;
 use FairHub\Models\tab_comunicati;
+use FairHub\Models\tab_eventi;
 use Illuminate\Http\Request;
 use FairHub\Http\Requests;
 use FairHub\Http\Controllers\Controller;
@@ -58,7 +61,7 @@ composer require zendframework/zend-diactoros
      */
     public function show($id)
     {
-        //
+        return response()->json(tab_comunicati::where('com_id', '=', $id)->get());
     }
 
     /**
@@ -69,7 +72,11 @@ composer require zendframework/zend-diactoros
      */
     public function edit($id)
     {
-        //
+        $comunicato = tab_comunicati::where('com_id', '=', $id)->get();
+        $categorie = tab_categorie::all();
+        $eventi = tab_eventi::all();
+        $languages = Language::all();
+
     }
 
     /**
