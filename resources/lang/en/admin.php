@@ -36,4 +36,10 @@ return [
             'head' => 'Releases'
         ],
     ],
+    'events' => [
+        'head' => 'Events',
+        'index' => [
+            'head' => 'Events'
+        ],
+    ],
 ];

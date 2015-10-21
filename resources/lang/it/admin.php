@@ -36,4 +36,10 @@ return [
             'head' => 'Elenco comunicati'
         ],
     ],
+    'events' => [
+        'head' => 'Eventi',
+        'index' => [
+            'head' => 'Eventi'
+        ],
+    ],
 ];

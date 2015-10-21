@@ -83,6 +83,7 @@ Route::group(
             return view('admin/dashboard');
         }]);
         Route::resource('press-release', 'PressReleaseController', ['as' => 'press-release']);
+        Route::resource('events', 'EventsController', ['as' => 'events']);
 
 });
 
