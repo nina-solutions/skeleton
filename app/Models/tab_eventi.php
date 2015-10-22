@@ -54,6 +54,14 @@ class tab_eventi extends HubModel
      */
     public function translation()
     {
-        return $this->hasMany('FairHub\tab_eventi_translations');
+        return $this->hasMany('FairHub\Models\tab_eventi_translations');
+    }
+
+    /**
+     * Get the comments for the blog post.
+     */
+    public function categories()
+    {
+        return $this->hasMany('FairHub\Models\tab_categorie', 'eve_id', 'cat_eve_id');
     }
 }

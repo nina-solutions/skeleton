@@ -84,6 +84,8 @@ Route::group(
         }]);
         Route::resource('press-release', 'PressReleaseController', ['as' => 'press-release']);
         Route::resource('events', 'EventsController', ['as' => 'events']);
+        Route::resource('languages', 'LanguagesController', ['as' => 'languages']);
+        Route::resource('categories', 'CategoriesController', ['as' => 'categories']);
 
 });
 

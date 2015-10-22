@@ -44,7 +44,7 @@ class DW_UTILITA extends HubModel
     }
 
     public function anagrafiche(){
-        return $this->hasManyThrough('FairHub\DW_ANAGRAFICHE','FairHub\DW_RELANAUTY','UTY_ID','ANA_ID','UT_ID');
+        return $this->hasManyThrough('FairHub\Models\DW_ANAGRAFICHE','FairHub\Models\DW_RELANAUTY','UTY_ID','ANA_ID','UT_ID');
     }
 
 

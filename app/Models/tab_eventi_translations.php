@@ -13,7 +13,7 @@ class tab_eventi_translations extends HubModel
      */
     public function eventi()
     {
-        return $this->belongsTo('FairHub\tab_eventi', 'eventi_id', 'eve_id', 'tab_eventi');
+        return $this->belongsTo('FairHub\Models\tab_eventi', 'eventi_id', 'eve_id', 'tab_eventi');
     }
 
     /**
@@ -21,7 +21,7 @@ class tab_eventi_translations extends HubModel
      */
     public function language()
     {
-        return $this->belongsTo('FairHub\Language');
+        return $this->belongsTo('FairHub\Models\Language');
     }
 
     /**

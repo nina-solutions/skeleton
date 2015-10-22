@@ -4,7 +4,7 @@ namespace FairHub\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\App;
-use FairHub\FairTranslation;
+use FairHub\Models\FairTranslation;
 
 class Fair extends Model
 {
@@ -13,7 +13,7 @@ class Fair extends Model
      */
     public function editions()
     {
-        return $this->hasMany('FairHub\FairEdition');
+        return $this->hasMany('FairHub\Models\FairEdition');
     }
 
     /**
@@ -29,7 +29,7 @@ class Fair extends Model
      */
     public function translation()
     {
-        return $this->hasMany('FairHub\FairTranslation');
+        return $this->hasMany('FairHub\Models\FairTranslation');
     }
 
     /**

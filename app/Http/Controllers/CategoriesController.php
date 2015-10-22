@@ -2,12 +2,12 @@
 
 namespace FairHub\Http\Controllers;
 
-use FairHub\Models\tab_eventi;
+use FairHub\Models\tab_categorie;
 use Illuminate\Http\Request;
 use FairHub\Http\Requests;
 use FairHub\Http\Controllers\Controller;
 
-class EventsController extends Controller
+class CategoriesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,12 +17,12 @@ class EventsController extends Controller
     public function index(Request $request)
     {
         if ($request->has('h-search-text'))
-            $events = tab_eventi::like('eve_desc', $request->input('h-search-text'))->paginate();
+            $categories = tab_categorie::like('cat_desc', $request->input('h-search-text'))->paginate();
         else
-            $events = tab_eventi::paginate();
+            $categories = tab_categorie::paginate();
 
-        return view('admin.events.index',[
-            'events' => $events
+        return view('admin.categories.index',[
+            'categories' => $categories
         ]);
     }
 
@@ -55,7 +55,8 @@ class EventsController extends Controller
      */
     public function show($id)
     {
-        return response()->json(tab_eventi::where('eve_id', '=', $id)->get());
+        $ev = tab_categorie::where('cat_id', '=', $id)->first();
+        return response()->json($ev);
     }
 
     /**

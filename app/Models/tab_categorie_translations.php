@@ -21,7 +21,7 @@ class tab_categorie_translations extends HubModel
      */
     public function language()
     {
-        return $this->belongsTo('FairHub\Language');
+        return $this->belongsTo('FairHub\Models\Language');
     }
 
     /**

@@ -26,7 +26,7 @@ class DW_ANAGRAFICHE extends HubModel
      * @return \Illuminate\Database\Eloquent\Relations\HasManyThrough
      */
     public function utilita(){
-        return $this->hasManyThrough('FairHub\DW_UTILITA','FairHub\DW_RELANAUTY','UTY_ID','UT_ID','ANA_ID');
+        return $this->hasManyThrough('FairHub\Models\DW_UTILITA','FairHub\Models\DW_RELANAUTY','UTY_ID','UT_ID','ANA_ID');
     }
 
 
@@ -36,7 +36,7 @@ class DW_ANAGRAFICHE extends HubModel
      * @return \Illuminate\Database\Eloquent\Relations\HasManyThrough
      */
     public function categories(){
-        return $this->hasManyThrough('FairHub\DW_SOTTOCATEGORIE','FairHub\DW_RELANAUTY','UTY_ID','UT_ID','ANA_ID');
+        return $this->hasManyThrough('FairHub\Models\DW_SOTTOCATEGORIE','FairHub\Models\DW_RELANAUTY','UTY_ID','UT_ID','ANA_ID');
     }
 
     //If you hate the way this Database is designed,

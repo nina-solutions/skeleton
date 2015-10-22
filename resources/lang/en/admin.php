@@ -42,4 +42,16 @@ return [
             'head' => 'Events'
         ],
     ],
+    'languages' => [
+        'head' => 'Languages',
+        'index' => [
+            'head' => 'Languages'
+        ],
+    ],
+    'categories' => [
+        'head' => 'Categories',
+        'index' => [
+            'head' => 'Categories'
+        ],
+    ],
 ];
