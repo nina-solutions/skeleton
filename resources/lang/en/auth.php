@@ -21,6 +21,7 @@ return [
         'surname' => 'Surname',
         'email' => 'Personal E-mail',
         'password' => 'Password',
+        'remember' => 'Remember me',
         'password-confirm' => 'Password confirm',
     ],
     'login' => [

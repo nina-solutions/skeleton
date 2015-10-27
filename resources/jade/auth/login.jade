@@ -15,6 +15,11 @@ block content
         + php("Form::label('password', trans('auth.contact.password'), ['class' => 'control-label col-md-3'])")
         .col-md-9
           + php("Form::password('password', array('required', 'class'=>'form-control'))")
+      .form-group
+        + php("Form::label('remember', trans('auth.contact.remember'), ['class' => 'control-label col-md-3'])")
+        .col-md-9
+          + php("Form::checkbox('remember', '1', array('class'=>'form-control'))")
+
     fieldset
       .form-group
         .col-md-3
