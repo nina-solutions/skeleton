@@ -6,6 +6,7 @@ use FairHub\Models\Language;
 use Illuminate\Http\Request;
 use FairHub\Http\Requests;
 use FairHub\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Redirect;
 
 class LanguagesController extends Controller
 {
@@ -33,7 +34,9 @@ class LanguagesController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.languages.form',[
+            'language' => new Language()
+        ]);
     }
 
     /**
@@ -44,7 +47,12 @@ class LanguagesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $language = Language::class;
+        if (!$language->create($request->all())){
+            return redirect()->back()->withInput()->with('messages', [trans('messages.error')]);
+        }
+        return redirect()->route('admin.languages.index')->with('messages', [trans('messages.success')]);
+
     }
 
     /**
@@ -55,7 +63,8 @@ class LanguagesController extends Controller
      */
     public function show($id)
     {
-        //
+        $language = Language::findOrNew($id);
+        return json_encode($language);
     }
 
     /**
@@ -66,7 +75,11 @@ class LanguagesController extends Controller
      */
     public function edit($id)
     {
-        //
+        $language = Language::findOrNew($id);
+        return view('admin.languages.form',[
+            'language' => $language,
+            'id' => $id
+        ]);
     }
 
     /**
@@ -78,7 +91,11 @@ class LanguagesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $language = Language::findOrNew($id);
+        if (!$language->update($request->all(), $id)){
+            return redirect()->back()->withInput()->with('messages', [trans('messages.error')]);
+        }
+        return redirect()->route('admin.languages.index')->with('messages', [trans('messages.success')]);
     }
 
     /**
@@ -89,6 +106,6 @@ class LanguagesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        redirect('dashboad');
     }
 }

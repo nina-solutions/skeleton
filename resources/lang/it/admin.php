@@ -22,6 +22,15 @@ return [
             'old' => 'Scaduti'
         ],
     ],
+
+    'actions' => [
+        'save' => 'Salva',
+        'update' => 'Aggiorna',
+        'create' => 'Crea',
+        'cancel' => 'Annulla',
+        'reset' => 'Cancella',
+    ],
+
     'contact' => [
         'name' => 'Nome',
         'email' => 'Indirizzo E-mail',
@@ -46,6 +55,10 @@ return [
         'head' => 'Lingue',
         'index' => [
             'head' => 'Lingue'
+        ],
+        'form' => [
+            'code' => 'Code',
+            'description' => 'Description'
         ],
     ],
     'categories' => [

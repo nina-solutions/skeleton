@@ -22,6 +22,15 @@ return [
             'old' => 'Expired'
         ],
     ],
+
+    'actions' => [
+        'save' => 'Save',
+        'update' => 'Update',
+        'create' => 'Create',
+        'cancel' => 'Cancel',
+        'reset' => 'Reset',
+    ],
+
     'contact' => [
         'name' => 'Name',
         'email' => 'Personal E-mail',
@@ -46,6 +55,10 @@ return [
         'head' => 'Languages',
         'index' => [
             'head' => 'Languages'
+        ],
+        'form' => [
+            'code' => 'Code',
+            'description' => 'Description'
         ],
     ],
     'categories' => [

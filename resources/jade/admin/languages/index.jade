@@ -18,16 +18,14 @@ block content
     .col-xs-12
       .box
         .box-header
-          h3.box-title @lang('admin.languages.index.head')
-          .box-tools
-            .input-group(style='width:150 px;')
+          a.btn.btn-primary(href="languages/create")
+            h3.box-title @lang('admin.actions.create')
+          .box-tools.pull-right
+            .has-feedback
               form(action='',id='search-form')
                 + php("Form::hidden('h-search-text', Input::old('h-search-text'), array('id'=>'h-search-text'))")
-              + php("Form::text('search-text', Input::old('search-text'), array('id'=>'search-text', 'class'=>'form-control input-sm pull-right', 'placeholder'=>trans('admin.search.text')))")
-
-              .input-group-btn
-                button#press-search.btn.btn-sm.btn-default
-                  i.fa.fa-search
+                + php("Form::text('search-text', Input::old('search-text'), array('id'=>'search-text', 'class'=>'form-control input-sm', 'placeholder'=>trans('admin.search.text')))")
+                span.glyphicon.glyphicon-search.form-control-feedback
         .box-body.table-responsive.no-padding
           table.table.table-hover
             tr
@@ -39,9 +37,9 @@ block content
                 td {{$l->description}}
                 td {{$l->code}}
                 td
-                  +php ('"<a href=\'/admin/press-release/$l->id/edit\'>"', '"</a>"')
+                  +php ('"<a href=\'/admin/languages/$l->id/edit\'>"', '"</a>"')
                     span.glyphicon.glyphicon-edit
-                  +php ('"<a href=\'/admin/press-release/$l->id\'>"', '"</a>"')
+                  +php ('"<a href=\'/admin/languages/$l->id\'>"', '"</a>"')
                     span.glyphicon.glyphicon-remove
       + php("$languages->render()")
 
