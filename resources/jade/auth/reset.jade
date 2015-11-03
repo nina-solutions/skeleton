@@ -1,0 +1,30 @@
+extends ../partials/template
+block title
+  title @lang('auth.password.title')
+
+block content
+  h1 @lang('auth.password.title')
+  + php("Form::open(array('url' => 'password/reset', 'data-toggle' => 'validator', 'class' => 'form-horizontal hub-press', 'files' => true))", "Form::close()")
+    + php("Form::hidden('token', $token)")
+    fieldset
+      legend @lang('auth.password.head')
+      .form-group
+        + php("Form::label('email', trans('auth.contact.surname'), ['class' => 'control-label col-md-3'])")
+        .col-md-9
+          + php("Form::text('email', Input::old('email'), array('required', 'class'=>'form-control', 'placeholder'=>trans('auth.contact.email')))")
+      .form-group
+        + php("Form::label('password', trans('auth.contact.password'), ['class' => 'control-label col-md-3'])")
+        .col-md-9
+          + php("Form::password('password', array('required', 'class'=>'form-control'))")
+      .form-group
+        + php("Form::label('password_confirmation', trans('auth.contact.password-confirm'), ['class' => 'control-label col-md-3'])")
+        .col-md-9
+          + php("Form::password('password_confirmation', array('required', 'class'=>'form-control'))")
+    fieldset
+      .form-group
+        .col-md-3
+        .col-md-9
+          + if("env('APP_ENV') == 'testing'")
+            + php("Form::submit('submit', array('class' => 'btn btn-primary', 'name' => 'submit'))")
+          + php("Form::submit(trans('auth.actions.password'), array('class' => 'btn btn-primary', 'name' => 'submit'))")
+          + php("Form::reset(trans('auth.actions.reset'), array('class' => 'btn'))")

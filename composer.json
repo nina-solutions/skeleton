@@ -8,7 +8,7 @@
         "php": ">=5.5.9",
         "laravel/framework": "5.1.*",
         "laravelcollective/html": "5.1.*",
-        "guzzlehttp/guzzle": "~5.3|~6.0",
+        "guzzlehttp/guzzle": "~5.3",
         "predis/predis": "~1.0"
     },
     "require-dev": {
@@ -19,7 +19,8 @@
     },
     "autoload": {
         "classmap": [
-            "database"
+            "database",
+            "app/Models"
         ],
         "psr-4": {
             "FairHub\\": "app/"

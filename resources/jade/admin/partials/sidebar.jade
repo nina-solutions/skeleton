@@ -1,0 +1,46 @@
+aside.main-sidebar
+  // sidebar: style can be found in sidebar.less
+  section.sidebar
+    // Sidebar user panel (optional)
+    .user-panel
+      .pull-left.image
+        img.img-circle(src='https://placehold.it/160x160', alt='User Image')
+      .pull-left.info
+        p Szabo Karoly - USERNAME
+        // Status
+        a(href='#')
+          i.fa.fa-circle.text-success
+          |  Online
+    // search form (Optional)
+    form.sidebar-form(action='#', method='get')
+      .input-group
+        input.form-control(type='text', name='q', placeholder='Search...')
+        span.input-group-btn
+          button#search-btn.btn.btn-flat(type='submit', name='search')
+            i.fa.fa-search
+    // /.search form
+    // Sidebar Menu
+    ul.sidebar-menu
+      li.header HEADER
+      // Optionally, you can add icons to the links
+      li.active
+        a(href='#')
+          span Dashboard
+      li
+        a(href='users')
+          span Utenti
+      li.treeview
+        a(href='#')
+          span Comunicati Stampa
+          i.fa.fa-angle-left.pull-right
+        ul.treeview-menu
+          li
+            a(href='/press-release') Comunicati
+          li
+            a(href='/events') Eventi
+          li
+            a(href='/languages') Lingue
+          li
+            a(href='/categories') Categorie
+    // /.sidebar-menu
+  // /.sidebar

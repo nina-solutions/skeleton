@@ -7,7 +7,7 @@
          convertNoticesToExceptions="true"
          convertWarningsToExceptions="true"
          processIsolation="false"
-         stopOnFailure="false"
+         stopOnFailure="true"
          syntaxCheck="false">
     <testsuites>
         <testsuite name="Application Test Suite">
@@ -21,8 +21,44 @@
     </filter>
     <php>
         <env name="APP_ENV" value="testing"/>
-        <env name="CACHE_DRIVER" value="array"/>
-        <env name="SESSION_DRIVER" value="array"/>
+        <env name="CACHE_DRIVER" value="file"/>
+        <env name="SESSION_DRIVER" value="file"/>
         <env name="QUEUE_DRIVER" value="sync"/>
+
+        <env name="APP_DEBUG" value="true"/>
+        <env name="APP_ORM_DEBUG" value="false"/>
+        <env name="APP_KEY" value="iJV3Fmtz7MlgqdQGkLZ9F1OlUfulzG4v"/>
+        <env name="APP_URL" value="http://hub.php55"/>
+
+        <env name="DB_CONNECTION" value="pgsql"/>
+        <env name="DB_HOST" value="taro.intesys.it"/>
+        <env name="DB_DATABASE" value="hub"/>
+        <env name="DB_USERNAME" value="veronafiere"/>
+        <env name="DB_PASSWORD" value="veronafiere"/>
+
+        <env name="MAIL_DRIVER" value="mailgun"/>
+        <env name="MAIL_HOST" value="smtp.mailgun.org"/>
+        <env name="MAIL_PORT" value="587"/>
+        <env name="MAIL_USERNAME" value="postmaster@sandbox9ca951d433d14e42a1aa36543aae7d53.mailgun.org"/>
+        <env name="MAIL_PASSWORD" value="49b06266479d9127a9a2f4dc0b3149f9"/>
+        <env name="MAIL_ENCRYPTION" value="null"/>
+        <env name="MAIL_FROM" value="karoly.szabo@intesys.it"/>
+        <env name="MAIL_NAME" value="Karoly"/>
+
+        <env name="FROM_MAIL" value="=info@veronafiere.it"/>
+        <env name="FROM_NAME" value="VeronaFiere-SVILUPPO"/>
+        <env name="FROM_NAMEPROD" value="VeronaFiere"/>
+
+        <env name="FROM_EMAIL_PRESS" value="pressoffice@veronafiere.it"/>
+        <env name="FROM_EMAIL_INFO" value="info@veronafiere.it"/>
+
+        <env name="EMAIL_INTERNAL" value="karoly.szabo@intesys.it"/>
+        <env name="EMAIL_INTERNALPROD" value="pressoffice@veronafiere.it"/>
+
+        <env name="REDIS_HOST" value="192.168.244.155"/>
+        <env name="REDIS_PORT" value="6379"/>
+        <env name="REDIS_DATABASE" value="1"/>
+
+        <env name="UPLOAD" value="app/uploaded_files"/>
     </php>
 </phpunit>

@@ -24,7 +24,7 @@ elixir(function(mix) {
         src: '/jade/'
     });
     mix.sass('app.sass');
-    mix.coffee('app.coffee');
+    mix.coffee(['app.coffee', 'admin.coffee']);
     mix.version(["css/app.css", "js/app.js"]);
     //mix.requirejs("bootstrap.js", rjsOptions);
 });

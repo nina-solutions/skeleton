@@ -26,7 +26,7 @@ return [
     |
     */
 
-    'url' => 'http://localhost',
+    'url' => 'http://hub.php55',
 
     /*
     |--------------------------------------------------------------------------
@@ -78,7 +78,7 @@ return [
     |
     */
 
-    'key' => env('APP_KEY', 'SomeRandomString'),
+    'key' => env('APP_KEY', 'lalalalala'),
 
     'cipher' => 'AES-256-CBC',
 
@@ -137,7 +137,6 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
-
         //Efficiently\Larasset\LarassetServiceProvider::class,
         //Efficiently\JqueryLaravel\JqueryLaravelServiceProvider::class,
 
@@ -147,6 +146,7 @@ return [
         FairHub\Providers\AppServiceProvider::class,
         FairHub\Providers\EventServiceProvider::class,
         FairHub\Providers\RouteServiceProvider::class,
+
 
     ],
 
@@ -200,6 +200,7 @@ return [
         'View'      => Illuminate\Support\Facades\View::class,
 
         'PressAccreditationController'  => FairHub\Http\Controllers\PressAccreditationController::class,
+        'PressReleaseController'  => FairHub\Http\Controllers\PressReleaseController::class,
     ],
 
 ];

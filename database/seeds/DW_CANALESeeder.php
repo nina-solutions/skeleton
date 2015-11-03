@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use FairHub\DW_CANALE as C;
+use FairHub\Models\DW_CANALE as C;
 
 class DW_CANALESeeder extends Seeder
 {

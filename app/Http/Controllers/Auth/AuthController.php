@@ -2,7 +2,7 @@
 
 namespace FairHub\Http\Controllers\Auth;
 
-use FairHub\User;
+use FairHub\Models\User;
 use Validator;
 use FairHub\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
@@ -22,6 +22,9 @@ class AuthController extends Controller
     */
 
     use AuthenticatesAndRegistersUsers, ThrottlesLogins;
+
+    private $redirectTo = '/';
+    private $maxLoginAttempts = 10;
 
     /**
      * Create a new authentication controller instance.

@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use FairHub\DW_MACROCATEGORIE as DM;
+use FairHub\Models\DW_MACROCATEGORIE as DM;
 
 class DW_MACROCATEGORIESeeder extends Seeder
 {

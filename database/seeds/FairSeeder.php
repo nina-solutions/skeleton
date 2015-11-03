@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use FairHub\Fair as F;
+use FairHub\Models\Fair as F;
 
 class FairSeeder extends Seeder
 {

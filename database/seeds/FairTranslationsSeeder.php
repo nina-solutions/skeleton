@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use FairHub\FairTranslation as FT;
+use FairHub\Models\FairTranslation as FT;
 
 class FairTranslationsSeeder extends Seeder
 {

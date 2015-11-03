@@ -1,0 +1,15 @@
+//- templade.jade
+include ../../partials/mixins
+doctype html
+html
+  include admin-header
+  body.skin-blue
+    div.wrapper
+      include header
+      include sidebar
+      //
+        include ../../partials/errors
+        include ../../partials/messages
+      include content
+      include footer
+    include admin-footer

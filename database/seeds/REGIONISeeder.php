@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use FairHub\REGIONI as R;
+use FairHub\Models\REGIONI as R;
 
 class REGIONISeeder extends Seeder
 {

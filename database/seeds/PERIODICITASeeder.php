@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use FairHub\DW_PERIODICITA as DP;
+use FairHub\Models\DW_PERIODICITA as DP;
 
 
 class PERIODICITASeeder extends Seeder
