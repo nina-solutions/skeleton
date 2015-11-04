@@ -1,10 +1,10 @@
 <?php
 
-namespace FairHub;
+namespace FairHub\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class UserContextRole extends Model
+class Context extends Model
 {
     //
 }

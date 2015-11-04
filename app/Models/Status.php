@@ -1,10 +1,10 @@
 <?php
 
-namespace FairHub;
+namespace FairHub\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Role extends Model
+class Status extends Model
 {
     //
 }
