@@ -47,8 +47,8 @@ class LanguagesController extends Controller
      */
     public function store(Request $request)
     {
-        $language = Language::class;
-        if (!$language->create($request->all())){
+        $language = new Language($request->all());
+        if (!$language->save()){
             return redirect()->back()->withInput()->with('messages', [trans('messages.error')]);
         }
         return redirect()->route('admin.languages.index')->with('messages', [trans('messages.success')]);
@@ -108,4 +108,5 @@ class LanguagesController extends Controller
     {
         redirect('dashboad');
     }
+
 }
