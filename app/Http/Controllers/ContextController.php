@@ -34,7 +34,7 @@ class ContextController extends Controller
                     'name' => 'Nome',
                     'description' => 'Descrizione',
                     'code' => 'Codice',
-                    //'context_parent' => 'Contesto Padre'
+                    'parentName' => 'Contesto'
                 ]
             ]
         ]);
@@ -47,8 +47,11 @@ class ContextController extends Controller
      */
     public function create()
     {
+        $contexts = Context::all()->pluck('name', 'id');
         return response()->view('admin.contexts.form',[
-            'context' => new Context()
+            'context' => new Context(),
+            'contexts' => $contexts,
+            'title' => trans('admin.contexts.new')
         ]);
     }
 
@@ -89,9 +92,12 @@ class ContextController extends Controller
     public function edit($id)
     {
         $context = Context::findOrNew($id);
+        $contexts = Context::where('id' , '!=', $id)->get()->pluck('name', 'id');
         return response()->view('admin.contexts.form',[
             'context' => $context,
-            'id' => $id
+            'contexts' => $contexts,
+            'id' => $id,
+            'title' => $context->name
         ]);
     }
 

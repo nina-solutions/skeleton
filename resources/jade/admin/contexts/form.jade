@@ -20,20 +20,31 @@ block content
     .col-md-6
       .box.box-primary
         .box-header.with-border
-          h3.box-title @lang('admin.contexts.head')
-        + php("Form::model($context, ['route' => (isset($id) ? array('admin.contexts.update', $id) : array('admin.contexts.store')), 'method' => (isset($id) ? 'PUT' : 'POST'),'data-toggle' => 'validator', 'role' => 'form', 'class' => ''])", "Form::close()")
+          h3.box-title {{$title}}
+        + php("Form::model($context, ['route' => (isset($id) ? ['admin.contexts.update', $id] : ['admin.contexts.store']), 'method' => (isset($id) ? 'PUT' : 'POST'),'data-toggle' => 'validator', 'role' => 'form', 'class' => ''])", "Form::close()")
           + if("isset($id)")
             + php("Form::hidden('id', $id)")
           .box-body
             .form-group
               + php("Form::label('code', trans('admin.contexts.form.code'), ['class' => ''])")
-              + php("Form::text('code', Input::old('code'), array('required', 'class'=>'form-control', 'placeholder'=>trans('admin.contexts.form.code')))")
+              + php("Form::text('code', Input::old('code'), ['required', 'class'=>'form-control', 'placeholder'=>trans('admin.contexts.form.code')])")
             .form-group
               + php("Form::label('name', trans('admin.contexts.form.name'), ['class' => ''])")
-              + php("Form::text('name', Input::old('name'), array('required', 'class'=>'form-control', 'placeholder'=>trans('admin.contexts.form.name')))")
+              + php("Form::text('name', Input::old('name'), ['required', 'class'=>'form-control', 'placeholder'=>trans('admin.contexts.form.name')])")
             .form-group
               + php("Form::label('description', trans('admin.contexts.form.description'), ['class' => ''])")
-              + php("Form::text('description', Input::old('description'), array('required', 'class'=>'form-control', 'placeholder'=>trans('admin.contexts.form.description')))")
+              + php("Form::text('description', Input::old('description'), ['required', 'class'=>'form-control', 'placeholder'=>trans('admin.contexts.form.description')])")
+            .form-group
+              + php("Form::label('context_id', trans('admin.contexts.form.parent'), ['class' => ''])")
+              + php("Form::select('context_id', $contexts, Input::old('context_id'), ['class'=>'form-control', 'placeholder'=>trans('admin.contexts.form.parent')])")
+            .form-group
+              + php("Form::label('datepicker', trans('admin.contexts.form.dates'), ['class' => ''])")
+              .input-group
+                .input-group-addon
+                  i.fa.fa-clock-o
+                + php("Form::text('datepicker', Input::old('datepicker'), ['class'=>'form-control pull-right', 'placeholder'=>trans('admin.contexts.form.dates')])")
+              + php("Form::hidden('start', Input::old('start'), ['id' => 'start'])")
+              + php("Form::hidden('end', Input::old('end'), ['id' => 'end'])")
           // /.box-body
           .box-footer
             button.btn.btn-primary(type='submit') @lang('admin.actions.save')

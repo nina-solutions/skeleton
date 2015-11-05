@@ -62,6 +62,7 @@ return [
         ],
     ],
     'contexts' => [
+        'new' => 'Nuova Fiera',
         'head' => 'Fiere',
         'index' => [
             'head' => 'Elanco Fiere'
@@ -69,7 +70,9 @@ return [
         'form' => [
             'code' => 'Codice',
             'description' => 'Descrizione',
-            'name' => 'Nome'
+            'name' => 'Nome',
+            'parent' => 'Parte di',
+            'dates' => 'Date evento',
         ],
     ],
     'categories' => [

@@ -12,7 +12,8 @@ class Context extends Model
         'start',
         'end',
         'link',
-        'description'
+        'description',
+        'context_id'
     ];
     /**
      * Get the code-related fair.
@@ -31,5 +32,16 @@ class Context extends Model
                 ->orWhere('code', 'ILIKE', "%$text%");
         });
         return $query->where('description', 'ILIKE', "%$text%");
+    }
+
+    public function getParentNameAttribute(){
+        $parent = $this->context()->first();
+        if ($parent !== null)
+            return $parent->name;
+        return null;
+    }
+
+    public function context(){
+        return $this->hasOne('FairHub\Models\Context', 'id', 'context_id');
     }
 }

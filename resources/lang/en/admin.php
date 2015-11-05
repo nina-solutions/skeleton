@@ -62,6 +62,7 @@ return [
         ],
     ],
     'contexts' => [
+        'new' => 'New Fair',
         'head' => 'Fiere',
         'index' => [
             'head' => 'Elenco Fiere'
@@ -69,7 +70,9 @@ return [
         'form' => [
             'code' => 'Code',
             'description' => 'Description',
-            'name' => 'Name'
+            'name' => 'Name',
+            'parent' => 'Part of',
+            'dates' => 'Event dates',
         ],
     ],
     'categories' => [
