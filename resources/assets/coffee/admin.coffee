@@ -20,7 +20,7 @@ class HubAdmin
     if datepicker.length > 0
       start = $('#start')
       end = $('#end')
-      datepicker.daterangepicker { timePicker: true, timePicker24Hour: true }
+      datepicker.daterangepicker { timePicker: false }
       if start.length > 0
         datepicker.data('daterangepicker').startDate = moment(start.val().replace(' ','T'), 'YYYY-MM-DDTHH:mm:ss')
       if end.length > 0
