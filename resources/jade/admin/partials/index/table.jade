@@ -1,0 +1,15 @@
+.box-body.table-responsive.no-padding
+  table.table.table-hover
+    tr
+      + foreach('$table->columns','$c')
+        th {{$c}}
+      th
+    + foreach('$data','$d')
+      tr
+        + foreach('$table->columns','$c', '$key', '$i')
+          td {{$d->$key}}
+        td
+          +php ('"<a href=\'/admin/$table->name/$d->id/edit\'>"', '"</a>"')
+            span.glyphicon.glyphicon-edit
+          +php ('"<a href=\'/admin/$table->name/$d->id\'>"', '"</a>"')
+            span.glyphicon.glyphicon-search

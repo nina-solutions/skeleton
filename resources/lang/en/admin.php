@@ -61,6 +61,17 @@ return [
             'description' => 'Description'
         ],
     ],
+    'contexts' => [
+        'head' => 'Fiere',
+        'index' => [
+            'head' => 'Elenco Fiere'
+        ],
+        'form' => [
+            'code' => 'Code',
+            'description' => 'Description',
+            'name' => 'Name'
+        ],
+    ],
     'categories' => [
         'head' => 'Categories',
         'index' => [

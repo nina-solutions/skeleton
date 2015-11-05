@@ -86,6 +86,7 @@ Route::group(
         Route::resource('events', 'EventsController');
         Route::resource('languages', 'LanguagesController');
         Route::resource('categories', 'CategoriesController');
+        Route::resource('contexts', 'ContextController');
 
 });
 

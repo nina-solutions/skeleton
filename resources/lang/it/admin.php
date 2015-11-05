@@ -57,8 +57,19 @@ return [
             'head' => 'Lingue'
         ],
         'form' => [
-            'code' => 'Code',
-            'description' => 'Description'
+            'code' => 'Codice',
+            'description' => 'Descrizione'
+        ],
+    ],
+    'contexts' => [
+        'head' => 'Fiere',
+        'index' => [
+            'head' => 'Elanco Fiere'
+        ],
+        'form' => [
+            'code' => 'Codice',
+            'description' => 'Descrizione',
+            'name' => 'Nome'
         ],
     ],
     'categories' => [

@@ -1,12 +1,13 @@
 
 class HubAdmin
   constructor: () ->
-    if $('#press-search').length > 0
+    $.ajaxSetup headers: 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    if $('#search').length > 0
       $('input#search-text').keypress (event) ->
         if(event.which == 13)
-          $('#press-search').trigger('click')
+          $('#search').trigger('click')
 
-      $('#press-search').click ->
+      $('#search').click ->
         $('input#h-search-text').val($('input#search-text').val())
         $('#search-form').submit()
 

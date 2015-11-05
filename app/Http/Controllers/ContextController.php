@@ -2,13 +2,12 @@
 
 namespace FairHub\Http\Controllers;
 
-use FairHub\Models\Language;
+use FairHub\Models\Context;
 use Illuminate\Http\Request;
 use FairHub\Http\Requests;
 use FairHub\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Redirect;
 
-class LanguagesController extends Controller
+class ContextController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,18 +17,20 @@ class LanguagesController extends Controller
     public function index(Request $request)
     {
         //TODO: fix this dirty hack to init the query
-        $languages = Language::where('id', '>=', '1');
+        $contexts = Context::where('id', '>=', '1');
 
         if ($request->has('h-search-text')) {
-            $languages->like($request->input('h-search-text'));
+            $contexts->like($request->input('h-search-text'));
         }
-        return view('admin.languages.index',[
-            'data' => $languages->paginate(),
+        return view('admin.contexts.index',[
+            'data' => $contexts->paginate(),
             'table' => (object) [
-                'name' => 'languages',
+                'name' => 'contexts',
                 'columns' => [
-                    'description' => 'Nome',
-                    'code' => 'Codice'
+                    'name' => 'Nome',
+                    'description' => 'Descrizione',
+                    'code' => 'Codice',
+                    //'context_parent' => 'Contesto Padre'
                 ]
             ]
         ]);
@@ -42,8 +43,8 @@ class LanguagesController extends Controller
      */
     public function create()
     {
-        return view('admin.languages.form',[
-            'language' => new Language()
+        return view('admin.contexts.form',[
+            'context' => new Context()
         ]);
     }
 
@@ -55,11 +56,11 @@ class LanguagesController extends Controller
      */
     public function store(Request $request)
     {
-        $language = new Language($request->all());
-        if (!$language->save()){
+        $contexts = new Context($request->all());
+        if (!$contexts->save()){
             return redirect()->back()->withInput()->with('messages', [trans('messages.error')]);
         }
-        return redirect()->route('admin.languages.index')->with('messages', [trans('messages.success')]);
+        return redirect()->route('admin.contexts.index')->with('messages', [trans('messages.success')]);
 
     }
 
@@ -71,8 +72,8 @@ class LanguagesController extends Controller
      */
     public function show($id)
     {
-        $language = Language::findOrNew($id);
-        return json_encode($language);
+        $context = Context::findOrNew($id);
+        return json_encode($context);
     }
 
     /**
@@ -83,9 +84,9 @@ class LanguagesController extends Controller
      */
     public function edit($id)
     {
-        $language = Language::findOrNew($id);
-        return view('admin.languages.form',[
-            'language' => $language,
+        $context = Context::findOrNew($id);
+        return view('admin.contexts.form',[
+            'context' => $context,
             'id' => $id
         ]);
     }
@@ -99,11 +100,11 @@ class LanguagesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $language = Language::findOrNew($id);
-        if (!$language->update($request->all(), $id)){
+        $context = Context::findOrNew($id);
+        if (!$context->update($request->all(), $id)){
             return redirect()->back()->withInput()->with('messages', [trans('messages.error')]);
         }
-        return redirect()->route('admin.languages.index')->with('messages', [trans('messages.success')]);
+        return redirect()->route('admin.contexts.index')->with('messages', [trans('messages.success')]);
     }
 
     /**
@@ -114,7 +115,6 @@ class LanguagesController extends Controller
      */
     public function destroy($id)
     {
-        redirect('dashboad');
+        //
     }
-
 }

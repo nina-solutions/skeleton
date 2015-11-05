@@ -1,0 +1,41 @@
+extends ../partials/template
+block title
+  title @lang('admin.contexts.head')
+
+block breadcrumbs
+  ol.breadcrumb
+    li
+      a(href='/admin/dashboard')
+        i.fa.fa-dashboard
+        | @lang('admin.dashboard.head')
+    li.active
+      | @lang('admin.contexts.head')
+
+block inner-title
+  h1 @lang('admin.contexts.head')
+    small @lang('admin.contexts.head')
+
+block content
+  .row
+    .col-md-6
+      .box.box-primary
+        .box-header.with-border
+          h3.box-title @lang('admin.contexts.head')
+        + php("Form::model($context, ['route' => (isset($id) ? array('admin.contexts.update', $id) : array('admin.contexts.store')), 'method' => (isset($id) ? 'PUT' : 'POST'),'data-toggle' => 'validator', 'role' => 'form', 'class' => ''])", "Form::close()")
+          + if("isset($id)")
+            + php("Form::hidden('id', $id)")
+          .box-body
+            .form-group
+              + php("Form::label('code', trans('admin.contexts.form.code'), ['class' => ''])")
+              + php("Form::text('code', Input::old('code'), array('required', 'class'=>'form-control', 'placeholder'=>trans('admin.contexts.form.code')))")
+            .form-group
+              + php("Form::label('name', trans('admin.contexts.form.name'), ['class' => ''])")
+              + php("Form::text('name', Input::old('name'), array('required', 'class'=>'form-control', 'placeholder'=>trans('admin.contexts.form.name')))")
+            .form-group
+              + php("Form::label('description', trans('admin.contexts.form.description'), ['class' => ''])")
+              + php("Form::text('description', Input::old('description'), array('required', 'class'=>'form-control', 'placeholder'=>trans('admin.contexts.form.description')))")
+          // /.box-body
+          .box-footer
+            button.btn.btn-primary(type='submit') @lang('admin.actions.save')
+
+
