@@ -22,9 +22,12 @@ class HubAdmin
       end = $('#end')
       datepicker.daterangepicker { timePicker: true, timePicker24Hour: true }
       if start.length > 0
-        datepicker.data('daterangepicker').setStartDate(start.val().substr(0,10))
+        datepicker.data('daterangepicker').startDate = moment(start.val().replace(' ','T'), 'YYYY-MM-DDTHH:mm:ss')
       if end.length > 0
-        datepicker.data('daterangepicker').setEndDate(end.val().substr(0,10))
+        datepicker.data('daterangepicker').endDate = moment(end.val().replace(' ','T'), 'YYYY-MM-DDTHH:mm:ss')
+      datepicker.val(start.val() + " - " + end.val())
+      datepicker.data('daterangepicker').updateView();
+      datepicker.data('daterangepicker').updateCalendars();
       datepicker.on 'apply.daterangepicker', (ev, picker) ->
         $('#start').val(picker.startDate.format('YYYY-MM-DD HH:mm:ss'))
         $('#end').val(picker.endDate.format('YYYY-MM-DD HH:mm:ss'))
