@@ -6,7 +6,7 @@ aside.main-sidebar
       .pull-left.image
         img.img-circle(src='https://placehold.it/160x160', alt='User Image')
       .pull-left.info
-        p Szabo Karoly - USERNAME
+        p Szabo Karoly
         // Status
         a(href='#')
           i.fa.fa-circle.text-success
@@ -35,12 +35,12 @@ aside.main-sidebar
           i.fa.fa-angle-left.pull-right
         ul.treeview-menu
           li
-            a(href='/press-release') Comunicati
+            a(href="{{action('PressReleaseController@index')}}") Comunicati
           li
-            a(href='/events') Eventi
+            a(href="{{action('ContextController@index')}}") Fiere
           li
-            a(href='/languages') Lingue
+            a(href="{{action('LanguagesController@index')}}") Lingue
           li
-            a(href='/categories') Categorie
+            a(href="{{action('CategoriesController@index')}}") Categorie
     // /.sidebar-menu
   // /.sidebar

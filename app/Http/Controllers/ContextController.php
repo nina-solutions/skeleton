@@ -22,7 +22,11 @@ class ContextController extends Controller
         if ($request->has('h-search-text')) {
             $contexts->like($request->input('h-search-text'));
         }
-        return view('admin.contexts.index',[
+
+        if ($request->has('type') && $request->input('type') == 'json') {
+            return response()->json($contexts->get());
+        }
+        return response()->view('admin.contexts.index',[
             'data' => $contexts->paginate(),
             'table' => (object) [
                 'name' => 'contexts',
@@ -43,7 +47,7 @@ class ContextController extends Controller
      */
     public function create()
     {
-        return view('admin.contexts.form',[
+        return response()->view('admin.contexts.form',[
             'context' => new Context()
         ]);
     }
@@ -73,7 +77,7 @@ class ContextController extends Controller
     public function show($id)
     {
         $context = Context::findOrNew($id);
-        return json_encode($context);
+        return response()->json($context);
     }
 
     /**
@@ -85,7 +89,7 @@ class ContextController extends Controller
     public function edit($id)
     {
         $context = Context::findOrNew($id);
-        return view('admin.contexts.form',[
+        return response()->view('admin.contexts.form',[
             'context' => $context,
             'id' => $id
         ]);
