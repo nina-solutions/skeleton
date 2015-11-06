@@ -25,9 +25,11 @@ class ContentRequest extends Request
     public function rules()
     {
         $status = 1;
+        $newid = '';
         if ($this->has('id')){
             $content = Content::find($this->get('id'));
             $status = (int)$content->status_id;
+            $newid = '|different:id';
         }
         return [
             'name' => 'required',
@@ -36,7 +38,7 @@ class ContentRequest extends Request
             'end' => 'required|date|after:start',
             'status_id' => "required|integer|exists:statuses,id|exists:status_transitions,to_status_id,from_status_id,$status",
             'context_id' => 'required|integer|exists:contexts,id',
-            'content_id' => 'exists:contents,id|integer|different:id',
+            'content_id' => "exists:contents,id|integer$newid",
         ];
     }
 

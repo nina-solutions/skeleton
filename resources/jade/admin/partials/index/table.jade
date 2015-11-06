@@ -14,7 +14,7 @@ include ../../../partials/mixins
               +else
                 | {{$d->$key}}
         td
-          +php ('"<a href=\'/admin/$table->name/$d->id/edit\'>"', '"</a>"')
+          a(href!="{{ action($table->controller.'@edit', [$d->id]) }}")
             span.glyphicon.glyphicon-edit
-          +php ('"<a href=\'/admin/$table->name/$d->id\'>"', '"</a>"')
+          a(href!="{{ action($table->controller.'@show', [$d->id]) }}")
             span.glyphicon.glyphicon-search

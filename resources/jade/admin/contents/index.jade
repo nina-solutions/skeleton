@@ -18,7 +18,7 @@ block content
     .col-xs-12
       .box
         .box-header
-          a.btn.btn-primary(href="{{action($table->controller.'@create')}}")
+          a.btn.btn-primary(href!="{{action($table->controller.'@create')}}")
             h3.box-title @lang('admin.actions.create')
           include ../partials/index/search
         include ../partials/index/table
