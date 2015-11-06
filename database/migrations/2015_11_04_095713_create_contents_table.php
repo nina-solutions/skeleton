@@ -28,7 +28,7 @@ class CreateContentsTable extends Migration
             //TODO: State changes may be logged in future development
             //TODO: Content reviews and content versioning can be a great extra!
             //TODO: ContentAttachment
-            $table->integer('status_id')->unsigned()->nullable();
+            $table->integer('status_id')->unsigned()->default(1);
             $table->foreign('status_id')->references('id')->on('statuses');
 
             //Every content MUST belong to a Context
