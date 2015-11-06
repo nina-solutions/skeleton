@@ -2,9 +2,7 @@
 
 namespace FairHub\Models;
 
-use Illuminate\Database\Eloquent\Model;
-
-class StatusTransition extends Model
+class StatusTransition extends HubModel
 {
     /**
      * Get the code-related fair.

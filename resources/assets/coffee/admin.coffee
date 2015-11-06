@@ -18,7 +18,7 @@ class HubAdmin
       statusButton.click (e) ->
         e.preventDefault()
         statusField.val($(this).data('value'))
-        $('form').submit
+        $(this).closest('form').submit()
 
     select = $('select')
     if select.length > 0

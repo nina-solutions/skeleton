@@ -2,9 +2,7 @@
 
 namespace FairHub\Models;
 
-use Illuminate\Database\Eloquent\Model;
-
-class Language extends Model
+class Language extends HubModel
 {
     protected $fillable = [
         'code',

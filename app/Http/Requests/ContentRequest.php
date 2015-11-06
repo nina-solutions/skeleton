@@ -3,6 +3,7 @@
 namespace FairHub\Http\Requests;
 
 use FairHub\Http\Requests\Request;
+use FairHub\Models\Content;
 
 class ContentRequest extends Request
 {
@@ -26,16 +27,16 @@ class ContentRequest extends Request
         $status = 1;
         if ($this->has('id')){
             $content = Content::find($this->get('id'));
-            $status = $content->status_id;
+            $status = (int)$content->status_id;
         }
         return [
             'name' => 'required',
             'description' => 'required',
             'start' => 'required|date',
             'end' => 'required|date|after:start',
-            'status_id' => "required|exists:statuses,id|exists:status_transitions,to_status_id,from_status_id,$status",
-            'context_id' => 'required|exists:contexts,id',
-            'content_id' => 'exists:contents,id|different:id',
+            'status_id' => "required|integer|exists:statuses,id|exists:status_transitions,to_status_id,from_status_id,$status",
+            'context_id' => 'required|integer|exists:contexts,id',
+            'content_id' => 'exists:contents,id|integer|different:id',
         ];
     }
 

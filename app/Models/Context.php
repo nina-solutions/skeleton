@@ -4,8 +4,12 @@ namespace FairHub\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Context extends Model
+class Context extends HubModel
 {
+    protected $nullable = [
+        'context_id',
+        'description'
+    ];
     protected $fillable = [
         'code',
         'name',
@@ -25,7 +29,7 @@ class Context extends Model
     /**
      * Get the code-related fair.
      */
-    public function scopeLike($query, $text)
+    public function scopeDescNameLike($query, $text)
     {
         $query = $query->where(function($query) use ($text) {
             $query->where('description', 'ILIKE', "%$text%")

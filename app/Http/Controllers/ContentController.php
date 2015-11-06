@@ -19,7 +19,7 @@ class ContentController extends Controller
         $contents = Content::where('id', '>=', '1');
 
         if ($request->has('h-search-text')) {
-            $contents->like($request->input('h-search-text'));
+            $contents->descNameLike($request->input('h-search-text'));
         }
 
         if ($request->has('type') && $request->input('type') == 'json') {
@@ -31,9 +31,12 @@ class ContentController extends Controller
                 'name' => 'contents',
                 'columns' => [
                     'name' => 'Nome',
-                    'description' => 'Descrizione',
+                    'statusName' => 'Stato',
                     'parentName' => 'Contenuto padre',
                     'contextName' => 'Contesto'
+                ],
+                'modifiers' => [
+                    'statusName' => 'statusCode'
                 ]
             ]
         ]);
@@ -69,8 +72,8 @@ class ContentController extends Controller
      */
     public function store(ContentRequest $request)
     {
-        $contents = new Content($request->all());
-        if (!$contents->save()){
+        $content = new Content($request->all());
+        if (!$content->save()){
             return redirect()->back()->withInput()->with('messages', [trans('messages.error')]);
         }
         return redirect()->route('admin.contents.index')->with('messages', [trans('messages.success')]);
@@ -101,11 +104,13 @@ class ContentController extends Controller
         $contents = Content::where('id' , '!=', $id)->get()->pluck('name', 'id');
         $contexts = Context::all()->pluck('name', 'id');
         $statuses = $content->transitions();
+        $status = $content->status()->get()->first();
         return response()->view('admin.contents.form',[
-            'context' => $content,
+            'content' => $content,
             'contents' => $contents,
             'contexts' => $contexts,
             'statuses' => $statuses,
+            'status' => $status,
             'id' => $id,
             'title' => $content->name
         ]);

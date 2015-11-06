@@ -8,7 +8,11 @@ include ../../../partials/mixins
     + foreach('$data','$d')
       tr
         + foreach('$table->columns','$c', '$key', '$i')
-          td {{$d->$key}}
+          td
+            + if("isset($table->modifiers) && isset($table->modifiers[$key]) ")
+              span(class!="{{str_replace('.', ' ', $d->{$table->modifiers[$key]})}}") {{$d->$key}}
+              +else
+                | {{$d->$key}}
         td
           +php ('"<a href=\'/admin/$table->name/$d->id/edit\'>"', '"</a>"')
             span.glyphicon.glyphicon-edit
