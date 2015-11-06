@@ -1,0 +1,57 @@
+extends ../partials/template
+block title
+  title @lang('admin.contents.head')
+
+block breadcrumbs
+  ol.breadcrumb
+    li
+      a(href='/admin/dashboard')
+        i.fa.fa-dashboard
+        | @lang('admin.dashboard.head')
+    li.active
+      | @lang('admin.contents.head')
+
+block inner-title
+  h1 @lang('admin.contents.head')
+    small @lang('admin.contents.head')
+
+block content
+  .row
+    .col-md-6
+      .box.box-primary
+        .box-header.with-border
+          h3.box-title {{$title}} - {{$status->name}}
+        + php("Form::model($content, ['route' => (isset($id) ? ['admin.contents.update', $id] : ['admin.contents.store']), 'method' => (isset($id) ? 'PUT' : 'POST'),'data-toggle' => 'validator', 'role' => 'form', 'class' => ''])", "Form::close()")
+          + if("isset($id)")
+            + php("Form::hidden('id', $id)")
+          .box-body
+            .form-group
+              + php("Form::label('name', trans('admin.contents.form.name'), ['class' => ''])")
+              + php("Form::text('name', Input::old('name'), ['required', 'class'=>'form-control', 'placeholder'=>trans('admin.contents.form.name')])")
+            .form-group
+              + php("Form::label('description', trans('admin.contents.form.description'), ['class' => ''])")
+              + php("Form::text('description', Input::old('description'), ['required', 'class'=>'form-control', 'placeholder'=>trans('admin.contents.form.description')])")
+            .form-group
+              + php("Form::label('link', trans('admin.contents.form.link'), ['class' => ''])")
+              + php("Form::text('link', Input::old('link'), ['class'=>'form-control', 'placeholder'=>trans('admin.contents.form.link')])")
+            .form-group
+              + php("Form::label('context_id', trans('admin.contexts.form.fair'), ['class' => ''])")
+              + php("Form::select('context_id', $contexts, Input::old('context_id'), ['required', 'class'=>'form-control', 'placeholder'=>trans('admin.contexts.form.parent')])")
+            .form-group
+              + php("Form::label('content_id', trans('admin.contents.form.parent'), ['class' => ''])")
+              + php("Form::select('content_id', $contents, Input::old('content_id'), ['class'=>'form-control', 'placeholder'=>trans('admin.contents.form.parent')])")
+            .form-group
+              + php("Form::label('datepicker', trans('admin.contents.form.dates'), ['class' => ''])")
+              .input-group
+                .input-group-addon
+                  i.fa.fa-clock-o
+                + php("Form::text('datepicker', Input::old('datepicker'), ['class'=>'form-control pull-right', 'placeholder'=>trans('admin.contents.form.dates')])")
+              + php("Form::hidden('start', Input::old('start'), ['id' => 'start'])")
+              + php("Form::hidden('end', Input::old('end'), ['id' => 'end'])")
+              + php("Form::hidden('status_id', Input::old('status_id'), ['id' => 'status_id'])")
+          // /.box-body
+          .box-footer
+            + foreach("$statuses", '$status', '$id')
+              button.status-button.btn.btn-primary(type='submit',data-value='{{$id}}') {{$status}}
+
+

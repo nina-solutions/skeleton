@@ -12,6 +12,14 @@ class HubAdmin
         $('input#h-search-text').val($('input#search-text').val())
         $('#search-form').submit()
 
+    statusButton = $('.status-button')
+    statusField = $('#status_id')
+    if (statusButton.length > 0 && statusField.length > 0)
+      statusButton.click (e) ->
+        e.preventDefault()
+        statusField.val($(this).data('value'))
+        $('form').submit
+
     select = $('select')
     if select.length > 0
       select.select2()
@@ -21,9 +29,9 @@ class HubAdmin
       start = $('#start')
       end = $('#end')
       datepicker.daterangepicker { timePicker: false }
-      if start.length > 0
+      if start.length > 0 and start.val().length >= 10
         datepicker.data('daterangepicker').startDate = moment(start.val().replace(' ','T'), 'YYYY-MM-DDTHH:mm:ss')
-      if end.length > 0
+      if end.length > 0 and end.val().length >= 10
         datepicker.data('daterangepicker').endDate = moment(end.val().replace(' ','T'), 'YYYY-MM-DDTHH:mm:ss')
       datepicker.val(start.val() + " - " + end.val())
       datepicker.data('daterangepicker').updateView();

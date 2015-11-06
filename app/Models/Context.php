@@ -20,7 +20,7 @@ class Context extends Model
      */
     public function scopeCode($query, $code)
     {
-        return $query->where('code', '=', substr($code,0,2));
+        return $query->where('code', '=', substr($code,0,5));
     }
     /**
      * Get the code-related fair.

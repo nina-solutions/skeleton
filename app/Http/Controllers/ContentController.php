@@ -2,20 +2,41 @@
 
 namespace FairHub\Http\Controllers;
 
+use FairHub\Http\Requests\ContentRequest;
+use FairHub\Models\Content;
+use FairHub\Models\Context;
+use FairHub\Models\Status;
+use FairHub\Models\StatusTransition;
 use Illuminate\Http\Request;
 use FairHub\Http\Requests;
 use FairHub\Http\Controllers\Controller;
 
 class ContentController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        //TODO: fix this dirty hack to init the query
+        $contents = Content::where('id', '>=', '1');
+
+        if ($request->has('h-search-text')) {
+            $contents->like($request->input('h-search-text'));
+        }
+
+        if ($request->has('type') && $request->input('type') == 'json') {
+            return response()->json($contents->get());
+        }
+        return response()->view('admin.contents.index',[
+            'data' => $contents->paginate(),
+            'table' => (object) [
+                'name' => 'contents',
+                'columns' => [
+                    'name' => 'Nome',
+                    'description' => 'Descrizione',
+                    'parentName' => 'Contenuto padre',
+                    'contextName' => 'Contesto'
+                ]
+            ]
+        ]);
     }
 
     /**
@@ -25,7 +46,19 @@ class ContentController extends Controller
      */
     public function create()
     {
-        //
+        $contents = Content::all()->pluck('name', 'id');
+        $contexts = Context::all()->pluck('name', 'id');
+        $content = new Content();
+        $statuses = $content->transitions();
+        $status = Status::find(1)->first();
+        return response()->view('admin.contents.form',[
+            'content' => $content,
+            'contents' => $contents,
+            'contexts' => $contexts,
+            'statuses' => $statuses,
+            'status' => $status,
+            'title' => trans('admin.contents.new')
+        ]);
     }
 
     /**
@@ -34,9 +67,14 @@ class ContentController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ContentRequest $request)
     {
-        //
+        $contents = new Content($request->all());
+        if (!$contents->save()){
+            return redirect()->back()->withInput()->with('messages', [trans('messages.error')]);
+        }
+        return redirect()->route('admin.contents.index')->with('messages', [trans('messages.success')]);
+
     }
 
     /**
@@ -47,7 +85,8 @@ class ContentController extends Controller
      */
     public function show($id)
     {
-        //
+        $content = Content::findOrNew($id);
+        return response()->json($content);
     }
 
     /**
@@ -58,7 +97,18 @@ class ContentController extends Controller
      */
     public function edit($id)
     {
-        //
+        $content = Content::findOrNew($id);
+        $contents = Content::where('id' , '!=', $id)->get()->pluck('name', 'id');
+        $contexts = Context::all()->pluck('name', 'id');
+        $statuses = $content->transitions();
+        return response()->view('admin.contents.form',[
+            'context' => $content,
+            'contents' => $contents,
+            'contexts' => $contexts,
+            'statuses' => $statuses,
+            'id' => $id,
+            'title' => $content->name
+        ]);
     }
 
     /**
@@ -68,9 +118,13 @@ class ContentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(ContentRequest $request, $id)
     {
-        //
+        $content = Content::findOrNew($id);
+        if (!$content->update($request->all(), $id)){
+            return redirect()->back()->withInput()->with('messages', [trans('messages.error')]);
+        }
+        return redirect()->route('admin.contents.index')->with('messages', [trans('messages.success')]);
     }
 
     /**

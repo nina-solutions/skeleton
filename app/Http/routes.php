@@ -87,6 +87,7 @@ Route::group(
         Route::resource('languages', 'LanguagesController');
         Route::resource('categories', 'CategoriesController');
         Route::resource('contexts', 'ContextController');
+        Route::resource('contents', 'ContentController');
 
 });
 
