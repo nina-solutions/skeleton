@@ -22,7 +22,7 @@ class CreateContentsTable extends Migration
 
             //TODO: Move in translation table
             $table->string('description');
-            $table->dateTime('link')->nullable();
+            $table->string('link')->nullable();
 
             //In every moments of his life, a Content have a state
             //TODO: State changes may be logged in future development
