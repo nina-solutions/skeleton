@@ -29,6 +29,7 @@ class ContentController extends Controller
             'data' => $contents->paginate(),
             'table' => (object) [
                 'name' => 'contents',
+                'controller' => 'ContentController',
                 'columns' => [
                     'name' => 'Nome',
                     'statusName' => 'Stato',
@@ -52,13 +53,15 @@ class ContentController extends Controller
         $contents = Content::all()->pluck('name', 'id');
         $contexts = Context::all()->pluck('name', 'id');
         $content = new Content();
-        $statuses = $content->transitions();
+        $transitions = $content->transitions();
+        $statuses = Status::all()->pluck('code', 'id');
         $status = Status::find(1)->first();
         return response()->view('admin.contents.form',[
             'content' => $content,
             'contents' => $contents,
             'contexts' => $contexts,
             'statuses' => $statuses,
+            'transitions' => $transitions,
             'status' => $status,
             'title' => trans('admin.contents.new')
         ]);
@@ -103,13 +106,15 @@ class ContentController extends Controller
         $content = Content::findOrNew($id);
         $contents = Content::where('id' , '!=', $id)->get()->pluck('name', 'id');
         $contexts = Context::all()->pluck('name', 'id');
-        $statuses = $content->transitions();
+        $transitions = $content->transitions();
+        $statuses = Status::all()->pluck('code', 'id');
         $status = $content->status()->get()->first();
         return response()->view('admin.contents.form',[
             'content' => $content,
             'contents' => $contents,
             'contexts' => $contexts,
             'statuses' => $statuses,
+            'transitions' => $transitions,
             'status' => $status,
             'id' => $id,
             'title' => $content->name

@@ -51,5 +51,5 @@ block content
               + php("Form::hidden('status_id', Input::old('status_id'), ['id' => 'status_id'])")
           // /.box-body
           .box-footer
-            + foreach("$statuses", '$s', '$id')
-              button.status-button.btn.btn-primary(type='submit',data-value='{{$id}}') {{$s}}
+            + foreach("$transitions", '$s', '$id')
+              button.status-button.btn(class!="{{'btn-'.$statuses[$id]}}", type='submit',data-value='{{$id}}') {{$s}}

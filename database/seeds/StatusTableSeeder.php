@@ -12,11 +12,11 @@ class StatusTableSeeder extends Seeder
      */
     public function run()
     {
-        S::create(['id' => '1', 'name' => 'Bozza']);
-        S::create(['id' => '2', 'name' => 'Revisionare']);
-        S::create(['id' => '3', 'name' => 'Pubblicabile']);
-        S::create(['id' => '4', 'name' => 'Pubblicato']);
-        S::create(['id' => '5', 'name' => 'Archiviato']);
-        S::create(['id' => '6', 'name' => 'Cancellato']);
+        S::create(['id' => '1', 'name' => 'Bozza', 'code' => 'default']);
+        S::create(['id' => '2', 'name' => 'Revisionare', 'code' => 'warning']);
+        S::create(['id' => '3', 'name' => 'Pubblicabile', 'code' => 'primary']);
+        S::create(['id' => '4', 'name' => 'Pubblicato', 'code' => 'success']);
+        S::create(['id' => '5', 'name' => 'Archiviato', 'code' => 'info']);
+        S::create(['id' => '6', 'name' => 'Cancellato', 'code' => 'danger']);
     }
 }
