@@ -21,11 +21,12 @@ class LanguagesController extends Controller
         $languages = Language::where('id', '>=', '1');
 
         if ($request->has('h-search-text')) {
-            $languages->like($request->input('h-search-text'));
+            $languages->orLike(['description', 'code'],$request->input('h-search-text'));
         }
         return view('admin.languages.index',[
             'data' => $languages->paginate(),
             'table' => (object) [
+                'controller' => 'LanguagesController',
                 'name' => 'languages',
                 'columns' => [
                     'description' => 'Nome',

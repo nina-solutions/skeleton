@@ -32,16 +32,6 @@ class Content extends HubModel
     {
         return $query->where('status_id', '=', (int)$code);
     }
-    /**
-     * Get the contents with name or description like $text.
-     */
-    public function scopeDescNameLike($query, $text)
-    {
-        return $query->where(function($query) use ($text) {
-            $query->where('description', 'ILIKE', "%$text%")
-                ->orWhere('name', 'ILIKE', "%$text%");
-        });
-    }
 
     public function getContextNameAttribute(){
         $parent = $this->context()->first();

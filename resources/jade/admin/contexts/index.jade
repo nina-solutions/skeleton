@@ -1,6 +1,6 @@
 extends ../partials/template
 block title
-  title @lang('admin.contexts.head')
+  title @lang('admin.'.$table->name.'.head')
 
 block breadcrumbs
   ol.breadcrumb
@@ -9,16 +9,16 @@ block breadcrumbs
         i.fa.fa-dashboard
         | @lang('admin.dashboard.head')
     li.active
-      | @lang('admin.contexts.head')
+      | @lang('admin.'.$table->name.'.head')
 block inner-title
-  h1 @lang('admin.contexts.head')
-    small @lang('admin.contexts.head')
+  h1 @lang('admin.'.$table->name.'.head')
+    small @lang('admin.'.$table->name.'.head')
 block content
   .row
     .col-xs-12
       .box
         .box-header
-          a.btn.btn-primary(href="{{action('ContextController@create')}}")
+          a.btn.btn-primary(href!="{{ action($table->controller.'@create') }}")
             h3.box-title @lang('admin.actions.create')
           include ../partials/index/search
         include ../partials/index/table

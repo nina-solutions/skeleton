@@ -3,18 +3,18 @@ include ../../../partials/mixins
   table.table.table-hover
     tr
       + foreach('$table->columns','$c')
-        th {{$c}}
+        th {{ $c }}
       th
     + foreach('$data','$d')
       tr
         + foreach('$table->columns','$c', '$key', '$i')
           td
             + if("isset($table->modifiers) && isset($table->modifiers[$key]) ")
-              span.label(class!="{{ 'label-'.$d->{$table->modifiers[$key]} }}") {{$d->$key}}
+              span.label(class!="{{ 'label-'.$d->{$table->modifiers[$key]} }}") {{ $d->$key }}
               +else
-                | {{$d->$key}}
+                | {{ $d->$key }}
         td
-          a(href!="{{ action($table->controller.'@edit', [$d->id]) }}")
+          a(href!='{{ action("$table->controller@edit", [$d->id]) }}')
             span.glyphicon.glyphicon-edit
-          a(href!="{{ action($table->controller.'@show', [$d->id]) }}")
+          a(href!='{{ action("$table->controller@show", [$d->id]) }}')
             span.glyphicon.glyphicon-search

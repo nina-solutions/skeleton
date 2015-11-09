@@ -20,7 +20,7 @@ class ContextController extends Controller
         $contexts = Context::where('id', '>=', '1');
 
         if ($request->has('h-search-text')) {
-            $contexts->descNameLike($request->input('h-search-text'));
+            $contexts->orLike(['name', 'description'], $request->input('h-search-text'));
         }
 
         if ($request->has('type') && $request->input('type') == 'json') {
@@ -30,6 +30,7 @@ class ContextController extends Controller
             'data' => $contexts->paginate(),
             'table' => (object) [
                 'name' => 'contexts',
+                'controller' => 'ContextController',
                 'columns' => [
                     'name' => 'Nome',
                     'description' => 'Descrizione',

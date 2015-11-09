@@ -107,4 +107,22 @@ abstract class HubModel extends Model
         return $query->where($field, 'ILIKE', "%$value%");
     }
 
+    /**
+     * Get the code-related fair.
+     */
+    public function orLike($query, $fields, $text)
+    {
+        $query = $query->where(function($query) use ($fields, $text) {
+            if(is_array($fields)){
+                foreach($fields as $field){
+                    $query->orWhere($field, 'ILIKE', "%$text%");
+                }
+            } else {
+                $query->where($fields, 'ILIKE', "%$text%");
+            }
+
+        });
+        return $query;
+    }
+
 }

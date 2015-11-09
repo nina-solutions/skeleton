@@ -19,7 +19,7 @@ class ContentController extends Controller
         $contents = Content::where('id', '>=', '1');
 
         if ($request->has('h-search-text')) {
-            $contents->descNameLike($request->input('h-search-text'));
+            $contents->orLike(['description', 'name'], $request->input('h-search-text'));
         }
 
         if ($request->has('type') && $request->input('type') == 'json') {
