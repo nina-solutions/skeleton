@@ -110,7 +110,7 @@ abstract class HubModel extends Model
     /**
      * Get the code-related fair.
      */
-    public function orLike($query, $fields, $text)
+    public function scopeOrLike($query, $fields, $text)
     {
         $query = $query->where(function($query) use ($fields, $text) {
             if(is_array($fields)){
