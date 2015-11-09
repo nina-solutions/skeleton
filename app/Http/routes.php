@@ -84,10 +84,12 @@ Route::group(
         }]);
         Route::resource('press-release', 'PressReleaseController');
         Route::resource('events', 'EventsController');
-        Route::resource('languages', 'LanguagesController');
         Route::resource('categories', 'CategoriesController');
+
+        Route::resource('languages', 'LanguagesController');
         Route::resource('contexts', 'ContextController');
         Route::resource('contents', 'ContentController');
+        Route::resource('users', 'UserController');
 
 });
 

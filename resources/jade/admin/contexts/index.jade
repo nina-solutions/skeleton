@@ -10,9 +10,11 @@ block breadcrumbs
         | @lang('admin.dashboard.head')
     li.active
       | @lang('admin.'.$table->name.'.head')
+
 block inner-title
   h1 @lang('admin.'.$table->name.'.head')
     small @lang('admin.'.$table->name.'.head')
+
 block content
   .row
     .col-xs-12
