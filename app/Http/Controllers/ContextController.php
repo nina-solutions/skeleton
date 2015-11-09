@@ -22,6 +22,9 @@ class ContextController extends Controller
         if ($request->has('h-search-text')) {
             $contexts->orLike(['name', 'description'], $request->input('h-search-text'));
         }
+        if ($request->has('h-search-code')) {
+            $contexts->code($request->input('h-search-code'));
+        }
 
         if ($request->has('type') && $request->input('type') == 'json') {
             return response()->json($contexts->get());
@@ -34,7 +37,7 @@ class ContextController extends Controller
                 'columns' => [
                     'name' => 'Nome',
                     'description' => 'Descrizione',
-                    'code' => 'Codice',
+                    'fullCode' => 'Codice',
                     'parentName' => 'Contesto'
                 ]
             ]

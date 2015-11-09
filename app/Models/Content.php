@@ -40,19 +40,25 @@ class Content extends HubModel
         return null;
     }
 
-    public function context(){
-        return $this->hasOne('FairHub\Models\Context', 'id', 'context_id');
-    }
-
     public function getParentNameAttribute(){
-        $parent = $this->parentContent()->first();
+        $parent = $this->contentParent()->first();
         if ($parent !== null)
             return $parent->name;
         return null;
     }
 
-    public function parentContent(){
-        return $this->hasOne('FairHub\Models\Content', 'id', 'content_id');
+
+    public function context(){
+        return $this->belongsTo('FairHub\Models\Context', 'context_id', 'id');
+    }
+
+    public function contentChilds(){
+        return $this->hasMany('FairHub\Models\Content', 'id', 'content_id');
+    }
+
+    public function contentParent(){
+        return $this->belongsTo('FairHub\Models\Content', 'content_id', 'id');
+
     }
     public function getStatusNameAttribute(){
         $status = $this->status()->first();

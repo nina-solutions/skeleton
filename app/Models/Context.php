@@ -24,7 +24,24 @@ class Context extends HubModel
      */
     public function scopeCode($query, $code)
     {
-        return $query->where('code', '=', substr($code,0,5));
+        switch(strlen($code)){
+            case 2:
+                $query->where('code', '=', substr($code,0,2))->whereNotNull('context_id');
+                break;
+            case 3:
+
+                $query->where('code', '=', substr($code,0,3))->whereNull('context_id');
+                break;
+            case 5:
+                $query->where('code', '=', substr($code,3,2))->whereNotNull('context_id');
+                $query->whereHas('contextParent', function ($q) use ($code) {
+                    $q->where('code', '=', substr($code,0,3));
+                });
+                break;
+            default:
+        }
+
+        return $query;
     }
     /**
      * Get the code-related fair.
@@ -38,14 +55,25 @@ class Context extends HubModel
         return $query->where('description', 'ILIKE', "%$text%");
     }
 
+    public function getFullCodeAttribute(){
+        $parent = $this->contextParent()->first();
+        if ($parent !== null)
+            return $parent->fullCode . $this->code;
+        return $this->code;
+    }
+
     public function getParentNameAttribute(){
-        $parent = $this->context()->first();
+        $parent = $this->contextParent()->first();
         if ($parent !== null)
             return $parent->name;
         return null;
     }
 
-    public function context(){
-        return $this->hasOne('FairHub\Models\Context', 'id', 'context_id');
+    public function contextParent(){
+        return $this->belongsTo('FairHub\Models\Context', 'context_id', 'id');
+    }
+
+    public function contextChilds(){
+        return $this->hasMany('FairHub\Models\Context', 'id', 'context_id');
     }
 }
