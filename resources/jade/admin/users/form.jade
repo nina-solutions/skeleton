@@ -22,8 +22,6 @@ block content
         .box.box-primary
           .box-header.with-border
             h3.box-title {{ $title }} - {{ trans("admin.users.levels.$user->level") }}
-          + if("isset($id)")
-            + php("Form::hidden('id', $id)")
           .box-body
             .form-group
               + php("Form::label('name', trans('admin.'.$table->name.'.form.name'), ['class' => ''])")
@@ -31,9 +29,15 @@ block content
             .form-group
               + php("Form::label('email', trans('admin.'.$table->name.'.form.email'), ['class' => ''])")
               + php("Form::text('email', Input::old('email'), ['required', 'class'=>'form-control', 'placeholder'=>trans('admin.'.$table->name.'.form.email')])")
+            + if("isset($id)")
+              + php("Form::hidden('id', $id)")
+              +else
+                .form-group
+                  + php("Form::label('password', trans('admin.'.$table->name.'.form.password'), ['class' => ''])")
+                  + php("Form::text('password', Input::old('password'), ['required', 'class'=>'form-control', 'placeholder'=>trans('admin.'.$table->name.'.form.password')])")
             .form-group
-              + php("Form::label('context_id', trans('admin.'.$table->name.'.form.context'), ['class' => ''])")
-              + php('Form::select("context_id", $contexts, Input::old("context_id"), ["id" => "context_id", "class"=>"form-control", "placeholder"=>trans("admin.$table->name.form.role")])')
+                  + php("Form::label('context_id', trans('admin.'.$table->name.'.form.context'), ['class' => ''])")
+                  + php('Form::select("context_id", $contexts, Input::old("context_id"), ["id" => "context_id", "class"=>"form-control", "placeholder"=>trans("admin.$table->name.form.role")])')
           // /.box-body
           .box-footer
             button.btn.btn-primary(type='submit') @lang('admin.actions.save')
