@@ -61,7 +61,9 @@ class HubAdmin
     roles = $('#roles')
     context_id = $('#context_id')
     permissions = $('#permissions')
-    #This is the right way..wird error come up if I use this method..so i'm converting this to the shitty .click on every new element
+    $('.remove-permission').each ->
+      $(context_id).find('option[value='+$(this).data('value')+']').attr('disabled', 'disabled')
+
     $(permissions).on 'click', '.remove-permission', (e) ->
       hub.remove_permission(e, this)
       hub.init_select()
