@@ -5,7 +5,7 @@ namespace FairHub\Http\Controllers;
 use FairHub\Models\Context;
 use FairHub\Models\Role;
 use FairHub\Models\User;
-use FairHub\Models\UserContextRole;
+use FairHub\Models\ContextUser;
 use Illuminate\Http\Request;
 use FairHub\Http\Requests;
 use FairHub\Http\Controllers\Controller;
@@ -76,9 +76,10 @@ class UserController extends Controller
         if (!$user->save()){
             return redirect()->back()->withInput()->with('messages', [trans('messages.error')]);
         }
+        $user->permissions()->sync();
         $roles = $request->get('roles');
         foreach ($roles as $role) {
-            $permissions = UserContextRole::user($user)
+            $permissions = ContextUser::user($user)
                 ->where('context_id', '=', $role['context_id'])
                 ->where('role_id', '=', $role['role_id'])
                 ->get();
@@ -109,7 +110,7 @@ class UserController extends Controller
     {
         $user = User::findOrNew($id);
         $contexts = Context::all()->pluck('name', 'id');
-        $permissions = UserContextRole::where('user_id', '=', $id)->get()->pluck('role_id', 'context_id');
+        $permissions = ContextUser::where('user_id', '=', $id)->get()->pluck('role_id', 'context_id');
         $roles = Role::all()->pluck('name', 'id');
         return view('admin.users.form',[
             'user' => $user,

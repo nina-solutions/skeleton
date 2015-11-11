@@ -76,4 +76,13 @@ class Context extends HubModel
     public function contextChilds(){
         return $this->hasMany('FairHub\Models\Context', 'id', 'context_id');
     }
+
+    public function users(){
+        return $this->belongsToMany('User');
+    }
+
+    public function roles(){
+        return $this->belongsToMany('Role', 'context_users', 'role_id', 'context_id');
+    }
+
 }

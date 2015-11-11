@@ -40,4 +40,12 @@ class User extends HubModel implements AuthenticatableContract, CanResetPassword
     public function isAdmin(){
         return $this->level < 3;
     }
+
+    public function contexts(){
+        return $this->belongsToMany('Context');
+    }
+
+    public function roles(){
+        return $this->belongsToMany('Role', 'context_users', 'role_id', 'user_id');
+    }
 }
