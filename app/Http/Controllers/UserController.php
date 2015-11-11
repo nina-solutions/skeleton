@@ -76,15 +76,7 @@ class UserController extends Controller
         if (!$user->save()){
             return redirect()->back()->withInput()->with('messages', [trans('messages.error')]);
         }
-        $user->permissions()->sync();
-        $roles = $request->get('roles');
-        foreach ($roles as $role) {
-            $permissions = ContextUser::user($user)
-                ->where('context_id', '=', $role['context_id'])
-                ->where('role_id', '=', $role['role_id'])
-                ->get();
-        }
-
+        $user->contexts()->sync($request->get('permission'));
         return redirect()->route('admin.users.index')->with('messages', [trans('messages.success')]);
 
     }
@@ -143,6 +135,7 @@ class UserController extends Controller
         if (!$user->update($request->all(), $id)){
             return redirect()->back()->withInput()->with('messages', [trans('messages.error')]);
         }
+        $user->contexts()->sync($request->get('permission'));
         return redirect()->route('admin.users.index')->with('messages', [trans('messages.success')]);
     }
 

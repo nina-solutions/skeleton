@@ -77,8 +77,8 @@ class HubAdmin
         return false;
 
   user_permission: (roles, context_id, permissions) ->
-    new_role = roles.clone(true, true).attr('id', 'role_'+context_id.val()).removeClass('hidden').attr('name', 'permission['+context_id.val()+']')
-    new_label = $(document.createElement('label')).attr('for', 'permission['+context_id.val()+']').text(context_id.find('option').filter(':selected').text())
+    new_role = roles.clone(true, true).attr('id', 'role_'+context_id.val()).removeClass('hidden').attr('name', 'permission['+context_id.val()+'][role_id]')
+    new_label = $(document.createElement('label')).attr('for', 'permission['+context_id.val()+'][role_id]').text(context_id.find('option').filter(':selected').text())
     new_button = $(document.createElement('a')).addClass('btn btn-sm').attr('data-value', context_id.val()).html('<span class="glyphicon glyphicon-trash"></span>').click (e) ->
       hub.remove_permission(e, this)
       hub.init_select()

@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateContextUsersTable extends Migration
+class CreateContextUserTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,7 +12,7 @@ class CreateContextUsersTable extends Migration
      */
     public function up()
     {
-        Schema::create('context_users', function (Blueprint $table) {
+        Schema::create('context_user', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamps();
             $table->integer('user_id')->unsigned();
@@ -34,6 +34,6 @@ class CreateContextUsersTable extends Migration
      */
     public function down()
     {
-        Schema::drop('context_users');
+        Schema::drop('context_user');
     }
 }

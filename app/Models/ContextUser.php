@@ -18,7 +18,14 @@ class ContextUser extends HubModel
     }
 
     public function role(){
-        $this->belongsTo('Role');
+        $this->belongsTo('FairHub\Models\Role');
     }
 
+    public function user(){
+        $this->belongsTo('FairHub\Models\User');
+    }
+
+    public function context(){
+        $this->belongsTo('FairHub\Models\Context');
+    }
 }
