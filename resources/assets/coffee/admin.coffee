@@ -1,6 +1,6 @@
 "use strict"
 class HubAdmin
-  constructor: () ->
+  constructor: ->
     $.ajaxSetup headers: 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
     this.init_search()
     this.init_submit_status()
@@ -8,32 +8,32 @@ class HubAdmin
     this.init_datepicker()
     this.init_userform()
 
-  init_search: () ->
+  init_search: ->
     search = $('#search')
     if search.length > 0
       $('input#search-text').keypress (event) ->
-        if(event.which == 13)
+        if event.which == 13
           search.trigger('click')
 
       search.click ->
         $('input#h-search-text').val($('input#search-text').val())
         $('#search-form').submit()
 
-  init_submit_status: () ->
+  init_submit_status: ->
     statusButton = $('.status-button')
     statusField = $('#status_id')
-    if (statusButton.length > 0 && statusField.length > 0)
+    if statusButton.length > 0 and statusField.length > 0
       statusButton.click (e) ->
         e.preventDefault()
         statusField.val($(this).data('value'))
         $(this).closest('form').submit()
 
-  init_select: () ->
+  init_select: ->
     select = $('select').not('.hidden')
     if select.length > 0
       select.select2()
 
-  init_datepicker: () ->
+  init_datepicker: ->
     datepicker = $('#datepicker').not('.hidden')
     if datepicker.length > 0
       start = $('#start')
@@ -55,40 +55,34 @@ class HubAdmin
     $(context_id).find('option[value='+$(element).data('value')+']').prop('disabled', false)
     $(element).parents('div.permission').remove()
 
-
-  init_userform: () ->
+  init_userform: ->
     thisHub = this
     userform = $('#users')
     roles = $('#roles')
     context_id = $('#context_id')
     permissions = $('#permissions')
     #This is the right way..wird error come up if I use this method..so i'm converting this to the shitty .click on every new element
-    $('.remove-permission').click(function: (e) ->
+    $(permissions).on 'click', '.remove-permission', (e) ->
       hub.remove_permission(e, this)
       hub.init_select()
-      return false;
-    )
+
     if userform.length > 0 and context_id.length > 0 and permissions.length > 0
       context_id.change (e, item) ->
         # add new element
         thisHub.user_permission(roles, context_id, permissions)
         $(context_id).find('option').filter(':selected').attr('disabled', 'disabled')
         thisHub.init_select()
-        return false;
 
   user_permission: (roles, context_id, permissions) ->
     new_role = roles.clone(true, true).attr('id', 'role_'+context_id.val()).removeClass('hidden').attr('name', 'permission['+context_id.val()+'][role_id]')
     new_label = $(document.createElement('label')).attr('for', 'permission['+context_id.val()+'][role_id]').text(context_id.find('option').filter(':selected').text())
-    new_button = $(document.createElement('a')).addClass('btn btn-sm').attr('data-value', context_id.val()).html('<span class="glyphicon glyphicon-trash"></span>').click (e) ->
-      hub.remove_permission(e, this)
-      hub.init_select()
-      return false
-
+    new_button = $(document.createElement('a')).addClass('btn btn-sm remove-permission').attr('data-value', context_id.val()).html('<span class="glyphicon glyphicon-trash"></span>')
     selectColumn = $(document.createElement('div')).addClass('col-md-5').append(new_role)
     labelColumn = $(document.createElement('div')).addClass('col-md-5').append(new_label)
     actionColumn = $(document.createElement('div')).addClass('col-md-2').append(new_button)
-    new_role_div = $(document.createElement('div')).attr('id', 'permission_'+context_id.val()).addClass('row permission form-group').append(labelColumn, selectColumn, actionColumn)
+    new_role_div = $(document.createElement('div')).addClass('row permission form-group').append(labelColumn, selectColumn, actionColumn)
     permissions.append(new_role_div)
 
 hub = new HubAdmin()
+
 

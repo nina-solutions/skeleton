@@ -78,7 +78,7 @@ class Context extends HubModel
     }
 
     public function users(){
-        return $this->belongsToMany('FairHub\Models\User')->withTimestamps();
+        return $this->belongsToMany('FairHub\Models\User', 'context_user')->withTimestamps();
     }
 
     public function roles(){

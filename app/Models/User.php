@@ -42,7 +42,7 @@ class User extends HubModel implements AuthenticatableContract, CanResetPassword
     }
 
     public function contexts(){
-        return $this->belongsToMany('FairHub\Models\Context')->withTimestamps();
+        return $this->belongsToMany('FairHub\Models\Context', 'context_user')->withTimestamps();
     }
 
     public function roles(){

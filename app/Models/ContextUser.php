@@ -4,6 +4,7 @@ namespace FairHub\Models;
 
 class ContextUser extends HubModel
 {
+    protected $table = 'context_user';
     public function scopeUser($query, $user){
 
         return $query->where('user_id', '=', is_integer($user) ? $user : $user->id);

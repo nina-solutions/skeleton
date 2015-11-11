@@ -44,5 +44,12 @@ block content
           #permissions.box-body
             + php('Form::select("roles", $roles, null, ["id" => "roles", "class"=> "form-control hidden", "placeholder"=>trans("admin.$table->name.form.role")])')
             + foreach('$permissions','$role_id', '$context_id', '$i')
-              .form-group
-                + php('Form::select("permissions[$context_id]", $roles, $role_id, ["required", "class"=>"form-control", "placeholder"=>trans("admin.$table->name.form.role")])')
+              .row.permission.form-group
+                .col-md-5
+                  + php("Form::label('permission[$context_id][role_id]', $contexts[$context_id], ['class' => ''])")
+                .col-md-5
+                  + php('Form::select("permission[$context_id][role_id]", $roles, $role_id, ["required", "class"=>"form-control", "placeholder"=>trans("admin.$table->name.form.role")])')
+                .col-md-2
+                  a.btn.btn-sm.remove-permission(data-value!="{{ $context_id }}")
+                    span.glyphicon.glyphicon-trash
+

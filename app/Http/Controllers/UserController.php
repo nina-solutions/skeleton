@@ -109,7 +109,7 @@ class UserController extends Controller
             'id' => $id,
             'title' => $user->name,
             'contexts' => $contexts,
-            'permissions' => array(),
+            'permissions' => $permissions,
             'roles' => $roles,
             'table' => (object) [
                 'controller' => 'UserController',
