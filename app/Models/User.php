@@ -32,4 +32,12 @@ class User extends HubModel implements AuthenticatableContract, CanResetPassword
      * @var array
      */
     protected $hidden = ['password', 'remember_token'];
+
+    public function isSuper(){
+        return $this->level < 2;
+    }
+
+    public function isAdmin(){
+        return $this->level < 3;
+    }
 }

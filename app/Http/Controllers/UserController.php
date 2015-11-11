@@ -2,7 +2,10 @@
 
 namespace FairHub\Http\Controllers;
 
+use FairHub\Models\Context;
+use FairHub\Models\Role;
 use FairHub\Models\User;
+use FairHub\Models\UserContextRole;
 use Illuminate\Http\Request;
 use FairHub\Http\Requests;
 use FairHub\Http\Controllers\Controller;
@@ -42,8 +45,22 @@ class UserController extends Controller
      */
     public function create()
     {
+        $contexts = Context::all()->pluck('name', 'id');
+        $roles = Role::all()->pluck('name', 'id');
         return view('admin.users.form',[
-            'user' => new User()
+            'user' => new User(),
+            'title' => trans('admin.contexts.new'),
+            'contexts' => $contexts,
+            'roles' => $roles,
+            'permissions' => array(),
+            'table' => (object) [
+                'controller' => 'UserController',
+                'name' => 'users',
+                'columns' => [
+                    'name' => 'Nome',
+                    'email' => 'Email'
+                ]
+            ]
         ]);
     }
 
@@ -59,6 +76,14 @@ class UserController extends Controller
         if (!$user->save()){
             return redirect()->back()->withInput()->with('messages', [trans('messages.error')]);
         }
+        $roles = $request->get('roles');
+        foreach ($roles as $role) {
+            $permissions = UserContextRole::user($user)
+                ->where('context_id', '=', $role['context_id'])
+                ->where('role_id', '=', $role['role_id'])
+                ->get();
+        }
+
         return redirect()->route('admin.users.index')->with('messages', [trans('messages.success')]);
 
     }
@@ -83,9 +108,24 @@ class UserController extends Controller
     public function edit($id)
     {
         $user = User::findOrNew($id);
+        $contexts = Context::all()->pluck('name', 'id');
+        $permissions = UserContextRole::where('user_id', '=', $id)->get()->pluck('role_id', 'context_id');
+        $roles = Role::all()->pluck('name', 'id');
         return view('admin.users.form',[
             'user' => $user,
-            'id' => $id
+            'id' => $id,
+            'title' => $user->name,
+            'contexts' => $contexts,
+            'permissions' => array(),
+            'roles' => $roles,
+            'table' => (object) [
+                'controller' => 'UserController',
+                'name' => 'users',
+                'columns' => [
+                    'name' => 'Nome',
+                    'email' => 'Email'
+                ]
+            ]
         ]);
     }
 
