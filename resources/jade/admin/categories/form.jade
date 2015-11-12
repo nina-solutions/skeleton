@@ -29,9 +29,6 @@ block content
             .form-group
               + php("Form::label('description', trans('admin.'.$table->name.'.form.email'), ['class' => ''])")
               + php("Form::text('description', Input::old('description'), ['class'=>'form-control', 'placeholder'=>trans('admin.'.$table->name.'.form.description')])")
-            .form-group
-              + php("Form::label('context_id', trans('admin.'.$table->name.'.form.context'), ['class' => ''])")
-              + php('Form::select("context_id", $contexts, Input::old("context_id"), ["id" => "context_id", "class"=>"form-control", "placeholder"=>trans("admin.$table->name.form.role")])')
           // /.box-body
           .box-footer
             button.btn.btn-primary(type='submit') @lang('admin.actions.save')

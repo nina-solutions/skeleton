@@ -2,7 +2,7 @@
 
 namespace FairHub\Http\Controllers;
 
-use FairHub\Models\tab_categorie;
+use FairHub\Models\Category;
 use Illuminate\Http\Request;
 use FairHub\Http\Requests;
 use FairHub\Http\Controllers\Controller;
@@ -16,13 +16,21 @@ class CategoriesController extends Controller
      */
     public function index(Request $request)
     {
-        if ($request->has('h-search-text'))
-            $categories = tab_categorie::like('cat_desc', $request->input('h-search-text'))->paginate();
-        else
-            $categories = tab_categorie::paginate();
+        $data = Category::where('id', '>=', '1');
 
+        if ($request->has('h-search-text')) {
+            $data->orLike(['name', 'description'],$request->input('h-search-text'));
+        }
         return view('admin.categories.index',[
-            'categories' => $categories
+            'data' => $data->paginate(),
+            'table' => (object) [
+                'controller' => 'CategoriesController',
+                'name' => 'categories',
+                'columns' => [
+                    'name' => 'Nome',
+                    'description' => 'Descrizione'
+                ]
+            ]
         ]);
     }
 
@@ -33,7 +41,18 @@ class CategoriesController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.categories.form',[
+            'category' => new Category(),
+            'title' => trans('admin.categories.new'),
+            'table' => (object) [
+                'controller' => 'CategoriesController',
+                'name' => 'categories',
+                'columns' => [
+                    'name' => 'Nome',
+                    'description' => 'Descrizione'
+                ]
+            ]
+        ]);
     }
 
     /**
@@ -44,7 +63,12 @@ class CategoriesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $new = new Category($request->all());
+        if (!$new->save()){
+            return redirect()->back()->withInput()->with('messages', [trans('messages.error')]);
+        }
+        return redirect()->route('admin.categories.index')->with('messages', [trans('messages.success')]);
+
     }
 
     /**
@@ -55,8 +79,7 @@ class CategoriesController extends Controller
      */
     public function show($id)
     {
-        $ev = tab_categorie::where('cat_id', '=', $id)->first();
-        return response()->json($ev);
+        return json_encode(Category::findOrNew($id));
     }
 
     /**
@@ -67,7 +90,20 @@ class CategoriesController extends Controller
      */
     public function edit($id)
     {
-        //
+        $edit = Category::findOrNew($id);
+        return view('admin.categories.form',[
+            'category' => $edit,
+            'id' => $id,
+            'title' => $edit->name,
+            'table' => (object) [
+                'controller' => 'CategoriesController',
+                'name' => 'categories',
+                'columns' => [
+                    'name' => 'Nome',
+                    'description' => 'Descrizione'
+                ]
+            ]
+        ]);
     }
 
     /**
@@ -79,7 +115,11 @@ class CategoriesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $edit = Category::findOrNew($id);
+        if (!$edit->update($request->all(), $id)){
+            return redirect()->back()->withInput()->with('messages', [trans('messages.error')]);
+        }
+        return redirect()->route('admin.categories.index')->with('messages', [trans('messages.success')]);
     }
 
     /**

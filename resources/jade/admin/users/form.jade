@@ -37,7 +37,7 @@ block content
                   + php("Form::text('password', Input::old('password'), ['required', 'class'=>'form-control', 'placeholder'=>trans('admin.'.$table->name.'.form.password')])")
             .form-group
               + php("Form::label('context_id', trans('admin.'.$table->name.'.form.context'), ['class' => ''])")
-              + php('Form::select("context_id", $contexts, Input::old("context_id"), ["id" => "context_id", "class"=>"form-control", "placeholder"=>trans("admin.$table->name.form.role")])')
+              + php('Form::select("context_id", $contexts, Input::old("context_id"), ["id" => "context_id", "class"=>"form-control select2", "placeholder"=>trans("admin.$table->name.form.role")])')
           // /.box-body
           .box-footer
             button.btn.btn-primary(type='submit') @lang('admin.actions.save')
@@ -46,13 +46,13 @@ block content
           .box-header.with-border
             h3.box-title @lang('admin.'.$table->name.'.permission')
           #permissions.box-body
-            + php('Form::select("roles", $roles, null, ["id" => "roles", "class"=> "form-control hidden", "placeholder"=>trans("admin.$table->name.form.role")])')
+            + php('Form::select("roles", $roles, null, ["id" => "roles", "class"=> "form-control select2 hidden", "placeholder"=>trans("admin.$table->name.form.role")])')
             + foreach('$permissions','$role_id', '$context_id', '$i')
               .row.permission.form-group
                 .col-md-5
                   + php("Form::label('permission[$context_id][role_id]', $contexts[$context_id], ['class' => ''])")
                 .col-md-5
-                  + php('Form::select("permission[$context_id][role_id]", $roles, $role_id, ["required", "class"=>"form-control", "placeholder"=>trans("admin.$table->name.form.role")])')
+                  + php('Form::select("permission[$context_id][role_id]", $roles, $role_id, ["required", "class"=>"form-control select2", "placeholder"=>trans("admin.$table->name.form.role")])')
                 .col-md-2
                   a.btn.btn-sm.remove-permission(data-value!="{{ $context_id }}")
                     span.glyphicon.glyphicon-trash

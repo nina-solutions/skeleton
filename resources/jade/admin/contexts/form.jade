@@ -36,7 +36,7 @@ block content
               + php("Form::text('description', Input::old('description'), ['required', 'class'=>'form-control', 'placeholder'=>trans('admin.contexts.form.description')])")
             .form-group
               + php("Form::label('context_id', trans('admin.contexts.form.parent'), ['class' => ''])")
-              + php("Form::select('context_id', $contexts, Input::old('context_id'), ['class'=>'form-control', 'placeholder'=>trans('admin.contexts.form.parent')])")
+              + php("Form::select('context_id', $contexts, Input::old('context_id'), ['class'=>'form-control select2', 'placeholder'=>trans('admin.contexts.form.parent')])")
             .form-group
               + php("Form::label('datepicker', trans('admin.contexts.form.dates'), ['class' => ''])")
               .input-group

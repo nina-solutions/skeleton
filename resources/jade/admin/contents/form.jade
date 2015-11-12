@@ -36,10 +36,10 @@ block content
               + php("Form::text('link', Input::old('link'), ['class'=>'form-control', 'placeholder'=>trans('admin.contents.form.link')])")
             .form-group
               + php("Form::label('context_id', trans('admin.contexts.form.fair'), ['class' => ''])")
-              + php("Form::select('context_id', $contexts, Input::old('context_id'), ['required', 'class'=>'form-control', 'placeholder'=>trans('admin.contexts.form.parent')])")
+              + php("Form::select('context_id', $contexts, Input::old('context_id'), ['required', 'class'=>'form-control select2', 'placeholder'=>trans('admin.contexts.form.parent')])")
             .form-group
               + php("Form::label('content_id', trans('admin.contents.form.parent'), ['class' => ''])")
-              + php("Form::select('content_id', $contents, Input::old('content_id'), ['class'=>'form-control', 'placeholder'=>trans('admin.contents.form.parent')])")
+              + php("Form::select('content_id', $contents, Input::old('content_id'), ['class'=>'form-control select2', 'placeholder'=>trans('admin.contents.form.parent')])")
             .form-group
               + php("Form::label('datepicker', trans('admin.contents.form.dates'), ['class' => ''])")
               .input-group
