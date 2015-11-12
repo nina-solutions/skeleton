@@ -12,9 +12,9 @@ header.main-header
           li.dropdown.messages-menu
             a(href='#', data-toggle='dropdown').dropdown-toggle
               i.fa.fa-envelope-o
-              span.label.label-success {{count(Session::get('messages'))}}
+              span.label.label-success {{ count(Session::get('messages')) }}
             ul.dropdown-menu
-              li.header Hai {{count(Session::get('messages'))}} messaggi
+              li.header Hai {{ count(Session::get('messages')) }} messaggi
               + foreach('Session::get("messages")','$msg')
                 li
                   ul.menu
@@ -22,16 +22,16 @@ header.main-header
                     li
                       a(href='#')
                         i.fa.fa-users.text-aqua
-                          | {{$msg}}
+                          | {{ $msg }}
               li.footer
                 a(href='#') Vedi tutti i messaggi
         +if("$errors->count() > 0")
           li.dropdown.notifications-menu
             a(href='#', data-toggle='dropdown').dropdown-toggle
               i.fa.fa-bell-o
-              span.lavel.label-warning {{$errors->count()}}
+              span.lavel.label-warning {{ $errors->count() }}
             ul.dropdown-menu
-              li.header Hai {{$errors->count()}} notifiche
+              li.header Hai {{ $errors->count() }} notifiche
               + foreach('$errors->all()','$error')
                 li
                   ul.menu
@@ -39,16 +39,16 @@ header.main-header
                     li
                       a(href='#')
                         i.fa.fa-users.text-aqua
-                          | {{$error}}
+                          | {{ $error }}
               li.footer
                 a(href='#') Vedi tutte le notifiche
         +if("Session::has('issues')")
           li.dropdown.tasks-menu
             a(href='#', data-toggle='dropdown').dropdown-toggle
               i.fa.fa-flag-o
-              span.lavel.label-danger {{count(Session::get('issues'))}}
+              span.lavel.label-danger {{ count(Session::get('issues')) }}
             ul.dropdown-menu
-              li.header Hai {{count(Session::get('issues'))}} issue aperte
+              li.header Hai {{ count(Session::get('issues')) }} issue aperte
               + foreach('Session::get("issues")','$issue')
                 li
                   ul.menu
@@ -56,8 +56,8 @@ header.main-header
                     li
                       a(href='#')
                         h3
-                          | {{$issue->content}}
-                          small.pull-right {{$issue->percentage}}%
+                          | {{ $issue->content }}
+                          small.pull-right {{ $issue->percentage }}%
               li.footer
                 a(href='#') Vedi tutte le issues
         li.dropdown.user.user-menu

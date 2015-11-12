@@ -23,24 +23,28 @@ aside.main-sidebar
     ul.sidebar-menu
       li.header HEADER
       // Optionally, you can add icons to the links
-      li.active
+      li(class!="{{ (!isset($table)) ? 'active' : '' }}")
         a(href='#')
           span Dashboard
-      li
-        a(href="{{action('UserController@index')}}")
-          span Utonti
+      li(class!="{{ (isset($table) && $table->controller == 'UserController') ? 'active' : '' }}")
+        a(href="{{ action('UserController@index') }}")
+          span Utenti
+      li(class!="{{ (isset($table) && $table->controller == 'ContextController') ? 'active' : '' }}")
+        a(href="{{ action('ContextController@index') }}")
+          span Fiere
+      li(class!="{{ (isset($table) && $table->controller == 'LanguagesController') ? 'active' : '' }}")
+        a(href="{{ action('LanguagesController@index') }}")
+          span Lingue
+      li(class!="{{ (isset($table) && $table->controller == 'CategoriesController') ? 'active' : '' }}")
+        a(href="{{ action('CategoriesController@index') }}")
+          span Categorie
       li.treeview
         a(href='#')
           span Comunicati Stampa
           i.fa.fa-angle-left.pull-right
         ul.treeview-menu
           li
-            a(href="{{action('PressReleaseController@index')}}") Comunicati
-          li
-            a(href="{{action('ContextController@index')}}") Fiere
-          li
-            a(href="{{action('LanguagesController@index')}}") Lingue
-          li
-            a(href="{{action('CategoriesController@index')}}") Categorie
+            a(href="{{ action('PressReleaseController@index') }}") Comunicati
+
     // /.sidebar-menu
   // /.sidebar

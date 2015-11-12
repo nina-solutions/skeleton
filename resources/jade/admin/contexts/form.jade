@@ -20,7 +20,7 @@ block content
     .col-md-6
       .box.box-primary
         .box-header.with-border
-          h3.box-title {{$title}}
+          h3.box-title {{ $title }}
         + php("Form::model($context, ['route' => (isset($id) ? ['admin.contexts.update', $id] : ['admin.contexts.store']), 'method' => (isset($id) ? 'PUT' : 'POST'),'data-toggle' => 'validator', 'role' => 'form', 'class' => ''])", "Form::close()")
           + if("isset($id)")
             + php("Form::hidden('id', $id)")
