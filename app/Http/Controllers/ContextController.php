@@ -137,6 +137,6 @@ class ContextController extends Controller
      */
     public function destroy($id)
     {
-        //
+        return redirect()->route('admin.contexts.index');
     }
 }
