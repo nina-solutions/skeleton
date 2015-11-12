@@ -2,6 +2,7 @@
 
 namespace FairHub\Http\Controllers;
 
+use FairHub\Models\Category;
 use FairHub\Models\Context;
 use Illuminate\Http\Request;
 use FairHub\Http\Requests;
@@ -52,9 +53,11 @@ class ContextController extends Controller
     public function create()
     {
         $contexts = Context::all()->pluck('name', 'id');
+        $categories = Category::all()->pluck('name', 'id');
         return response()->view('admin.contexts.form',[
             'context' => new Context(),
             'contexts' => $contexts,
+            'categories' => $categories,
             'title' => trans('admin.contexts.new')
         ]);
     }
@@ -67,10 +70,11 @@ class ContextController extends Controller
      */
     public function store(Request $request)
     {
-        $contexts = new Context($request->all());
-        if (!$contexts->save()){
+        $context = new Context($request->all());
+        if (!$context->save()){
             return redirect()->back()->withInput()->with('messages', [trans('messages.error')]);
         }
+        $context->categories()->sync($request->get('categories'));
         return redirect()->route('admin.contexts.index')->with('messages', [trans('messages.success')]);
 
     }
@@ -97,9 +101,12 @@ class ContextController extends Controller
     {
         $context = Context::findOrNew($id);
         $contexts = Context::where('id' , '!=', $id)->get()->pluck('name', 'id');
+        $categories = Category::all()->pluck('name', 'id');
+
         return response()->view('admin.contexts.form',[
             'context' => $context,
             'contexts' => $contexts,
+            'categories' => $categories,
             'id' => $id,
             'title' => $context->name
         ]);
@@ -118,6 +125,7 @@ class ContextController extends Controller
         if (!$context->update($request->all(), $id)){
             return redirect()->back()->withInput()->with('messages', [trans('messages.error')]);
         }
+        $context->categories()->sync($request->get('categories'));
         return redirect()->route('admin.contexts.index')->with('messages', [trans('messages.success')]);
     }
 

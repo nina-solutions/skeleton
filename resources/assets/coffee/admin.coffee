@@ -29,9 +29,9 @@ class HubAdmin
         $(this).closest('form').submit()
 
   init_select: ->
-    select = $('select').not('.hidden')
+    select = $('select.select2').not('.hidden')
     if select.length > 0
-      select.select2()
+      select.select2({ width: '100%' })
 
   init_datepicker: ->
     datepicker = $('#datepicker').not('.hidden')
