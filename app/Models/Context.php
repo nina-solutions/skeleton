@@ -102,20 +102,20 @@ class Context extends HubModel
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
     public function users(){
-        return $this->belongsToMany('FairHub\Models\User')->withTimestamps();
+        return $this->belongsToMany('FairHub\Models\User')->withPivot('role_id')->withTimestamps();
     }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
     public function roles(){
-        return $this->belongsToMany('FairHub\Models\Role', 'context_user')->withTimestamps();
+        return $this->belongsToMany('FairHub\Models\Role', 'context_user')->withPivot('user_id')->withTimestamps();
     }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
     public function categories(){
-        return $this->belongsToMany('FairHub\Models\Category')->withTimestamps();
+        return $this->belongsToMany('FairHub\Models\Category')->withPivot('order')->withTimestamps();
     }
 }

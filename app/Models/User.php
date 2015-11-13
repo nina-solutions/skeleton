@@ -46,10 +46,10 @@ class User extends HubModel implements AuthenticatableContract,
     }
 
     public function contexts(){
-        return $this->belongsToMany('FairHub\Models\Context')->withTimestamps();
+        return $this->belongsToMany('FairHub\Models\Context')->withPivot('role_id')->withTimestamps();
     }
 
     public function roles(){
-        return $this->belongsToMany('FairHub\Models\Role', 'context_user', 'role_id', 'user_id')->withTimestamps();
+        return $this->belongsToMany('FairHub\Models\Role', 'context_user', 'role_id', 'user_id')->withPivot('context_id')->withTimestamps();
     }
 }

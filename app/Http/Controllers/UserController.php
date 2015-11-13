@@ -25,14 +25,20 @@ class UserController extends Controller
         if ($request->has('h-search-text')) {
             $data->orLike(['name', 'email'],$request->input('h-search-text'));
         }
+        $data = $data->paginate();
+        $this->authorize(new User());
+
         return view('admin.users.index',[
-            'data' => $data->paginate(),
+            'data' => $data,
             'table' => (object) [
                 'controller' => 'UserController',
                 'name' => 'users',
                 'columns' => [
                     'name' => 'Nome',
                     'email' => 'Email'
+                ],
+                'actions' => [
+
                 ]
             ]
         ]);
@@ -45,10 +51,12 @@ class UserController extends Controller
      */
     public function create()
     {
+        $new = new User();
+        $this->authorize($new);
         $contexts = Context::all()->pluck('name', 'id');
         $roles = Role::all()->pluck('name', 'id');
         return view('admin.users.form',[
-            'user' => new User(),
+            'user' => $new,
             'title' => trans('admin.contexts.new'),
             'contexts' => $contexts,
             'roles' => $roles,
@@ -72,11 +80,12 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        $user = new User($request->all());
-        if (!$user->save()){
+        $new = new User($request->all());
+        $this->authorize($new);
+        if (!$new->save()){
             return redirect()->back()->withInput()->with('messages', [trans('messages.error')]);
         }
-        $user->contexts()->sync($request->get('permission'));
+        $new->contexts()->sync($request->get('permission'));
         return redirect()->route('admin.users.index')->with('messages', [trans('messages.success')]);
 
     }
@@ -89,7 +98,9 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        return json_encode(User::findOrNew($id));
+        $show = User::findOrNew($id);
+        $this->authorize($show);
+        return json_encode($show);
     }
 
     /**
@@ -100,14 +111,15 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        $user = User::findOrNew($id);
+        $edit = User::findOrNew($id);
+        $this->authorize($edit);
         $contexts = Context::all()->pluck('name', 'id');
         $permissions = ContextUser::where('user_id', '=', $id)->get()->pluck('role_id', 'context_id');
         $roles = Role::all()->pluck('name', 'id');
         return view('admin.users.form',[
-            'user' => $user,
+            'user' => $edit,
             'id' => $id,
-            'title' => $user->name,
+            'title' => $edit->name,
             'contexts' => $contexts,
             'permissions' => $permissions,
             'roles' => $roles,
@@ -131,11 +143,12 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $user = User::findOrNew($id);
-        if (!$user->update($request->all(), $id)){
+        $edit = User::findOrNew($id);
+        $this->authorize($edit);
+        if (!$edit->update($request->all(), $id)){
             return redirect()->back()->withInput()->with('messages', [trans('messages.error')]);
         }
-        $user->contexts()->sync($request->get('permission'));
+        $edit->contexts()->sync($request->get('permission'));
         return redirect()->route('admin.users.index')->with('messages', [trans('messages.success')]);
     }
 
@@ -147,6 +160,7 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $kill = User::findOrNew($id);
+        $this->authorize($kill);
     }
 }

@@ -13,7 +13,7 @@ class AuthServiceProvider extends ServiceProvider
      * @var array
      */
     protected $policies = [
-        'App\Model' => 'App\Policies\ModelPolicy',
+        'FairHub\Models\User' => 'FairHub\Policies\UserPolicy',
     ];
 
     /**
@@ -24,8 +24,15 @@ class AuthServiceProvider extends ServiceProvider
      */
     public function boot(GateContract $gate)
     {
-        $this->registerPolicies($gate);
+        //KarolyNote
+        //if you introduce any kind of bug here, sorry no more permission will be granted!
+        //any request will return false
 
-        //
+        $this->registerPolicies($gate);
+//        $gate->before(function ($user, $ability) {
+//            if ($user->isSuper()) {
+//                return true;
+//            }
+//        });
     }
 }
