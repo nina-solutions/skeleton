@@ -1,7 +1,8 @@
+include ../../partials/mixins
 // Content Wrapper. Contains page content
 div.content-wrapper
   section.content-header
-    block inner-title
-    block breadcrumbs
+    +yield('inner-title')
+    +yield('breadcrumbs')
   section.content
-    block content
+    +yield('content')

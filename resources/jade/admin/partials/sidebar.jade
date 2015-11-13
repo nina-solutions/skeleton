@@ -1,3 +1,4 @@
+include ../../partials/mixins
 aside.main-sidebar
   // sidebar: style can be found in sidebar.less
   section.sidebar
@@ -38,6 +39,9 @@ aside.main-sidebar
       li(class!="{{ (isset($table) && $table->controller == 'CategoriesController') ? 'active' : '' }}")
         a(href="{{ action('CategoriesController@index') }}")
           span Categorie
+      li(class!="{{ (isset($table) && $table->controller == 'ContentController') ? 'active' : '' }}")
+        a(href="{{ action('ContentController@index') }}")
+          span Content Generico
       li.treeview
         a(href='#')
           span Comunicati Stampa
