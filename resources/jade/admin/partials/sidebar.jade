@@ -7,7 +7,7 @@ aside.main-sidebar
       .pull-left.image
         img.img-circle(src='https://placehold.it/160x160', alt='User Image')
       .pull-left.info
-        p Szabo Karoly
+        p {{ Auth::user()->name }}
         // Status
         a(href='#')
           i.fa.fa-circle.text-success

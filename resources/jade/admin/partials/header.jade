@@ -63,16 +63,16 @@ header.main-header
         li.dropdown.user.user-menu
           a(href='#', data-toggle='dropdown').dropdown-toggle
             img(src="https://placehold.it/160x160", alt='User img').user-image
-            span.hidden-xs Nome utente
+            span.hidden-xs {{ Auth::user()->name }}
           ul.dropdown-menu
             li.user-header
               img(src="https://placehold.it/160x160", alt='User img').user-image
-              p Nome utente - web developer
-              small membro da qua qua qua
+              p {{ Auth::user()->email }}
+              small Livello: {{ Auth::user()->level }}
             li.user-body
               div.col-xs4.text-center
                 a(href='#')
-                  TEST
+                  | Wok in progress
             li.user-footer
               div.pull-left
                 a(href='/admin/profile').btn.btn-default.btn-flat Profilo

@@ -24,6 +24,6 @@ include ../../partials/mixins
         .box-header
           a.btn.btn-primary(href!="{{ action($table->controller.'@create') }}")
             h3.box-title @lang('admin.actions.create')
-          include ../partials/index/search
-        include ../partials/index/table
+          +include('admin.partials.index.search')
+        +include('admin.partials.index.table')
       + php("$data->render()")
