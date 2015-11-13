@@ -1,8 +1,9 @@
-extends ../partials/template
-block title
+include ../../partials/mixins
++extends('admin/partials/template')
++section('title')
   title @lang('admin.'.$table->name.'.head')
 
-block breadcrumbs
++section('breadcrumbs')
   ol.breadcrumb
     li
       a(href='/admin/dashboard')
@@ -11,11 +12,11 @@ block breadcrumbs
     li.active
       | @lang('admin.'.$table->name.'.head')
 
-block inner-title
++section('inner-title')
   h1 @lang('admin.'.$table->name.'.head')
     small @lang('admin.'.$table->name.'.head')
 
-block content
++section('content')
   .row
     + php("Form::model($category, ['route' => (isset($id) ? ['admin.'.$table->name.'.update', $id] : ['admin.'.$table->name.'.store']), 'method' => (isset($id) ? 'PUT' : 'POST'),'data-toggle' => 'validator', 'role' => 'form', 'class' => '', 'id' => $table->name])", "Form::close()")
       .col-md-6

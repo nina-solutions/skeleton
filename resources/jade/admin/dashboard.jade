@@ -1,17 +1,19 @@
-extends partials/template
-block title
+include ../partials/mixins
++extends('admin/partials/template')
+
++section('title')
   title @lang('admin.dashboard.head')
 
-block breadcrumbs
++section('breadcrumbs')
   ol.breadcrumb
     li.active
       a(href='#')
         i.fa.fa-dashboard
         | @lang('admin.dashboard.head')
 
-block inner-title
++section('inner-title')
   h1 @lang('admin.dashboard.head')
     small @lang('admin.dashboard.head')
 
-block content
++section('content')
   p @lang('admin.dashboard.head')

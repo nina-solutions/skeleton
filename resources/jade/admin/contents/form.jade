@@ -1,8 +1,10 @@
-extends ../partials/template
-block title
+include ../../partials/mixins
++extends('admin/partials/template')
+
++section('title')
   title @lang('admin.contents.head')
 
-block breadcrumbs
++section('breadcrumbs')
   ol.breadcrumb
     li
       a(href='/admin/dashboard')
@@ -11,11 +13,11 @@ block breadcrumbs
     li.active
       | @lang('admin.contents.head')
 
-block inner-title
++section('inner-title')
   h1 @lang('admin.contents.head')
     small @lang('admin.contents.head')
 
-block content
++section('content')
   .row
     .col-md-6
       .box.box-primary
