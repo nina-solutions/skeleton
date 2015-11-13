@@ -17,7 +17,12 @@ class ContentController extends Controller
     {
         //TODO: fix this dirty hack to init the query
         $contents = Content::where('id', '>=', '1');
-
+        $this->authorize(new Content());
+        $user = $request->user();
+        //dd($user->contexts()->get()->pluck('pivot.role_id', 'pivot.context_id')->toArray());
+        if(!$user->isAdmin()){
+            $contents->whereIn('context_id', $user->contexts()->get()->pluck('id')->toArray());
+        }
         if ($request->has('h-search-text')) {
             $contents->orLike(['description', 'name'], $request->input('h-search-text'));
         }
@@ -53,6 +58,7 @@ class ContentController extends Controller
         $contents = Content::all()->pluck('name', 'id');
         $contexts = Context::all()->pluck('name', 'id');
         $content = new Content();
+        $this->authorize($content);
         $transitions = $content->transitions();
         $statuses = Status::all()->pluck('code', 'id');
         $status = Status::find(1)->first();
@@ -76,6 +82,7 @@ class ContentController extends Controller
     public function store(ContentRequest $request)
     {
         $content = new Content($request->all());
+        $this->authorize($content);
         if (!$content->save()){
             return redirect()->back()->withInput()->with('messages', [trans('messages.error')]);
         }
@@ -92,6 +99,7 @@ class ContentController extends Controller
     public function show($id)
     {
         $content = Content::findOrNew($id);
+        $this->authorize($content);
         return response()->json($content);
     }
 
@@ -104,6 +112,7 @@ class ContentController extends Controller
     public function edit($id)
     {
         $content = Content::findOrNew($id);
+        $this->authorize($content);
         $contents = Content::where('id' , '!=', $id)->get()->pluck('name', 'id');
         $contexts = Context::all()->pluck('name', 'id');
         $transitions = $content->transitions();
@@ -131,6 +140,7 @@ class ContentController extends Controller
     public function update(ContentRequest $request, $id)
     {
         $content = Content::findOrNew($id);
+        $this->authorize($content);
         if (!$content->update($request->all(), $id)){
             return redirect()->back()->withInput()->with('messages', [trans('messages.error')]);
         }

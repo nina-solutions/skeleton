@@ -14,6 +14,10 @@ class AuthServiceProvider extends ServiceProvider
      */
     protected $policies = [
         'FairHub\Models\User' => 'FairHub\Policies\UserPolicy',
+        'FairHub\Models\Context' => 'FairHub\Policies\ContextPolicy',
+        'FairHub\Models\Content' => 'FairHub\Policies\ContentPolicy',
+        'FairHub\Models\Category' => 'FairHub\Policies\CategoryPolicy',
+        'FairHub\Models\Language' => 'FairHub\Policies\LanguagePolicy',
     ];
 
     /**
@@ -29,10 +33,10 @@ class AuthServiceProvider extends ServiceProvider
         //any request will return false
 
         $this->registerPolicies($gate);
-//        $gate->before(function ($user, $ability) {
-//            if ($user->isSuper()) {
-//                return true;
-//            }
-//        });
+        $gate->before(function ($user, $ability) {
+            if ($user->isSuper()) {
+                return true;
+            }
+        });
     }
 }

@@ -29,19 +29,19 @@ class ContextPolicy
     }
     public function create(User $user,Context $manage)
     {
-        return $user->isSuper();
+        return $user->isAdmin();
     }
     public function edit(User $user,Context $manage)
     {
-        return $user->isSuper();
+        return $user->isAdmin();
     }
     public function store(User $user,Context $manage)
     {
-        return $user->isSuper();
+        return $user->isAdmin();
     }
     public function update(User $user,Context $manage)
     {
-        return $user->isSuper();
+        return $user->isAdmin();
     }
     public function destroy(User $user,Context $manage)
     {

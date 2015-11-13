@@ -6,7 +6,7 @@ use FairHub\Models\Category;
 use FairHub\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class CategoriesPolicy
+class CategoryPolicy
 {
     use HandlesAuthorization;
 
@@ -29,19 +29,19 @@ class CategoriesPolicy
     }
     public function create(User $user,Category $manage)
     {
-        return $user->isSuper();
+        return $user->isAdmin();
     }
     public function edit(User $user,Category $manage)
     {
-        return $user->isSuper();
+        return $user->isAdmin();
     }
     public function store(User $user,Category $manage)
     {
-        return $user->isSuper();
+        return $user->isAdmin();
     }
     public function update(User $user,Category $manage)
     {
-        return $user->isSuper();
+        return $user->isAdmin();
     }
     public function destroy(User $user,Category $manage)
     {
