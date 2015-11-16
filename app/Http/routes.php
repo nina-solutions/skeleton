@@ -76,7 +76,7 @@ Route::group(
     [
         'prefix' => 'admin',
         //'as' => 'admin::',
-        'middleware' => 'auth'
+        'middleware' => ['auth', 'acl']
     ],
     function () {
         Route::get('dashboard', ['as' => 'dashboard', function () {

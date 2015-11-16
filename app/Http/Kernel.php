@@ -32,5 +32,5 @@ class Kernel extends HttpKernel
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
         'guest' => \FairHub\Http\Middleware\RedirectIfAuthenticated::class,
         'channelrole' => \FairHub\Http\Middleware\ChannelRoleMiddleware::class,
-    ];
+        'acl' => \FairHub\Http\Middleware\AclMiddleware::class,    ];
 }

@@ -4,6 +4,7 @@ namespace FairHub\Policies;
 use FairHub\Models\User;
 use FairHub\Models\Content;
 use Illuminate\Auth\Access\HandlesAuthorization;
+use Illuminate\Support\Facades\Session;
 
 class ContentPolicy
 {
@@ -25,12 +26,12 @@ class ContentPolicy
         if(!isset($content->context_id)) {
             return true;
         }
-        $policy = $user->contexts()->get()->pluck('pivot.role_id', 'pivot.context_id');
+        $policy = session('acl');
         return isset($policy[$content->context_id]);
     }
     public function update(User $user, Content $content)
     {
-        $policy = $user->contexts()->get()->pluck('pivot.role_id', 'pivot.context_id');
+        $policy = session('acl');
         if(isset($policy[$content->context_id])){
             if($content->status_id == 4 || $content->status_id == 3){
                 return $policy[$content->context_id] < 3;
@@ -46,11 +47,19 @@ class ContentPolicy
     }
     public function store(User $user, Content $content)
     {
-        return true;
+        $policy = session('acl');
+        if(isset($policy[$content->context_id])){
+            if($content->status_id == 4 || $content->status_id == 3){
+                return $policy[$content->context_id] < 3;
+            }
+            //if is not published content, that's fine
+            return true;
+        }
+        return false;
     }
     public function edit(User $user, Content $content)
     {
-        $policy = $user->contexts()->get()->pluck('pivot.role_id', 'pivot.context_id');
+        $policy = session('acl');
         if(isset($policy[$content->context_id])){
             if($content->status_id == 4 || $content->status_id == 3){
                 return $policy[$content->context_id] < 3;
@@ -62,7 +71,7 @@ class ContentPolicy
     }
     public function show(User $user, Content $content)
     {
-        $policy = $user->contexts()->get()->pluck('pivot.role_id', 'pivot.context_id');
+        $policy = session('acl');
         return isset($policy[$content->context_id]);
     }
     public function destroy(User $user, Content $content)
