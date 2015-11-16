@@ -17,11 +17,11 @@ class CategoriesController extends Controller
     public function index(Request $request)
     {
         $data = Category::where('id', '>=', '1');
-
+        $this->authorize(new Category());
         if ($request->has('h-search-text')) {
             $data->orLike(['name', 'description'],$request->input('h-search-text'));
         }
-        return view('admin.categories.index',[
+        return view('admin.index',[
             'data' => $data->paginate(),
             'table' => (object) [
                 'controller' => 'CategoriesController',
@@ -41,6 +41,7 @@ class CategoriesController extends Controller
      */
     public function create()
     {
+        $this->authorize(new Category());
         return view('admin.categories.form',[
             'category' => new Category(),
             'title' => trans('admin.categories.new'),
@@ -64,6 +65,7 @@ class CategoriesController extends Controller
     public function store(Request $request)
     {
         $new = new Category($request->all());
+        $this->authorize($new);
         if (!$new->save()){
             return redirect()->back()->withInput()->with('messages', [trans('messages.error')]);
         }
@@ -79,7 +81,9 @@ class CategoriesController extends Controller
      */
     public function show($id)
     {
-        return json_encode(Category::findOrNew($id));
+        $show = Category::findOrNew($id);
+        $this->authorize($show);
+        return json_encode($show);
     }
 
     /**
@@ -91,6 +95,7 @@ class CategoriesController extends Controller
     public function edit($id)
     {
         $edit = Category::findOrNew($id);
+        $this->authorize($edit);
         return view('admin.categories.form',[
             'category' => $edit,
             'id' => $id,
@@ -116,6 +121,7 @@ class CategoriesController extends Controller
     public function update(Request $request, $id)
     {
         $edit = Category::findOrNew($id);
+        $this->authorize($edit);
         if (!$edit->update($request->all(), $id)){
             return redirect()->back()->withInput()->with('messages', [trans('messages.error')]);
         }

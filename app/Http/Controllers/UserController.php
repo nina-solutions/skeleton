@@ -21,14 +21,14 @@ class UserController extends Controller
     {
         //TODO: fix this dirty hack to init the query
         $data = User::where('id', '>=', '1');
+        $this->authorize(new User());
 
         if ($request->has('h-search-text')) {
             $data->orLike(['name', 'email'],$request->input('h-search-text'));
         }
         $data = $data->paginate();
-        $this->authorize(new User());
 
-        return view('admin.users.index',[
+        return view('admin.index',[
             'data' => $data,
             'table' => (object) [
                 'controller' => 'UserController',

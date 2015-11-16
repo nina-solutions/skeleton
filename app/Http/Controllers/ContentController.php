@@ -30,7 +30,7 @@ class ContentController extends Controller
         if ($request->has('type') && $request->input('type') == 'json') {
             return response()->json($contents->get());
         }
-        return response()->view('admin.contents.index',[
+        return response()->view('admin.index',[
             'data' => $contents->paginate(),
             'table' => (object) [
                 'name' => 'contents',
