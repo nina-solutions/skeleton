@@ -26,7 +26,7 @@ class ContentPolicy
     }
     public function update(User $user, Content $content)
     {
-        $policy = $user->contexts()->get()->pluck('pivot.role_id', 'pivot.context_id')->toArray();
+        $policy = $user->contexts()->get()->pluck('pivot.role_id', 'pivot.context_id');
         if(isset($policy[$content->context_id])){
             if($content->status_id == 4 || $content->status_id == 3){
                 return $policy[$content->context_id] < 3;
@@ -46,10 +46,7 @@ class ContentPolicy
     }
     public function edit(User $user, Content $content)
     {
-        $policy = $user->contexts();
-        $policy = $policy->get();
-        $policy = $policy->pluck('pivot.role_id', 'pivot.context_id');
-        //$policy = [1=>2, 2=>2, 3=>2];
+        $policy = $user->contexts()->get()->pluck('pivot.role_id', 'pivot.context_id');
         if(isset($policy[$content->context_id])){
             if($content->status_id == 4 || $content->status_id == 3){
                 return $policy[$content->context_id] < 3;
