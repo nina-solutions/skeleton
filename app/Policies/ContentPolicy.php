@@ -22,7 +22,11 @@ class ContentPolicy
 
     public function index(User $user, Content $content)
     {
-        return true;
+        if(!isset($content->context_id)) {
+            return true;
+        }
+        $policy = $user->contexts()->get()->pluck('pivot.role_id', 'pivot.context_id');
+        return isset($policy[$content->context_id]);
     }
     public function update(User $user, Content $content)
     {
@@ -58,7 +62,8 @@ class ContentPolicy
     }
     public function show(User $user, Content $content)
     {
-        return true;
+        $policy = $user->contexts()->get()->pluck('pivot.role_id', 'pivot.context_id');
+        return isset($policy[$content->context_id]);
     }
     public function destroy(User $user, Content $content)
     {
