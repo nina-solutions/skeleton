@@ -11,7 +11,7 @@ class FairTranslation extends Model
      */
     public function fair()
     {
-        return $this->belongsTo('FairHub\Fair');
+        return $this->belongsTo('FairHub\Models\Fair');
     }
 
     /**
@@ -19,7 +19,7 @@ class FairTranslation extends Model
      */
     public function language()
     {
-        return $this->belongsTo('FairHub\Language');
+        return $this->belongsTo('FairHub\Models\Language');
     }
 
     /**

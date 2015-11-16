@@ -19,6 +19,7 @@ return [
     'contact' => [
         'name' => 'Nome',
         'surname' => 'Cognome',
+        'remember' => 'Ricordati di me',
         'email' => 'Indirizzo E-mail',
         'password' => 'Password',
         'password-confirm' => 'Conferma password',

@@ -1,3 +1,4 @@
+include ../../partials/mixins
 aside.main-sidebar
   // sidebar: style can be found in sidebar.less
   section.sidebar
@@ -6,7 +7,7 @@ aside.main-sidebar
       .pull-left.image
         img.img-circle(src='https://placehold.it/160x160', alt='User Image')
       .pull-left.info
-        p Szabo Karoly - USERNAME
+        p {{ Auth::user()->name }}
         // Status
         a(href='#')
           i.fa.fa-circle.text-success
@@ -23,20 +24,31 @@ aside.main-sidebar
     ul.sidebar-menu
       li.header HEADER
       // Optionally, you can add icons to the links
-      li.active
+      li(class!="{{ (!isset($table)) ? 'active' : '' }}")
         a(href='#')
-          span Link
-      li
-        a(href='#')
-          span Another Link
+          span Dashboard
+      li(class!="{{ (isset($table) && $table->controller == 'UserController') ? 'active' : '' }}")
+        a(href="{{ action('UserController@index') }}")
+          span Utenti
+      li(class!="{{ (isset($table) && $table->controller == 'ContextController') ? 'active' : '' }}")
+        a(href="{{ action('ContextController@index') }}")
+          span Fiere
+      li(class!="{{ (isset($table) && $table->controller == 'LanguagesController') ? 'active' : '' }}")
+        a(href="{{ action('LanguagesController@index') }}")
+          span Lingue
+      li(class!="{{ (isset($table) && $table->controller == 'CategoriesController') ? 'active' : '' }}")
+        a(href="{{ action('CategoriesController@index') }}")
+          span Categorie
+      li(class!="{{ (isset($table) && $table->controller == 'ContentController') ? 'active' : '' }}")
+        a(href="{{ action('ContentController@index') }}")
+          span Content Generico
       li.treeview
         a(href='#')
-          span Multilevel
+          span Comunicati Stampa
           i.fa.fa-angle-left.pull-right
         ul.treeview-menu
           li
-            a(href='#') Link in level 2
-          li
-            a(href='#') Link in level 2
+            a(href="{{ action('PressReleaseController@index') }}") Comunicati
+
     // /.sidebar-menu
   // /.sidebar

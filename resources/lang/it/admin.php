@@ -22,6 +22,15 @@ return [
             'old' => 'Scaduti'
         ],
     ],
+
+    'actions' => [
+        'save' => 'Salva',
+        'update' => 'Aggiorna',
+        'create' => 'Crea',
+        'cancel' => 'Annulla',
+        'reset' => 'Cancella',
+    ],
+
     'contact' => [
         'name' => 'Nome',
         'email' => 'Indirizzo E-mail',
@@ -34,6 +43,42 @@ return [
         'head' => 'Comunicati Stampa',
         'index' => [
             'head' => 'Elenco comunicati'
+        ],
+    ],
+    'events' => [
+        'head' => 'Eventi',
+        'index' => [
+            'head' => 'Eventi'
+        ],
+    ],
+    'languages' => [
+        'head' => 'Lingue',
+        'index' => [
+            'head' => 'Lingue'
+        ],
+        'form' => [
+            'code' => 'Codice',
+            'description' => 'Descrizione'
+        ],
+    ],
+    'contexts' => [
+        'new' => 'Nuova Fiera',
+        'head' => 'Fiere',
+        'index' => [
+            'head' => 'Elanco Fiere'
+        ],
+        'form' => [
+            'code' => 'Codice',
+            'description' => 'Descrizione',
+            'name' => 'Nome',
+            'parent' => 'Parte di',
+            'dates' => 'Date evento',
+        ],
+    ],
+    'categories' => [
+        'head' => 'Categorie',
+        'index' => [
+            'head' => 'Categorie'
         ],
     ],
 ];

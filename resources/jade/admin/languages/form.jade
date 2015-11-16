@@ -1,0 +1,40 @@
+include ../../partials/mixins
++extends('admin/partials/template')
+
++section('title')
+  title @lang('admin.languages.head')
+
++section('breadcrumbs')
+  ol.breadcrumb
+    li
+      a(href='/admin/dashboard')
+        i.fa.fa-dashboard
+        | @lang('admin.dashboard.head')
+    li.active
+      | @lang('admin.languages.head')
+
++section('inner-title')
+  h1 @lang('admin.languages.head')
+    small @lang('admin.languages.head')
+
++section('content')
+  .row
+    .col-md-6
+      .box.box-primary
+        .box-header.with-border
+          h3.box-title @lang('admin.languages.head')
+        + php("Form::model($language, ['route' => (isset($id) ? array('admin.languages.update', $id) : array('admin.languages.store')), 'method' => (isset($id) ? 'PUT' : 'POST'),'data-toggle' => 'validator', 'role' => 'form', 'class' => ''])", "Form::close()")
+          + if("isset($id)")
+            + php("Form::hidden('id', $id)")
+          .box-body
+            .form-group
+              + php("Form::label('code', trans('admin.languages.form.code'), ['class' => ''])")
+              + php("Form::text('code', Input::old('code'), array('required', 'class'=>'form-control', 'placeholder'=>trans('admin.languages.form.code')))")
+            .form-group
+              + php("Form::label('description', trans('admin.languages.form.description'), ['class' => ''])")
+              + php("Form::text('description', Input::old('description'), array('required', 'class'=>'form-control', 'placeholder'=>trans('admin.languages.form.description')))")
+          // /.box-body
+          .box-footer
+            button.btn.btn-primary(type='submit') @lang('admin.actions.save')
+
+

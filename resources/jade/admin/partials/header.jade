@@ -8,77 +8,71 @@ header.main-header
     // Navbar Right Menu
     div.navbar-custom-menu
       ul.nav.navbar-nav
-        +if("Session::has('message')")
+        +if("Session::has('messages')")
           li.dropdown.messages-menu
             a(href='#', data-toggle='dropdown').dropdown-toggle
               i.fa.fa-envelope-o
-              span.label.label-success {{count($messages)}}
+              span.label.label-success {{ count(Session::get('messages')) }}
             ul.dropdown-menu
-              li.header Hai count($messages) messaggi
-              li
-                ul.menu
-                  // messages
-                  li
-                    a(href='#')
-                      div.pull-left
-                        img(src="https://placehold.it/160x160", alt='User img').img-circle
-                      h4
-                        messaggio
-                        small
-                          i.fa.fa-clock-o
-                            x minuti
-                      p Testo messaggio
+              li.header Hai {{ count(Session::get('messages')) }} messaggi
+              + foreach('Session::get("messages")','$msg')
+                li
+                  ul.menu
+                    // messages
+                    li
+                      a(href='#')
+                        i.fa.fa-users.text-aqua
+                          | {{ $msg }}
               li.footer
                 a(href='#') Vedi tutti i messaggi
-        li.dropdown.notifications-menu
-          a(href='#', data-toggle='dropdown').dropdown-toggle
-            i.fa.fa-bell-o
-            span.lavel.label-warning {{$errors->count()}}
-          ul.dropdown-menu
-            li.header Hai {{$errors->count()}} notifiche
-            + foreach('$errors->all()','$error')
-              li
-                ul.menu
-                  // notifications
-                  li
-                    a(href='#')
-                      i.fa.fa-users.text-aqua
-                        | {{$error}}
-            li.footer
-              a(href='#') Vedi tutte le notifiche
+        +if("$errors->count() > 0")
+          li.dropdown.notifications-menu
+            a(href='#', data-toggle='dropdown').dropdown-toggle
+              i.fa.fa-bell-o
+              span.lavel.label-warning {{ $errors->count() }}
+            ul.dropdown-menu
+              li.header Hai {{ $errors->count() }} notifiche
+              + foreach('$errors->all()','$error')
+                li
+                  ul.menu
+                    // notifications
+                    li
+                      a(href='#')
+                        i.fa.fa-users.text-aqua
+                          | {{ $error }}
+              li.footer
+                a(href='#') Vedi tutte le notifiche
         +if("Session::has('issues')")
           li.dropdown.tasks-menu
             a(href='#', data-toggle='dropdown').dropdown-toggle
               i.fa.fa-flag-o
-              span.lavel.label-danger {{$issues->count()}}
+              span.lavel.label-danger {{ count(Session::get('issues')) }}
             ul.dropdown-menu
-              li.header Hai {{$issues->count()}} issue aperte
-              + foreach('$issues->all()','$issue')
-              li
-                ul.menu
-                  // issues
-                  li
-                    a(href='#')
-                      h3
-                        | {{$issue->content}}
-                        small.pull-right {{$issue->percentage}}%
+              li.header Hai {{ count(Session::get('issues')) }} issue aperte
+              + foreach('Session::get("issues")','$issue')
+                li
+                  ul.menu
+                    // issues
+                    li
+                      a(href='#')
+                        h3
+                          | {{ $issue->content }}
+                          small.pull-right {{ $issue->percentage }}%
               li.footer
                 a(href='#') Vedi tutte le issues
         li.dropdown.user.user-menu
           a(href='#', data-toggle='dropdown').dropdown-toggle
             img(src="https://placehold.it/160x160", alt='User img').user-image
-            span.hidden-xs Nome utente
+            span.hidden-xs {{ Auth::user()->name }}
           ul.dropdown-menu
             li.user-header
               img(src="https://placehold.it/160x160", alt='User img').user-image
-              p
-                Nome utente - web developer
-                small
-                  membro da qua qua qua
+              p {{ Auth::user()->email }}
+              small Livello: {{ Auth::user()->level }}
             li.user-body
               div.col-xs4.text-center
                 a(href='#')
-                  TEST
+                  | Wok in progress
             li.user-footer
               div.pull-left
                 a(href='/admin/profile').btn.btn-default.btn-flat Profilo

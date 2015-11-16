@@ -66,6 +66,14 @@ class tab_categorie extends HubModel
      */
     public function translation()
     {
-        return $this->hasMany('FairHub\tab_categorie_translations');
+        return $this->hasMany('FairHub\Models\tab_categorie_translations');
+    }
+
+    /**
+     * Get the fair that owns the edition.
+     */
+    public function event()
+    {
+        return $this->belongsTo('FairHub\Models\tab_eventi', 'cat_eve_id', 'eve_id', 'tab_eventi');
     }
 }

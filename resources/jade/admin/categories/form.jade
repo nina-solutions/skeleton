@@ -1,0 +1,35 @@
+include ../../partials/mixins
++extends('admin/partials/template')
++section('title')
+  title @lang('admin.'.$table->name.'.head')
+
++section('breadcrumbs')
+  ol.breadcrumb
+    li
+      a(href='/admin/dashboard')
+        i.fa.fa-dashboard
+        | @lang('admin.dashboard.head')
+    li.active
+      | @lang('admin.'.$table->name.'.head')
+
++section('inner-title')
+  h1 @lang('admin.'.$table->name.'.head')
+    small @lang('admin.'.$table->name.'.head')
+
++section('content')
+  .row
+    + php("Form::model($category, ['route' => (isset($id) ? ['admin.'.$table->name.'.update', $id] : ['admin.'.$table->name.'.store']), 'method' => (isset($id) ? 'PUT' : 'POST'),'data-toggle' => 'validator', 'role' => 'form', 'class' => '', 'id' => $table->name])", "Form::close()")
+      .col-md-6
+        .box.box-primary
+          .box-header.with-border
+            h3.box-title {{ $title }}
+          .box-body
+            .form-group
+              + php("Form::label('name', trans('admin.'.$table->name.'.form.name'), ['class' => ''])")
+              + php("Form::text('name', Input::old('name'), ['required', 'class'=>'form-control', 'placeholder'=>trans('admin.'.$table->name.'.form.name')])")
+            .form-group
+              + php("Form::label('description', trans('admin.'.$table->name.'.form.email'), ['class' => ''])")
+              + php("Form::text('description', Input::old('description'), ['class'=>'form-control', 'placeholder'=>trans('admin.'.$table->name.'.form.description')])")
+          // /.box-body
+          .box-footer
+            button.btn.btn-primary(type='submit') @lang('admin.actions.save')

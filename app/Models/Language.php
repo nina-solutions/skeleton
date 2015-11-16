@@ -2,15 +2,18 @@
 
 namespace FairHub\Models;
 
-use Illuminate\Database\Eloquent\Model;
-
-class Language extends Model
+class Language extends HubModel
 {
+    protected $fillable = [
+        'code',
+        'description'
+    ];
     /**
-     * Get the code-related fair.
+     * Get the langauge with that code.
      */
     public function scopeCode($query, $code)
     {
         return $query->where('code', '=', substr($code,0,2));
     }
+
 }

@@ -1,0 +1,7 @@
+include ../../../partials/mixins
+.box-tools.pull-right
+  .has-feedback
+    form(action='',id='search-form')
+      + php("Form::hidden('h-search-text', Input::old('h-search-text'), array('id'=>'h-search-text'))")
+    + php("Form::text('search-text', Input::old('h-search-text'), array('id'=>'search-text', 'class'=>'form-control input-sm', 'placeholder'=>trans('admin.search.text')))")
+    span#search.glyphicon.glyphicon-search.form-control-feedback

@@ -10,6 +10,8 @@ return [
     | The following language lines are used by the Fair Hub web app
     |
     */
+    'success' => 'Success',
+    'error' => 'Error',
 
     'hello' => 'Ciao',
     'thanks' => 'Grazie per aver scelto il nostro servizio.',

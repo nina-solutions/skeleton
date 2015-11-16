@@ -22,6 +22,15 @@ return [
             'old' => 'Expired'
         ],
     ],
+
+    'actions' => [
+        'save' => 'Save',
+        'update' => 'Update',
+        'create' => 'Create',
+        'cancel' => 'Cancel',
+        'reset' => 'Reset',
+    ],
+
     'contact' => [
         'name' => 'Name',
         'email' => 'Personal E-mail',
@@ -34,6 +43,42 @@ return [
         'head' => 'Press Release',
         'index' => [
             'head' => 'Releases'
+        ],
+    ],
+    'events' => [
+        'head' => 'Events',
+        'index' => [
+            'head' => 'Events'
+        ],
+    ],
+    'languages' => [
+        'head' => 'Languages',
+        'index' => [
+            'head' => 'Languages'
+        ],
+        'form' => [
+            'code' => 'Code',
+            'description' => 'Description'
+        ],
+    ],
+    'contexts' => [
+        'new' => 'New Fair',
+        'head' => 'Fiere',
+        'index' => [
+            'head' => 'Elenco Fiere'
+        ],
+        'form' => [
+            'code' => 'Code',
+            'description' => 'Description',
+            'name' => 'Name',
+            'parent' => 'Part of',
+            'dates' => 'Event dates',
+        ],
+    ],
+    'categories' => [
+        'head' => 'Categories',
+        'index' => [
+            'head' => 'Categories'
         ],
     ],
 ];

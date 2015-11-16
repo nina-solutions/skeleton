@@ -75,14 +75,21 @@ Route::group('{locale}/{service}/{action}/{code}', function ($locale='it', $serv
 Route::group(
     [
         'prefix' => 'admin',
-        'as' => 'admin::',
+        //'as' => 'admin::',
         'middleware' => 'auth'
     ],
     function () {
         Route::get('dashboard', ['as' => 'dashboard', function () {
             return view('admin/dashboard');
         }]);
-        Route::resource('press-release', 'PressReleaseController', ['as' => 'press-release']);
+        Route::resource('press-release', 'PressReleaseController');
+        Route::resource('events', 'EventsController');
+
+        Route::resource('categories', 'CategoriesController');
+        Route::resource('languages', 'LanguagesController');
+        Route::resource('contexts', 'ContextController');
+        Route::resource('contents', 'ContentController');
+        Route::resource('users', 'UserController');
 
 });
 

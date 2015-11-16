@@ -98,7 +98,7 @@ class tab_comunicati extends HubModel
      */
     public function translation()
     {
-        return $this->hasMany('FairHub\tab_eventi_translations');
+        return $this->hasMany('FairHub\Models\tab_eventi_translations');
     }
 
 }

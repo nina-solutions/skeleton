@@ -13,7 +13,7 @@ class tab_comunicati_translations extends HubModel
      */
     public function comunicati()
     {
-        return $this->belongsTo('FairHub\tab_comunicati', 'comunicati_id', 'com_id', 'tab_comunicati');
+        return $this->belongsTo('FairHub\Models\tab_comunicati', 'comunicati_id', 'com_id', 'tab_comunicati');
     }
 
     /**
@@ -21,7 +21,7 @@ class tab_comunicati_translations extends HubModel
      */
     public function language()
     {
-        return $this->belongsTo('FairHub\Language');
+        return $this->belongsTo('FairHub\Models\Language');
     }
 
     /**

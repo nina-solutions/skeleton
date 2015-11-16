@@ -2,14 +2,11 @@
 include ../../partials/mixins
 doctype html
 html
-  include admin-header
+  +include('admin.partials.admin-header')
   body.skin-blue
     div.wrapper
-      include header
-      include sidebar
-      //
-        include ../../partials/errors
-        include ../../partials/messages
-      include content
-      include footer
-    include admin-footer
+      +include('admin.partials.header')
+      +include('admin.partials.sidebar')
+      +include('admin.partials.content')
+      +include('admin.partials.footer')
+    +include('admin.partials.admin-footer')

@@ -12,7 +12,7 @@ class FairEdition extends Model
      */
     public function fair()
     {
-        return $this->belongsTo('FairHub\Fair');
+        return $this->belongsTo('FairHub\Models\Fair');
     }
 
     /**
@@ -23,7 +23,7 @@ class FairEdition extends Model
         if ($language == null) {
             $language = App::getLocale();
         }
-        return $this->hasMany('FairHub\FairEditionTranslation');
+        return $this->hasMany('FairHub\Models\FairEditionTranslation');
     }
 
     /**
