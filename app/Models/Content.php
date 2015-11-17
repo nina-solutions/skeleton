@@ -2,14 +2,10 @@
 
 namespace FairHub\Models;
 
-use Illuminate\Database\Eloquent\Model;
-
 class Content extends HubModel
 {
     protected $nullable = [
         'content_id',
-        'status_id',
-        'description'
     ];
     protected $attributes = [
         'status_id' => 1,

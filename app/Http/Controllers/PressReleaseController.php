@@ -2,9 +2,12 @@
 
 namespace FairHub\Http\Controllers;
 
+use FairHub\Models\Category;
 use FairHub\Models\Content;
+use FairHub\Models\Context;
 use FairHub\Models\Language;
 use FairHub\Models\PressRelease;
+use FairHub\Models\Status;
 use FairHub\Models\User;
 use Illuminate\Http\Request;
 use FairHub\Http\Requests;
@@ -12,6 +15,8 @@ use FairHub\Http\Controllers\Controller;
 
 class PressReleaseController extends Controller
 {
+    protected $name = 'press-releases';
+    protected $controller = 'PressReleaseController';
     /**
      *
      * Display a listing of the resource.
@@ -32,15 +37,18 @@ class PressReleaseController extends Controller
         return view('admin.index',[
             'data' => $data,
             'table' => (object) [
-                'controller' => 'PressReleaseController',
-                'name' => 'press-releases',
+                'controller' => $this->controller,
+                'name' => $this->name,
                 'columns' => [
                     'title' => 'Titolo',
-                    'contentName' => 'Nome',
+                    //'contentName' => 'Nome',
                     //'contextName' => 'Contesto'
                 ],
                 'actions' => [
 
+                ],
+                'modifiers' => [
+                    //'statusName' => 'statusCode'
                 ]
             ]
         ]);
@@ -51,9 +59,32 @@ class PressReleaseController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        $contents = Content::whereIn('context_id', array_keys($request->session()->get('acl')->toArray()))->get()->pluck('name', 'id');
+        $contexts = Context::whereIn('id', array_keys($request->session()->get('acl')->toArray()))->get()->pluck('name', 'id');
+        $categories = Category::all()->pluck('name', 'id');
+        $content = new Content();
+        $this->authorize($content);
+        $model = new PressRelease();
+        $model->content = $content;
+        $transitions = $content->transitions();
+        $statuses = Status::all()->pluck('code', 'id');
+        $status = Status::where('id', '=', '1')->first();
+        return response()->view("admin.$this->name.form",[
+            'model' => $model,
+            'contents' => $contents,
+            'contexts' => $contexts,
+            'categories' => $categories,
+            'statuses' => $statuses,
+            'transitions' => $transitions,
+            'status' => $status,
+            'title' => trans("admin.$this->name.new"),
+            'table' => (object) [
+                'controller' => $this->controller,
+                'name' => $this->name,
+            ]
+        ]);
     }
 
     /**
@@ -64,7 +95,15 @@ class PressReleaseController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $new = new PressRelease($request->all());
+        $this->authorize($new->content);
+        if (!$new->save()){
+            return redirect()->back()->withInput()->with('messages', [trans('messages.error')]);
+        }
+        $content = new Content($request->get('content'));
+        $new->content()->save($content);
+        return redirect()->route('admin.contents.index')->with('messages', [trans('messages.success')]);
+
     }
 
     /**

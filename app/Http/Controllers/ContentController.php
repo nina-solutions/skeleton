@@ -20,9 +20,7 @@ class ContentController extends Controller
         $this->authorize(new Content());
         $user = $request->user();
         //dd($user->contexts()->get()->pluck('pivot.role_id', 'pivot.context_id')->toArray());
-        if(!$user->isAdmin()){
-            $contents->whereIn('context_id', array_keys($request->session()->get('acl')->toArray()));
-        }
+        $contents->whereIn('context_id', array_keys($request->session()->get('acl')->toArray()));
         if ($request->has('h-search-text')) {
             $contents->orLike(['description', 'name'], $request->input('h-search-text'));
         }
@@ -61,7 +59,7 @@ class ContentController extends Controller
         $this->authorize($content);
         $transitions = $content->transitions();
         $statuses = Status::all()->pluck('code', 'id');
-        $status = Status::find(1)->first();
+        $status = Status::where('id', '=', '1')->first();
         return response()->view('admin.contents.form',[
             'content' => $content,
             'contents' => $contents,
