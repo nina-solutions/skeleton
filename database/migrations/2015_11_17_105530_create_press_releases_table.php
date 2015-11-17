@@ -22,7 +22,7 @@ class CreatePressReleasesTable extends Migration
             $table->integer('category_id')->unsigned();
 
             $table->text('body');
-            $table->string('notes');
+            $table->string('notes')->nullable();
 
             $table->foreign('category_id')->references('id')->on('categories');
         });

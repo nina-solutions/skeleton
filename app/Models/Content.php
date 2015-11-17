@@ -58,8 +58,8 @@ class Content extends HubModel
 
     public function contentParent(){
         return $this->belongsTo('FairHub\Models\Content', 'content_id', 'id');
-
     }
+
     public function getStatusNameAttribute(){
         $status = $this->status()->first();
         if ($status !== null)

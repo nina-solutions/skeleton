@@ -83,8 +83,10 @@ Route::group(
             ['get','post'],
             'dashboard',
             ['as' => 'dashboard', 'uses' => 'CustomController@dashboard']);
-        Route::resource('press-release', 'PressReleaseController');
+
         Route::resource('events', 'EventsController');
+
+        Route::resource('press-releases', 'PressReleaseController');
 
         Route::resource('categories', 'CategoriesController');
         Route::resource('languages', 'LanguagesController');
