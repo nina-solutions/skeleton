@@ -80,4 +80,8 @@ class Content extends HubModel
         return StatusTransition::from($this->status_id)->get()->pluck('name', 'to_status_id');
     }
 
+    public function contentable(){
+        return $this->morphTo();
+    }
+
 }
