@@ -2,10 +2,10 @@
 
 namespace FairHub\Http\Controllers;
 
+use FairHub\Models\Content;
 use FairHub\Models\Language;
-use FairHub\Models\tab_categorie;
-use FairHub\Models\tab_comunicati;
-use FairHub\Models\tab_eventi;
+use FairHub\Models\PressRelease;
+use FairHub\Models\User;
 use Illuminate\Http\Request;
 use FairHub\Http\Requests;
 use FairHub\Http\Controllers\Controller;
@@ -14,22 +14,36 @@ class PressReleaseController extends Controller
 {
     /**
      *
-composer require symfony/psr-http-message-bridge
-composer require zendframework/zend-diactoros
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request)
     {
-        if ($request->has('h-search-text'))
-            $communications = tab_comunicati::like('com_titolo', $request->input('h-search-text'))->paginate();
-        else
-            $communications = tab_comunicati::paginate();
+        //TODO: fix this dirty hack to init the query
+        $data = PressRelease::where('id', '>=', '1');
+        $this->authorize(new Content());
 
-        return view('admin.press-release.index',[
-                'communications' => $communications
-            ]);
+        if ($request->has('h-search-text')) {
+            $data->orLike(['title', 'subhead', 'subtitle'],$request->input('h-search-text'));
+        }
+        $data = $data->paginate();
+
+        return view('admin.index',[
+            'data' => $data,
+            'table' => (object) [
+                'controller' => 'PressReleaseController',
+                'name' => 'press-releases',
+                'columns' => [
+                    'title' => 'Titolo',
+                    'contentName' => 'Nome',
+                    //'contextName' => 'Contesto'
+                ],
+                'actions' => [
+
+                ]
+            ]
+        ]);
     }
 
     /**
@@ -61,7 +75,6 @@ composer require zendframework/zend-diactoros
      */
     public function show($id)
     {
-        return response()->json(tab_comunicati::where('com_id', '=', $id)->get());
     }
 
     /**
@@ -72,10 +85,7 @@ composer require zendframework/zend-diactoros
      */
     public function edit($id)
     {
-        $comunicato = tab_comunicati::where('com_id', '=', $id)->get();
-        $categorie = tab_categorie::all();
-        $eventi = tab_eventi::all();
-        $languages = Language::all();
+
 
     }
 

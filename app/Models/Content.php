@@ -58,8 +58,8 @@ class Content extends HubModel
 
     public function contentParent(){
         return $this->belongsTo('FairHub\Models\Content', 'content_id', 'id');
-
     }
+
     public function getStatusNameAttribute(){
         $status = $this->status()->first();
         if ($status !== null)
@@ -78,6 +78,10 @@ class Content extends HubModel
 
     public function transitions(){
         return StatusTransition::from($this->status_id)->get()->pluck('name', 'to_status_id');
+    }
+
+    public function contentable(){
+        return $this->morphTo();
     }
 
 }

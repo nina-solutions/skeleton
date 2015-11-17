@@ -17,3 +17,15 @@ include ../partials/mixins
 
 +section('content')
   p @lang('admin.dashboard.head')
+  .row
+    .col-md-6
+      .box.box-primary
+        .box-header.with-border
+          h3.box-title {{ $title }}
+        + php("Form::open(['method' => 'POST','data-toggle' => 'validator', 'role' => 'form', 'class' => ''])", "Form::close()")
+          .box-body
+            .form-group
+              + php("Form::label('acl[]', trans('admin.dashboard.contexts'), ['class' => ''])")
+              + php("Form::select('acl[]', $options, $selected, ['required', 'multiple' => true, 'class' => 'form-control select2'])")
+          .box-footer
+            button.btn.btn-primary(type='submit') @lang('admin.actions.save')

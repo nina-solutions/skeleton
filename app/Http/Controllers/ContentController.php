@@ -21,7 +21,7 @@ class ContentController extends Controller
         $user = $request->user();
         //dd($user->contexts()->get()->pluck('pivot.role_id', 'pivot.context_id')->toArray());
         if(!$user->isAdmin()){
-            $contents->whereIn('context_id', $user->contexts()->get()->pluck('id')->toArray());
+            $contents->whereIn('context_id', array_keys($request->session()->get('acl')->toArray()));
         }
         if ($request->has('h-search-text')) {
             $contents->orLike(['description', 'name'], $request->input('h-search-text'));
@@ -30,7 +30,7 @@ class ContentController extends Controller
         if ($request->has('type') && $request->input('type') == 'json') {
             return response()->json($contents->get());
         }
-        return response()->view('admin.contents.index',[
+        return response()->view('admin.index',[
             'data' => $contents->paginate(),
             'table' => (object) [
                 'name' => 'contents',

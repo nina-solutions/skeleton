@@ -76,14 +76,17 @@ Route::group(
     [
         'prefix' => 'admin',
         //'as' => 'admin::',
-        'middleware' => 'auth'
+        'middleware' => ['auth', 'acl']
     ],
     function () {
-        Route::get('dashboard', ['as' => 'dashboard', function () {
-            return view('admin/dashboard');
-        }]);
-        Route::resource('press-release', 'PressReleaseController');
+        Route::match(
+            ['get','post'],
+            'dashboard',
+            ['as' => 'dashboard', 'uses' => 'CustomController@dashboard']);
+
         Route::resource('events', 'EventsController');
+
+        Route::resource('press-releases', 'PressReleaseController');
 
         Route::resource('categories', 'CategoriesController');
         Route::resource('languages', 'LanguagesController');
@@ -109,11 +112,3 @@ Route::post('password/email', 'Auth\PasswordController@postEmail');
 // Password reset routes...
 Route::get('password/reset/{token}', 'Auth\PasswordController@getReset');
 Route::post('password/reset', 'Auth\PasswordController@postReset');
-
-/*
-Route::controllers([
-    'auth' => 'Auth\AuthController',
-    'password' => 'Auth\PasswordController',
-]);
-
-*/

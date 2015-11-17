@@ -19,7 +19,7 @@ class ContextController extends Controller
     {
         //TODO: fix this dirty hack to init the query
         $contexts = Context::where('id', '>=', '1');
-
+        $this->authorize(new Context());
         if ($request->has('h-search-text')) {
             $contexts->orLike(['name', 'description'], $request->input('h-search-text'));
         }
@@ -30,7 +30,7 @@ class ContextController extends Controller
         if ($request->has('type') && $request->input('type') == 'json') {
             return response()->json($contexts->get());
         }
-        return response()->view('admin.contexts.index',[
+        return response()->view('admin.index',[
             'data' => $contexts->paginate(),
             'table' => (object) [
                 'name' => 'contexts',
@@ -52,6 +52,7 @@ class ContextController extends Controller
      */
     public function create()
     {
+        $this->authorize(new Context());
         $contexts = Context::all()->pluck('name', 'id');
         $categories = Category::all()->pluck('name', 'id');
         return response()->view('admin.contexts.form',[
@@ -70,11 +71,12 @@ class ContextController extends Controller
      */
     public function store(Request $request)
     {
-        $context = new Context($request->all());
-        if (!$context->save()){
+        $new = new Context($request->all());
+        $this->authorize($new);
+        if (!$new->save()){
             return redirect()->back()->withInput()->with('messages', [trans('messages.error')]);
         }
-        $context->categories()->sync($request->get('categories'));
+        $new->categories()->sync($request->get('categories'));
         return redirect()->route('admin.contexts.index')->with('messages', [trans('messages.success')]);
 
     }
@@ -87,8 +89,9 @@ class ContextController extends Controller
      */
     public function show($id)
     {
-        $context = Context::findOrNew($id);
-        return response()->json($context);
+        $show = Context::findOrNew($id);
+        $this->authorize($show);
+        return response()->json($show);
     }
 
     /**
@@ -99,16 +102,17 @@ class ContextController extends Controller
      */
     public function edit($id)
     {
-        $context = Context::findOrNew($id);
+        $edit = Context::findOrNew($id);
+        $this->authorize($edit);
         $contexts = Context::where('id' , '!=', $id)->get()->pluck('name', 'id');
         $categories = Category::all()->pluck('name', 'id');
 
         return response()->view('admin.contexts.form',[
-            'context' => $context,
+            'context' => $edit,
             'contexts' => $contexts,
             'categories' => $categories,
             'id' => $id,
-            'title' => $context->name
+            'title' => $edit->name
         ]);
     }
 
@@ -121,11 +125,12 @@ class ContextController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $context = Context::findOrNew($id);
-        if (!$context->update($request->all(), $id)){
+        $edit = Context::findOrNew($id);
+        $this->authorize($edit);
+        if (!$edit->update($request->all(), $id)){
             return redirect()->back()->withInput()->with('messages', [trans('messages.error')]);
         }
-        $context->categories()->sync($request->get('categories'));
+        $edit->categories()->sync($request->get('categories'));
         return redirect()->route('admin.contexts.index')->with('messages', [trans('messages.success')]);
     }
 
