@@ -2,6 +2,7 @@
 
 namespace FairHub\Http\Controllers;
 
+use FairHub\Http\Requests\HubContentRequest;
 use FairHub\Models\Category;
 use FairHub\Models\Content;
 use FairHub\Models\Context;
@@ -76,16 +77,17 @@ class HubController extends Controller
     /**
      * Show the form for creating a new resource.
      *
+     * @param HubContentRequest $request
+     * @param $type
      * @return \Illuminate\Http\Response
      */
-    public function create(Request $request, $type)
+    public function create(HubContentRequest $request, $type)
     {
         $contents = Content::whereIn('context_id', array_keys($request->session()->get('acl')->toArray()))->get()->pluck('name', 'id');
         $contexts = Context::whereIn('id', array_keys($request->session()->get('acl')->toArray()))->get()->pluck('name', 'id');
         $categories = Category::all()->pluck('name', 'id');
         $content = new Content();
         $this->authorize($content);
-        //TODO: fix this dirty hack to init the query
         if(class_exists($this->model) &&
             method_exists(new $this->model(), 'query') &&
             is_callable($this->model .'::query')){
@@ -121,7 +123,7 @@ class HubController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, $type)
+    public function store(HubContentRequest $request, $type)
     {
         if(class_exists($this->model) &&
             method_exists(new $this->model(), 'query') &&
@@ -204,11 +206,12 @@ class HubController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param HubContentRequest|Request $request
+     * @param $type
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $type, $id)
+    public function update(HubContentRequest $request, $type, $id)
     {
         if(class_exists($this->model) &&
             method_exists(new $this->model(), 'query') &&
