@@ -47,13 +47,13 @@ aside.main-sidebar
         li(class!="{{ (isset($table) && $table->controller == 'ContentController') ? 'active' : '' }}")
           a(href="{{ action('ContentController@index') }}")
             span Content Generico
-      li.treeview
+      li.treeview(class!="{{ isset($table->contentable_type) ? 'active' : '' }}")
         a(href='#')
           span Comunicati Stampa
           i.fa.fa-angle-left.pull-right
-        ul.treeview-menu
+        ul.treeview-menu(class!="{{ isset($table->contentable_type) ? 'active menu-open' : '' }}")
           +foreach("Session::get('contents')", "$cont", "$key")
-            li
+            li(class!="{{ (isset($table->contentable_type) && $table->contentable_type == $key) ? 'active' : '' }}")
               a(href!="{{ action('HubController@index', ['contentable_type' => $key]) }}") {{ $cont['sidebar'] }}
 
     // /.sidebar-menu
