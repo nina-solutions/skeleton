@@ -6,7 +6,6 @@ use FairHub\Models\Category;
 use FairHub\Models\Content;
 use FairHub\Models\Context;
 use FairHub\Models\Language;
-use FairHub\Models\PressRelease;
 use FairHub\Models\Status;
 use FairHub\Models\User;
 use Illuminate\Http\Request;
@@ -17,6 +16,14 @@ class PressReleaseController extends Controller
 {
     protected $name = 'press-releases';
     protected $controller = 'PressReleaseController';
+    protected $model = 'FairHub\\Models\\PressRelease';
+    protected $columns = [];
+
+    public function __construct()
+    {
+
+    }
+
     /**
      *
      * Display a listing of the resource.
@@ -26,7 +33,14 @@ class PressReleaseController extends Controller
     public function index(Request $request)
     {
         //TODO: fix this dirty hack to init the query
-        $data = PressRelease::where('id', '>=', '1');
+        if(class_exists($this->model) &&
+            method_exists(new $this->model(), 'query') &&
+            is_callable($this->model .'::query')){
+            $data = call_user_func($this->model .'::where', 'id', '>=', '1');
+        }else{
+            return redirect()->route("dashboard")->with('error', [trans('messages.critical')]);
+        }
+        //$data = PressRelease::where('id', '>=', '1');
         $this->authorize(new Content());
 
         if ($request->has('h-search-text')) {
@@ -41,8 +55,8 @@ class PressReleaseController extends Controller
                 'name' => $this->name,
                 'columns' => [
                     'title' => 'Titolo',
-                    //'contentName' => 'Nome',
-                    //'contextName' => 'Contesto'
+                    'contentName' => 'Nome',
+                    'contextName' => 'Contesto'
                 ],
                 'actions' => [
 
@@ -66,7 +80,15 @@ class PressReleaseController extends Controller
         $categories = Category::all()->pluck('name', 'id');
         $content = new Content();
         $this->authorize($content);
-        $model = new PressRelease();
+        //TODO: fix this dirty hack to init the query
+        if(class_exists($this->model) &&
+            method_exists(new $this->model(), 'query') &&
+            is_callable($this->model .'::query')){
+            $model = new $this->model();
+        }else{
+            return redirect()->route("dashboard")->with('error', [trans('messages.critical')]);
+        }
+
         $model->content = $content;
         $transitions = $content->transitions();
         $statuses = Status::all()->pluck('code', 'id');
@@ -95,15 +117,20 @@ class PressReleaseController extends Controller
      */
     public function store(Request $request)
     {
-        $new = new PressRelease($request->all());
+        if(class_exists($this->model) &&
+            method_exists(new $this->model(), 'query') &&
+            is_callable($this->model .'::query')){
+            $new = new $this->model($request->all());
+        }else{
+            return redirect()->route("dashboard")->with('error', [trans('messages.critical')]);
+        }
         $this->authorize($new->content);
         if (!$new->save()){
             return redirect()->back()->withInput()->with('messages', [trans('messages.error')]);
         }
         $content = new Content($request->get('content'));
         $new->content()->save($content);
-        return redirect()->route('admin.contents.index')->with('messages', [trans('messages.success')]);
-
+        return redirect()->route("admin.$this->name.index")->with('messages', [trans('messages.success')]);
     }
 
     /**
@@ -114,6 +141,15 @@ class PressReleaseController extends Controller
      */
     public function show($id)
     {
+        if(class_exists($this->model) &&
+            method_exists(new $this->model(), 'findOrNew') &&
+            is_callable($this->model .'::findOrNew')){
+            $show = call_user_func($this->model .'::findOrNew', $id);
+        }else{
+            return redirect()->route("dashboard")->with('error', [trans('messages.critical')]);
+        }
+        $this->authorize($show->content);
+        return response()->json($show->load('content'));
     }
 
     /**
@@ -124,7 +160,35 @@ class PressReleaseController extends Controller
      */
     public function edit($id)
     {
-
+        if(class_exists($this->model) &&
+            method_exists(new $this->model(), 'query') &&
+            is_callable($this->model .'::query')){
+            $model = call_user_func($this->model .'::findOrNew', $id);
+        }else{
+            return redirect()->route("dashboard")->with('error', [trans('messages.critical')]);
+        }
+        $this->authorize($model->content);
+        $contents = Content::where('id' , '!=', $id)->get()->pluck('name', 'id');
+        $contexts = Context::all()->pluck('name', 'id');
+        $categories = Category::all()->pluck('name', 'id');
+        $transitions = $model->content->transitions();
+        $statuses = Status::all()->pluck('code', 'id');
+        $status = $model->content->status()->get()->first();
+        return response()->view("admin.$this->name.form",[
+            'model' => $model,
+            'contents' => $contents,
+            'contexts' => $contexts,
+            'categories' => $categories,
+            'statuses' => $statuses,
+            'transitions' => $transitions,
+            'status' => $status,
+            'id' => $id,
+            'title' => $model->content->name,
+            'table' => (object) [
+                'controller' => $this->controller,
+                'name' => $this->name,
+            ]
+        ]);
 
     }
 
@@ -137,7 +201,20 @@ class PressReleaseController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        if(class_exists($this->model) &&
+            method_exists(new $this->model(), 'query') &&
+            is_callable($this->model .'::query')){
+            $edit = call_user_func($this->model .'::findOrNew', $id);
+        }else{
+            return redirect()->route("dashboard")->with('error', [trans('messages.critical')]);
+        }
+        $this->authorize($edit->content);
+        if (!$edit->update($request->all())){
+            return redirect()->back()->withInput()->with('messages', [trans('messages.error')]);
+        }
+        $edit->content->update($request->get('content'));
+        //$new->content()->save($content);
+        return redirect()->route("admin.$this->name.index")->with('messages', [trans('messages.success')]);
     }
 
     /**

@@ -12,6 +12,8 @@
 */
 
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Route;
+use Illuminate\Routing\Router;
 
 Route::get('/', ['as' => 'welcome', 'uses' => 'CustomController@welcome']);
 Route::get('home', ['as' => 'home', 'uses' => 'CustomController@home']);

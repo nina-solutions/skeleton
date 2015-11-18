@@ -14,8 +14,8 @@ abstract class HubContent extends HubModel
     }
 
     public function getContentNameAttribute(){
-        $content = $this->content();
-        dd($content);
+        $content = $this->content;
+        //dd($content);
         if ($content !== null)
             return $content->name;
         return null;
