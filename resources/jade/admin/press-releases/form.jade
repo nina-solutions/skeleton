@@ -18,7 +18,7 @@ include ../../partials/mixins
     small @lang('admin.contents.head')
 
 +section('content')
-  + php("Form::model($model, ['route' => (isset($id) ? ['admin.'.$table->name.'.update', $id] : ['admin.'.$table->name.'.store']), 'method' => (isset($id) ? 'PUT' : 'POST'),'data-toggle' => 'validator', 'role' => 'form', 'class' => ''])", "Form::close()")
+  + php("Form::model($model, ['action' => (isset($id) ? ['HubController@update', $table->contentable_type, $id] : ['HubController@store', $table->contentable_type]), 'method' => (isset($id) ? 'PUT' : 'POST'),'data-toggle' => 'validator', 'role' => 'form', 'class' => ''])", "Form::close()")
     .row
       .col-md-6
         .box.box-primary

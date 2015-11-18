@@ -16,8 +16,8 @@ include ../../../partials/mixins
                   | {{ $d->$key }}
           td
             +statement('can', "'edit', $d")
-              a(href!='{{ action("$table->controller@edit", [$d->id]) }}')
+              a(href!='{{ action("$table->controller@edit", array_merge(["id" => $d->id], (isset($table->contentable_type) ? ["contentable_type" => $table->contentable_type]: []))) }}')
                 span.glyphicon.glyphicon-edit
             +statement('can', "'show', $d")
-              a(href!='{{ action("$table->controller@show", [$d->id]) }}')
+              a(href!='{{ action("$table->controller@show", array_merge(["id" => $d->id], (isset($table->contentable_type) ? ["contentable_type" => $table->contentable_type]: []))) }}')
                 span.glyphicon.glyphicon-search

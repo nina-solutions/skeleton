@@ -22,7 +22,7 @@ include ../partials/mixins
     .col-xs-12
       .box
         .box-header
-          a.btn.btn-primary(href!="{{ action($table->controller.'@create') }}")
+          a.btn.btn-primary(href!="{{ action($table->controller.'@create', isset($table->contentable_type) ? ['contentable_type' => $table->contentable_type] : []) }}")
             h3.box-title @lang('admin.actions.create')
           +include('admin.partials.index.search')
         +include('admin.partials.index.table')

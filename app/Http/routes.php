@@ -78,7 +78,7 @@ Route::group(
     [
         'prefix' => 'admin',
         //'as' => 'admin::',
-        'middleware' => ['auth', 'acl']
+        'middleware' => ['auth', 'acl', 'contents']
     ],
     function () {
         Route::match(
@@ -88,7 +88,7 @@ Route::group(
 
         Route::resource('events', 'EventsController');
 
-        Route::resource('press-releases', 'PressReleaseController');
+        Route::resource('{contentable_type}/content', 'HubController');
 
         Route::resource('categories', 'CategoriesController');
         Route::resource('languages', 'LanguagesController');

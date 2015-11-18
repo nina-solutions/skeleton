@@ -11,17 +11,29 @@ use FairHub\Models\User;
 use Illuminate\Http\Request;
 use FairHub\Http\Requests;
 use FairHub\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Route;
 
-class PressReleaseController extends Controller
+class HubController extends Controller
 {
-    protected $name = 'press-releases';
-    protected $controller = 'PressReleaseController';
-    protected $model = 'FairHub\\Models\\PressRelease';
+    protected $name = '';
+    protected $controller = 'HubController';
+    protected $model = '';
     protected $columns = [];
+    protected $actions = [];
+    protected $modifiers = [];
 
     public function __construct()
     {
 
+        if (Route::current()) {
+            $this->routeParamters = (object)Route::current()->parameters();
+            $conf = config('hub-contents.' . $this->routeParamters->contentable_type);
+            $this->columns = $conf['columns'];
+            $this->actions = $conf['actions'];
+            $this->modifiers = $conf['modifiers'];
+            $this->model = $conf['model'];
+            $this->name = $conf['name'];
+        }
     }
 
     /**
@@ -30,7 +42,7 @@ class PressReleaseController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index(Request $request, $type)
     {
         //TODO: fix this dirty hack to init the query
         if(class_exists($this->model) &&
@@ -53,17 +65,10 @@ class PressReleaseController extends Controller
             'table' => (object) [
                 'controller' => $this->controller,
                 'name' => $this->name,
-                'columns' => [
-                    'title' => 'Titolo',
-                    'contentName' => 'Nome',
-                    'contextName' => 'Contesto'
-                ],
-                'actions' => [
-
-                ],
-                'modifiers' => [
-                    //'statusName' => 'statusCode'
-                ]
+                'columns' => $this->columns,
+                'actions' => $this->actions,
+                'modifiers' => $this->modifiers,
+                'contentable_type' => $this->routeParamters->contentable_type,
             ]
         ]);
     }
@@ -73,7 +78,7 @@ class PressReleaseController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Request $request)
+    public function create(Request $request, $type)
     {
         $contents = Content::whereIn('context_id', array_keys($request->session()->get('acl')->toArray()))->get()->pluck('name', 'id');
         $contexts = Context::whereIn('id', array_keys($request->session()->get('acl')->toArray()))->get()->pluck('name', 'id');
@@ -105,6 +110,7 @@ class PressReleaseController extends Controller
             'table' => (object) [
                 'controller' => $this->controller,
                 'name' => $this->name,
+                'contentable_type' => $this->routeParamters->contentable_type,
             ]
         ]);
     }
@@ -115,7 +121,7 @@ class PressReleaseController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $type)
     {
         if(class_exists($this->model) &&
             method_exists(new $this->model(), 'query') &&
@@ -130,7 +136,9 @@ class PressReleaseController extends Controller
         }
         $content = new Content($request->get('content'));
         $new->content()->save($content);
-        return redirect()->route("admin.$this->name.index")->with('messages', [trans('messages.success')]);
+        return redirect()
+            ->action('HubController@index', ['contentable_type' => $this->routeParamters->contentable_type])
+            ->with('messages', [trans('messages.success')]);
     }
 
     /**
@@ -139,7 +147,7 @@ class PressReleaseController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($type, $id)
     {
         if(class_exists($this->model) &&
             method_exists(new $this->model(), 'findOrNew') &&
@@ -158,7 +166,7 @@ class PressReleaseController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($type, $id)
     {
         if(class_exists($this->model) &&
             method_exists(new $this->model(), 'query') &&
@@ -187,6 +195,7 @@ class PressReleaseController extends Controller
             'table' => (object) [
                 'controller' => $this->controller,
                 'name' => $this->name,
+                'contentable_type' => $this->routeParamters->contentable_type,
             ]
         ]);
 
@@ -199,7 +208,7 @@ class PressReleaseController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $type, $id)
     {
         if(class_exists($this->model) &&
             method_exists(new $this->model(), 'query') &&
@@ -213,8 +222,9 @@ class PressReleaseController extends Controller
             return redirect()->back()->withInput()->with('messages', [trans('messages.error')]);
         }
         $edit->content->update($request->get('content'));
-        //$new->content()->save($content);
-        return redirect()->route("admin.$this->name.index")->with('messages', [trans('messages.success')]);
+        return redirect()
+            ->action('HubController@index', ['contentable_type' => $this->routeParamters->contentable_type])
+            ->with('messages', [trans('messages.success')]);
     }
 
     /**
@@ -223,7 +233,7 @@ class PressReleaseController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($type, $id)
     {
         //
     }

@@ -8,7 +8,21 @@
 
 return [
     'press-releases' => [
-
+        'sidebar' => 'Comunicati Stampa', //i should be a trans(..) instance
+        'name' => 'press-releases', //am i useful?
+        'model' => 'FairHub\\Models\\PressRelease',
+        'columns' => [
+            'title' => 'Titolo',
+            'contentName' => 'Nome',
+            'contextName' => 'Contesto',
+            'statusName' => 'Stato'
+        ],
+        'modifiers' => [
+            'statusName' => 'statusCode'
+        ],
+        'actions' => [
+            //i'll prepare an action field, to specify listing available actions
+        ],
     ],
 
 ];

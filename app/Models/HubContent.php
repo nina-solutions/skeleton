@@ -20,6 +20,18 @@ abstract class HubContent extends HubModel
             return $content->name;
         return null;
     }
+    public function getStatusNameAttribute(){
+        $status = $this->content->status()->first();
+        if ($status !== null)
+            return $status->name;
+        return null;
+    }
+    public function getStatusCodeAttribute(){
+        $status = $this->content->status()->first();
+        if ($status !== null)
+            return $status->code;
+        return null;
+    }
 
     /**
      * Get all of the product's photos.
