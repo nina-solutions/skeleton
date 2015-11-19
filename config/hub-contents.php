@@ -10,6 +10,10 @@ return [
     'press-releases' => [
         'sidebar' => 'Comunicati Stampa', //i should be a trans(..) instance
         'name' => 'press-releases', //am i useful?
+        'url' => [
+            'it' => 'comunicati',
+            'en' => 'press-releases',
+        ],
         'model' => 'FairHub\\Models\\PressRelease',
         'columns' => [
             'title' => 'Titolo',

@@ -2,8 +2,10 @@
 
 namespace FairHub\Providers;
 
+use FairHub\Models\Context;
 use FairHub\Models\DW_MACROCATEGORIE;
 use FairHub\Models\FairEdition;
+use FairHub\Models\Language;
 use Illuminate\Routing\Router;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 
@@ -26,6 +28,17 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function boot(Router $router)
     {
+        $router->pattern('id', '[0-9]+');
+        $codes = Context::all()->pluck('fullCode')->toArray();
+        $router->pattern('faircode', '('.implode('|', $codes).')');
+        $codes = Language::all()->pluck('code')->toArray();
+        $router->pattern('lang', '('.implode('|', $codes).')');
+        $entities = config('hub-contents');
+        $regex = [];
+        foreach( $entities as $entity){
+            $regex[] = implode('|', $entity['url']);
+        }
+        $router->pattern('service', '('.implode('|', $regex).')');
 /*
         $faircodes = FairEdition::active()->get();
         $codes = [];

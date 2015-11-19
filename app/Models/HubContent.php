@@ -3,6 +3,7 @@
 namespace FairHub\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 abstract class HubContent extends HubModel
 {
@@ -31,6 +32,30 @@ abstract class HubContent extends HubModel
         if ($status !== null)
             return $status->code;
         return null;
+    }
+
+    public function scopeFairCode($query, $code)
+    {
+        $var = get_class($this);
+        $tmp = explode('\\', $var);
+        $var = $tmp[count($tmp)-1];
+        $raw = '';
+        if (strlen($code) == 3){
+            $raw = DB::raw("SELECT cnt.contentable_id FROM contents as cnt JOIN contexts as cxt ON cnt.context_id = cxt.id WHERE cnt.contentable_type LIKE '%$var' AND cxt.code = '$code'");
+        }elseif(strlen($code) == 5){
+            $parentCode = substr($code, 0, 3);
+            $childCode = substr($code, 3, 2);
+            $raw = DB::raw("SELECT cnt.contentable_id FROM contents as cnt JOIN contexts as cxt ON cnt.context_id = cxt.id JOIN contexts pcxt ON cxt.context_id = pcxt.id WHERE cnt.contentable_type LIKE '%$var' AND cxt.code = '$childCode' AND pcxt.code = '$parentCode'");
+        }
+        $res = [];
+        $sel = DB::select($raw);
+        foreach ($sel as $item) {
+            $res[] = $item->contentable_id;
+
+        }
+        $query = $query->whereIn('id', $res);
+
+        return $query;
     }
 
     /**

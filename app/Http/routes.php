@@ -18,6 +18,17 @@ use Illuminate\Routing\Router;
 Route::get('/', ['as' => 'welcome', 'uses' => 'CustomController@welcome']);
 Route::get('home', ['as' => 'home', 'uses' => 'CustomController@home']);
 
+Route::get('{lang}/{faircode}/{service}',
+    ['as' => 'service-index', 'uses' => 'ServiceController@index']
+);
+Route::get('{lang}/{faircode}/{service}/{id}',
+    ['as' => 'service-index', 'uses' => 'ServiceController@show']
+);
+//->where(['format' => '\.?(json|xml|rss)?']);
+//Route::get('{lang}/{code}/{service}/{id}{format}')->where(['format' => '\.?(json|xml|rss)?']);
+
+
+
 Route::match(
     ['get','post'],
     '{lang}/press-accreditation/register/{role}/{code}',
