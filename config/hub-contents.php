@@ -7,9 +7,13 @@
  */
 
 return [
-    'press-releases' => [
+    'press_releases' => [
         'sidebar' => 'Comunicati Stampa', //i should be a trans(..) instance
         'name' => 'press-releases', //am i useful?
+        'rss' => [
+            'title' => 'rss.press-releases.title',
+            'description' => 'rss.press-releases.description',
+        ],
         'service' => [
             'it' => 'comunicati',
             'en' => 'press-releases',
@@ -23,9 +27,6 @@ return [
         ],
         'modifiers' => [
             'statusName' => 'statusCode'
-        ],
-        'actions' => [
-            //i'll prepare an action field, to specify listing available actions
         ],
     ],
 

@@ -15,7 +15,7 @@ class ServiceController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request, $lang, $faircode, $service, $format = null)
+    public function index(Request $request, $lang, $faircode, $service, $format = '')
     {
         App::setLocale($lang);
         session(['lang' => App::getLocale()]);
@@ -32,14 +32,15 @@ class ServiceController extends Controller
                 }
             }
         }
-        if($format){
-            $format = str_replace('.', '', $format);
-            switch ($format){
-                case 'xml':
-                    return response()->xml($return);
-            }
+        $format = str_replace('.', '', $format);
+        switch ($format){
+            case 'xml':
+                return response()->xml($return);
+            case 'rss':
+                return response()->rss($return->flatten());
+            default:
+                return response()->json($return);
         }
-        return response()->json($return);
     }
     /**
      * Display the specified resource.
@@ -47,11 +48,32 @@ class ServiceController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Request $request, $lang, $faircode, $service, $id)
+    public function show(Request $request, $lang, $faircode, $service, $id, $format = '')
     {
         App::setLocale($lang);
         session(['lang' => App::getLocale()]);
-
+        $contents = config('hub-contents');
+        $return = null;
+        foreach($contents as $content){
+            if(in_array($service, $content['service'])){
+                if(class_exists($content['model']) &&
+                    method_exists(new $content['model'], 'query') &&
+                    is_callable($content['model'] .'::query')) {
+                    $model = call_user_func($content['model'] . '::where', 'id', '>=', '1');
+                    $return = $model->where('id', '=', $id)->fairCode($faircode)->get()->load('content');
+                    break;
+                }
+            }
+        }
+        $format = str_replace('.', '', $format);
+        switch ($format){
+            case 'xml':
+                return response()->xml($return);
+            case 'rss':
+                return response()->rss($return);
+            default:
+                return response()->json($return);
+        }
     }
 
     /**
