@@ -1,3 +1,4 @@
+include ../../partials/mixins
 aside.main-sidebar
   // sidebar: style can be found in sidebar.less
   section.sidebar
@@ -6,7 +7,7 @@ aside.main-sidebar
       .pull-left.image
         img.img-circle(src='https://placehold.it/160x160', alt='User Image')
       .pull-left.info
-        p Szabo Karoly - USERNAME
+        p {{ Auth::user()->name }}
         // Status
         a(href='#')
           i.fa.fa-circle.text-success
@@ -23,24 +24,37 @@ aside.main-sidebar
     ul.sidebar-menu
       li.header HEADER
       // Optionally, you can add icons to the links
-      li.active
-        a(href='#')
+      li(class!="{{ (isset($table) && $table->controller == 'CustomController') ? 'active' : '' }}")
+        a(href="{{ action('CustomController@dashboard') }}")
           span Dashboard
-      li
-        a(href='users')
-          span Utenti
-      li.treeview
+      +statement('can', "'UserController@index', 'user_model'")
+        li(class!="{{ (isset($table) && $table->controller == 'UserController') ? 'active' : '' }}")
+          a(href="{{ action('UserController@index') }}")
+            span Utenti
+      +statement('can', "'ContextController@index', 'context_model'")
+        li(class!="{{ (isset($table) && $table->controller == 'ContextController') ? 'active' : '' }}")
+          a(href="{{ action('ContextController@index') }}")
+            span Fiere
+      +statement('can', "'LanguagesController@index', 'language_model'")
+        li(class!="{{ (isset($table) && $table->controller == 'LanguagesController') ? 'active' : '' }}")
+          a(href="{{ action('LanguagesController@index') }}")
+            span Lingue
+      +statement('can', "'CategoriesController@index', 'category_model'")
+        li(class!="{{ (isset($table) && $table->controller == 'CategoriesController') ? 'active' : '' }}")
+          a(href="{{ action('CategoriesController@index') }}")
+            span Categorie
+      +statement('can', "'ContentController@index', 'content_model'")
+        li(class!="{{ (isset($table) && $table->controller == 'ContentController') ? 'active' : '' }}")
+          a(href="{{ action('ContentController@index') }}")
+            span Content Generico
+      li.treeview(class!="{{ isset($table->contentable_type) ? 'active' : '' }}")
         a(href='#')
           span Comunicati Stampa
           i.fa.fa-angle-left.pull-right
-        ul.treeview-menu
-          li
-            a(href='/press-release') Comunicati
-          li
-            a(href='/events') Eventi
-          li
-            a(href='/languages') Lingue
-          li
-            a(href='/categories') Categorie
+        ul.treeview-menu(class!="{{ isset($table->contentable_type) ? 'active menu-open' : '' }}")
+          +foreach("Session::get('contents')", "$cont", "$key")
+            li(class!="{{ (isset($table->contentable_type) && $table->contentable_type == $key) ? 'active' : '' }}")
+              a(href!="{{ action('HubController@index', ['contentable_type' => $key]) }}") {{ $cont['sidebar'] }}
+
     // /.sidebar-menu
   // /.sidebar

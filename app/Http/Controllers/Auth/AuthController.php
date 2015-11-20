@@ -23,7 +23,7 @@ class AuthController extends Controller
 
     use AuthenticatesAndRegistersUsers, ThrottlesLogins;
 
-    private $redirectTo = '/';
+    private $redirectTo = '/admin/dashboard';
     private $maxLoginAttempts = 10;
 
     /**

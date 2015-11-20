@@ -18,6 +18,10 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->string('password', 60);
             $table->rememberToken();
+            //1 = superadmin
+            //2 = admin
+            //3 = anyone else, gotopermissions
+            $table->integer('level')->default(3);
             $table->timestamps();
         });
     }

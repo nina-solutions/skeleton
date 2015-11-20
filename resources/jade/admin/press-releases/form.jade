@@ -1,0 +1,78 @@
+include ../../partials/mixins
++extends('admin/partials/template')
+
++section('title')
+  title @lang('admin.contents.head')
+
++section('breadcrumbs')
+  ol.breadcrumb
+    li
+      a(href='/admin/dashboard')
+        i.fa.fa-dashboard
+        | @lang('admin.dashboard.head')
+    li.active
+      | @lang('admin.contents.head')
+
++section('inner-title')
+  h1 @lang('admin.contents.head')
+    small @lang('admin.contents.head')
+
++section('content')
+  + php("Form::model($model, ['action' => (isset($id) ? ['HubController@update', $table->contentable_type, $id] : ['HubController@store', $table->contentable_type]), 'method' => (isset($id) ? 'PUT' : 'POST'),'data-toggle' => 'validator', 'role' => 'form', 'class' => ''])", "Form::close()")
+    .row
+      .col-md-6
+        .box.box-primary
+          .box-header.with-border
+            h3.box-title {{$title}} - {{$status->name}}
+          + if("isset($id)")
+            + php("Form::hidden('id', $id)")
+          .box-body
+            .form-group
+              + php("Form::label('content[name]', trans('admin.contents.form.name'))")
+              + php("Form::text('content[name]', null, ['required', 'class'=>'form-control', 'placeholder'=>trans('admin.contents.form.name')])")
+            .form-group
+              + php("Form::label('content[description]', trans('admin.contents.form.description'))")
+              + php("Form::text('content[description]', null, ['required', 'class'=>'form-control', 'placeholder'=>trans('admin.contents.form.description')])")
+            .form-group
+              + php("Form::label('link]', trans('admin.contents.form.link'))")
+              + php("Form::text('content[link]', null, ['class'=>'form-control', 'placeholder'=>trans('admin.contents.form.link')])")
+            .form-group
+              + php("Form::label('content[context_id]', trans('admin.contexts.form.fair'))")
+              + php("Form::select('content[context_id]', $contexts, null, ['required', 'class'=>'form-control select2', 'placeholder'=>trans('admin.contexts.form.parent')])")
+            .form-group
+              + php("Form::label('content[content_id]', trans('admin.contents.form.parent'))")
+              + php("Form::select('content[content_id]', $contents, null, ['class'=>'form-control select2', 'placeholder'=>trans('admin.contents.form.parent')])")
+            .form-group
+              + php("Form::label('datepicker', trans('admin.contents.form.dates'))")
+              .input-group
+                .input-group-addon
+                  i.fa.fa-clock-o
+                + php("Form::text('datepicker', Input::old('datepicker'), ['class'=>'form-control pull-right', 'placeholder'=>trans('admin.contents.form.dates')])")
+              + php("Form::hidden('content[start]', null, ['id' => 'start'])")
+              + php("Form::hidden('content[end]', null, ['id' => 'end'])")
+              + php("Form::hidden('content[status_id]', null, ['id' => 'status_id'])")
+          // /.box-body
+          .box-footer
+            + foreach("$transitions", '$s', '$id')
+              button.status-button.btn(class!="{{'btn-'.$statuses[$id]}}", type='submit',data-value='{{$id}}') {{$s}}
+      .col-md-6
+        .box.box-primary
+          .box-body
+            .form-group
+              + php("Form::label('subhead', trans('admin.'.$table->name.'.form.subhead'))")
+              + php("Form::text('subhead', null, ['required', 'class'=>'form-control', 'placeholder'=>trans('admin.'.$table->name.'.form.subhead')])")
+            .form-group
+              + php("Form::label('title', trans('admin.'.$table->name.'.form.title'))")
+              + php("Form::text('title', null, ['required', 'class'=>'form-control', 'placeholder'=>trans('admin.'.$table->name.'.form.title')])")
+            .form-group
+              + php("Form::label('subtitle', trans('admin.'.$table->name.'.form.subtitle'))")
+              + php("Form::text('subtitle', null, ['class'=>'form-control', 'placeholder'=>trans('admin.'.$table->name.'.form.subtitle')])")
+            .form-group
+              + php("Form::label('category_id', trans('admin.'.$table->name.'.form.categories'))")
+              + php("Form::select('category_id', $categories, null, ['required', 'class'=>'form-control select2', 'placeholder'=>trans('admin.'.$table->name.'.form.categories')])")
+            .form-group
+              + php("Form::label('body', trans('admin.'.$table->name.'.form.body'))")
+              + php("Form::text('body', null, ['class'=>'form-control select2', 'placeholder'=>trans('admin.'.$table->name.'.form.body')])")
+            .form-group
+              + php("Form::label('notes', trans('admin.'.$table->name.'.form.notes'))")
+              + php("Form::text('notes', null, ['class'=>'form-control select2', 'placeholder'=>trans('admin.'.$table->name.'.form.notes')])")

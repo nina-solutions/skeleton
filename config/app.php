@@ -144,9 +144,10 @@ return [
          * Application Service Providers...
          */
         FairHub\Providers\AppServiceProvider::class,
+        FairHub\Providers\AuthServiceProvider::class,
         FairHub\Providers\EventServiceProvider::class,
         FairHub\Providers\RouteServiceProvider::class,
-
+        FairHub\Providers\ResponseMacroProvider::class,
 
     ],
 
@@ -178,6 +179,7 @@ return [
         'Event'     => Illuminate\Support\Facades\Event::class,
         'File'      => Illuminate\Support\Facades\File::class,
         'Form'      => Collective\Html\FormFacade::class,
+        'Gate'      => Illuminate\Support\Facades\Gate::class,
         'Hash'      => Illuminate\Support\Facades\Hash::class,
         'HTML'      => Collective\Html\HtmlFacade::class,
         'Input'     => Illuminate\Support\Facades\Input::class,
@@ -200,7 +202,7 @@ return [
         'View'      => Illuminate\Support\Facades\View::class,
 
         'PressAccreditationController'  => FairHub\Http\Controllers\PressAccreditationController::class,
-        'PressReleaseController'  => FairHub\Http\Controllers\PressReleaseController::class,
+        'HubController'  => FairHub\Http\Controllers\HubController::class,
     ],
 
 ];

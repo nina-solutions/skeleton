@@ -17,13 +17,22 @@ class LanguagesController extends Controller
      */
     public function index(Request $request)
     {
-        if ($request->has('hsearch-text'))
-            $languages = Language::like('description', $request->input('h-search-text'))->paginate();
-        else
-            $languages = Language::paginate();
-
-        return view('admin.languages.index',[
-            'languages' => $languages
+        //TODO: fix this dirty hack to init the query
+        $languages = Language::where('id', '>=', '1');
+        $this->authorize(new Language());
+        if ($request->has('h-search-text')) {
+            $languages->orLike(['description', 'code'],$request->input('h-search-text'));
+        }
+        return view('admin.index',[
+            'data' => $languages->paginate(),
+            'table' => (object) [
+                'controller' => 'LanguagesController',
+                'name' => 'languages',
+                'columns' => [
+                    'description' => 'Nome',
+                    'code' => 'Codice'
+                ]
+            ]
         ]);
     }
 
@@ -34,8 +43,10 @@ class LanguagesController extends Controller
      */
     public function create()
     {
+        $new = new Language();
+        $this->authorize($new);
         return view('admin.languages.form',[
-            'language' => new Language()
+            'language' => $new
         ]);
     }
 
@@ -47,8 +58,9 @@ class LanguagesController extends Controller
      */
     public function store(Request $request)
     {
-        $language = Language::class;
-        if (!$language->create($request->all())){
+        $new = new Language($request->all());
+        $this->authorize($new);
+        if (!$language->save()){
             return redirect()->back()->withInput()->with('messages', [trans('messages.error')]);
         }
         return redirect()->route('admin.languages.index')->with('messages', [trans('messages.success')]);
@@ -75,9 +87,10 @@ class LanguagesController extends Controller
      */
     public function edit($id)
     {
-        $language = Language::findOrNew($id);
+        $edit = Language::findOrNew($id);
+        $this->authorize($edit);
         return view('admin.languages.form',[
-            'language' => $language,
+            'language' => $edit,
             'id' => $id
         ]);
     }
@@ -91,8 +104,9 @@ class LanguagesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $language = Language::findOrNew($id);
-        if (!$language->update($request->all(), $id)){
+        $edit = Language::findOrNew($id);
+        $this->authorize($edit);
+        if (!$edit->update($request->all(), $id)){
             return redirect()->back()->withInput()->with('messages', [trans('messages.error')]);
         }
         return redirect()->route('admin.languages.index')->with('messages', [trans('messages.success')]);
@@ -108,4 +122,5 @@ class LanguagesController extends Controller
     {
         redirect('dashboad');
     }
+
 }

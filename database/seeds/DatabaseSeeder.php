@@ -29,7 +29,10 @@ class DatabaseSeeder extends Seeder
         //$this->call(FairEditionsSeeder::class);
         //$this->call(tab_lingue_Seeder::class);
         //$this->call(tab_eventi_Seeder::class);
-        $this->call(tab_categorie_Seeder::class);
+        //$this->call(tab_categorie_Seeder::class);
+        //$this->call(RoleTableSeeder::class);
+        //$this->call(StatusTableSeeder::class);
+        //$this->call(StatusTransitionTableSeeder::class);
 
         Model::reguard();
     }

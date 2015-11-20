@@ -11,6 +11,36 @@ use Illuminate\Database\Eloquent\Model;
 
 abstract class HubModel extends Model
 {
+    protected $nullable = [];
+
+    /**
+     * Listen for save event
+     */
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::saving(function($model)
+        {
+            self::setNullables($model);
+        });
+    }
+
+    /**
+     * Set empty nullable fields to null
+     * @param object $model
+     */
+    protected static function setNullables($model)
+    {
+        foreach($model->nullable as $field)
+        {
+            if(empty($model->{$field}))
+            {
+                $model->{$field} = null;
+            }
+        }
+    }
+
     /**
      * Set the keys for a save update query.
      * This is a fix for tables with composite keys
@@ -75,6 +105,24 @@ abstract class HubModel extends Model
 
     public  function scopeLike($query, $field, $value){
         return $query->where($field, 'ILIKE', "%$value%");
+    }
+
+    /**
+     * Get the code-related fair.
+     */
+    public function scopeOrLike($query, $fields, $text)
+    {
+        $query = $query->where(function($query) use ($fields, $text) {
+            if(is_array($fields)){
+                foreach($fields as $field){
+                    $query->orWhere($field, 'ILIKE', "%$text%");
+                }
+            } else {
+                $query->where($fields, 'ILIKE', "%$text%");
+            }
+
+        });
+        return $query;
     }
 
 }

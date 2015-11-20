@@ -2,8 +2,10 @@
 
 namespace FairHub\Providers;
 
+use FairHub\Models\Context;
 use FairHub\Models\DW_MACROCATEGORIE;
 use FairHub\Models\FairEdition;
+use FairHub\Models\Language;
 use Illuminate\Routing\Router;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 
@@ -26,15 +28,18 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function boot(Router $router)
     {
-/*
-        $faircodes = FairEdition::active()->get();
-        $codes = [];
-        foreach($faircodes as $faircode){
-            $codes[] = $faircode->fairCode;
+        $router->pattern('id', '[0-9]+');
+        $codes = Context::all()->pluck('fullCode')->toArray();
+        $router->pattern('faircode', '('.implode('|', $codes).')');
+        $codes = Language::all()->pluck('code')->toArray();
+        $router->pattern('lang', '('.implode('|', $codes).')');
+        $entities = config('hub-contents');
+        $regex = [];
+        foreach( $entities as $entity){
+            $regex[] = implode('|', $entity['service']);
         }
-        //Fair code structure for code parameter
-        $router->pattern('code', implode('|', $codes));
-        */
+        $router->pattern('service', '('.implode('|', $regex).')');
+
         //accepted roles
         $roles = implode('|',array_keys(config('press-accreditation.channels')));
         $router->pattern('role', $roles);

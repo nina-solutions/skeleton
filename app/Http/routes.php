@@ -12,9 +12,21 @@
 */
 
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Route;
+use Illuminate\Routing\Router;
 
 Route::get('/', ['as' => 'welcome', 'uses' => 'CustomController@welcome']);
 Route::get('home', ['as' => 'home', 'uses' => 'CustomController@home']);
+
+Route::get('{lang}/{faircode}/{service}{format?}',
+    ['as' => 'service-index', 'uses' => 'ServiceController@index']
+)->where(['format' => '\.(json|xml|rss)']);
+Route::get('{lang}/{faircode}/{service}/{id}{format?}',
+    ['as' => 'service-index', 'uses' => 'ServiceController@show']
+)->where(['format' => '\.(json|xml|rss)']);
+//Route::get('{lang}/{code}/{service}/{id}{format}')->where(['format' => '\.?(json|xml|rss)?']);
+
+
 
 Route::match(
     ['get','post'],
@@ -76,16 +88,23 @@ Route::group(
     [
         'prefix' => 'admin',
         //'as' => 'admin::',
-        'middleware' => 'auth'
+        'middleware' => ['auth', 'acl', 'contents']
     ],
     function () {
-        Route::get('dashboard', ['as' => 'dashboard', function () {
-            return view('admin/dashboard');
-        }]);
-        Route::resource('press-release', 'PressReleaseController');
+        Route::match(
+            ['get','post'],
+            'dashboard',
+            ['as' => 'dashboard', 'uses' => 'CustomController@dashboard']);
+
         Route::resource('events', 'EventsController');
-        Route::resource('languages', 'LanguagesController');
+
+        Route::resource('{contentable_type}/content', 'HubController');
+
         Route::resource('categories', 'CategoriesController');
+        Route::resource('languages', 'LanguagesController');
+        Route::resource('contexts', 'ContextController');
+        Route::resource('contents', 'ContentController');
+        Route::resource('users', 'UserController');
 
 });
 
@@ -105,11 +124,3 @@ Route::post('password/email', 'Auth\PasswordController@postEmail');
 // Password reset routes...
 Route::get('password/reset/{token}', 'Auth\PasswordController@getReset');
 Route::post('password/reset', 'Auth\PasswordController@postReset');
-
-/*
-Route::controllers([
-    'auth' => 'Auth\AuthController',
-    'password' => 'Auth\PasswordController',
-]);
-
-*/
