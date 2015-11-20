@@ -28,6 +28,7 @@ return [
         'modifiers' => [
             'statusName' => 'statusCode'
         ],
+        'actions' => [],
     ],
 
 ];
