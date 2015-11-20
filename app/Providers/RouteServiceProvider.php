@@ -36,18 +36,10 @@ class RouteServiceProvider extends ServiceProvider
         $entities = config('hub-contents');
         $regex = [];
         foreach( $entities as $entity){
-            $regex[] = implode('|', $entity['url']);
+            $regex[] = implode('|', $entity['service']);
         }
         $router->pattern('service', '('.implode('|', $regex).')');
-/*
-        $faircodes = FairEdition::active()->get();
-        $codes = [];
-        foreach($faircodes as $faircode){
-            $codes[] = $faircode->fairCode;
-        }
-        //Fair code structure for code parameter
-        $router->pattern('code', implode('|', $codes));
-        */
+
         //accepted roles
         $roles = implode('|',array_keys(config('press-accreditation.channels')));
         $router->pattern('role', $roles);

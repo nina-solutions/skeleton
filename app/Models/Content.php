@@ -21,6 +21,13 @@ class Content extends HubModel
         'content_id',
         'context_id'
     ];
+//HIDE from Json eventually unwanted fields
+    protected $hidden = [
+        'context_id',
+        'content_id',
+        'status_id',
+        'contentable_type'
+    ];
     /**
      * Get the status-related content
      */

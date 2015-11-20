@@ -51,7 +51,6 @@ abstract class HubContent extends HubModel
         $sel = DB::select($raw);
         foreach ($sel as $item) {
             $res[] = $item->contentable_id;
-
         }
         $query = $query->whereIn('id', $res);
 

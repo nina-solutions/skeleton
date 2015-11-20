@@ -10,7 +10,7 @@ return [
     'press-releases' => [
         'sidebar' => 'Comunicati Stampa', //i should be a trans(..) instance
         'name' => 'press-releases', //am i useful?
-        'url' => [
+        'service' => [
             'it' => 'comunicati',
             'en' => 'press-releases',
         ],

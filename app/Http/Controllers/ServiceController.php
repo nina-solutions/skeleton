@@ -15,23 +15,31 @@ class ServiceController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request, $lang, $faircode, $service)
+    public function index(Request $request, $lang, $faircode, $service, $format = null)
     {
         App::setLocale($lang);
         session(['lang' => App::getLocale()]);
         $contents = config('hub-contents');
-        $entity = null;
+        $return = null;
         foreach($contents as $content){
-            if(in_array($service, $content['url'])){
+            if(in_array($service, $content['service'])){
                 if(class_exists($content['model']) &&
                     method_exists(new $content['model'], 'query') &&
                     is_callable($content['model'] .'::query')) {
                     $model = call_user_func($content['model'] . '::where', 'id', '>=', '1');
-                    return $model->fairCode($faircode)->get()->load('content');
+                    $return = $model->fairCode($faircode)->get()->load('content');
+                    break;
                 }
             }
         }
-
+        if($format){
+            $format = str_replace('.', '', $format);
+            switch ($format){
+                case 'xml':
+                    return response()->xml($return);
+            }
+        }
+        return response()->json($return);
     }
     /**
      * Display the specified resource.

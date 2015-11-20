@@ -147,7 +147,7 @@ return [
         FairHub\Providers\AuthServiceProvider::class,
         FairHub\Providers\EventServiceProvider::class,
         FairHub\Providers\RouteServiceProvider::class,
-
+        FairHub\Providers\ResponseMacroProvider::class,
 
     ],
 
@@ -202,7 +202,7 @@ return [
         'View'      => Illuminate\Support\Facades\View::class,
 
         'PressAccreditationController'  => FairHub\Http\Controllers\PressAccreditationController::class,
-        'PressReleaseController'  => FairHub\Http\Controllers\PressReleaseController::class,
+        'HubController'  => FairHub\Http\Controllers\HubController::class,
     ],
 
 ];
