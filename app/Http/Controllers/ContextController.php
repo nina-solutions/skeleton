@@ -62,7 +62,7 @@ class ContextController extends Controller
             'contexts' => $contexts,
             'categories' => $categories,
             'languages' => $languages,
-            'translations' => [],
+            'translatables' => [],
             'title' => trans('admin.contexts.new')
         ]);
     }
@@ -117,6 +117,7 @@ class ContextController extends Controller
             'categories' => $categories,
             'languages' => $languages,
             'translations' => $edit->listsTranslations($edit->translatedAttributes)->get()->toArray(),
+            'translatables' => [],
             'id' => $id,
             'title' => $edit->name
         ]);

@@ -7,6 +7,7 @@ class HubAdmin
     this.init_select()
     this.init_datepicker()
     this.init_userform()
+    this.init_translatable()
 
   init_search: ->
     search = $('#search')
@@ -49,6 +50,23 @@ class HubAdmin
       datepicker.on 'apply.daterangepicker', (ev, picker) ->
         $('#start').val(picker.startDate.format('YYYY-MM-DD HH:mm:ss'))
         $('#end').val(picker.endDate.format('YYYY-MM-DD HH:mm:ss'))
+
+  init_translatable: ->
+    main_row = $('#translatable')
+
+  add_language: (main_row, language_id, fields) ->
+    new_field = []
+    new_label = []
+    for field in fields
+      do (field) ->
+        new_field.push $(document.createElement('input')).attr('name', language_id + '[' + field + ']').text(field)
+        new_label.push $(document.createElement('label')).attr('for', language_id + '[' + field + ']').text(field)
+    new_button = $(document.createElement('a')).addClass('btn btn-sm remove-language').attr('data-value', language_id).html('<span class="glyphicon glyphicon-trash"></span>')
+    selectColumn = $(document.createElement('div')).addClass('col-md-5').append(new_role)
+    labelColumn = $(document.createElement('div')).addClass('col-md-5').append(new_label)
+    actionColumn = $(document.createElement('div')).addClass('col-md-2').append(new_button)
+    new_lang_box = $(document.createElement('div')).addClass('col-md-6 language-box').append(labelColumn, selectColumn, actionColumn)
+    main_row.append(new_lang_box)
 
   remove_permission: (e, element) ->
     e.preventDefault

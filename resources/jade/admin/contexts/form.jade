@@ -18,40 +18,60 @@ include ../../partials/mixins
     small @lang('admin.contexts.head')
 
 +section('content')
-  .row
-    .col-md-6
-      .box.box-primary
-        .box-header.with-border
-          h3.box-title {{ $title }}
-        + php("Form::model($context, ['route' => (isset($id) ? ['admin.contexts.update', $id] : ['admin.contexts.store']), 'method' => (isset($id) ? 'PUT' : 'POST'),'data-toggle' => 'validator', 'role' => 'form', 'class' => ''])", "Form::close()")
-          + if("isset($id)")
-            + php("Form::hidden('id', $id)")
-          .box-body
-            .form-group
-              + php("Form::label('code', trans('admin.contexts.form.code'), ['class' => ''])")
-              + php("Form::text('code', Input::old('code'), ['required', 'class'=>'form-control', 'placeholder'=>trans('admin.contexts.form.code')])")
-            .form-group
-              + php("Form::label('name', trans('admin.contexts.form.name'), ['class' => ''])")
-              + php("Form::text('name', Input::old('name'), ['required', 'class'=>'form-control', 'placeholder'=>trans('admin.contexts.form.name')])")
-            .form-group
-              + php("Form::label('description', trans('admin.contexts.form.description'), ['class' => ''])")
-              + php("Form::text('description', Input::old('description'), ['required', 'class'=>'form-control', 'placeholder'=>trans('admin.contexts.form.description')])")
-            .form-group
-              + php("Form::label('context_id', trans('admin.contexts.form.parent'), ['class' => ''])")
-              + php("Form::select('context_id', $contexts, Input::old('context_id'), ['class'=>'form-control select2', 'placeholder'=>trans('admin.contexts.form.parent')])")
-            .form-group
-              + php("Form::label('datepicker', trans('admin.contexts.form.dates'), ['class' => ''])")
-              .input-group
-                .input-group-addon
-                  i.fa.fa-clock-o
-                + php("Form::text('datepicker', Input::old('datepicker'), ['class'=>'form-control pull-right', 'placeholder' => trans('admin.contexts.form.dates')])")
-              + php("Form::hidden('start', Input::old('start'), ['id' => 'start'])")
-              + php("Form::hidden('end', Input::old('end'), ['id' => 'end'])")
-            .form-group
-              + php("Form::label('categories[]', trans('admin.contexts.form.categories'), ['class' => ''])")
-              + php("Form::select('categories[]', $categories, $context->categories()->get()->pluck('id')->toArray(), ['required', 'multiple' => true, 'class' => 'form-control select2'])")
+  #translatable.row
+    + php("Form::model($context, ['route' => (isset($id) ? ['admin.contexts.update', $id] : ['admin.contexts.store']), 'method' => (isset($id) ? 'PUT' : 'POST'),'data-toggle' => 'validator', 'role' => 'form', 'class' => ''])", "Form::close()")
+      .col-md-6
+        .box.box-primary
+          .box-header.with-border
+            h3.box-title {{ $title }}
 
-          .box-footer
-            button.btn.btn-primary(type='submit') @lang('admin.actions.save')
-
+            + if("isset($id)")
+              + php("Form::hidden('id', $id)")
+            .box-body
+              .form-group
+                + php("Form::label('code', trans('admin.contexts.form.code'), ['class' => ''])")
+                + php("Form::text('code', Input::old('code'), ['required', 'class'=>'form-control', 'placeholder'=>trans('admin.contexts.form.code')])")
+              .form-group
+                + php("Form::label('name', trans('admin.contexts.form.name'), ['class' => ''])")
+                + php("Form::text('name', Input::old('name'), ['required', 'class'=>'form-control', 'placeholder'=>trans('admin.contexts.form.name')])")
+              .form-group
+                + php("Form::label('description', trans('admin.contexts.form.description'), ['class' => ''])")
+                + php("Form::text('description', Input::old('description'), ['required', 'class'=>'form-control', 'placeholder'=>trans('admin.contexts.form.description')])")
+              .form-group
+                + php("Form::label('context_id', trans('admin.contexts.form.parent'), ['class' => ''])")
+                + php("Form::select('context_id', $contexts, Input::old('context_id'), ['class'=>'form-control select2', 'placeholder'=>trans('admin.contexts.form.parent')])")
+              .form-group
+                + php("Form::label('datepicker', trans('admin.contexts.form.dates'), ['class' => ''])")
+                .input-group
+                  .input-group-addon
+                    i.fa.fa-clock-o
+                  + php("Form::text('datepicker', Input::old('datepicker'), ['class'=>'form-control pull-right', 'placeholder' => trans('admin.contexts.form.dates')])")
+                + php("Form::hidden('start', Input::old('start'), ['id' => 'start'])")
+                + php("Form::hidden('end', Input::old('end'), ['id' => 'end'])")
+              .form-group
+                + php("Form::label('categories[]', trans('admin.contexts.form.categories'), ['class' => ''])")
+                + php("Form::select('categories[]', $categories, $context->categories()->get()->pluck('id')->toArray(), ['required', 'multiple' => true, 'class' => 'form-control select2'])")
+              .form-group
+                + php("Form::label('language_id', trans('admin.'.$table->name.'.form.language_id'), ['class' => ''])")
+                + php('Form::select("language_id", $languages, Input::old("language_id"), ["id" => "language_id", "class"=>"form-control select2", "placeholder"=>trans("admin.$table->name.form.language_id")])')
+            // /.box-body
+            .box-footer
+              button.btn.btn-primary(type='submit') @lang('admin.actions.save')
+      + foreach('$languages','$language', '$language_id', '$i')
+        .col-md-6.language-box(data-value!="{{ $language_id }}")
+          .box.box-default
+            .box-header.with-border
+              h3.box-title {{ $language }}
+            .box-body
+              .row.languages.form-group
+                .col-md-11
+                  + foreach('$translatables','$value', '$field', '$j')
+                    .row
+                      .col-md-5
+                        + php("Form::label('$language_id[$field]', $field, ['class' => ''])")
+                      .col-md-7
+                        + php('Form::text("$language_id[$field]", $value, ["required", "class"=>"form-control select2", "placeholder"=>trans("admin.$table->name.form.language")])')
+              .col-md-1
+                a.btn.btn-sm.remove-language(data-value!="{{ $language_id }}")
+                  span.glyphicon.glyphicon-trash
 
