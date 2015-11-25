@@ -4,6 +4,7 @@ namespace FairHub\Http\Controllers;
 
 use FairHub\Models\Category;
 use FairHub\Models\Context;
+use FairHub\Models\Language;
 use Illuminate\Http\Request;
 use FairHub\Http\Requests;
 use FairHub\Http\Controllers\Controller;
@@ -55,10 +56,13 @@ class ContextController extends Controller
         $this->authorize(new Context());
         $contexts = Context::all()->pluck('name', 'id');
         $categories = Category::all()->pluck('name', 'id');
+        $languages = Language::all()->pluck('description', 'id');
         return response()->view('admin.contexts.form',[
             'context' => new Context(),
             'contexts' => $contexts,
             'categories' => $categories,
+            'languages' => $languages,
+            'translations' => [],
             'title' => trans('admin.contexts.new')
         ]);
     }
@@ -106,11 +110,13 @@ class ContextController extends Controller
         $this->authorize($edit);
         $contexts = Context::where('id' , '!=', $id)->get()->pluck('name', 'id');
         $categories = Category::all()->pluck('name', 'id');
-
+        $languages = Language::all()->pluck('description', 'id');
         return response()->view('admin.contexts.form',[
             'context' => $edit,
             'contexts' => $contexts,
             'categories' => $categories,
+            'languages' => $languages,
+            'translations' => $edit->listsTranslations($edit->translatedAttributes)->get()->toArray(),
             'id' => $id,
             'title' => $edit->name
         ]);

@@ -83,7 +83,7 @@ return [
     | application, set this to 'Trans'.
     |
     */
-    'translation_suffix' => 'T',
+    'translation_suffix' => 'Translation',
 
     /*
     |--------------------------------------------------------------------------
@@ -94,7 +94,7 @@ return [
     | translation model.
     |
     */
-    'locale_key' => 'locale',
+    'locale_key' => 'language_id',
 
     /*
     |--------------------------------------------------------------------------
@@ -108,6 +108,6 @@ return [
     | Set this to true only if you understand the security risks.
     |
     */
-    'always_fillable' => false,
+    'always_fillable' => true,
 
 ];

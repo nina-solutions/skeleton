@@ -2,22 +2,39 @@
 
 namespace FairHub\Models;
 
+use Dimsav\Translatable\Translatable;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
 class Context extends HubModel
 {
+    use Translatable;
+
+    public $translatedAttributes = [
+        'description'
+    ];
+    /**
+     * The relations to eager load on every query.
+     *
+     * @var array
+     */
+    //optional
+    protected $with = [
+        'translations'
+    ];
+
     protected $nullable = [
         'context_id',
         'description'
     ];
+
     protected $fillable = [
         'code',
         'name',
         'start',
         'end',
         'link',
-        'description',
+        'description', //RESTA FILLABLE NEL MODEL PADRE
         'context_id'
     ];
 
