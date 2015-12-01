@@ -11,6 +11,21 @@ use FairHub\Http\Controllers\Controller;
 
 class ContextController extends Controller
 {
+    private $table = null;
+    public function __construct()
+    {
+        $this->table = (object) [
+            'name' => 'contexts',
+            'controller' => 'ContextController',
+            'columns' => [
+                'name' => 'Nome',
+                'description' => 'Descrizione',
+                'fullCode' => 'Codice',
+                'parentName' => 'Contesto'
+            ]
+        ];
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -33,16 +48,7 @@ class ContextController extends Controller
         }
         return response()->view('admin.index',[
             'data' => $contexts->paginate(),
-            'table' => (object) [
-                'name' => 'contexts',
-                'controller' => 'ContextController',
-                'columns' => [
-                    'name' => 'Nome',
-                    'description' => 'Descrizione',
-                    'fullCode' => 'Codice',
-                    'parentName' => 'Contesto'
-                ]
-            ]
+            'table' => $this->table
         ]);
     }
 
@@ -57,13 +63,16 @@ class ContextController extends Controller
         $contexts = Context::all()->pluck('name', 'id');
         $categories = Category::all()->pluck('name', 'id');
         $languages = Language::all()->pluck('description', 'id');
+        $new = new Context();
         return response()->view('admin.contexts.form',[
-            'context' => new Context(),
+            'context' => $new,
             'contexts' => $contexts,
             'categories' => $categories,
             'languages' => $languages,
-            'translatables' => [],
-            'title' => trans('admin.contexts.new')
+            'translations' => [],
+            'translatables' => $new->translatedAttributes,
+            'title' => trans('admin.contexts.new'),
+            'table' => $this->table
         ]);
     }
 
@@ -117,9 +126,10 @@ class ContextController extends Controller
             'categories' => $categories,
             'languages' => $languages,
             'translations' => $edit->listsTranslations($edit->translatedAttributes)->get()->toArray(),
-            'translatables' => [],
+            'translatables' => $edit->translatedAttributes,
             'id' => $id,
-            'title' => $edit->name
+            'title' => $edit->name,
+            'table' => $this->table
         ]);
     }
 

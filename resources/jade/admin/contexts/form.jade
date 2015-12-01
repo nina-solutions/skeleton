@@ -18,7 +18,7 @@ include ../../partials/mixins
     small @lang('admin.contexts.head')
 
 +section('content')
-  #translatable.row
+  .row
     + php("Form::model($context, ['route' => (isset($id) ? ['admin.contexts.update', $id] : ['admin.contexts.store']), 'method' => (isset($id) ? 'PUT' : 'POST'),'data-toggle' => 'validator', 'role' => 'form', 'class' => ''])", "Form::close()")
       .col-md-6
         .box.box-primary
@@ -57,21 +57,20 @@ include ../../partials/mixins
             // /.box-body
             .box-footer
               button.btn.btn-primary(type='submit') @lang('admin.actions.save')
-      + foreach('$languages','$language', '$language_id', '$i')
-        .col-md-6.language-box(data-value!="{{ $language_id }}")
-          .box.box-default
-            .box-header.with-border
-              h3.box-title {{ $language }}
-            .box-body
-              .row.languages.form-group
-                .col-md-11
+      .col-md-6
+        #translations.row
+          + php("Form::hidden('fields', implode(';', $translatables), ['id' => 'fields'])")
+          + foreach('$translations','$language', '$language_id', '$i')
+            .col-md-12.translation-box(data-value!="{{ $language_id }}")
+              .box.box-default
+                .box-header.with-border
+                  h3.box-title {{ $language }}
+                  a.btn.btn-sm.remove-translation(data-value!="{{ $language_id }}")
+                    span.glyphicon.glyphicon-trash
+                .box-body.row
                   + foreach('$translatables','$value', '$field', '$j')
                     .row
                       .col-md-5
                         + php("Form::label('$language_id[$field]', $field, ['class' => ''])")
                       .col-md-7
                         + php('Form::text("$language_id[$field]", $value, ["required", "class"=>"form-control select2", "placeholder"=>trans("admin.$table->name.form.language")])')
-              .col-md-1
-                a.btn.btn-sm.remove-language(data-value!="{{ $language_id }}")
-                  span.glyphicon.glyphicon-trash
-

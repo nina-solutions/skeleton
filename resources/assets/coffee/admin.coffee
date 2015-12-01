@@ -52,21 +52,41 @@ class HubAdmin
         $('#end').val(picker.endDate.format('YYYY-MM-DD HH:mm:ss'))
 
   init_translatable: ->
-    main_row = $('#translatable')
+    thisHub = this
+    language_id = $('#language_id')
+    translations = $('#translations')
+    fields = $('#fields').val().split(';')
+    $('.remove-translation').each ->
+      $(language_id).find('option[value='+$(this).data('value')+']').attr('disabled', 'disabled')
 
-  add_language: (main_row, language_id, fields) ->
-    new_field = []
-    new_label = []
+    $(translations).on 'click', '.remove-translation', (e) ->
+      hub.remove_translation(e, this)
+      hub.init_select()
+
+    if language_id.length > 0 and translations.length > 0 and fields.length > 0
+      language_id.change (e, item) ->
+        thisHub.add_language(translations, language_id, fields)
+        $(language_id).find('option').filter(':selected').attr('disabled', 'disabled')
+        thisHub.init_select()
+
+  add_language: (translations, language_id, fields) ->
+    new_fields = []
+    selectedLang = $(language_id).find('option').filter(':selected')
     for field in fields
       do (field) ->
-        new_field.push $(document.createElement('input')).attr('name', language_id + '[' + field + ']').text(field)
-        new_label.push $(document.createElement('label')).attr('for', language_id + '[' + field + ']').text(field)
-    new_button = $(document.createElement('a')).addClass('btn btn-sm remove-language').attr('data-value', language_id).html('<span class="glyphicon glyphicon-trash"></span>')
-    selectColumn = $(document.createElement('div')).addClass('col-md-5').append(new_role)
-    labelColumn = $(document.createElement('div')).addClass('col-md-5').append(new_label)
-    actionColumn = $(document.createElement('div')).addClass('col-md-2').append(new_button)
-    new_lang_box = $(document.createElement('div')).addClass('col-md-6 language-box').append(labelColumn, selectColumn, actionColumn)
-    main_row.append(new_lang_box)
+        inputField = $(document.createElement('div')).addClass('col-md-8').append($(document.createElement('input')).addClass('form-control').attr('name', selectedLang.val() + '[' + field + ']').text(field))
+        labelField = $(document.createElement('div')).addClass('col-md-4').append($(document.createElement('label')).addClass('pull-right').attr('for', selectedLang.val() + '[' + field + ']').text(field))
+        new_fields.push $(document.createElement('div')).addClass('row').append(labelField, inputField)
+    new_button = $(document.createElement('div')).addClass('box-tools pull-right').append($(document.createElement('a')).addClass('btn btn-box-tool btn-sm remove-translation').attr('data-value', selectedLang.val()).html('<span class="glyphicon glyphicon-trash"></span>'))
+    bodyBox = $(document.createElement('div')).addClass('box-body').append(new_fields)
+    headerBox = $(document.createElement('div')).addClass('box-header with-border').append($(document.createElement('h3')).addClass('box-title').text(selectedLang.text()), new_button)
+    boxing = $(document.createElement('div')).addClass('row').append($(document.createElement('div')).addClass('box box-default').append(headerBox, bodyBox))
+    new_lang_box = $(document.createElement('div')).addClass('col-md-12 translation-box').append(boxing)
+    translations.append(new_lang_box)
+  remove_translation: (e, element) ->
+    e.preventDefault
+    $(language_id).find('option[value='+$(element).data('value')+']').prop('disabled', false)
+    $(element).parents('div.translation-box').remove()
 
   remove_permission: (e, element) ->
     e.preventDefault
