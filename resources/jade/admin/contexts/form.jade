@@ -35,9 +35,6 @@ include ../../partials/mixins
                 + php("Form::label('name', trans('admin.contexts.form.name'), ['class' => ''])")
                 + php("Form::text('name', Input::old('name'), ['required', 'class'=>'form-control', 'placeholder'=>trans('admin.contexts.form.name')])")
               .form-group
-                + php("Form::label('description', trans('admin.contexts.form.description'), ['class' => ''])")
-                + php("Form::text('description', Input::old('description'), ['required', 'class'=>'form-control', 'placeholder'=>trans('admin.contexts.form.description')])")
-              .form-group
                 + php("Form::label('context_id', trans('admin.contexts.form.parent'), ['class' => ''])")
                 + php("Form::select('context_id', $contexts, Input::old('context_id'), ['class'=>'form-control select2', 'placeholder'=>trans('admin.contexts.form.parent')])")
               .form-group
@@ -60,17 +57,19 @@ include ../../partials/mixins
       .col-md-6
         #translations.row
           + php("Form::hidden('fields', implode(';', $translatables), ['id' => 'fields'])")
-          + foreach('$translations','$language', '$language_id', '$i')
-            .col-md-12.translation-box(data-value!="{{ $language_id }}")
-              .box.box-default
-                .box-header.with-border
-                  h3.box-title {{ $language }}
-                  a.btn.btn-sm.remove-translation(data-value!="{{ $language_id }}")
-                    span.glyphicon.glyphicon-trash
-                .box-body.row
-                  + foreach('$translatables','$value', '$field', '$j')
-                    .row
-                      .col-md-5
-                        + php("Form::label('$language_id[$field]', $field, ['class' => ''])")
-                      .col-md-7
-                        + php('Form::text("$language_id[$field]", $value, ["required", "class"=>"form-control select2", "placeholder"=>trans("admin.$table->name.form.language")])')
+          + foreach('$translations','$translation', '$trans_id', '$i')
+            .col-md-12.translation-box
+              .row
+                .box.box-default
+                  .box-header.with-border
+                    h3.box-title {{ $languages[$translation->language_id] }}
+                    div.box-tools.pull-right
+                      a.btn.btn-box-tool.btn-sm.remove-translation(data-value!="{{ $translation->language_id }}")
+                        span.glyphicon.glyphicon-trash
+                  .box-body
+                    + foreach('$translatables','$value')
+                      .row
+                        .col-md-4
+                          + php("Form::label($translation->language_id.'['.$value.']', $value, ['class' => 'pull-right'])")
+                        .col-md-8
+                          + php('Form::text($translation->language_id."[".$value."]", $translation->$value, ["required", "class"=>"form-control select2", "placeholder"=>trans("admin.$table->name.form.language")])')

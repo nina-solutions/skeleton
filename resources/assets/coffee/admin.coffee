@@ -83,6 +83,7 @@ class HubAdmin
     boxing = $(document.createElement('div')).addClass('row').append($(document.createElement('div')).addClass('box box-default').append(headerBox, bodyBox))
     new_lang_box = $(document.createElement('div')).addClass('col-md-12 translation-box').append(boxing)
     translations.append(new_lang_box)
+
   remove_translation: (e, element) ->
     e.preventDefault
     $(language_id).find('option[value='+$(element).data('value')+']').prop('disabled', false)

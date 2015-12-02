@@ -85,6 +85,7 @@ class ContextController extends Controller
     public function store(Request $request)
     {
         $new = new Context($request->all());
+        //dd($request->all());
         $this->authorize($new);
         if (!$new->save()){
             return redirect()->back()->withInput()->with('messages', [trans('messages.error')]);
@@ -125,7 +126,7 @@ class ContextController extends Controller
             'contexts' => $contexts,
             'categories' => $categories,
             'languages' => $languages,
-            'translations' => $edit->listsTranslations($edit->translatedAttributes)->get()->toArray(),
+            'translations' => $edit->translations,
             'translatables' => $edit->translatedAttributes,
             'id' => $id,
             'title' => $edit->name,

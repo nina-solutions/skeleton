@@ -11,17 +11,11 @@ return [
     |
     */
     'locales' => [
-        'it',
-        'en' => [
-            'UK',
-            'US',
-        ],
-        'de',
-        'fr',
-        'es' => [
-            'MX', // mexican spanish
-            'CO', // colombian spanish
-        ],
+        '1',
+        '2',
+        '3',
+        '4',
+        '5'
     ],
 
     /*
@@ -59,7 +53,7 @@ return [
     | $useTranslationFallback when defined
     |
     */
-    'use_fallback' => true,
+    'use_fallback' => false,
 
     /*
     |--------------------------------------------------------------------------
@@ -71,7 +65,7 @@ return [
     | set it to false.
     |
     */
-    'fallback_locale' => 'it',
+    'fallback_locale' => false,
 
     /*
     |--------------------------------------------------------------------------
@@ -108,6 +102,6 @@ return [
     | Set this to true only if you understand the security risks.
     |
     */
-    'always_fillable' => true,
+    'always_fillable' => false,
 
 ];

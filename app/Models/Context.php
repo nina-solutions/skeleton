@@ -25,7 +25,9 @@ class Context extends HubModel
 
     protected $nullable = [
         'context_id',
-        'description'
+        'description',
+        'start',
+        'end'
     ];
 
     protected $fillable = [
