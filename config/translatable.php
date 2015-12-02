@@ -102,6 +102,6 @@ return [
     | Set this to true only if you understand the security risks.
     |
     */
-    'always_fillable' => false,
+    'always_fillable' => true,
 
 ];

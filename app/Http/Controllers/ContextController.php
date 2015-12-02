@@ -19,7 +19,6 @@ class ContextController extends Controller
             'controller' => 'ContextController',
             'columns' => [
                 'name' => 'Nome',
-                'description' => 'Descrizione',
                 'fullCode' => 'Codice',
                 'parentName' => 'Contesto'
             ]
@@ -37,7 +36,7 @@ class ContextController extends Controller
         $contexts = Context::where('id', '>=', '1');
         $this->authorize(new Context());
         if ($request->has('h-search-text')) {
-            $contexts->orLike(['name', 'description'], $request->input('h-search-text'));
+            $contexts->orLike(['name', 'code'], $request->input('h-search-text'));
         }
         if ($request->has('h-search-code')) {
             $contexts->code($request->input('h-search-code'));
@@ -85,7 +84,6 @@ class ContextController extends Controller
     public function store(Request $request)
     {
         $new = new Context($request->all());
-        //dd($request->all());
         $this->authorize($new);
         if (!$new->save()){
             return redirect()->back()->withInput()->with('messages', [trans('messages.error')]);

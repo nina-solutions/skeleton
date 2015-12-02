@@ -25,7 +25,7 @@ class Context extends HubModel
 
     protected $nullable = [
         'context_id',
-        'description',
+        //'description',
         'start',
         'end'
     ];
@@ -36,7 +36,7 @@ class Context extends HubModel
         'start',
         'end',
         'link',
-        'description', //RESTA FILLABLE NEL MODEL PADRE
+        //'description', //RESTA FILLABLE NEL MODEL PADRE
         'context_id'
     ];
 
@@ -66,21 +66,6 @@ class Context extends HubModel
         }
 
         return $query;
-    }
-
-    /**
-     * Get the code-related fair.
-     * @param $query Builder
-     * @param $text String
-     * @return Builder
-     */
-    public function scopeDescNameLike($query, $text)
-    {
-        $query = $query->where(function($query) use ($text) {
-            $query->where('description', 'ILIKE', "%$text%")
-                ->orWhere('code', 'ILIKE', "%$text%");
-        });
-        return $query->where('description', 'ILIKE', "%$text%");
     }
 
     /**
