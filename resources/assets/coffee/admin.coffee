@@ -55,19 +55,20 @@ class HubAdmin
     thisHub = this
     language_id = $('#language_id')
     translations = $('#translations')
-    fields = $('#fields').val().split(';')
-    $('.remove-translation').each ->
-      $(language_id).find('option[value='+$(this).data('value')+']').attr('disabled', 'disabled')
+    if translations.length > 0
+      fields = $('#fields').val().split(';')
+      $('.remove-translation').each ->
+        $(language_id).find('option[value='+$(this).data('value')+']').attr('disabled', 'disabled')
 
-    $(translations).on 'click', '.remove-translation', (e) ->
-      hub.remove_translation(e, this)
-      hub.init_select()
+      $(translations).on 'click', '.remove-translation', (e) ->
+        hub.remove_translation(e, this)
+        hub.init_select()
 
-    if language_id.length > 0 and translations.length > 0 and fields.length > 0
-      language_id.change (e, item) ->
-        thisHub.add_language(translations, language_id, fields)
-        $(language_id).find('option').filter(':selected').attr('disabled', 'disabled')
-        thisHub.init_select()
+      if language_id.length > 0 and translations.length > 0 and fields.length > 0
+        language_id.change (e, item) ->
+          thisHub.add_language(translations, language_id, fields)
+          $(language_id).find('option').filter(':selected').attr('disabled', 'disabled')
+          thisHub.init_select()
 
   add_language: (translations, language_id, fields) ->
     new_fields = []
@@ -110,11 +111,11 @@ class HubAdmin
     if userform.length > 0 and context_id.length > 0 and permissions.length > 0
       context_id.change (e, item) ->
         # add new element
-        thisHub.user_permission(roles, context_id, permissions)
+        thisHub.add_permission(roles, context_id, permissions)
         $(context_id).find('option').filter(':selected').attr('disabled', 'disabled')
         thisHub.init_select()
 
-  user_permission: (roles, context_id, permissions) ->
+  add_permission: (roles, context_id, permissions) ->
     new_role = roles.clone(true, true).attr('id', 'role_'+context_id.val()).removeClass('hidden').attr('name', 'permission['+context_id.val()+'][role_id]')
     new_label = $(document.createElement('label')).attr('for', 'permission['+context_id.val()+'][role_id]').text(context_id.find('option').filter(':selected').text())
     new_button = $(document.createElement('a')).addClass('btn btn-sm remove-permission').attr('data-value', context_id.val()).html('<span class="glyphicon glyphicon-trash"></span>')
