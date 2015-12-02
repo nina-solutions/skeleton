@@ -25,6 +25,7 @@ class HubContentRequest extends Request
      */
     public function rules()
     {
+        if ($this->method() === 'GET') return [];
         $status = 1;
         $newid = '';
         if (Route::current()){
