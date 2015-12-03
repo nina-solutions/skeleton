@@ -4,7 +4,6 @@ namespace FairHub\Models;
 
 use Dimsav\Translatable\Translatable;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Model;
 
 class Context extends HubModel
 {
