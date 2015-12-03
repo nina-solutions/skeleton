@@ -99,6 +99,7 @@ class HubController extends Controller
         $model->content = $content;
         $transitions = $content->transitions();
         $statuses = Status::all()->pluck('code', 'id');
+        $languages = Language::all()->pluck('description', 'id');
         $status = Status::where('id', '=', '1')->first();
         return response()->view("admin.$this->name.form",[
             'model' => $model,
@@ -107,6 +108,9 @@ class HubController extends Controller
             'categories' => $categories,
             'statuses' => $statuses,
             'transitions' => $transitions,
+            'languages' => $languages,
+            'translations' => [],
+            'translatables' => $model->translatedAttributes,
             'status' => $status,
             'title' => trans("admin.$this->name.new"),
             'table' => (object) [
@@ -182,6 +186,7 @@ class HubController extends Controller
         $contexts = Context::all()->pluck('name', 'id');
         $categories = Category::all()->pluck('name', 'id');
         $transitions = $model->content->transitions();
+        $languages = Language::all()->pluck('description', 'id');
         $statuses = Status::all()->pluck('code', 'id');
         $status = $model->content->status()->get()->first();
         return response()->view("admin.$this->name.form",[
@@ -190,7 +195,10 @@ class HubController extends Controller
             'contexts' => $contexts,
             'categories' => $categories,
             'statuses' => $statuses,
+            'languages' => $languages,
             'transitions' => $transitions,
+            'translations' => $model->translations,
+            'translatables' => $model->translatedAttributes,
             'status' => $status,
             'id' => $id,
             'title' => $model->content->name,
