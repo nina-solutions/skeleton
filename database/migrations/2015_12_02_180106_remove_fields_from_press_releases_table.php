@@ -13,7 +13,10 @@ class RemoveFieldsFromPressReleasesTable extends Migration
     public function up()
     {
         Schema::table('press_releases', function (Blueprint $table) {
-            //
+            $table->dropColumn('subhead');
+            $table->dropColumn('title');
+            $table->dropColumn('subtitle');
+            $table->dropColumn('body');
         });
     }
 
@@ -25,7 +28,10 @@ class RemoveFieldsFromPressReleasesTable extends Migration
     public function down()
     {
         Schema::table('press_releases', function (Blueprint $table) {
-            //
+            $table->string('subhead')->nullable();
+            $table->string('title');
+            $table->string('subtitle')->nullable();
+            $table->text('body');
         });
     }
 }
