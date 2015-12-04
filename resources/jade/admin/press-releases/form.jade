@@ -73,17 +73,16 @@ include ../../partials/mixins
           + php("Form::hidden('fields', implode(';', $translatables), ['id' => 'fields'])")
           + foreach('$translations','$translation', '$trans_id', '$i')
             .col-md-12.translation-box
-              .row
-                .box.box-default
-                  .box-header.with-border
-                    h3.box-title {{ $languages[$translation->language_id] }}
-                    div.box-tools.pull-right
-                      a.btn.btn-box-tool.btn-sm.remove-translation(data-value!="{{ $translation->language_id }}")
-                        span.glyphicon.glyphicon-trash
-                  .box-body
-                    + foreach('$translatables','$value')
-                      .row
-                        .col-md-4
-                          + php("Form::label($translation->language_id.'['.$value.']', $value, ['class' => 'pull-right'])")
-                        .col-md-8
-                          + php('Form::text($translation->language_id."[".$value."]", $translation->$value, ["required", "class"=>"form-control select2", "placeholder"=>trans("admin.$table->name.form.language")])')
+              .box.box-default
+                .box-header.with-border
+                  h3.box-title {{ $languages[$translation->language_id] }}
+                  div.box-tools.pull-right
+                    a.btn.btn-box-tool.btn-sm.remove-translation(data-value!="{{ $translation->language_id }}")
+                      span.glyphicon.glyphicon-trash
+                .box-body
+                  + foreach('$translatables','$value')
+                    .row
+                      .col-md-4
+                        + php("Form::label($translation->language_id.'['.$value.']', $value, ['class' => 'pull-right'])")
+                      .col-md-8
+                        + php('Form::text($translation->language_id."[".$value."]", $translation->$value, ["required", "class"=>"form-control select2", "placeholder"=>trans("admin.$table->name.form.language")])')

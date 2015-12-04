@@ -53,7 +53,7 @@ return [
     | $useTranslationFallback when defined
     |
     */
-    'use_fallback' => false,
+    'use_fallback' => true,
 
     /*
     |--------------------------------------------------------------------------
@@ -65,7 +65,7 @@ return [
     | set it to false.
     |
     */
-    'fallback_locale' => false,
+    'fallback_locale' => 1,
 
     /*
     |--------------------------------------------------------------------------

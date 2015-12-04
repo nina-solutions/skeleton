@@ -81,7 +81,7 @@ class HubAdmin
     new_button = $(document.createElement('div')).addClass('box-tools pull-right').append($(document.createElement('a')).addClass('btn btn-box-tool btn-sm remove-translation').attr('data-value', selectedLang.val()).html('<span class="glyphicon glyphicon-trash"></span>'))
     bodyBox = $(document.createElement('div')).addClass('box-body').append(new_fields)
     headerBox = $(document.createElement('div')).addClass('box-header with-border').append($(document.createElement('h3')).addClass('box-title').text(selectedLang.text()), new_button)
-    boxing = $(document.createElement('div')).addClass('row').append($(document.createElement('div')).addClass('box box-default').append(headerBox, bodyBox))
+    boxing = $(document.createElement('div')).addClass('box box-default').append(headerBox, bodyBox)
     new_lang_box = $(document.createElement('div')).addClass('col-md-12 translation-box').append(boxing)
     translations.append(new_lang_box)
 

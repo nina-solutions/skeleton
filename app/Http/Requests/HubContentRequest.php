@@ -40,6 +40,7 @@ class HubContentRequest extends Request
                 $newid = '|different:id';
             }
         }
+        return [];
         return [
             'content[name]' => 'required',
             'content[description]' => 'required',
