@@ -1,9 +1,9 @@
-/vendor
+#/vendor
 #/node_modules
 .env
 /bootstrap/compiled.php
 .env.*.php
 .env.php
 .idea*
-resources/views/*
-!resources/views/vendor*
+#resources/views/*
+#resources/views/vendor*
