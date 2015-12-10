@@ -37,13 +37,16 @@ return [
     // to track files with credentials : Rocketeer will prompt you for your credentials
     // and store them locally
     'connections'      => [
+        'preview' => [
+            'host'      => '192.168.154.18',
+            'username'  => 'intesys',
+            'password'  => '1nt3sys',
+            'db_role'   => true,
+        ],
         'production' => [
             'host'      => '192.168.154.18',
             'username'  => 'intesys',
             'password'  => '1nt3sys',
-            'key'       => '',
-            'keyphrase' => '',
-            'agent'     => '',
             'db_role'   => true,
         ],
     ],
@@ -77,7 +80,16 @@ return [
         // Stages configurations
         'stages'      => [],
         // Connections configuration
-        'connections' => [],
+        'connections' => [
+            'preview'    => [
+                'scm'    => array('branch' => 'develop'),
+                'remote' => array('app_directory' => 'hub2',),
+            ],
+            'production'    => [
+                'scm'    => array('branch' => 'master'),
+                'remote' => array('app_directory' => 'hub2',),
+            ],
+        ],
 
     ],
 

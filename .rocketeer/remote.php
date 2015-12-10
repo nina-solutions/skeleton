@@ -20,11 +20,11 @@ return [
 
     // The root directory where your applications will be deployed
     // This path *needs* to start at the root, ie. start with a /
-    'root_directory' => '/home/httpd/intesys/hub2',
+    'root_directory' => '/home/httpd/intesys/',
 
     // The folder the application will be cloned in
     // Leave empty to use `application_name` as your folder name
-    'app_directory'  => '',
+    'app_directory'  => 'hub2',
 
     // A list of folders/file to be shared between releases
     // Use this to list folders that need to keep their state, like
@@ -33,6 +33,9 @@ return [
         'storage/logs',
         'storage/framework',
         'storage/sessions',
+        'tools',
+        'vendor',
+        'node_modules',
     ],
 
     // Execution

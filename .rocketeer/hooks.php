@@ -16,14 +16,17 @@ return [
 
     // Tasks to execute before the core Rocketeer Tasks
     'before' => [
-        'setup'   => [],
+        'setup'   => ['gulp default'],
         'deploy'  => [],
         'cleanup' => [],
     ],
 
     // Tasks to execute after the core Rocketeer Tasks
     'after'  => [
-        'setup'   => [],
+        'setup'   => [
+            'rm -rf .git',
+            'mv production.env .env'
+        ],
         'deploy'  => [],
         'cleanup' => [],
     ],
