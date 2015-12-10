@@ -10,6 +10,7 @@ class DW_UTILITA extends HubModel
     public $timestamps = false;
 
     protected $primaryKey = 'UT_ID';
+    protected $connection = 'dw';
 
     /**
      * @param $query Builder

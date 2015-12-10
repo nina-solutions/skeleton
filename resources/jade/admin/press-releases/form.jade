@@ -59,20 +59,30 @@ include ../../partials/mixins
         .box.box-primary
           .box-body
             .form-group
-              + php("Form::label('subhead', trans('admin.'.$table->name.'.form.subhead'))")
-              + php("Form::text('subhead', null, ['required', 'class'=>'form-control', 'placeholder'=>trans('admin.'.$table->name.'.form.subhead')])")
-            .form-group
-              + php("Form::label('title', trans('admin.'.$table->name.'.form.title'))")
-              + php("Form::text('title', null, ['required', 'class'=>'form-control', 'placeholder'=>trans('admin.'.$table->name.'.form.title')])")
-            .form-group
-              + php("Form::label('subtitle', trans('admin.'.$table->name.'.form.subtitle'))")
-              + php("Form::text('subtitle', null, ['class'=>'form-control', 'placeholder'=>trans('admin.'.$table->name.'.form.subtitle')])")
-            .form-group
               + php("Form::label('category_id', trans('admin.'.$table->name.'.form.categories'))")
               + php("Form::select('category_id', $categories, null, ['required', 'class'=>'form-control select2', 'placeholder'=>trans('admin.'.$table->name.'.form.categories')])")
-            .form-group
-              + php("Form::label('body', trans('admin.'.$table->name.'.form.body'))")
-              + php("Form::text('body', null, ['class'=>'form-control select2', 'placeholder'=>trans('admin.'.$table->name.'.form.body')])")
+
             .form-group
               + php("Form::label('notes', trans('admin.'.$table->name.'.form.notes'))")
               + php("Form::text('notes', null, ['class'=>'form-control select2', 'placeholder'=>trans('admin.'.$table->name.'.form.notes')])")
+            .form-group
+              + php("Form::label('language_id', trans('admin.'.$table->name.'.form.language_id'), ['class' => ''])")
+              + php('Form::select("language_id", $languages, Input::old("language_id"), ["id" => "language_id", "class"=>"form-control select2", "placeholder"=>trans("admin.$table->name.form.language_id")])')
+      .col-md-6
+        #translations.row
+          + php("Form::hidden('fields', implode(';', $translatables), ['id' => 'fields'])")
+          + foreach('$translations','$translation', '$trans_id', '$i')
+            .col-md-12.translation-box
+              .box.box-default
+                .box-header.with-border
+                  h3.box-title {{ $languages[$translation->language_id] }}
+                  div.box-tools.pull-right
+                    a.btn.btn-box-tool.btn-sm.remove-translation(data-value!="{{ $translation->language_id }}")
+                      span.glyphicon.glyphicon-trash
+                .box-body
+                  + foreach('$translatables','$value')
+                    .row
+                      .col-md-4
+                        + php("Form::label($translation->language_id.'['.$value.']', $value, ['class' => 'pull-right'])")
+                      .col-md-8
+                        + php('Form::text($translation->language_id."[".$value."]", $translation->$value, ["required", "class"=>"form-control select2", "placeholder"=>trans("admin.$table->name.form.language")])')

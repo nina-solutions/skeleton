@@ -2,22 +2,40 @@
 
 namespace FairHub\Models;
 
+use Dimsav\Translatable\Translatable;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Model;
 
 class Context extends HubModel
 {
-    protected $nullable = [
-        'context_id',
+    use Translatable;
+
+    public $translatedAttributes = [
         'description'
     ];
+    /**
+     * The relations to eager load on every query.
+     *
+     * @var array
+     */
+    //optional
+    protected $with = [
+        'translations'
+    ];
+
+    protected $nullable = [
+        'context_id',
+        //'description',
+        'start',
+        'end'
+    ];
+
     protected $fillable = [
         'code',
         'name',
         'start',
         'end',
         'link',
-        'description',
+        //'description', //RESTA FILLABLE NEL MODEL PADRE
         'context_id'
     ];
 
@@ -47,21 +65,6 @@ class Context extends HubModel
         }
 
         return $query;
-    }
-
-    /**
-     * Get the code-related fair.
-     * @param $query Builder
-     * @param $text String
-     * @return Builder
-     */
-    public function scopeDescNameLike($query, $text)
-    {
-        $query = $query->where(function($query) use ($text) {
-            $query->where('description', 'ILIKE', "%$text%")
-                ->orWhere('code', 'ILIKE', "%$text%");
-        });
-        return $query->where('description', 'ILIKE', "%$text%");
     }
 
     /**

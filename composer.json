@@ -10,7 +10,8 @@
         "laravelcollective/html": "5.1.*",
         "guzzlehttp/guzzle": "~5.3",
         "predis/predis": "~1.0",
-        "doctrine/dbal": "*"
+        "doctrine/dbal": "*",
+        "dimsav/laravel-translatable" : "*"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

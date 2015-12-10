@@ -12,6 +12,7 @@ return [
     */
     'success' => 'Success',
     'error' => 'Error',
+    'welcome' => 'Hub VeronaFiere',
 
     'hello' => 'Ciao',
     'thanks' => 'Grazie per aver scelto il nostro servizio.',

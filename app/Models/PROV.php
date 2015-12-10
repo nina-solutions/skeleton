@@ -14,6 +14,7 @@ class PROV extends HubModel
         'cdt_nome_tab',
         'cdt_codice'
     ];
+    protected $connection = 'dw';
 
     //If you hate the way this Database is designed,
     //uniformity: if I want ID of any class, i just use id() method

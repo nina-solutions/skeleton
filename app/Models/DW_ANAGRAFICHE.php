@@ -8,6 +8,7 @@ class DW_ANAGRAFICHE extends HubModel
     public $timestamps = false;
 
     protected $primaryKey = 'ANA_ID';
+    protected $connection = 'dw';
 
 
     /** Mutator: Force well formatted names.

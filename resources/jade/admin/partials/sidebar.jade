@@ -22,34 +22,40 @@ aside.main-sidebar
     // /.search form
     // Sidebar Menu
     ul.sidebar-menu
-      li.header HEADER
-      // Optionally, you can add icons to the links
-      li(class!="{{ (isset($table) && $table->controller == 'CustomController') ? 'active' : '' }}")
-        a(href="{{ action('CustomController@dashboard') }}")
-          span Dashboard
-      +statement('can', "'UserController@index', 'user_model'")
-        li(class!="{{ (isset($table) && $table->controller == 'UserController') ? 'active' : '' }}")
-          a(href="{{ action('UserController@index') }}")
-            span Utenti
+      li.header Gestione contenuti
       +statement('can', "'ContextController@index', 'context_model'")
-        li(class!="{{ (isset($table) && $table->controller == 'ContextController') ? 'active' : '' }}")
-          a(href="{{ action('ContextController@index') }}")
-            span Fiere
-      +statement('can', "'LanguagesController@index', 'language_model'")
-        li(class!="{{ (isset($table) && $table->controller == 'LanguagesController') ? 'active' : '' }}")
-          a(href="{{ action('LanguagesController@index') }}")
-            span Lingue
-      +statement('can', "'CategoriesController@index', 'category_model'")
-        li(class!="{{ (isset($table) && $table->controller == 'CategoriesController') ? 'active' : '' }}")
-          a(href="{{ action('CategoriesController@index') }}")
-            span Categorie
-      +statement('can', "'ContentController@index', 'content_model'")
-        li(class!="{{ (isset($table) && $table->controller == 'ContentController') ? 'active' : '' }}")
-          a(href="{{ action('ContentController@index') }}")
-            span Content Generico
+        li.treeview(class!="{{ !isset($table->contentable_type) ? 'active' : '' }}")
+          a(href='#')
+            span Area Admin
+            i.fa.fa-angle-left.pull-right
+          ul.treeview-menu(class!="{{ !isset($table->contentable_type) ? 'active menu-open' : '' }}")
+            // Optionally, you can add icons to the links
+            li(class!="{{ (isset($table) && $table->controller == 'CustomController') ? 'active' : '' }}")
+              a(href="{{ action('CustomController@dashboard') }}")
+                span Dashboard
+            +statement('can', "'UserController@index', 'user_model'")
+              li(class!="{{ (isset($table) && $table->controller == 'UserController') ? 'active' : '' }}")
+                a(href="{{ action('UserController@index') }}")
+                  span Utenti
+            +statement('can', "'ContextController@index', 'context_model'")
+              li(class!="{{ (isset($table) && $table->controller == 'ContextController') ? 'active' : '' }}")
+                a(href="{{ action('ContextController@index') }}")
+                  span Fiere
+            +statement('can', "'LanguagesController@index', 'language_model'")
+              li(class!="{{ (isset($table) && $table->controller == 'LanguagesController') ? 'active' : '' }}")
+                a(href="{{ action('LanguagesController@index') }}")
+                  span Lingue
+            +statement('can', "'CategoriesController@index', 'category_model'")
+              li(class!="{{ (isset($table) && $table->controller == 'CategoriesController') ? 'active' : '' }}")
+                a(href="{{ action('CategoriesController@index') }}")
+                  span Categorie
+            +statement('can', "'ContentController@index', 'content_model'")
+              li(class!="{{ (isset($table) && $table->controller == 'ContentController') ? 'active' : '' }}")
+                a(href="{{ action('ContentController@index') }}")
+                  span Content Generico
       li.treeview(class!="{{ isset($table->contentable_type) ? 'active' : '' }}")
         a(href='#')
-          span Comunicati Stampa
+          span Contenuti
           i.fa.fa-angle-left.pull-right
         ul.treeview-menu(class!="{{ isset($table->contentable_type) ? 'active menu-open' : '' }}")
           +foreach("Session::get('contents')", "$cont", "$key")
