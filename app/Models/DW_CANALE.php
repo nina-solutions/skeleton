@@ -8,6 +8,7 @@ class DW_CANALE extends HubModel
     public $timestamps = false;
 
     protected $primaryKey = 'CAN_ID';
+    protected $connection = 'dw';
     //increments('CAN_ID');
     //string('CAN_DESCRIZIONE', 50);
     //string('CAN_NOTE', 200);

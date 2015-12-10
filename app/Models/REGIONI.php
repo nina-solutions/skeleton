@@ -14,6 +14,7 @@ class REGIONI extends HubModel
         'CDT_NOME_TAB',
         'CDT_CODICE'
     ];
+    protected $connection = 'dw';
 
     //If you hate the way this Database is designed,
     //uniformity: if I want ID of any class, i just use id() method

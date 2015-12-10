@@ -9,6 +9,7 @@ class DW_PERIODICITA extends HubModel
     public $timestamps = false;
 
     protected $primaryKey = 'PER_ID';
+    protected $connection = 'dw';
 
     //If you hate the way this Database is designed,
     //uniformity: if I want ID of any class, i just use id() method

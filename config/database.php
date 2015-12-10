@@ -51,41 +51,51 @@ return [
             'database' => storage_path('database.sqlite'),
             'prefix'   => '',
         ],
-/*
+
         'mysql' => [
-            'driver'    => 'mysql',
-            'host'      => env('DB_HOST'),
-            'database'  => env('DB_DATABASE'),
-            'username'  => env('DB_USERNAME'),
-            'password'  => env('DB_PASSWORD'),
+            'driver'    => env('MY_DRIVER'),
+            'host'      => env('MY_HOST'),
+            'database'  => env('MY_DATABASE'),
+            'username'  => env('MY_USERNAME'),
+            'password'  => env('MY_PASSWORD'),
             'charset'   => 'utf8',
             'collation' => 'utf8_unicode_ci',
             'prefix'    => '',
             'strict'    => false,
         ],
-        */
+
 
         'pgsql' => [
-            'driver'   => 'pgsql',
-            'host'     => env('DB_HOST'),
-            'database' => env('DB_DATABASE'),
-            'username' => env('DB_USERNAME'),
-            'password' => env('DB_PASSWORD'),
+            'driver'   => env('PG_DRIVER'),
+            'host'     => env('PG_HOST'),
+            'database' => env('PG_DATABASE'),
+            'username' => env('PG_USERNAME'),
+            'password' => env('PG_PASSWORD'),
             'charset'  => 'utf8',
             'prefix'   => '',
             'schema'   => 'public',
         ],
-/*
-        'sqlsrv' => [
-            'driver'   => 'sqlsrv',
-            'host'     => env('DB_HOST', 'localhost'),
-            'database' => env('DB_DATABASE', 'forge'),
-            'username' => env('DB_USERNAME', 'forge'),
-            'password' => env('DB_PASSWORD', ''),
+
+        'dw' => [
+            'driver'   => env('DW_DRIVER'),
+            'host'     => env('DW_HOST'),
+            'database' => env('DW_DATABASE'),
+            'username' => env('DW_USERNAME'),
+            'password' => env('DW_PASSWORD'),
             'charset'  => 'utf8',
             'prefix'   => '',
         ],
-        */
+
+        'mn' => [
+            'driver'   => env('MN_DRIVER'),
+            'host'     => env('MN_HOST'),
+            'database' => env('MN_DATABASE'),
+            'username' => env('MN_USERNAME'),
+            'password' => env('MN_PASSWORD'),
+            'charset'  => 'utf8',
+            'prefix'   => '',
+        ],
+
 
     ],
 
