@@ -10,6 +10,7 @@ class DW_MACROINTERESSE extends HubModel
     public $timestamps = false;
 
     protected $primaryKey = 'MIN_ID';
+    protected $connection = 'dw';
 
     public function scopeType($query, $type = "Visa Information"){
 

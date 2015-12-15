@@ -13,6 +13,7 @@ class VISA_TIPOSEDE extends HubModel
     protected $primaryKey = [
         'VITS_CODICE'
     ];
+    protected $connection = 'mn';
 
 
     public function scopeNation($query, $nationId) {

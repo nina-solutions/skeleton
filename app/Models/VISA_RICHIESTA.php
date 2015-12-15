@@ -11,6 +11,7 @@ class VISA_RICHIESTA extends HubModel
     //Working with this kind of keys implies NO incrementing and some custom save functions
     public $incrementing = true;
     protected $primaryKey = 'VISA_ID';
+    protected $connection = 'mn';
 
 
     //If you hate the way this Database is designed,

@@ -170,6 +170,7 @@
       this.init_select();
       this.init_datepicker();
       this.init_userform();
+      this.init_translatable();
     }
 
     HubAdmin.prototype.init_search = function() {
@@ -236,6 +237,58 @@
       }
     };
 
+    HubAdmin.prototype.init_translatable = function() {
+      var fields, language_id, thisHub, translations;
+      thisHub = this;
+      language_id = $('#language_id');
+      translations = $('#translations');
+      if (translations.length > 0) {
+        fields = $('#fields').val().split(';');
+        $('.remove-translation').each(function() {
+          return $(language_id).find('option[value=' + $(this).data('value') + ']').attr('disabled', 'disabled');
+        });
+        $(translations).on('click', '.remove-translation', function(e) {
+          hub.remove_translation(e, this);
+          return hub.init_select();
+        });
+        if (language_id.length > 0 && translations.length > 0 && fields.length > 0) {
+          return language_id.change(function(e, item) {
+            thisHub.add_language(translations, language_id, fields);
+            $(language_id).find('option').filter(':selected').attr('disabled', 'disabled');
+            return thisHub.init_select();
+          });
+        }
+      }
+    };
+
+    HubAdmin.prototype.add_language = function(translations, language_id, fields) {
+      var bodyBox, boxing, field, fn, headerBox, i, len, new_button, new_fields, new_lang_box, selectedLang;
+      new_fields = [];
+      selectedLang = $(language_id).find('option').filter(':selected');
+      fn = function(field) {
+        var inputField, labelField;
+        inputField = $(document.createElement('div')).addClass('col-md-8').append($(document.createElement('input')).addClass('form-control').attr('name', selectedLang.val() + '[' + field + ']').text(field));
+        labelField = $(document.createElement('div')).addClass('col-md-4').append($(document.createElement('label')).addClass('pull-right').attr('for', selectedLang.val() + '[' + field + ']').text(field));
+        return new_fields.push($(document.createElement('div')).addClass('row').append(labelField, inputField));
+      };
+      for (i = 0, len = fields.length; i < len; i++) {
+        field = fields[i];
+        fn(field);
+      }
+      new_button = $(document.createElement('div')).addClass('box-tools pull-right').append($(document.createElement('a')).addClass('btn btn-box-tool btn-sm remove-translation').attr('data-value', selectedLang.val()).html('<span class="glyphicon glyphicon-trash"></span>'));
+      bodyBox = $(document.createElement('div')).addClass('box-body').append(new_fields);
+      headerBox = $(document.createElement('div')).addClass('box-header with-border').append($(document.createElement('h3')).addClass('box-title').text(selectedLang.text()), new_button);
+      boxing = $(document.createElement('div')).addClass('box box-default').append(headerBox, bodyBox);
+      new_lang_box = $(document.createElement('div')).addClass('col-md-12 translation-box').append(boxing);
+      return translations.append(new_lang_box);
+    };
+
+    HubAdmin.prototype.remove_translation = function(e, element) {
+      e.preventDefault;
+      $(language_id).find('option[value=' + $(element).data('value') + ']').prop('disabled', false);
+      return $(element).parents('div.translation-box').remove();
+    };
+
     HubAdmin.prototype.remove_permission = function(e, element) {
       e.preventDefault;
       $(context_id).find('option[value=' + $(element).data('value') + ']').prop('disabled', false);
@@ -258,14 +311,14 @@
       });
       if (userform.length > 0 && context_id.length > 0 && permissions.length > 0) {
         return context_id.change(function(e, item) {
-          thisHub.user_permission(roles, context_id, permissions);
+          thisHub.add_permission(roles, context_id, permissions);
           $(context_id).find('option').filter(':selected').attr('disabled', 'disabled');
           return thisHub.init_select();
         });
       }
     };
 
-    HubAdmin.prototype.user_permission = function(roles, context_id, permissions) {
+    HubAdmin.prototype.add_permission = function(roles, context_id, permissions) {
       var actionColumn, labelColumn, new_button, new_label, new_role, new_role_div, selectColumn;
       new_role = roles.clone(true, true).attr('id', 'role_' + context_id.val()).removeClass('hidden').attr('name', 'permission[' + context_id.val() + '][role_id]');
       new_label = $(document.createElement('label')).attr('for', 'permission[' + context_id.val() + '][role_id]').text(context_id.find('option').filter(':selected').text());

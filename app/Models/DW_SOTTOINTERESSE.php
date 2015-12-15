@@ -11,6 +11,7 @@ class DW_SOTTOINTERESSE extends HubModel
     public $timestamps = false;
 
     protected $primaryKey = 'SIN_ID';
+    protected $connection = 'dw';
 
     /**
      * @param $query Builder
