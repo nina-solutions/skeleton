@@ -28,7 +28,7 @@
         <env name="APP_DEBUG" value="true"/>
         <env name="APP_ORM_DEBUG" value="false"/>
         <env name="APP_KEY" value="iJV3Fmtz7MlgqdQGkLZ9F1OlUfulzG4v"/>
-        <env name="APP_URL" value="http://hub.php55"/>
+        <env name="APP_URL" value="http://hub.okavango"/>
 
         <env name="DB_CONNECTION" value="pgsql"/>
         <env name="DB_HOST" value="taro.intesys.it"/>
@@ -60,5 +60,10 @@
         <env name="REDIS_DATABASE" value="1"/>
 
         <env name="UPLOAD" value="app/uploaded_files"/>
+
+
+        <env name="VISA_MAILTO" value="nicola.bosco@intesys.it"/>
+        <env name="VISA_MAILFROM" value="Nicola Bosco"/>
+
     </php>
 </phpunit>
