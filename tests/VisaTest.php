@@ -150,7 +150,7 @@ class VisaTest extends TestCase
             ->see('The Place of Birth field is required.')
             ->see('The From (dd/mm/yyyy) must be a date after today.') //date after today
             ->see('The To (dd/mm/yyyy) must be a date after today.') //date after today
-            ->see('The Date of Birth (dd/mm/yyyy) must be a date before 1999-12-14.') // The user must be >16
+            ->see('The Date of Birth (dd/mm/yyyy) must be a date before 199') // The user must be >16
             ->see("The Other field is required when Sector of Interest is Other.")
 
             ->seePageIs('/en/visa/register/visitor/MDM15/');
