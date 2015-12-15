@@ -11,6 +11,7 @@ class DW_SOTTOCATEGORIE extends HubModel
     public $timestamps = false;
 
     protected $primaryKey = 'SOC_ID';
+    protected $connection = 'dw';
 
     /**
      * @param $query Builder

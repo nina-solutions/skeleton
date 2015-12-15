@@ -25,6 +25,7 @@ class HubContentRequest extends Request
      */
     public function rules()
     {
+        if ($this->method() === 'GET') return [];
         $status = 1;
         $newid = '';
         if (Route::current()){
@@ -39,6 +40,7 @@ class HubContentRequest extends Request
                 $newid = '|different:id';
             }
         }
+        return [];
         return [
             'content[name]' => 'required',
             'content[description]' => 'required',

@@ -4,12 +4,27 @@ namespace FairHub\Http\Controllers;
 
 use FairHub\Models\Category;
 use FairHub\Models\Context;
+use FairHub\Models\Language;
 use Illuminate\Http\Request;
 use FairHub\Http\Requests;
 use FairHub\Http\Controllers\Controller;
 
 class ContextController extends Controller
 {
+    private $table = null;
+    public function __construct()
+    {
+        $this->table = (object) [
+            'name' => 'contexts',
+            'controller' => 'ContextController',
+            'columns' => [
+                'name' => 'Nome',
+                'fullCode' => 'Codice',
+                'parentName' => 'Contesto'
+            ]
+        ];
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -21,7 +36,7 @@ class ContextController extends Controller
         $contexts = Context::where('id', '>=', '1');
         $this->authorize(new Context());
         if ($request->has('h-search-text')) {
-            $contexts->orLike(['name', 'description'], $request->input('h-search-text'));
+            $contexts->orLike(['name', 'code'], $request->input('h-search-text'));
         }
         if ($request->has('h-search-code')) {
             $contexts->code($request->input('h-search-code'));
@@ -32,16 +47,7 @@ class ContextController extends Controller
         }
         return response()->view('admin.index',[
             'data' => $contexts->paginate(),
-            'table' => (object) [
-                'name' => 'contexts',
-                'controller' => 'ContextController',
-                'columns' => [
-                    'name' => 'Nome',
-                    'description' => 'Descrizione',
-                    'fullCode' => 'Codice',
-                    'parentName' => 'Contesto'
-                ]
-            ]
+            'table' => $this->table
         ]);
     }
 
@@ -55,11 +61,17 @@ class ContextController extends Controller
         $this->authorize(new Context());
         $contexts = Context::all()->pluck('name', 'id');
         $categories = Category::all()->pluck('name', 'id');
+        $languages = Language::all()->pluck('description', 'id');
+        $new = new Context();
         return response()->view('admin.contexts.form',[
-            'context' => new Context(),
+            'context' => $new,
             'contexts' => $contexts,
             'categories' => $categories,
-            'title' => trans('admin.contexts.new')
+            'languages' => $languages,
+            'translations' => [],
+            'translatables' => $new->translatedAttributes,
+            'title' => trans('admin.contexts.new'),
+            'table' => $this->table
         ]);
     }
 
@@ -106,13 +118,17 @@ class ContextController extends Controller
         $this->authorize($edit);
         $contexts = Context::where('id' , '!=', $id)->get()->pluck('name', 'id');
         $categories = Category::all()->pluck('name', 'id');
-
+        $languages = Language::all()->pluck('description', 'id');
         return response()->view('admin.contexts.form',[
             'context' => $edit,
             'contexts' => $contexts,
             'categories' => $categories,
+            'languages' => $languages,
+            'translations' => $edit->translations,
+            'translatables' => $edit->translatedAttributes,
             'id' => $id,
-            'title' => $edit->name
+            'title' => $edit->name,
+            'table' => $this->table
         ]);
     }
 

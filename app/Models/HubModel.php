@@ -115,10 +115,27 @@ abstract class HubModel extends Model
         $query = $query->where(function($query) use ($fields, $text) {
             if(is_array($fields)){
                 foreach($fields as $field){
-                    $query->orWhere($field, 'ILIKE', "%$text%");
+                    if(isset($this->translatedAttributes) &&
+                        is_array($this->translatedAttributes) &&
+                        in_array($field, $this->translatedAttributes)){
+                        $query->orWhere(function($query) use ($field, $text) {
+                            $query->whereTranslationLike($field, "%$text%");
+                        });
+                    }else {
+                        $query->orWhere($field, 'ILIKE', "%$text%");
+                    }
                 }
             } else {
-                $query->where($fields, 'ILIKE', "%$text%");
+                if(isset($this->translatedAttributes) &&
+                    is_array($this->translatedAttributes) &&
+                    in_array($fields, $this->translatedAttributes)){
+                    $query->orWhere(function($query) use ($fields, $text) {
+                        $query->whereTranslationLike($fields, "%$text%");
+                    });
+
+                }else {
+                    $query->where($fields, 'ILIKE', "%$text%");
+                }
             }
 
         });

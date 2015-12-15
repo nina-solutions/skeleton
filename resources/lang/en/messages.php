@@ -12,6 +12,7 @@ return [
     */
     'success' => 'Success',
     'error' => 'Error',
+    'welcome' => 'Hub VeronaFiere',
 
     'hello' => 'Hello',
     'thanks' => 'Thanks for choosing our service.',

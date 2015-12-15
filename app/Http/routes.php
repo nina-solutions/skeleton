@@ -116,6 +116,10 @@ Route::group(
     function () {
         Route::match(
             ['get','post'],
+            '/',
+            ['as' => 'dashboard', 'uses' => 'CustomController@dashboard']);
+        Route::match(
+            ['get','post'],
             'dashboard',
             ['as' => 'dashboard', 'uses' => 'CustomController@dashboard']);
 

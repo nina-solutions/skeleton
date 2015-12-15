@@ -8,6 +8,7 @@ class DW_ANAGRAFICA_TESTATA extends HubModel
     public $timestamps = false;
 
     protected $primaryKey = 'AS_ID';
+    protected $connection = 'dw';
 
     protected $fillable = [
         'ANA_ID',

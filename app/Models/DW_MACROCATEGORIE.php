@@ -10,6 +10,7 @@ class DW_MACROCATEGORIE extends HubModel
     public $timestamps = false;
 
     protected $primaryKey = 'MAC_ID';
+    protected $connection = 'dw';
 
     public function scopeQualifications($query, $channel = 0){
         $string = config('press-accreditation.query.'.$channel);
