@@ -97,4 +97,45 @@
         rmcaltro.parent().parent().hide()
 
   category.trigger 'change'
+
+
+
+
+
+  # VISA JS EMBASSIES
+  vits_nazioni = $('select[name="VISA_ELENCONAZIONIAMBASCIATE"]')
+  vits_codice__wrapper = $('.vits_codice__wrapper')
+  vits_codice__content = $('.vits_codice__content')
+  vits_ajax_url = "/en/visa/ajax/"
+
+  vits_nazioni.change ->
+    if vits_nazioni.val() != ""
+      $.ajax
+        url: vits_ajax_url + "embassy/"
+        dataType: "html"
+        data: {nation: vits_nazioni.val(), default: vits_codice__content.find('input[type=hidden]').val() }
+        error: (jqXHR, textStatus, errorThrown) ->
+          console.log "AJAX Error: #{textStatus}"
+        success: (data, textStatus, jqXHR) ->
+          console.log "Successful AJAX call: #{data}"
+          vits_codice__content.html data
+          vits_codice__wrapper.addClass 'active'
+
+  vits_nazioni.trigger 'change'
+
+
+  #VISA INTERESTS - OTHER
+  visa_interesse = $('select[name="VISA_SETTOREINTERESSE"]')
+  visa_other_interesse = $('#VISA_SETTOREINTERESSE_OTHER')
+
+  visa_interesse.change ->
+    if visa_interesse.val().toLowerCase() != "other"
+      visa_other_interesse.parent().parent().addClass 'hidden'
+    else
+      visa_other_interesse.parent().parent().removeClass 'hidden'
+
+  visa_interesse.trigger 'change'
+
+
+
 ) jQuery

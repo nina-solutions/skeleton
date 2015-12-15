@@ -231,3 +231,15 @@ mixin lang(line)
   Compiled: @choice('language.line', 1)
 mixin choice(line, choice)
   | @choice('#{line}', #{choice})
+//- @isset statement mixin
+//-
+  Example:
+  +isset('$number')
+    .number The Big Number
+  Compiled:
+  @if(isset($number))
+  <div class="number">The Big Number</div>
+  @endif
+mixin isset(variable)
+  +statement('if', 'isset(' + variable + ')')
+    block

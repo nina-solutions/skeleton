@@ -16,6 +16,9 @@ class EventServiceProvider extends ServiceProvider
         'FairHub\Events\AnagraficaSaved' => [
             'FairHub\Listeners\EmailSubscriptionConfirmation',
         ],
+        'FairHub\Events\VisaSaved' => [
+            'FairHub\Listeners\VisaSubscription',
+        ],
     ];
 
     /**

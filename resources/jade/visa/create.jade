@@ -1,0 +1,91 @@
+extends ../partials/template
+
+block title
+  title @lang('visa.register')
+
+block content
+  h1 @lang('visa.register')
+
+  + php("Form::open(array('route' => array('visa-save', $lang, $type, $code), 'data-toggle' => 'validator', 'class' => 'form-horizontal hub-visa', 'files' => false))", "Form::close()")
+
+    //cicling all fieldset
+    + foreach('$visaFields','$fieldset', '$fieldsetName', '$fieldsetIncrement')
+      fieldset
+
+        + isset('$fieldset["legend"]')
+          legend @lang($fieldset["legend"])
+
+        //cicling all fields
+        + foreach('$fieldset["fields"]','$field', '$fieldName', '$fieldIncrement')
+
+          + if("$field['type'] == 'text'")
+            .form-group
+              + php("Form::label($fieldName, trans($field['label']) . (in_array('required',$field['rules'])?' *':''), ['class' => 'control-label col-md-3'])")
+              .col-md-9
+                + php("Form::text($fieldName, Input::old($fieldName), array((in_array('required',$field['rules'])?'required':''), 'class'=>'form-control', 'placeholder'=>trans( $field['label'])))")
+
+          + if("$field['type'] == 'textarea'")
+            .form-group
+              + php("Form::label($fieldName, trans($field['label']) . (in_array('required',$field['rules'])?' *':''), ['class' => 'control-label col-md-3'])")
+              .col-md-9
+                + php("Form::textarea($fieldName, Input::old($fieldName), array((in_array('required',$field['rules'])?'required':''), 'class'=>'form-control', 'placeholder'=>trans( $field['label'])))")
+
+
+
+
+          + if("$field['type'] == 'email'")
+            .form-group
+              + php("Form::label($fieldName, trans($field['label']) . (in_array('required',$field['rules'])?' *':''), ['class' => 'control-label col-md-3'])")
+              .col-md-9
+                + php("Form::email($fieldName, Input::old($fieldName), array((in_array('required',$field['rules'])?'required':''), 'class'=>'form-control', 'placeholder'=>trans( $field['label'])))")
+
+          + if("$field['type'] == 'url'")
+            .form-group
+              + php("Form::label($fieldName, trans($field['label']) . (in_array('required',$field['rules'])?' *':''), ['class' => 'control-label col-md-3'])")
+              .col-md-9
+                + php("Form::url($fieldName, Input::old($fieldName), array((in_array('required',$field['rules'])?'required':''), 'class'=>'form-control', 'placeholder'=>trans( $field['label'])))")
+
+
+          + if("$field['type'] == 'hidden'")
+            + php("Form::hidden($fieldName, Input::old($fieldName))")
+
+          + if("$field['type'] == 'date'")
+            .form-group
+              + php("Form::label($fieldName, trans($field['label']) . (in_array('required',$field['rules'])?' *':''), ['class' => 'control-label col-md-3'])")
+              .col-md-9
+                + php("Form::date($fieldName, Input::old($fieldName), array((in_array('required',$field['rules'])?'required':''), 'class'=>'form-control', 'placeholder'=>trans( $field['label'])))")
+
+          + if("$field['type'] == 'radio'")
+            .form-group
+              + php("Form::label($fieldName, trans($field['label']) . (in_array('required',$field['rules'])?' *':''), ['class' => 'control-label col-md-3'])")
+              .col-md-9
+                + foreach('$field["options"]','$option','$value', '$rOptions')
+                  + php("Form::radio($fieldName, $value, (Input::old($fieldName) === $value ? true : false), array((in_array('required',$field['rules'])?'required':''), 'class'=>'radio-inline','id'=>$fieldName.'-'.$value  ))")
+                  + php("Form::label($fieldName.'-'.$value, trans($option), array('class'=>'radio-inline'))")
+
+          + if("$field['type'] == 'select'")
+            .form-group
+              + php("Form::label($fieldName, trans($field['label']) . (in_array('required',$field['rules'])?' *':''), ['class' => 'control-label col-md-3'])")
+              .col-md-9
+                + php("Form::select($fieldName, $field['options'], Input::old($fieldName), array((in_array('required',$field['rules'])?'required':''), 'class'=>'form-control', 'placeholder'=>trans( $field['label'])))")
+
+
+          + if("$field['type'] == 'vits_codice'")
+            .form-group.vits_codice__wrapper
+              + php("Form::label($fieldName, trans($field['label']) . (in_array('required',$field['rules'])?' *':''), ['class' => 'control-label col-md-3'])")
+              .col-md-9.vits_codice__content
+                + php("Form::hidden($fieldName, Input::old($fieldName))")
+
+    fieldset
+      legend @lang('visa.form.information_letter')
+      .form-group
+        .col-xs-12
+          .scrollableText @lang('visa.form.information_letter_text')
+
+    fieldset
+      legend @lang('visa.form.request')
+      + php("Form::submit(trans('visa.form.submit'), array('class' => 'btn btn-primary', 'name' => 'submit'))")
+      + php("Form::reset(trans('visa.form.reset'), array('class' => 'btn'))")
+
+
+

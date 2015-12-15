@@ -18,6 +18,29 @@ use Illuminate\Routing\Router;
 Route::get('/', ['as' => 'welcome', 'uses' => 'CustomController@welcome']);
 Route::get('home', ['as' => 'home', 'uses' => 'CustomController@home']);
 
+
+
+
+//Visa Accreditation routes
+Route::get(
+    '{lang}/visa/register/{type}/{code}',
+    [ 'middleware' => 'visa-check-language', 'as' => 'visa-register', 'uses' => 'VisaController@create']
+);
+Route::post(
+    '{lang}/visa/save/{type}/{code}',
+    [ 'middleware' => 'visa-check-language', 'as' => 'visa-save', 'uses' => 'VisaController@store']
+);
+Route::match(
+    ['get','post'],
+    '{lang}/visa/ajax/{operation}',
+    [ 'as' => 'visa-ajax', 'uses' => 'VisaController@ajax']
+);
+Route::get(
+    '{lang}/visa/thanks/',
+    [ 'as' => 'visa-thanks' , 'uses' => 'VisaController@thanks' ]
+);
+
+
 Route::get('{lang}/{faircode}/{service}{format?}',
     ['as' => 'service-index', 'uses' => 'ServiceController@index']
 )->where(['format' => '\.(json|xml|rss)']);

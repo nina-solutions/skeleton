@@ -129,6 +129,37 @@ return [
         'ANA_FILENAME4' => 'Recent work',
         'ANA_FILENAME5' => 'Card',
 
+
+        //VISA
+        'VISA_TITOLO' => 'Title', //trans('form.visa.titolo')
+        'VISA_NOME' => 'First Name (as per passport)', //trans('form.visa.nome'),
+        'VISA_COGNOME' => 'Last Name (as per passport)', //Etc..
+        'VISA_POSIZIONE' => 'Job Title',
+        'VISA_RAGSOC' => 'Company',
+        'VISA_UBICAZIONE1' => 'Address',
+        'VISA_LOCALITA' => 'City',
+        'VISA_STATO' => 'State/Province',
+        'VISA_CAP' => 'Zip /Postal Code',
+        'VISA_NAZIONE' => 'Country',
+        'VISA_TEL' => 'Telephone (include Country Code)',
+        'VISA_FAX' => 'Fax (include Country Code)',
+        'VISA_EMAIL' => 'Email',
+        'VISA_WWW' => 'Company Website',
+        'VISA_NPASS' => 'Passport no.',
+        'VISA_PASSDATAEMISSIONE' => 'Date of issue (dd/mm/yyyy)',
+        'VISA_PASSDATASCAD' => 'Exp. date (dd/mm/yyyy)',
+        'VISA_LUOGONASCITA' => 'Place of Birth',
+        'VISA_DATANASCITA' => 'Date of Birth (dd/mm/yyyy)',
+        'VISA_BACTIVITY' => 'Business Activity',
+        'VISA_SETTOREINTERESSE' => 'Sector of Interest',
+        'VISA_SETTOREINTERESSE_OTHER' => 'Other',
+        'VISA_ELENCONAZIONIAMBASCIATE' => 'Choose a country',
+        'VISA_VITS_CODICE' => 'Embassy',
+        'VISA_DAL' => 'From (dd/mm/yyyy)',
+        'VISA_AL' => 'To (dd/mm/yyyy)',
+
+        'VISA_PAD' => 'Hall',
+        'VISA_STAND' => 'Stand'
     ],
 
 ];

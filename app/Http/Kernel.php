@@ -34,5 +34,6 @@ class Kernel extends HttpKernel
         'channelrole' => \FairHub\Http\Middleware\ChannelRoleMiddleware::class,
         'acl' => \FairHub\Http\Middleware\AclMiddleware::class,
         'contents' => \FairHub\Http\Middleware\ContentsMiddleware::class,
+        'visa-check-language' => \FairHub\Http\Middleware\VisaMiddleware::class,
     ];
 }

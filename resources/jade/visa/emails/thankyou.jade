@@ -1,0 +1,18 @@
+//
+   Created by Karoly Szabo on 8/31/15.
+
+extends ../../partials/template
+
+block title
+  title @lang('visa.email.object',['type' => $type, 'code' => $code])
+block content
+  div(style="margin:2em;padding:0;letter-spacing:0.05em;background-color:#fff;")
+    h1(style="margin:1em 1em 2em 0;font:bold 16px arial;border-bottom:solid 1px #ccc;") @lang('visa.email.object',['type' => $type, 'code' => $code])
+
+    div(style="margin:1em 1em 1em 1em;font:12px arial; line-height:1.6em;")
+      p @lang('visa.email.text',['code' => $code, 'user' => $user])
+
+
+    div(style="margin:3em 1em 1em 0;font:10px arial;border-top:solid 1px #ccc;")
+      p @lang('visa.email.footer')
+

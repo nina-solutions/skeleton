@@ -1,0 +1,9 @@
+extends ../partials/template-ajax
+
+block content
+  + foreach('$embassies','$option','$value', '$rOptions')
+
+    + php("Form::radio($fieldName, $value, ($default == $value ? true : false), array('required', 'class'=>'radio-inline','id'=>$fieldName.'-'.$value  ))")
+    + php("Form::label($fieldName.'-'.$value, trans($option), array('class'=>'radio-inline'))")
+
+
