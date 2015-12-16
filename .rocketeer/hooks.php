@@ -24,7 +24,7 @@ return [
     // Tasks to execute after the core Rocketeer Tasks
     'after'  => [
         'setup'   => [
-            'rm -rf .git',
+            'rm -rf .git*',
             'mv production.env .env'
         ],
         'deploy'  => [],
