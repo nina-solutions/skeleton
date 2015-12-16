@@ -1,13 +1,13 @@
 {
   "name": "VeronaFiere hub",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "authors": [
     "Karoly Szabo <karoly.szabo@intesys.it>"
   ],
   "description": "It provieds backend to manage contents and APIs to serve Form or data",
   "main": "index.php",
   "license": "MIT",
-  "homepage": "services.veronagiere.it",
+  "homepage": "hub2.veronafiere.it",
   "ignore": [
     "**/.*",
     "node_modules",
