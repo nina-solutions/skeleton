@@ -82,7 +82,7 @@ return [
         // Connections configuration
         'connections' => [
             'preview'    => [
-                'scm'    => array('branch' => 'develop'),
+                'scm'    => array('branch' => 'feature/npm-dedupe'),
                 'remote' => array('app_directory' => 'hub2',),
             ],
             'production'    => [
