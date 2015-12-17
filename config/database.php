@@ -59,7 +59,7 @@ return [
             'username'  => env('MY_USERNAME'),
             'password'  => env('MY_PASSWORD'),
             'charset'   => 'utf8',
-            'collation' => 'utf8_unicode_ci',
+            'collation' => 'utf8_general_ci',
             'prefix'    => '',
             'strict'    => false,
         ],
@@ -83,6 +83,8 @@ return [
             'username' => env('DW_USERNAME'),
             'password' => env('DW_PASSWORD'),
             'charset'  => 'utf8',
+            'collation' => 'utf8_general_ci',
+            'schema'   => 'public',
             'prefix'   => '',
         ],
 
@@ -93,6 +95,8 @@ return [
             'username' => env('MN_USERNAME'),
             'password' => env('MN_PASSWORD'),
             'charset'  => 'utf8',
+            'collation' => 'utf8_general_ci',
+            'schema'   => 'public',
             'prefix'   => '',
         ],
 
