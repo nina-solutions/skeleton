@@ -1,5 +1,5 @@
-# Hub
-Laravel implementation of hub.
+# Skeleton
+Laravel implementation.
 
 This app has the goal to become a webframe server for Forms and a service to provide information via json, xml and rss 
 
@@ -15,6 +15,6 @@ Each view MUST be written in JADE and compiled withb `gulp`
 ## SASS and Coffee
 
 Libraries are direcly committed in the public folder
-Hub related stuff are located in the resource directory and compiled via `gulp`
+Skeleton related stuff are located in the resource directory and compiled via `gulp`
 
 
