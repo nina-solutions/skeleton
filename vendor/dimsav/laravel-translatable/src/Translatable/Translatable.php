@@ -499,34 +499,6 @@ trait Translatable
     }
 
     /**
-     * Adds scope to get a list of translated attributes, using the current locale.
-     *
-     * Example usage: Country::allTranslations(['name', 'description'])->get()->toArray()
-     * Will return an array with items:
-     *  [
-     *      'id' => '1',                    // The id of country
-     *      'name' => 'Griechenland'        // The translated name
-     *      'description' => 'Griechenland' //The translated description
-     *  ]
-     *
-     * @param \Illuminate\Database\Eloquent\Builder $query
-     * @param string|array                          $translationField
-     */
-    public function scopeAllTranslations(Builder $query, $translationFields)
-    {
-        $translationTable = $this->getTranslationsTable();
-        $localeKey        = $this->getLocaleKey();
-        $query->select($translationTable.'.'.$this->getRelationKey(), $translationTable.'.'.$localeKey);
-        if (is_array($translationFields))
-            foreach($translationFields as $translationField)
-                $query->addSelect($translationTable.'.'.$translationField);
-        else
-            $query->addSelect($translationTable.'.'.$translationFields);
-
-        $query->leftJoin($translationTable, $translationTable.'.'.$this->getRelationKey(), '=', $this->getTable().'.'.$this->getKeyName());
-    }
-
-    /**
      * This scope eager loads the translations for the default and the fallback locale only.
      * We can use this as a shortcut to improve performance in our application.
      *
@@ -578,13 +550,12 @@ trait Translatable
     public function scopeWhereTranslationLike($query, $key, $value, $locale = null)
     {
         return $query->whereHas('translations', function ($query) use ($key, $value, $locale) {
-            $query->where($this->getTranslationsTable().'.'.$key, 'ILIKE', $value);
+            $query->where($this->getTranslationsTable().'.'.$key, 'LIKE', $value);
             if ($locale) {
-                $query->where($this->getTranslationsTable().'.'.$this->getLocaleKey(), 'ILIKE', $locale);
+                $query->where($this->getTranslationsTable().'.'.$this->getLocaleKey(), 'LIKE', $locale);
             }
         });
     }
-
 
 
     /**

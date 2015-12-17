@@ -4,6 +4,12 @@
     "keywords": ["framework", "laravel"],
     "license": "MIT",
     "type": "project",
+    "repositories": [
+      {
+        "type": "vcs",
+        "url": "https://github.com/sabau/laravel-translatable"
+      }
+    ],
     "require": {
         "php": ">=5.5.9",
         "laravel/framework": "5.1.*",
@@ -11,7 +17,7 @@
         "guzzlehttp/guzzle": "~5.3",
         "predis/predis": "~1.0",
         "doctrine/dbal": "*",
-        "dimsav/laravel-translatable" : "*"
+        "dimsav/laravel-translatable" : "dev-master"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
