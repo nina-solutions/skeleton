@@ -33,8 +33,6 @@ return [
         'storage/logs',
         'storage/framework',
         'storage/sessions',
-        'tools',
-        'vendor',
         'node_modules',
     ],
 
